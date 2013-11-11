@@ -58,7 +58,7 @@ void init(EScript::Namespace & lib) {
 		std::vector<Geometry::Vec3> positions;
 		for(auto & entry : *parameter[0].to<EScript::Array*>(rt))
 			positions.emplace_back( entry.to<const Geometry::Vec3&>(rt) );
-		return new E_Util::E_Bitmap(create2dDistanceHistogram(positions,parameter[1].toInt()));
+		return EScript::create(create2dDistanceHistogram(positions,parameter[1].toInt()));
 	})
 
 	//! result createAngleHistogram(Array Vec3, numberOfBuckets)
