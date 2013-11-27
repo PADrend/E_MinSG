@@ -262,6 +262,13 @@ void E_Node::init(EScript::Namespace & lib) {
 
 	//! [ESMF] self MinSG.Node.setSRT(SRT)
 	ES_MFUN(typeObject,Node,"setSRT",1,1,(thisObj->setSRT(parameter[0].to<const Geometry::SRT&>(rt)),thisEObj))
+	
+	//! [ESMF] SRT MinSG.Node.getWorldSRT()
+	ES_MFUN(typeObject,const Node,"getWorldSRT",0,0,Transformations::getWorldSRT(thisObj))
+	
+	//! [ESMF] slef MinSG.Node.setWorldSRT(SRT)
+	ES_MFUN(typeObject,Node,"setWorldSRT",1,1,(thisObj->setSRT( Transformations::worldSRTToRelSRT(thisObj,parameter[0].to<const Geometry::SRT&>(rt))),thisEObj))
+
 
 	// -----------------------------------
 	// ---- States
