@@ -52,6 +52,7 @@
 #include "SphericalSampling/E_Renderer.h"
 #include "SphericalSampling/E_SamplePoint.h"
 #include "SphericalSampling/E_SamplingSphere.h"
+#include "SphericalSampling/E_SphereVisualizationRenderer.h"
 #endif /* MINSG_EXT_SPHERICALSAMPLING */
 
 // [ext:ThesisJonas]
@@ -394,6 +395,7 @@ void init_ext(EScript::Namespace * /*globals*/,EScript::Namespace * lib) {
 		SphericalSampling::E_Renderer::init(*ns);
 		SphericalSampling::E_SamplePoint::init(*ns);
 		SphericalSampling::E_SamplingSphere::init(*ns);
+		SphericalSampling::E_SphereVisualizationRenderer::init(*ns);
 	}
 #endif /* MINSG_EXT_SPHERICALSAMPLING */
 

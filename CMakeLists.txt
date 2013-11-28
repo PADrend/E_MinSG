@@ -135,6 +135,7 @@ add_library(E_MinSG
 	Ext/SphericalSampling/E_Renderer.cpp
 	Ext/SphericalSampling/E_SamplePoint.cpp
 	Ext/SphericalSampling/E_SamplingSphere.cpp
+	Ext/SphericalSampling/E_SphereVisualizationRenderer.cpp
 	Ext/States/E_BudgetAnnotationState.cpp
 	Ext/States/E_EnvironmentState.cpp
 	Ext/States/E_LODRenderer.cpp
