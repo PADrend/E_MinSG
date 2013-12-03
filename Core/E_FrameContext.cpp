@@ -136,7 +136,7 @@ void E_FrameContext::init(EScript::Namespace & lib) {
 		return channelMap;
 	})
 
-	//! RenderingData FrameContext.getRenderingContext()
+	//! RenderingContext FrameContext.getRenderingContext()
 	ES_MFUN(typeObject, FrameContext, "getRenderingContext", 0, 0,
 				new E_Rendering::E_RenderingContext(&(thisObj->getRenderingContext())))
 
