@@ -113,6 +113,9 @@ void E_State::init(EScript::Namespace & lib) {
 	//!	[ESMF] Bool MinSG.State.isActive()	*/
 	ES_MFUN(typeObject, const State, "isActive", 0,  0,thisObj->isActive())
 
+	//!	[ESMF] Bool MinSG.State.isTempState()	*/
+	ES_MFUN(typeObject, const State, "isTempState", 0,  0,thisObj->isTempState())
+
 	//!	[ESMF] thisEObj MinSG.State.activate()
 	ES_MFUN(typeObject, State, "activate", 0, 0,  (thisObj->activate(), thisEObj))
 
@@ -129,6 +132,10 @@ void E_State::init(EScript::Namespace & lib) {
 	//! [ESF] thisEObj MinSG.State.unsetStateAttribute(string key)
 	ES_MFUN(typeObject, State, "unsetStateAttribute",1, 1, 
 				(thisObj->unsetAttribute(parameter[0].toString()),thisEObj))
+
+
+	//!	[ESMF] thisEObj MinSG.State.setTempState(bool)
+	ES_MFUN(typeObject, State, "setTempState", 1, 1,  (thisObj->setTempState(parameter[0].to<bool>(rt)), thisEObj))
 
 }
 
