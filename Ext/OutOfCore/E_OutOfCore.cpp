@@ -41,10 +41,9 @@ void init(EScript::Namespace & lib) {
 	declareConstant(ns, "CACHELEVELTYPE_MAIN_MEMORY", EScript::Number::create(static_cast<uint32_t>(CacheLevelType::MAIN_MEMORY)));
 	declareConstant(ns, "CACHELEVELTYPE_GRAPHICS_MEMORY", EScript::Number::create(static_cast<uint32_t>(CacheLevelType::GRAPHICS_MEMORY)));
 
-	//! [ESF] Void MinSG.OutOfCore.setUp(FrameContext, SceneManager)
-	ES_FUN(ns, "setUp", 2, 2, (setUp(&parameter[0].to<MinSG::FrameContext&>(rt), 
-															**EScript::assertType<E_SceneManager>(rt, parameter[1])), 
-									EScript::create(nullptr)));
+	//! [ESF] Void MinSG.OutOfCore.setUp(FrameContext)
+	ES_FUN(ns, "setUp", 1, 1, (setUp(parameter[0].to<MinSG::FrameContext&>(rt)), 
+									EScript::create(nullptr)))
 
 	//! [ESF] Number MinSG.OutOfCore.addCacheLevel(Number, Number)
 	ES_FUNCTION2(ns, "addCacheLevel", 2, 2, {

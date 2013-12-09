@@ -22,9 +22,10 @@
 #include <EScript/Basics.h>
 #include <EScript/StdObjects.h>
 #include <E_Util/E_Utils.h>
-#include <MinSG/SceneManagement/Exporter/ExporterContext.h>
+#include <MinSG/SceneManagement/ExportFunctions.h>
+#include <MinSG/SceneManagement/ImportFunctions.h>
 #include <MinSG/SceneManagement/SceneManager.h>
-#include <MinSG/SceneManagement/WriterDAE.h>
+#include <MinSG/SceneManagement/Exporter/WriterDAE.h>
 
 #include <Util/IO/FileName.h>
 
@@ -50,8 +51,8 @@ void E_SceneManager::init(EScript::Namespace & lib) {
 
 	//! [ESMF] ImportContext MinSG.SceneManager.createImportContext( options = 0)
 	ES_MFUNCTION(typeObject,SceneManager,"createImportContext",0,1,{
-		SceneManager::importOption_t options=static_cast<SceneManager::importOption_t>(parameter[0].toInt(0));
-		return new E_ImportContext(thisObj->createImportContext(options));
+		importOption_t options=static_cast<importOption_t>(parameter[0].toInt(0));
+		return new E_ImportContext(createImportContext(*thisObj,options));
 	})
 
 	//! [ESMF] node MinSG.SceneManager.createInstance(String id)
@@ -114,28 +115,28 @@ void E_SceneManager::init(EScript::Namespace & lib) {
 	//! [ESMF] GroupNode MinSG.SceneManager.loadCOLLADA( importContext,filename || filename, [importOptions])
 	ES_MFUNCTION(typeObject,SceneManager,"loadCOLLADA",1,2,{
 		E_ImportContext * eImportContext = parameter[0].toType<E_ImportContext>();
-		if(eImportContext!=nullptr){
+		if(eImportContext){
 			assertParamCount(rt,parameter,2,2);
-			return EScript::create(thisObj->loadCOLLADA( eImportContext->ref(), Util::FileName(parameter[1].toString())));
+			return EScript::create(loadCOLLADA( eImportContext->ref(), Util::FileName(parameter[1].toString())));
 		}else{
-			SceneManager::importOption_t options=static_cast<SceneManager::importOption_t>(parameter[1].toInt(0));
-			return EScript::create(thisObj->loadCOLLADA(Util::FileName(parameter[0].toString()),options ));
+			importOption_t options=static_cast<importOption_t>(parameter[1].toInt(0));
+			return EScript::create(loadCOLLADA(*thisObj,Util::FileName(parameter[0].toString()),options ));
 		}
 	})
 
 	//! [ESMF] Array|false MinSG.SceneManager.loadMinSGFile( importContext,filename || filename[,importOptions=0])
 	ES_MFUNCTION(typeObject,SceneManager,"loadMinSGFile",1,2,{
-		std::deque<Util::Reference<Node>> nodes;
+		std::vector<Util::Reference<Node>> nodes;
 		E_ImportContext * eImportContext = parameter[0].toType<E_ImportContext>();
-		if(eImportContext!=nullptr){
+		if(eImportContext){
 			assertParamCount(rt,parameter,2,2);
-			nodes = thisObj->loadMinSGFile(eImportContext->ref(), Util::FileName(parameter[1].toString()));
+			nodes = loadMinSGFile(eImportContext->ref(), Util::FileName(parameter[1].toString()));
 			if(nodes.empty()) {
 				return false;
 			}
 		}else{
-			SceneManager::importOption_t options=static_cast<SceneManager::importOption_t>(parameter[1].toInt(0));
-			nodes = thisObj->loadMinSGFile(Util::FileName(parameter[0].toString()), options);
+			importOption_t options=static_cast<importOption_t>(parameter[1].toInt(0));
+			nodes = loadMinSGFile(*thisObj,Util::FileName(parameter[0].toString()), options);
 			if(nodes.empty()) {
 				return false;
 			}
@@ -144,10 +145,10 @@ void E_SceneManager::init(EScript::Namespace & lib) {
 	})
 
 	//! [ESMF] Array|false MinSG.SceneManager.loadMinSGString(ImportContext, String)
-	ES_MFUNCTION(typeObject, SceneManager, "loadMinSGString", 2, 2, {
+	ES_FUNCTION(typeObject,  "loadMinSGString", 2, 2, {
 		auto & importContext = **EScript::assertType<E_ImportContext>(rt, parameter[0]);
 		std::stringstream stream(parameter[1].toString());
-		auto nodes = thisObj->loadMinSGStream(importContext, stream);
+		auto nodes = loadMinSGStream(importContext, stream);
 		if(nodes.empty()) 
 			return false;
 		return EScript::Array::create(nodes);
@@ -190,48 +191,36 @@ void E_SceneManager::init(EScript::Namespace & lib) {
 		return result;
 	})
 
-	//! [ESMF] void MinSG.SceneManager.saveMeshesInSubtreeAsPLY(rootNode, dirName [,saveRegisteredNodes=false])
-	ES_MFUNCTION(typeObject,SceneManager,"saveMeshesInSubtreeAsPLY",2,3,{
-		Node * rootNode = parameter[0].to<MinSG::Node*>(rt);
-		std::string dirName = parameter[1].toString();
-		thisObj->saveMeshesInSubtreeAsPLY(rootNode, dirName, parameter[2].toBool(false));
+	//! [ESMF] void MinSG.SceneManager.saveMeshesInSubtreeAsPLY(rootNode, dirName [,saveRegisteredNodes=false])  \deprecated
+	ES_FUNCTION(typeObject,"saveMeshesInSubtreeAsPLY",2,3,{
+		saveMeshesInSubtreeAsPLY(parameter[0].to<MinSG::Node*>(rt), parameter[1].toString(), parameter[2].toBool(false));
 		return nullptr;
 	})
 
-	//! [ESMF] void MinSG.SceneManager.saveMeshesInSubtreeAsMMF(rootNode, dirName [,saveRegisteredNodes=false])
-	ES_MFUNCTION(typeObject,SceneManager,"saveMeshesInSubtreeAsMMF",2,3,{
-		Node * rootNode = parameter[0].to<MinSG::Node*>(rt);
-		std::string dirName = parameter[1].toString();
-		thisObj->saveMeshesInSubtreeAsMMF(rootNode, dirName, parameter[2].toBool(false));
+	//! [ESMF] void MinSG.SceneManager.saveMeshesInSubtreeAsMMF(rootNode, dirName [,saveRegisteredNodes=false])  \deprecated
+	ES_FUNCTION(typeObject,"saveMeshesInSubtreeAsMMF",2,3,{
+		saveMeshesInSubtreeAsMMF(parameter[0].to<MinSG::Node*>(rt), parameter[1].toString(), parameter[2].toBool(false));
 		return nullptr;
 	})
 
-	//! [ESF] bool MinSG.SceneManager.saveMinSGFile(filename, Array nodes)
+	//! [ESF] void MinSG.SceneManager.saveMinSGFile(filename, Array nodes)  \deprecated
 	ES_MFUNCTION(typeObject,SceneManager,"saveMinSGFile",2,2,{
 		std::deque<Node *> nodes;
 		EScript::Array * array = parameter[1].to<EScript::Array*>(rt);
-		for(auto & element : *array) {
+		for(auto & element : *array)
 			nodes.push_back(element.to<MinSG::Node*>(rt));
-		}
-
-		bool result = thisObj->saveMinSGFile(Util::FileName(parameter[0].toString()), nodes);
-		return result;
+		saveMinSGFile(*thisObj,Util::FileName(parameter[0].toString()), nodes);
+		return nullptr;
 	})
 
-	//! [ESF] String|false MinSG.SceneManager.saveMinSGString(Array nodes)
-	ES_MFUNCTION(typeObject, SceneManager,"saveMinSGString", 1, 1, {
+	//! [ESF] String|false MinSG.SceneManager.saveMinSGString(Array nodes)  \deprecated
+	ES_MFUNCTION(typeObject, SceneManager,"saveMinSGString", 1, 1, { // 
 		std::deque<Node *> nodes;
 		EScript::Array * array = parameter[0].to<EScript::Array*>(rt);
-		for(auto & element : *array) {
+		for(auto & element : *array)
 			nodes.push_back(element.to<MinSG::Node*>(rt));
-		}
-
-		MinSG::SceneManagement::ExporterContext exporterContext(*thisObj);
 		std::stringstream stream;
-		const bool success = thisObj->saveMinSGStream(exporterContext, stream, nodes);
-		if(!success) {
-			return false;
-		}
+		saveMinSGStream(*thisObj,stream, nodes);
 		return stream.str();
 	})
 
@@ -245,12 +234,12 @@ void E_SceneManager::init(EScript::Namespace & lib) {
 
 
 	// consts
-	declareConstant(typeObject,"IMPORT_OPTION_NONE",					static_cast<uint32_t>(SceneManager::IMPORT_OPTION_NONE));
-	declareConstant(typeObject,"IMPORT_OPTION_REUSE_EXISTING_STATES",	static_cast<uint32_t>(SceneManager::IMPORT_OPTION_REUSE_EXISTING_STATES));
-	declareConstant(typeObject,"IMPORT_OPTION_DAE_INVERT_TRANSPARENCY",	static_cast<uint32_t>(SceneManager::IMPORT_OPTION_DAE_INVERT_TRANSPARENCY));
-	declareConstant(typeObject,"IMPORT_OPTION_USE_TEXTURE_REGISTRY",	static_cast<uint32_t>(SceneManager::IMPORT_OPTION_USE_TEXTURE_REGISTRY));
-	declareConstant(typeObject,"IMPORT_OPTION_USE_MESH_HASHING_REGISTRY",static_cast<uint32_t>(SceneManager::IMPORT_OPTION_USE_MESH_HASHING_REGISTRY));
-	declareConstant(typeObject,"IMPORT_OPTION_USE_MESH_REGISTRY",		static_cast<uint32_t>(SceneManager::IMPORT_OPTION_USE_MESH_REGISTRY));
+	declareConstant(typeObject,"IMPORT_OPTION_NONE",					static_cast<uint32_t>(IMPORT_OPTION_NONE));
+	declareConstant(typeObject,"IMPORT_OPTION_REUSE_EXISTING_STATES",	static_cast<uint32_t>(IMPORT_OPTION_REUSE_EXISTING_STATES));
+	declareConstant(typeObject,"IMPORT_OPTION_DAE_INVERT_TRANSPARENCY",	static_cast<uint32_t>(IMPORT_OPTION_DAE_INVERT_TRANSPARENCY));
+	declareConstant(typeObject,"IMPORT_OPTION_USE_TEXTURE_REGISTRY",	static_cast<uint32_t>(IMPORT_OPTION_USE_TEXTURE_REGISTRY));
+	declareConstant(typeObject,"IMPORT_OPTION_USE_MESH_HASHING_REGISTRY",static_cast<uint32_t>(IMPORT_OPTION_USE_MESH_HASHING_REGISTRY));
+	declareConstant(typeObject,"IMPORT_OPTION_USE_MESH_REGISTRY",		static_cast<uint32_t>(IMPORT_OPTION_USE_MESH_REGISTRY));
 }
 
 E_SceneManager::E_SceneManager(EScript::Type * type) : 
