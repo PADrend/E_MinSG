@@ -145,7 +145,7 @@ void E_SceneManager::init(EScript::Namespace & lib) {
 	})
 
 	//! [ESMF] Array|false MinSG.SceneManager.loadMinSGString(ImportContext, String)
-	ES_FUNCTION(typeObject,  "loadMinSGString", 2, 2, {
+    ES_FUNCTION2(typeObject,  "loadMinSGString", 2, 2, {
 		auto & importContext = **EScript::assertType<E_ImportContext>(rt, parameter[0]);
 		std::stringstream stream(parameter[1].toString());
 		auto nodes = loadMinSGStream(importContext, stream);
@@ -192,13 +192,13 @@ void E_SceneManager::init(EScript::Namespace & lib) {
 	})
 
 	//! [ESMF] void MinSG.SceneManager.saveMeshesInSubtreeAsPLY(rootNode, dirName [,saveRegisteredNodes=false])  \deprecated
-	ES_FUNCTION(typeObject,"saveMeshesInSubtreeAsPLY",2,3,{
+    ES_FUNCTION2(typeObject,"saveMeshesInSubtreeAsPLY",2,3,{
 		saveMeshesInSubtreeAsPLY(parameter[0].to<MinSG::Node*>(rt), parameter[1].toString(), parameter[2].toBool(false));
 		return nullptr;
 	})
 
 	//! [ESMF] void MinSG.SceneManager.saveMeshesInSubtreeAsMMF(rootNode, dirName [,saveRegisteredNodes=false])  \deprecated
-	ES_FUNCTION(typeObject,"saveMeshesInSubtreeAsMMF",2,3,{
+    ES_FUNCTION2(typeObject,"saveMeshesInSubtreeAsMMF",2,3,{
 		saveMeshesInSubtreeAsMMF(parameter[0].to<MinSG::Node*>(rt), parameter[1].toString(), parameter[2].toBool(false));
 		return nullptr;
 	})
