@@ -128,14 +128,6 @@ add_library(E_MinSG
 	Ext/SkeletalAnimation/Joints/E_JointNode.cpp
 	Ext/SkeletalAnimation/Joints/E_RigidJoint.cpp
 	Ext/SkeletalAnimation/Util/E_SkeletalAnimationUtils.cpp
-	Ext/SphericalSampling/E_BudgetRenderer.cpp
-	Ext/SphericalSampling/E_GeometryNodeCollector.cpp
-	Ext/SphericalSampling/E_Helper.cpp
-	Ext/SphericalSampling/E_PreprocessingContext.cpp
-	Ext/SphericalSampling/E_Renderer.cpp
-	Ext/SphericalSampling/E_SamplePoint.cpp
-	Ext/SphericalSampling/E_SamplingSphere.cpp
-	Ext/SphericalSampling/E_SphereVisualizationRenderer.cpp
 	Ext/States/E_BudgetAnnotationState.cpp
 	Ext/States/E_EnvironmentState.cpp
 	Ext/States/E_LODRenderer.cpp
@@ -146,6 +138,14 @@ add_library(E_MinSG
 	Ext/States/E_ScriptedState.cpp
 	Ext/States/E_ShadowState.cpp
 	Ext/States/E_StrangeExampleRenderer.cpp
+	Ext/SVS/E_BudgetRenderer.cpp
+	Ext/SVS/E_GeometryNodeCollector.cpp
+	Ext/SVS/E_Helper.cpp
+	Ext/SVS/E_PreprocessingContext.cpp
+	Ext/SVS/E_Renderer.cpp
+	Ext/SVS/E_SamplePoint.cpp
+	Ext/SVS/E_SamplingSphere.cpp
+	Ext/SVS/E_SphereVisualizationRenderer.cpp
 	Ext/ThesisJonas/E_Preprocessor.cpp
 	Ext/ThesisJonas/E_Renderer.cpp
 	Ext/Tools/E_DebugCamera.cpp

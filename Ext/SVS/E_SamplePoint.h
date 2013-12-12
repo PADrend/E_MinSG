@@ -1,18 +1,18 @@
 /*
-	This file is part of the E_MinSG library extension SphericalSampling.
+	This file is part of the E_MinSG library extension SVS.
 	Copyright (C) 2012 Benjamin Eikel <benjamin@eikel.org>
 	
 	This library is subject to the terms of the Mozilla Public License, v. 2.0.
 	You should have received a copy of the MPL along with this library; see the 
 	file LICENSE. If not, you can obtain one at http://mozilla.org/MPL/2.0/.
 */
-#ifdef MINSG_EXT_SPHERICALSAMPLING
+#ifdef MINSG_EXT_SVS
 
-#ifndef E_MINSG_SPHERICALSAMPLING_E_SAMPLEPOINT_H_
-#define E_MINSG_SPHERICALSAMPLING_E_SAMPLEPOINT_H_
+#ifndef E_MINSG_SVS_E_SAMPLEPOINT_H_
+#define E_MINSG_SVS_E_SAMPLEPOINT_H_
 
 #include <EScript/Objects/ExtReferenceObject.h>
-#include <MinSG/Ext/SphericalSampling/SamplePoint.h>
+#include <MinSG/Ext/SVS/SamplePoint.h>
 #include <cstddef>
 #include <string>
 #include <utility>
@@ -23,10 +23,10 @@ class Runtime;
 class Type;
 }
 namespace E_MinSG {
-namespace SphericalSampling {
+namespace SVS {
 
-//!	EScript wrapper class for MinSG::SphericalSampling::SamplePoint
-class E_SamplePoint : public EScript::ExtReferenceObject<MinSG::SphericalSampling::SamplePoint> {
+//!	EScript wrapper class for MinSG::SVS::SamplePoint
+class E_SamplePoint : public EScript::ExtReferenceObject<MinSG::SVS::SamplePoint> {
 		ES_PROVIDES_TYPE_NAME(SamplePoint)
 	public:
 		static EScript::Type * getTypeObject();
@@ -46,6 +46,6 @@ class E_SamplePoint : public EScript::ExtReferenceObject<MinSG::SphericalSamplin
 }
 }
 
-#endif /* E_MINSG_SPHERICALSAMPLING_E_SAMPLEPOINT_H_ */
+#endif /* E_MINSG_SVS_E_SAMPLEPOINT_H_ */
 
-#endif /* MINSG_EXT_SPHERICALSAMPLING */
+#endif /* MINSG_EXT_SVS */

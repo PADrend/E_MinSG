@@ -43,17 +43,17 @@
 #include "D3Fact/ELib_D3Fact.h"
 #endif // MINSG_EXT_D3FACT
 
-// [ext:SphericalSampling]
-#ifdef MINSG_EXT_SPHERICALSAMPLING
-#include "SphericalSampling/E_BudgetRenderer.h"
-#include "SphericalSampling/E_GeometryNodeCollector.h"
-#include "SphericalSampling/E_Helper.h"
-#include "SphericalSampling/E_PreprocessingContext.h"
-#include "SphericalSampling/E_Renderer.h"
-#include "SphericalSampling/E_SamplePoint.h"
-#include "SphericalSampling/E_SamplingSphere.h"
-#include "SphericalSampling/E_SphereVisualizationRenderer.h"
-#endif /* MINSG_EXT_SPHERICALSAMPLING */
+// [ext:SVS]
+#ifdef MINSG_EXT_SVS
+#include "SVS/E_BudgetRenderer.h"
+#include "SVS/E_GeometryNodeCollector.h"
+#include "SVS/E_Helper.h"
+#include "SVS/E_PreprocessingContext.h"
+#include "SVS/E_Renderer.h"
+#include "SVS/E_SamplePoint.h"
+#include "SVS/E_SamplingSphere.h"
+#include "SVS/E_SphereVisualizationRenderer.h"
+#endif /* MINSG_EXT_SVS */
 
 // [ext:ThesisJonas]
 #ifdef MINSG_EXT_THESISJONAS
@@ -383,21 +383,21 @@ void init_ext(EScript::Namespace * /*globals*/,EScript::Namespace * lib) {
 	E_D3Fact::init(lib);
 #endif  // MINSG_EXT_D3FACT
 
-	// [ext:SphericalSampling]
-#ifdef MINSG_EXT_SPHERICALSAMPLING
+	// [ext:SVS]
+#ifdef MINSG_EXT_SVS
 	{
 		EScript::Namespace * ns = new EScript::Namespace();
-		declareConstant(lib, "SphericalSampling", ns);
-		SphericalSampling::E_BudgetRenderer::init(*ns);
-		SphericalSampling::E_GeometryNodeCollector::init(*ns);
-		SphericalSampling::E_Helper::init(*ns);
-		SphericalSampling::E_PreprocessingContext::init(*ns);
-		SphericalSampling::E_Renderer::init(*ns);
-		SphericalSampling::E_SamplePoint::init(*ns);
-		SphericalSampling::E_SamplingSphere::init(*ns);
-		SphericalSampling::E_SphereVisualizationRenderer::init(*ns);
+		declareConstant(lib, "SVS", ns);
+		SVS::E_BudgetRenderer::init(*ns);
+		SVS::E_GeometryNodeCollector::init(*ns);
+		SVS::E_Helper::init(*ns);
+		SVS::E_PreprocessingContext::init(*ns);
+		SVS::E_Renderer::init(*ns);
+		SVS::E_SamplePoint::init(*ns);
+		SVS::E_SamplingSphere::init(*ns);
+		SVS::E_SphereVisualizationRenderer::init(*ns);
 	}
-#endif /* MINSG_EXT_SPHERICALSAMPLING */
+#endif /* MINSG_EXT_SVS */
 
 	// [ext:ThesisJonas]
 #ifdef MINSG_EXT_THESISJONAS

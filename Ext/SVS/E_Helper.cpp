@@ -1,12 +1,12 @@
 /*
-	This file is part of the E_MinSG library extension SphericalSampling.
+	This file is part of the E_MinSG library extension SVS.
 	Copyright (C) 2012 Benjamin Eikel <benjamin@eikel.org>
 	
 	This library is subject to the terms of the Mozilla Public License, v. 2.0.
 	You should have received a copy of the MPL along with this library; see the 
 	file LICENSE. If not, you can obtain one at http://mozilla.org/MPL/2.0/.
 */
-#ifdef MINSG_EXT_SPHERICALSAMPLING
+#ifdef MINSG_EXT_SVS
 
 #include "E_Helper.h"
 #include "E_SamplingSphere.h"
@@ -22,15 +22,15 @@
 #include <E_Rendering/Texture/E_Texture.h>
 #include <MinSG/Core/Nodes/AbstractCameraNode.h>
 #include <MinSG/Core/Nodes/CameraNodeOrtho.h>
-#include <MinSG/Ext/SphericalSampling/Definitions.h>
-#include <MinSG/Ext/SphericalSampling/Helper.h>
-#include <MinSG/Ext/SphericalSampling/SamplingSphere.h>
+#include <MinSG/Ext/SVS/Definitions.h>
+#include <MinSG/Ext/SVS/Helper.h>
+#include <MinSG/Ext/SVS/SamplingSphere.h>
 #include <vector>
 
-using namespace MinSG::SphericalSampling;
+using namespace MinSG::SVS;
 
 namespace E_MinSG {
-namespace SphericalSampling {
+namespace SVS {
 namespace E_Helper {
 
 void init(EScript::Namespace & lib) {
@@ -39,7 +39,7 @@ void init(EScript::Namespace & lib) {
 	declareConstant(&lib, "INTERPOLATION_MAXALL", EScript::Number::create(INTERPOLATION_MAXALL));
 	declareConstant(&lib, "INTERPOLATION_WEIGHTED3", EScript::Number::create(INTERPOLATION_WEIGHTED3));
 
-	//! [ESF] CameraNodeOrtho SphericalSampling.createSamplingCamera(Sphere, Matrix4x4, Number)
+	//! [ESF] CameraNodeOrtho SVS.createSamplingCamera(Sphere, Matrix4x4, Number)
 	ES_FUN(&lib, "createSamplingCamera", 3, 3,
 				EScript::create(createSamplingCamera(
 					parameter[0].to<const Geometry::Sphere_f&>(rt),
@@ -47,7 +47,7 @@ void init(EScript::Namespace & lib) {
 					parameter[2].to<int32_t>(rt)
 				)))
 
-	//! [ESF] Void SphericalSampling.transformCamera(AbstractCameraNode, Sphere, Matrix4x4, Vec3)
+	//! [ESF] Void SVS.transformCamera(AbstractCameraNode, Sphere, Matrix4x4, Vec3)
 	ES_FUN(&lib, "transformCamera", 4, 4,
 				(transformCamera(
 					**EScript::assertType<E_AbstractCameraNode>(rt, parameter[0]),
@@ -56,7 +56,7 @@ void init(EScript::Namespace & lib) {
 					parameter[3].to<const Geometry::Vec3&>(rt)
 				 ), EScript::create(nullptr)))
 
-	//! [ESF] Texture SphericalSampling.createColorTexture(Number, Number, SamplingSphere, Number)
+	//! [ESF] Texture SVS.createColorTexture(Number, Number, SamplingSphere, Number)
 	ES_FUNCTION2(&lib, "createColorTexture", 4, 4, {
 		const uint32_t width = parameter[0].to<uint32_t>(rt);
 		const uint32_t height = parameter[1].to<uint32_t>(rt);
@@ -65,28 +65,28 @@ void init(EScript::Namespace & lib) {
 		return new E_Rendering::E_Texture(createColorTexture(width, height, samplingSphere, interpolation));
 	})
 
-	//! [ESF] Bool SphericalSampling.hasSamplingSphere(GroupNode)
+	//! [ESF] Bool SVS.hasSamplingSphere(GroupNode)
 	ES_FUN(&lib, "hasSamplingSphere", 1, 1, 
 		EScript::Bool::create(hasSamplingSphere(parameter[0].to<MinSG::GroupNode*>(rt)))
 	)
 
-	//! [ESF] SamplingSphere SphericalSampling.retrieveSamplingSphere(GroupNode)
+	//! [ESF] SamplingSphere SVS.retrieveSamplingSphere(GroupNode)
 	ES_FUN(&lib, "retrieveSamplingSphere", 1, 1, 
 		new E_SamplingSphere(retrieveSamplingSphere(parameter[0].to<MinSG::GroupNode *>(rt)))
 	)
 
-	//! [ESF] Number SphericalSampling.getSphereMemoryUsage(GroupNode)
+	//! [ESF] Number SVS.getSphereMemoryUsage(GroupNode)
 	ES_FUN(&lib, "getSphereMemoryUsage", 1, 1, 
 		static_cast<double>(retrieveSamplingSphere(parameter[0].to<MinSG::GroupNode *>(rt)).getMemoryUsage())
 	)
 
-	//! [ESF] Sphere SphericalSampling.transformSphere(Sphere, Matrix4x4)
+	//! [ESF] Sphere SVS.transformSphere(Sphere, Matrix4x4)
 	ES_FUN(&lib, "transformSphere", 2, 2,
 				new E_Geometry::E_Sphere(transformSphere(
 					parameter[0].to<const Geometry::Sphere_f&>(rt),
 					parameter[1].to<const Geometry::Matrix4x4&>(rt))))
 
-	//! [ESF] Void SphericalSampling.transformSpheresFromWorldToLocal(GroupNode)
+	//! [ESF] Void SVS.transformSpheresFromWorldToLocal(GroupNode)
 	ES_FUN(&lib, "transformSpheresFromWorldToLocal", 1, 1, 
 		(transformSpheresFromWorldToLocal(parameter[0].to<MinSG::GroupNode*>(rt)), EScript::create(nullptr))
 	)
@@ -96,4 +96,4 @@ void init(EScript::Namespace & lib) {
 }
 }
 
-#endif /* MINSG_EXT_SPHERICALSAMPLING */
+#endif /* MINSG_EXT_SVS */

@@ -1,25 +1,25 @@
 /*
-	This file is part of the E_MinSG library extension SphericalSampling.
+	This file is part of the E_MinSG library extension SVS.
 	Copyright (C) 2012 Benjamin Eikel <benjamin@eikel.org>
 	
 	This library is subject to the terms of the Mozilla Public License, v. 2.0.
 	You should have received a copy of the MPL along with this library; see the 
 	file LICENSE. If not, you can obtain one at http://mozilla.org/MPL/2.0/.
 */
-#ifdef MINSG_EXT_SPHERICALSAMPLING
+#ifdef MINSG_EXT_SVS
 
 #include "E_Renderer.h"
 #include "../../ELibMinSG.h"
 #include <EScript/Utils/DeprecatedMacros.h>
 #include <EScript/Basics.h>
 #include <EScript/StdObjects.h>
-#include <MinSG/Ext/SphericalSampling/Definitions.h>
-#include <MinSG/Ext/SphericalSampling/Helper.h>
-#include <MinSG/Ext/SphericalSampling/Renderer.h>
+#include <MinSG/Ext/SVS/Definitions.h>
+#include <MinSG/Ext/SVS/Helper.h>
+#include <MinSG/Ext/SVS/Renderer.h>
 #include <cstdint>
 
 namespace E_MinSG {
-namespace SphericalSampling {
+namespace SVS {
 
 EScript::Type * E_Renderer::getTypeObject() {
 	// E_Renderer ---|> E_NodeRendererState ---|> E_State
@@ -30,10 +30,10 @@ EScript::Type * E_Renderer::getTypeObject() {
 void E_Renderer::init(EScript::Namespace & lib) {
 	EScript::Type * typeObject = E_Renderer::getTypeObject();
 	declareConstant(&lib, "Renderer", typeObject);
-	addFactory<MinSG::SphericalSampling::Renderer, E_Renderer>();
+	addFactory<MinSG::SVS::Renderer, E_Renderer>();
 
-	//! [ESF] new MinSG.SphericalSampling.Renderer()
-	ES_CTOR(typeObject, 0, 0, EScript::create(new MinSG::SphericalSampling::Renderer()))
+	//! [ESF] new MinSG.SVS.Renderer()
+	ES_CTOR(typeObject, 0, 0, EScript::create(new MinSG::SVS::Renderer()))
 
 	//! [ESMF] Number Renderer.getInterpolationMethod()
 	ESMF_DECLARE(typeObject, const E_Renderer, "getInterpolationMethod", 0, 0, EScript::Number::create((**self)->getInterpolationMethod()))
@@ -41,7 +41,7 @@ void E_Renderer::init(EScript::Namespace & lib) {
 	//! [ESMF] self Renderer.setInterpolationMethod(Number)
 	ES_MFUNCTION_DECLARE(typeObject, E_Renderer, "setInterpolationMethod", 1, 1, {
 		const uint32_t interpolationValue = parameter[0].to<uint32_t>(runtime);
-		(**self)->setInterpolationMethod(MinSG::SphericalSampling::interpolationFromUInt(interpolationValue));
+		(**self)->setInterpolationMethod(MinSG::SVS::interpolationFromUInt(interpolationValue));
 		return self;
 	})
 
@@ -65,7 +65,7 @@ void E_Renderer::init(EScript::Namespace & lib) {
 
 }
 
-E_Renderer::E_Renderer(MinSG::SphericalSampling::Renderer * renderer) :
+E_Renderer::E_Renderer(MinSG::SVS::Renderer * renderer) :
 		E_NodeRendererState(renderer, E_Renderer::getTypeObject()) {
 }
 
@@ -75,4 +75,4 @@ E_Renderer::~E_Renderer() {
 }
 }
 
-#endif /* MINSG_EXT_SPHERICALSAMPLING */
+#endif /* MINSG_EXT_SVS */

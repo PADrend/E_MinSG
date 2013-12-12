@@ -1,24 +1,24 @@
 /*
-	This file is part of the E_MinSG library extension SphericalSampling.
+	This file is part of the E_MinSG library extension SVS.
 	Copyright (C) 2013 Benjamin Eikel <benjamin@eikel.org>
 	
 	This library is subject to the terms of the Mozilla Public License, v. 2.0.
 	You should have received a copy of the MPL along with this library; see the 
 	file LICENSE. If not, you can obtain one at http://mozilla.org/MPL/2.0/.
 */
-#ifdef MINSG_EXT_SPHERICALSAMPLING
+#ifdef MINSG_EXT_SVS
 
 #include "E_GeometryNodeCollector.h"
 #include "../../Core/Nodes/E_GeometryNode.h"
 #include <EScript/Utils/DeprecatedMacros.h>
 #include <EScript/Basics.h>
 #include <EScript/StdObjects.h>
-#include <MinSG/Ext/SphericalSampling/GeometryNodeCollector.h>
+#include <MinSG/Ext/SVS/GeometryNodeCollector.h>
 #include <cstdint>
 #include <unordered_map>
 
 namespace E_MinSG {
-namespace SphericalSampling {
+namespace SVS {
 
 EScript::Type * E_GeometryNodeCollector::getTypeObject() {
 	// E_GeometryNodeCollector ---|> E_NodeRendererState ---|> E_State
@@ -29,10 +29,10 @@ EScript::Type * E_GeometryNodeCollector::getTypeObject() {
 void E_GeometryNodeCollector::init(EScript::Namespace & lib) {
 	EScript::Type * typeObject = E_GeometryNodeCollector::getTypeObject();
 	declareConstant(&lib, "GeometryNodeCollector", typeObject);
-	addFactory<MinSG::SphericalSampling::GeometryNodeCollector, E_GeometryNodeCollector>();
+	addFactory<MinSG::SVS::GeometryNodeCollector, E_GeometryNodeCollector>();
 
-	//! [ESF] new MinSG.SphericalSampling.GeometryNodeCollector()
-	ES_CTOR(typeObject, 0, 0, EScript::create(new MinSG::SphericalSampling::GeometryNodeCollector()))
+	//! [ESF] new MinSG.SVS.GeometryNodeCollector()
+	ES_CTOR(typeObject, 0, 0, EScript::create(new MinSG::SVS::GeometryNodeCollector()))
 
 	//! [ESMF] Array GeometryNodeCollector.getCollectedNodes()
 	ES_MFUNCTION_DECLARE(typeObject, E_GeometryNodeCollector, "getCollectedNodes", 0, 0, {
@@ -48,7 +48,7 @@ void E_GeometryNodeCollector::init(EScript::Namespace & lib) {
 	})
 }
 
-E_GeometryNodeCollector::E_GeometryNodeCollector(MinSG::SphericalSampling::GeometryNodeCollector * collector) :
+E_GeometryNodeCollector::E_GeometryNodeCollector(MinSG::SVS::GeometryNodeCollector * collector) :
 		E_NodeRendererState(collector, E_GeometryNodeCollector::getTypeObject()) {
 }
 
@@ -57,4 +57,4 @@ E_GeometryNodeCollector::~E_GeometryNodeCollector() = default;
 }
 }
 
-#endif /* MINSG_EXT_SPHERICALSAMPLING */
+#endif /* MINSG_EXT_SVS */

@@ -1,12 +1,12 @@
 /*
-	This file is part of the E_MinSG library extension SphericalSampling.
+	This file is part of the E_MinSG library extension SVS.
 	Copyright (C) 2012 Benjamin Eikel <benjamin@eikel.org>
 	
 	This library is subject to the terms of the Mozilla Public License, v. 2.0.
 	You should have received a copy of the MPL along with this library; see the 
 	file LICENSE. If not, you can obtain one at http://mozilla.org/MPL/2.0/.
 */
-#ifdef MINSG_EXT_SPHERICALSAMPLING
+#ifdef MINSG_EXT_SVS
 
 #include "E_SamplingSphere.h"
 #include "E_SamplePoint.h"
@@ -25,9 +25,9 @@
 #include <Geometry/Sphere.h>
 #include <Geometry/Vec3.h>
 #include <MinSG/Core/Nodes/ListNode.h>
-#include <MinSG/Ext/SphericalSampling/Definitions.h>
-#include <MinSG/Ext/SphericalSampling/Helper.h>
-#include <MinSG/Ext/SphericalSampling/SamplingSphere.h>
+#include <MinSG/Ext/SVS/Definitions.h>
+#include <MinSG/Ext/SVS/Helper.h>
+#include <MinSG/Ext/SVS/SamplingSphere.h>
 #include <Util/GenericAttribute.h>
 #include <Util/References.h>
 #include <sstream>
@@ -35,7 +35,7 @@
 #include <string>
 #include <vector>
 
-using namespace MinSG::SphericalSampling;
+using namespace MinSG::SVS;
 
 namespace MinSG {
 namespace VisibilitySubdivision {
@@ -43,7 +43,7 @@ class VisibilityVector;
 }
 }
 namespace E_MinSG {
-namespace SphericalSampling {
+namespace SVS {
 
 EScript::Type * E_SamplingSphere::getTypeObject() {
 	// E_SamplingSphere ---|> ExtObject
@@ -138,4 +138,4 @@ E_SamplingSphere::~E_SamplingSphere() = default;
 }
 }
 
-#endif /* MINSG_EXT_SPHERICALSAMPLING */
+#endif /* MINSG_EXT_SVS */

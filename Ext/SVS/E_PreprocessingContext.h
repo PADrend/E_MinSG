@@ -1,18 +1,18 @@
 /*
-	This file is part of the E_MinSG library extension SphericalSampling.
+	This file is part of the E_MinSG library extension SVS.
 	Copyright (C) 2013 Benjamin Eikel <benjamin@eikel.org>
 	
 	This library is subject to the terms of the Mozilla Public License, v. 2.0.
 	You should have received a copy of the MPL along with this library; see the 
 	file LICENSE. If not, you can obtain one at http://mozilla.org/MPL/2.0/.
 */
-#ifdef MINSG_EXT_SPHERICALSAMPLING
+#ifdef MINSG_EXT_SVS
 
-#ifndef E_MINSG_SPHERICALSAMPLING_E_PREPROCESSINGCONTEXT_H_
-#define E_MINSG_SPHERICALSAMPLING_E_PREPROCESSINGCONTEXT_H_
+#ifndef E_MINSG_SVS_E_PREPROCESSINGCONTEXT_H_
+#define E_MINSG_SVS_E_PREPROCESSINGCONTEXT_H_
 
 #include <EScript/Objects/ReferenceObject.h>
-#include <MinSG/Ext/SphericalSampling/PreprocessingContext.h>
+#include <MinSG/Ext/SVS/PreprocessingContext.h>
 #include <cstddef>
 #include <string>
 
@@ -21,10 +21,10 @@ class Namespace;
 class Type;
 }
 namespace E_MinSG {
-namespace SphericalSampling {
+namespace SVS {
 
-//!	EScript wrapper class for MinSG::SphericalSampling::PreprocessingContext
-class E_PreprocessingContext : public EScript::ReferenceObject<MinSG::SphericalSampling::PreprocessingContext,
+//!	EScript wrapper class for MinSG::SVS::PreprocessingContext
+class E_PreprocessingContext : public EScript::ReferenceObject<MinSG::SVS::PreprocessingContext,
 															   EScript::Policies::SameEObjects_ComparePolicy> {
 	ES_PROVIDES_TYPE_NAME(PreprocessingContext)
 	public:
@@ -41,6 +41,6 @@ class E_PreprocessingContext : public EScript::ReferenceObject<MinSG::SphericalS
 }
 }
 
-#endif /* E_MINSG_SPHERICALSAMPLING_E_PREPROCESSINGCONTEXT_H_ */
+#endif /* E_MINSG_SVS_E_PREPROCESSINGCONTEXT_H_ */
 
-#endif /* MINSG_EXT_SPHERICALSAMPLING */
+#endif /* MINSG_EXT_SVS */

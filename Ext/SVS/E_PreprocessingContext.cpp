@@ -1,12 +1,12 @@
 /*
-	This file is part of the E_MinSG library extension SphericalSampling.
+	This file is part of the E_MinSG library extension SVS.
 	Copyright (C) 2013 Benjamin Eikel <benjamin@eikel.org>
 	
 	This library is subject to the terms of the Mozilla Public License, v. 2.0.
 	You should have received a copy of the MPL along with this library; see the 
 	file LICENSE. If not, you can obtain one at http://mozilla.org/MPL/2.0/.
 */
-#ifdef MINSG_EXT_SPHERICALSAMPLING
+#ifdef MINSG_EXT_SVS
 
 #include "E_PreprocessingContext.h"
 #include "../../Core/Nodes/E_GroupNode.h"
@@ -16,14 +16,14 @@
 #include <EScript/Basics.h>
 #include <EScript/StdObjects.h>
 #include <E_Geometry/E_Vec3.h>
-#include <MinSG/Ext/SphericalSampling/PreprocessingContext.h>
+#include <MinSG/Ext/SVS/PreprocessingContext.h>
 #include <Util/References.h>
 #include <cstdint>
 #include <string>
 #include <utility>
 
 namespace E_MinSG {
-namespace SphericalSampling {
+namespace SVS {
 
 EScript::Type * E_PreprocessingContext::getTypeObject() {
 	// E_PreprocessingContext ---|> E_Object
@@ -35,7 +35,7 @@ void E_PreprocessingContext::init(EScript::Namespace & lib) {
 	EScript::Type * typeObject = E_PreprocessingContext::getTypeObject();
 	declareConstant(&lib, getClassName(), typeObject);
 
-	//! [ESF] new SphericalSampling.PreprocessingContext(SceneManager, FrameContext, GroupNode, Array, Number, Bool, Bool)
+	//! [ESF] new SVS.PreprocessingContext(SceneManager, FrameContext, GroupNode, Array, Number, Bool, Bool)
 	ES_CONSTRUCTOR(typeObject, 7, 7, {
 		MinSG::SceneManagement::SceneManager & sceneManager = ***EScript::assertType<E_SceneManager>(rt, parameter[0]);
 		MinSG::FrameContext & frameContext = parameter[1].to<MinSG::FrameContext&>(rt);
@@ -75,4 +75,4 @@ E_PreprocessingContext::~E_PreprocessingContext() = default;
 }
 }
 
-#endif /* MINSG_EXT_SPHERICALSAMPLING */
+#endif /* MINSG_EXT_SVS */
