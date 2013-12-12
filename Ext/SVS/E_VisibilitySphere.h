@@ -8,11 +8,11 @@
 */
 #ifdef MINSG_EXT_SVS
 
-#ifndef E_MINSG_SVS_E_SAMPLINGSPHERE_H_
-#define E_MINSG_SVS_E_SAMPLINGSPHERE_H_
+#ifndef E_MINSG_SVS_E_VISIBILITYSPHERE_H_
+#define E_MINSG_SVS_E_VISIBILITYSPHERE_H_
 
 #include <EScript/Objects/ExtReferenceObject.h>
-#include <MinSG/Ext/SVS/SamplingSphere.h>
+#include <MinSG/Ext/SVS/VisibilitySphere.h>
 #include <cstddef>
 #include <string>
 #include <utility>
@@ -25,23 +25,23 @@ class Type;
 namespace E_MinSG {
 namespace SVS {
 
-//!	EScript wrapper class for MinSG::SVS::SamplingSphere
-class E_SamplingSphere : public EScript::ExtReferenceObject<MinSG::SVS::SamplingSphere> {
-		ES_PROVIDES_TYPE_NAME(SamplingSphere)
+//!	EScript wrapper class for MinSG::SVS::VisibilitySphere
+class E_VisibilitySphere : public EScript::ExtReferenceObject<MinSG::SVS::VisibilitySphere> {
+		ES_PROVIDES_TYPE_NAME(VisibilitySphere)
 	public:
 		static EScript::Type * getTypeObject();
 		static void init(EScript::Namespace & lib);
 
 		template<typename ... Types>
-		explicit E_SamplingSphere(Types && ... params) :
-			ExtReferenceObject_t(E_SamplingSphere::getTypeObject(), std::forward<Types>(params) ...) {
+		explicit E_VisibilitySphere(Types && ... params) :
+			ExtReferenceObject_t(E_VisibilitySphere::getTypeObject(), std::forward<Types>(params) ...) {
 		}
-		virtual ~E_SamplingSphere();
+		virtual ~E_VisibilitySphere();
 };
 
 }
 }
 
-#endif /* E_MINSG_SVS_E_SAMPLINGSPHERE_H_ */
+#endif /* E_MINSG_SVS_E_VISIBILITYSPHERE_H_ */
 
 #endif /* MINSG_EXT_SVS */

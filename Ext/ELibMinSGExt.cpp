@@ -51,8 +51,8 @@
 #include "SVS/E_PreprocessingContext.h"
 #include "SVS/E_Renderer.h"
 #include "SVS/E_SamplePoint.h"
-#include "SVS/E_SamplingSphere.h"
 #include "SVS/E_SphereVisualizationRenderer.h"
+#include "SVS/E_VisibilitySphere.h"
 #endif /* MINSG_EXT_SVS */
 
 // [ext:ThesisJonas]
@@ -394,8 +394,8 @@ void init_ext(EScript::Namespace * /*globals*/,EScript::Namespace * lib) {
 		SVS::E_PreprocessingContext::init(*ns);
 		SVS::E_Renderer::init(*ns);
 		SVS::E_SamplePoint::init(*ns);
-		SVS::E_SamplingSphere::init(*ns);
 		SVS::E_SphereVisualizationRenderer::init(*ns);
+		SVS::E_VisibilitySphere::init(*ns);
 	}
 #endif /* MINSG_EXT_SVS */
 

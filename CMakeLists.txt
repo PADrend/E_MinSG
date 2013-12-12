@@ -144,8 +144,8 @@ add_library(E_MinSG
 	Ext/SVS/E_PreprocessingContext.cpp
 	Ext/SVS/E_Renderer.cpp
 	Ext/SVS/E_SamplePoint.cpp
-	Ext/SVS/E_SamplingSphere.cpp
 	Ext/SVS/E_SphereVisualizationRenderer.cpp
+	Ext/SVS/E_VisibilitySphere.cpp
 	Ext/ThesisJonas/E_Preprocessor.cpp
 	Ext/ThesisJonas/E_Renderer.cpp
 	Ext/Tools/E_DebugCamera.cpp

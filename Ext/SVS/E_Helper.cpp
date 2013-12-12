@@ -9,7 +9,7 @@
 #ifdef MINSG_EXT_SVS
 
 #include "E_Helper.h"
-#include "E_SamplingSphere.h"
+#include "E_VisibilitySphere.h"
 #include "../../Core/Nodes/E_CameraNodeOrtho.h"
 #include "../../Core/Nodes/E_GroupNode.h"
 #include "../../ELibMinSG.h"
@@ -24,7 +24,7 @@
 #include <MinSG/Core/Nodes/CameraNodeOrtho.h>
 #include <MinSG/Ext/SVS/Definitions.h>
 #include <MinSG/Ext/SVS/Helper.h>
-#include <MinSG/Ext/SVS/SamplingSphere.h>
+#include <MinSG/Ext/SVS/VisibilitySphere.h>
 #include <vector>
 
 using namespace MinSG::SVS;
@@ -56,28 +56,28 @@ void init(EScript::Namespace & lib) {
 					parameter[3].to<const Geometry::Vec3&>(rt)
 				 ), EScript::create(nullptr)))
 
-	//! [ESF] Texture SVS.createColorTexture(Number, Number, SamplingSphere, Number)
+	//! [ESF] Texture SVS.createColorTexture(Number, Number, VisibilitySphere, Number)
 	ES_FUNCTION2(&lib, "createColorTexture", 4, 4, {
 		const uint32_t width = parameter[0].to<uint32_t>(rt);
 		const uint32_t height = parameter[1].to<uint32_t>(rt);
-		const SamplingSphere & samplingSphere = EScript::assertType<E_SamplingSphere>(rt, parameter[2])->ref();
+		const VisibilitySphere & visibilitySphere = EScript::assertType<E_VisibilitySphere>(rt, parameter[2])->ref();
 		const interpolation_type_t interpolation = interpolationFromUInt(parameter[3].to<uint32_t>(rt));
-		return new E_Rendering::E_Texture(createColorTexture(width, height, samplingSphere, interpolation));
+		return new E_Rendering::E_Texture(createColorTexture(width, height, visibilitySphere, interpolation));
 	})
 
-	//! [ESF] Bool SVS.hasSamplingSphere(GroupNode)
-	ES_FUN(&lib, "hasSamplingSphere", 1, 1, 
-		EScript::Bool::create(hasSamplingSphere(parameter[0].to<MinSG::GroupNode*>(rt)))
+	//! [ESF] Bool SVS.hasVisibilitySphere(GroupNode)
+	ES_FUN(&lib, "hasVisibilitySphere", 1, 1, 
+		EScript::Bool::create(hasVisibilitySphere(parameter[0].to<MinSG::GroupNode*>(rt)))
 	)
 
-	//! [ESF] SamplingSphere SVS.retrieveSamplingSphere(GroupNode)
-	ES_FUN(&lib, "retrieveSamplingSphere", 1, 1, 
-		new E_SamplingSphere(retrieveSamplingSphere(parameter[0].to<MinSG::GroupNode *>(rt)))
+	//! [ESF] VisibilitySphere SVS.retrieveVisibilitySphere(GroupNode)
+	ES_FUN(&lib, "retrieveVisibilitySphere", 1, 1, 
+		new E_VisibilitySphere(retrieveVisibilitySphere(parameter[0].to<MinSG::GroupNode *>(rt)))
 	)
 
 	//! [ESF] Number SVS.getSphereMemoryUsage(GroupNode)
 	ES_FUN(&lib, "getSphereMemoryUsage", 1, 1, 
-		static_cast<double>(retrieveSamplingSphere(parameter[0].to<MinSG::GroupNode *>(rt)).getMemoryUsage())
+		static_cast<double>(retrieveVisibilitySphere(parameter[0].to<MinSG::GroupNode *>(rt)).getMemoryUsage())
 	)
 
 	//! [ESF] Sphere SVS.transformSphere(Sphere, Matrix4x4)
