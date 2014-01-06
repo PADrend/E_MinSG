@@ -85,11 +85,11 @@ void E_ScriptedState::init(EScript::Namespace & lib) {
 	ES_CTOR(typeObject,0,0, EScript::create(new ScriptedState( thisType,rt) ))
 
 
-	//!	[ESMF] void MinSG.ScriptedNodeRendererState.doEnableState(Node,RenderParam) \note ObjectAttribute
+	//!	[ESMF] void MinSG.ScriptedState.doEnableState(Node,RenderParam) \note ObjectAttribute
 	ES_FUN(typeObject,"doEnableState",2,2,(EScript::Number::create(State::STATE_OK)))
 	EScript::markAttributeAsObjectAttribute(typeObject,"doEnableState");
 
-	//!	[ESMF] void MinSG.ScriptedNodeRendererState.doDisableState(Node,RenderParam) \note ObjectAttribute
+	//!	[ESMF] void MinSG.ScriptedState.doDisableState(Node,RenderParam) \note ObjectAttribute
 	ES_FUN(typeObject,"doDisableState",2,2,(EScript::Number::create(State::STATE_OK)))
 	EScript::markAttributeAsObjectAttribute(typeObject,"doDisableState");
 

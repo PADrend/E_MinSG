@@ -42,7 +42,46 @@ NodeRendererResult ScriptedNodeRendererState::displayNode(FrameContext & /*conte
 	static const EScript::StringId attrName("displayNode");
 	EScript::ObjRef result = EScript::callMemberFunction(runtime, eThis.get(), attrName,EScript::ParameterValues(eNode,eRp));
 	return static_cast<NodeRendererResult>(result.toBool());
+}
 
+
+//! ---|> State
+State::stateResult_t ScriptedNodeRendererState::doEnableState(MinSG::FrameContext &fc, MinSG::Node * node, const MinSG::RenderParam & rp) {
+	MinSG::NodeRendererState::doEnableState(fc,node,rp);
+
+	EScript::ObjRef eThis = EScript::create(this); // create a temporary E_ScriptedNodeRendererState
+	if(eThis.isNull()){
+		WARN("ScriptedNodeRendererState::doEnableState");
+		return State::STATE_OK;
+	}
+	EScript::ObjRef eRp = new E_RenderParam(rp);
+	EScript::ObjRef eNode = EScript::create(node);
+
+	// call obj.doEnableState(Node,RenderParam)
+	// \note the 'context'-parameter is ignored, as the E_FrameContext can not be reconstructed from an existing FrameContext-object.
+	static const EScript::StringId attrName("doEnableState");
+	EScript::ObjRef result = EScript::callMemberFunction(runtime, eThis.get(), attrName,
+												EScript::ParameterValues(eNode,eRp));
+	return static_cast<State::stateResult_t>(result.toUInt());
+
+}
+
+//! ---|> State
+void ScriptedNodeRendererState::doDisableState(MinSG::FrameContext &fc,  MinSG::Node * node, const MinSG::RenderParam & rp) {
+	MinSG::NodeRendererState::doDisableState(fc,node,rp);
+	EScript::ObjRef eThis = EScript::create(this); // create a temporary E_ScriptedNodeRendererState
+	if(eThis.isNull()){
+		WARN("ScriptedNodeRendererState::doDisableState");
+		return;
+	}
+	EScript::ObjRef eRp = new E_RenderParam(rp);
+	EScript::ObjRef eNode = EScript::create(node);
+
+	// call obj.doDisableState(Node,RenderParam)
+	// \note the 'context'-parameter is ignored, as the E_FrameContext can not be reconstructed from an existing FrameContext-object.
+	static const EScript::StringId attrName("doDisableState");
+	EScript::ObjRef result = EScript::callMemberFunction(runtime, eThis.get(), attrName,
+												EScript::ParameterValues(eNode,eRp));
 }
 
 
@@ -72,8 +111,12 @@ void E_ScriptedNodeRendererState::init(EScript::Namespace & lib) {
 
 	//!	[ESMF] void MinSG.ScriptedNodeRendererState.displayNode((Node,RenderParam) \note ObjectAttribute
 	ES_FUN(typeObject,"displayNode",2,2,static_cast<uint32_t>(State::STATE_OK))
-	EScript::markAttributeAsObjectAttribute(typeObject,"displayNode");
+	
+	//!	[ESMF] void MinSG.ScriptedNodeRendererState.doEnableState(Node,RenderParam) \note ObjectAttribute
+	ES_FUN(typeObject,"doEnableState",2,2,(EScript::Number::create(State::STATE_OK)))
 
+	//!	[ESMF] void MinSG.ScriptedNodeRendererState.doDisableState(Node,RenderParam) \note ObjectAttribute
+	ES_FUN(typeObject,"doDisableState",2,2,(EScript::Void::get()))
 }
 
 // ------------------------------------------------------------

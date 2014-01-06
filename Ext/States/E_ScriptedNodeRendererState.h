@@ -29,11 +29,13 @@ class ScriptedNodeRendererState : public MinSG::NodeRendererState {
 		EScript::EPtr<EScript::Type> getEType(){	return eType;	}
 
 		/// ---|> State
-		virtual ScriptedNodeRendererState * clone() const 	{	return new ScriptedNodeRendererState(*this);	}
+		ScriptedNodeRendererState * clone() const override 	{	return new ScriptedNodeRendererState(*this);	}
 	private:
 		//! ---|> NodeRendererState
-		virtual MinSG::NodeRendererResult displayNode(MinSG::FrameContext & context, MinSG::Node * node, const MinSG::RenderParam & rp);
-
+		MinSG::NodeRendererResult displayNode(MinSG::FrameContext & context, MinSG::Node * node, const MinSG::RenderParam & rp )override;
+		stateResult_t doEnableState(MinSG::FrameContext & context,MinSG:: Node *, const MinSG::RenderParam & rp) override;
+		void doDisableState(MinSG::FrameContext & context, MinSG::Node *, const MinSG::RenderParam & rp) override;
+		
 		ScriptedNodeRendererState(const ScriptedNodeRendererState & other) : MinSG::NodeRendererState(other), runtime(other.runtime) {}
 		EScript::Runtime & runtime;
 		EScript::ERef<EScript::Type> eType;
