@@ -85,16 +85,15 @@ void E_FrameContext::init(EScript::Namespace & lib) {
 				return thisEObj;
 	})
 	
-	//!	[ESMF] thisEObj MinSG.FrameContext.displayNode(Node[,RenderingParameters|flags])
+	//!	[ESMF] bool MinSG.FrameContext.displayNode(Node[,RenderingParameters|flags])
 	ES_MFUNCTION(typeObject, FrameContext,"displayNode",1,2,{
 		E_RenderParam * eRp = parameter[1].toType<E_RenderParam>();
 		if(eRp){
-			thisObj->displayNode((parameter[0].to<MinSG::Node*>(rt)),eRp->ref());
+			return EScript::create(thisObj->displayNode((parameter[0].to<MinSG::Node*>(rt)),eRp->ref()));
 		}else{
-			thisObj->displayNode((parameter[0].to<MinSG::Node*>(rt)),
-										static_cast<MinSG::renderFlag_t>(parameter[1].toUInt(0)));
+			return EScript::create(thisObj->displayNode((parameter[0].to<MinSG::Node*>(rt)),
+										static_cast<MinSG::renderFlag_t>(parameter[1].toUInt(0))));
 		}
-		return thisEObj;
 	})
 
 	//! [ESMF] thisEObj MinSG.FrameContext.beginFrame( [_frameNumber] )
