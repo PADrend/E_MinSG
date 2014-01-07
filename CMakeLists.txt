@@ -164,6 +164,8 @@ add_library(E_MinSG
 	Ext/VisibilitySubdivision/E_PVSRenderer.cpp
 	Ext/VisibilitySubdivision/E_VisibilitySubdivisionRenderer.cpp
 	Ext/VisibilitySubdivision/E_VisibilityVector.cpp
+	Ext/VoxelWorld/E_VoxelStorage.cpp
+	Ext/VoxelWorld/E_VoxelWorld.cpp
 	Ext/Waypoints/E_FollowPathBehaviour.cpp
 	Ext/Waypoints/E_PathNode.cpp
 	Ext/Waypoints/E_Waypoint.cpp

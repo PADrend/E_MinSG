@@ -227,6 +227,11 @@
 #include "VisibilitySubdivision/E_VisibilitySubdivisionRenderer.h"
 #include "VisibilitySubdivision/E_VisibilityVector.h"
 
+// [ext:VoxelWorld]
+#ifdef MINSG_EXT_VOXEL_WORLD
+#include "VoxelWorld/E_VoxelWorld.h"
+#endif // MINSG_EXT_VOXEL_WORLD
+
 // [ext:Waypoints]
 #ifdef MINSG_EXT_WAYPOINTS
 #include "Waypoints/E_Waypoint.h"
@@ -579,6 +584,12 @@ void init_ext(EScript::Namespace * /*globals*/,EScript::Namespace * lib) {
 	//! Number getRuntime(ValuatedRegionNode)
 	ES_FUN(lib, "getRuntime", 1, 1, EScript::Number::create(MinSG::VisibilityMerge::Helper::getRuntime(**EScript::assertType<E_ValuatedRegionNode>(rt, parameter[0]))));
 #endif // MINSG_EXT_VISIBILITYMERGE
+
+
+// [ext:VoxelWorld]
+#ifdef MINSG_EXT_VOXEL_WORLD
+	VoxelWorld::init(*lib);
+#endif // M
 
 	// [ext:Waypoints]
 #ifdef MINSG_EXT_WAYPOINTS
