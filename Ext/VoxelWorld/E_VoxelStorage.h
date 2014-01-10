@@ -27,6 +27,8 @@ class E_VoxelStorage : public EScript::ReferenceObject<MinSG::VoxelWorld::simple
 
 		E_VoxelStorage(uint32_t nullValue) : 
 				ReferenceObject_t(getTypeObject(), nullValue) {}
+		E_VoxelStorage(MinSG::VoxelWorld::simpleVoxelStorage_t&&s) : 
+				ReferenceObject_t(getTypeObject(), std::move(s)) {}
         virtual ~E_VoxelStorage() = default;
 
 };
@@ -34,6 +36,8 @@ class E_VoxelStorage : public EScript::ReferenceObject<MinSG::VoxelWorld::simple
 }
 
 
+ES_CONV_OBJ_TO_EOBJ(MinSG::VoxelWorld::simpleVoxelStorage_t&&,	E_MinSG::VoxelWorld::E_VoxelStorage,			
+					new E_MinSG::VoxelWorld::E_VoxelStorage(std::move(obj)))
 ES_CONV_EOBJ_TO_OBJ(E_MinSG::VoxelWorld::E_VoxelStorage,		MinSG::VoxelWorld::simpleVoxelStorage_t&,		**eObj)
 ES_CONV_EOBJ_TO_OBJ(E_MinSG::VoxelWorld::E_VoxelStorage,		MinSG::VoxelWorld::simpleVoxelStorage_t*,		&(**eObj))
 
