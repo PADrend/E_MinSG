@@ -80,13 +80,11 @@
 #include "Evaluator/E_ScriptedEvaluator.h"
 #include "Evaluator/E_BoxQualityEvaluator.h"
 
-// [ext:FancyStuff]
+// misc
 #include <MinSG/Ext/States/SkyboxState.h>
 #include <MinSG/Ext/Behaviours/SimplePhysics.h>
 #include "States/E_BudgetAnnotationState.h"
 #include "States/E_StrangeExampleRenderer.h"
-#include "States/E_ScriptedState.h"
-#include "States/E_ScriptedNodeRendererState.h"
 #include "States/E_EnvironmentState.h"
 #include "States/E_MirrorState.h"
 #include "States/E_ProjSizeFilterState.h"
@@ -95,6 +93,14 @@
 #include "Nodes/E_BillboardNode.h"
 #include "Nodes/E_FakeInstanceNode.h"
 #include "Nodes/E_GenericMetaNode.h"
+
+// scripted states
+#include "States/E_ScriptedState.h"
+#include "States/E_ScriptedNodeRendererState.h"
+#include <MinSG/SceneManagement/SceneDescription.h>
+#include <MinSG/SceneManagement/Exporter/ExporterTools.h>
+#include <MinSG/SceneManagement/Importer/ImporterTools.h>
+
 
 // [ext:ImageCompare]
 #ifdef MINSG_EXT_IMAGECOMPARE
@@ -297,8 +303,73 @@ void init_ext(EScript::Namespace * /*globals*/,EScript::Namespace * lib) {
 	E_ProjSizeFilterState::init(*lib);
 	E_RandomColorRenderer::init(*lib);
 	E_ShadowState::init(*lib);
+	
+	// -----------------------------------------------------------
+	// scripted states
 	E_ScriptedState::init(*lib);
 	E_ScriptedNodeRendererState::init(*lib);
+	{ // export/import scripted states
+		static const char *const STATE_TYPE_SCRIPTED_STATE = "scriptedState";
+	
+		using namespace MinSG::SceneManagement;
+
+		static std::unique_ptr<std::pair<EScript::Runtime&,EScript::ObjRef>> exportHandler;
+
+		const auto exporterFn = [&](ExporterContext &,NodeDescription & desc,State *state) {
+			desc.setString(Consts::ATTR_STATE_TYPE, STATE_TYPE_SCRIPTED_STATE);
+//			std::cout << "Exporting ScriptedState..."<<std::endl;
+			
+			if(exportHandler){
+				Util::Reference<State> refHolder(state);
+
+				EScript::ObjRef eDescription = E_Util::E_Utils::convertGenericAttributeToEScriptObject(&desc);
+				EScript::ObjRef result = EScript::callFunction(exportHandler->first,exportHandler->second.get(),
+											EScript::ParameterValues(EScript::create(state),eDescription));
+				
+				std::unique_ptr<Util::GenericAttribute> desc2(E_Util::E_Utils::convertEScriptObjectToGenericAttribute(eDescription));
+				if( dynamic_cast<Util::GenericAttributeMap*>(desc2.get()) )
+					desc = std::move( *dynamic_cast<Util::GenericAttributeMap*>(desc2.get()) );
+				refHolder.detachAndDecrease();
+			}
+		};
+
+		ExporterTools::registerStateExporter(ScriptedState::getClassId(),exporterFn);
+		ExporterTools::registerStateExporter(ScriptedNodeRendererState::getClassId(),exporterFn);
+		
+		//! [ESMF] MinSG.setScriptedStateImporter( callback(state,Map stateDescription) )
+		ES_FUNCTION(lib,"setScriptedStateExporter",1,1,{
+			if(parameter[0].toBool())
+				exportHandler.reset(new std::pair<EScript::Runtime&,EScript::ObjRef>(rt,parameter[0]));
+			else
+				exportHandler.reset();
+			return nullptr;
+		})
+
+
+		static std::unique_ptr<std::pair<EScript::Runtime&,EScript::ObjRef>> importHandler;
+		ImporterTools::registerStateImporter([](ImportContext &,const std::string& stateType,const NodeDescription & desc,Node *parent) -> bool {
+			if(stateType != STATE_TYPE_SCRIPTED_STATE || !importHandler ) // check parent != nullptr is done by SceneManager
+				return false;
+//			std::cout << "Importing ScriptedState..."<<std::endl;
+			Util::Reference<Node> refHolder(parent);
+			
+			EScript::ObjRef eDescription = E_Util::E_Utils::convertGenericAttributeToEScriptObject(&desc);
+			EScript::ObjRef result = EScript::callFunction(importHandler->first,importHandler->second.get(),
+												EScript::ParameterValues(EScript::create(parent),eDescription));
+			refHolder.detachAndDecrease();
+			return result.toBool();			
+		});
+		//! [ESMF] MinSG.setScriptedStateImporter( callback(node,Map stateDescription) )
+		ES_FUNCTION(lib,"setScriptedStateImporter",1,1,{
+			if(parameter[0].toBool())
+				importHandler.reset(new std::pair<EScript::Runtime&,EScript::ObjRef>(rt,parameter[0]));
+			else
+				importHandler.reset();
+			return nullptr;
+		})
+	}
+	// -----------------------------------------------------------
+
 
 	/*! [ESF] Vec3 calculateSunPosition(timeOfDay[,julianDay=0,[timeZone=0[,longitude=0[,latitude=0]]]])
 	 East = x,  up = y, South = z
