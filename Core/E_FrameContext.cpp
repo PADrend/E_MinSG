@@ -56,13 +56,13 @@ void E_FrameContext::init(EScript::Namespace & lib) {
 
 	//!	[ESMF] Vec3 MinSG.FrameContext.convertScreenPosToWorldPos(Vec3)
 	ES_MFUNCTION(typeObject, FrameContext,"convertScreenPosToWorldPos",1,1,{
-		Geometry::Vec3 v = parameter[0].to<const Geometry::Vec3&>(rt);
+		Geometry::Vec3 v = parameter[0].to<Geometry::Vec3>(rt);
 		return new E_Geometry::E_Vec3(thisObj->convertScreenPosToWorldPos(v));
 	})
 
 	//!	[ESMF] Vec3 MinSG.FrameContext.convertWorldPosToScreenPos(Vec3)
 	ES_MFUNCTION(typeObject, FrameContext,"convertWorldPosToScreenPos",1,1,{
-		Geometry::Vec3 v = parameter[0].to<const Geometry::Vec3&>(rt);
+		Geometry::Vec3 v = parameter[0].to<Geometry::Vec3>(rt);
 		return new E_Geometry::E_Vec3(thisObj->convertWorldPosToScreenPos(v));
 	})
 
@@ -159,9 +159,9 @@ void E_FrameContext::init(EScript::Namespace & lib) {
                 (thisObj->setTextRenderer(parameter[0].to<Rendering::TextRenderer&>(rt)), thisEObj))
 
 	//! [ESMF] void FrameContext.setWorld...Vector(Vec3)
-	ES_MFUN(typeObject, FrameContext, "setWorldUpVector", 1, 1, ( thisObj->setWorldUpVector(parameter[0].to<const Geometry::Vec3&>(rt)) , thisEObj ) )
-	ES_MFUN(typeObject, FrameContext, "setWorldFrontVector", 1, 1, ( thisObj->setWorldFrontVector(parameter[0].to<const Geometry::Vec3&>(rt)) , thisEObj ) )
-	ES_MFUN(typeObject, FrameContext, "setWorldRightVector", 1, 1, ( thisObj->setWorldRightVector(parameter[0].to<const Geometry::Vec3&>(rt)) , thisEObj ) )
+	ES_MFUN(typeObject, FrameContext, "setWorldUpVector", 1, 1, ( thisObj->setWorldUpVector(parameter[0].to<Geometry::Vec3>(rt)) , thisEObj ) )
+	ES_MFUN(typeObject, FrameContext, "setWorldFrontVector", 1, 1, ( thisObj->setWorldFrontVector(parameter[0].to<Geometry::Vec3>(rt)) , thisEObj ) )
+	ES_MFUN(typeObject, FrameContext, "setWorldRightVector", 1, 1, ( thisObj->setWorldRightVector(parameter[0].to<Geometry::Vec3>(rt)) , thisEObj ) )
 
 	//! [ESMF] Vec3 FrameContext.getWorld...Vector()
 	ES_MFUN(typeObject, FrameContext, "getWorldUpVector", 0, 0, EScript::create(thisObj->getWorldUpVector()) )

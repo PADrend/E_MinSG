@@ -438,7 +438,7 @@ void init_ext(EScript::Namespace * /*globals*/,EScript::Namespace * lib) {
 	// ---- temp
 	//! [ESF] AbstractBehaviour __createSimplePhysics(Node[,vec3])
 	ES_FUN(lib,"__createSimplePhysics",1,2,new E_AbstractNodeBehaviour(
-			parameter.count() < 2 ? new SimplePhysics(parameter[0].to<MinSG::Node*>(rt)) : new SimplePhysics(parameter[0].to<MinSG::Node*>(rt), parameter[1].to<const Geometry::Vec3&>(rt))))
+			parameter.count() < 2 ? new SimplePhysics(parameter[0].to<MinSG::Node*>(rt)) : new SimplePhysics(parameter[0].to<MinSG::Node*>(rt), parameter[1].to<Geometry::Vec3>(rt))))
 
 	//! [ESF] AbstractBehaviour __loadCamPath(Node, filename)
 	ES_FUN(lib,"__loadCamPath",2,2,new E_AbstractNodeBehaviour(

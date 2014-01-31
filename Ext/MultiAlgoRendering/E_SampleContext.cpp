@@ -45,7 +45,7 @@ void E_SampleContext::init(EScript::Namespace & lib) {
 	ES_MFUN(getTypeObject(),const SampleContext,"getMinSampleRegion",0,0, EScript::create(thisObj->getMinSampleRegion()))
 
 	//! [ESMF] SampleRegion SampleContext.getSampleRegionAtPosition(Geometry.Vec3)
-	ES_MFUN(getTypeObject(),const SampleContext,"getSampleRegionAtPosition",1,1, EScript::create(thisObj->getSampleRegionAtPosition(parameter[0].to<const Geometry::Vec3&>(rt))))
+	ES_MFUN(getTypeObject(),const SampleContext,"getSampleRegionAtPosition",1,1, EScript::create(thisObj->getSampleRegionAtPosition(parameter[0].to<Geometry::Vec3>(rt))))
 
 	//! [ESMF] Number SampleContext.getRegionCount()
 	ES_MFUN(getTypeObject(),const SampleContext,"getRegionCount",0,0, thisObj->getRegionCount())

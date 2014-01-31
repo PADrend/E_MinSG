@@ -61,7 +61,7 @@ void E_ParticleEmitter::init(EScript::Namespace & lib) {
 	ES_MFUN(typeObject, const ParticleEmitter,"isEnabled",0,0,thisObj->isEnabled())
 
 	//! [ESMF] self MinSG.ParticleEmitter.setDirection(Vec3)	
-	ES_MFUN(typeObject, ParticleEmitter,"setDirection",1,1,(thisObj->setDirection( parameter[0].to<const Geometry::Vec3&>(rt)), thisEObj))
+	ES_MFUN(typeObject, ParticleEmitter,"setDirection",1,1,(thisObj->setDirection( parameter[0].to<Geometry::Vec3>(rt)), thisEObj))
 
 	ES_MFUN(typeObject, ParticleEmitter,"setDirectionVarianceAngle",1,1,(thisObj->setDirectionVarianceAngle(Geometry::Angle::deg(parameter[0].toFloat())), thisEObj))
 	ES_MFUN(typeObject, ParticleEmitter,"setParticlesPerSecond",1,1,(thisObj->setParticlesPerSecond(parameter[0].toFloat()), thisEObj))

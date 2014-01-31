@@ -51,7 +51,7 @@ void init_stdNodeVisitors(EScript::Namespace * lib) {
 	//! [ESF] Array collectClosedNodesAtPosition(root,position)
 	ES_FUNCTION2(lib, "collectClosedNodesAtPosition", 2, 2, {
 		const auto nodes = collectClosedNodesAtPosition((parameter[0].to<MinSG::Node*>(rt)),
-														parameter[1].to<const Geometry::Vec3&>(rt));
+														parameter[1].to<Geometry::Vec3>(rt));
 		return getENodeArray(nodes.begin(), nodes.end());
 	})
 
@@ -71,7 +71,7 @@ void init_stdNodeVisitors(EScript::Namespace * lib) {
 	//! [ESF] Array collectGeoNodesAtPosition(root,position)
 	ES_FUNCTION2(lib, "collectGeoNodesAtPosition", 2, 2, {
 		const auto nodes = collectGeoNodesAtPosition((parameter[0].to<MinSG::Node*>(rt)),
-													 parameter[1].to<const Geometry::Vec3&>(rt));
+													 parameter[1].to<Geometry::Vec3>(rt));
 		return getENodeArray(nodes.begin(), nodes.end());
 	})
 

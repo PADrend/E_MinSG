@@ -47,7 +47,7 @@ void E_SampleRegion::init(EScript::Namespace & lib) {
 		if(parameter[0].toType<E_SampleContext>())
 			return EScript::create(thisObj->createSamplePosition(parameter[0].to<SampleContext*>(rt)));
 		else
-			return EScript::create(thisObj->createSamplePosition(parameter[0].to<const Geometry::Vec3&>(rt)));
+			return EScript::create(thisObj->createSamplePosition(parameter[0].to<Geometry::Vec3>(rt)));
 		
 	})
 

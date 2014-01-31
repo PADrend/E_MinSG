@@ -59,7 +59,7 @@ void E_Delaunay3d::init(EScript::Namespace & lib) {
 
 	//! [ESMF] self Delaunay3d.addPoint(Vec3 pos, Object data)
 	ES_MFUN(typeObject, Delaunay3d_t, "addPoint", 2, 2,
-				 (thisObj->addPoint(ObjRefPoint3(parameter[0].to<const Geometry::Vec3&>(rt), parameter[1])), thisEObj))
+				 (thisObj->addPoint(ObjRefPoint3(parameter[0].to<Geometry::Vec3>(rt), parameter[1])), thisEObj))
 
 	//! [ESMF] Node Delaunay3d.createMinSGNodes(Bool)
 	ES_MFUN(typeObject, Delaunay3d_t, "createMinSGNodes", 1, 1,
@@ -67,7 +67,7 @@ void E_Delaunay3d::init(EScript::Namespace & lib) {
 
 	//! [ESMF] Array|Void Delaunay3d.findTetrahedron(Vec3, Number)
 	ES_MFUNCTION(typeObject, Delaunay3d_t, "findTetrahedron", 2, 2, {
-		const Geometry::Vec3 & pos = parameter[0].to<const Geometry::Vec3&>(rt);
+		const Geometry::Vec3 & pos = parameter[0].to<Geometry::Vec3>(rt);
 		const auto * tetrahedron = thisObj->findTetrahedron(pos, parameter[1].toFloat());
 		if(tetrahedron == nullptr) {
 			return EScript::create(nullptr);
@@ -82,7 +82,7 @@ void E_Delaunay3d::init(EScript::Namespace & lib) {
 
 	//! [ESMF] Array Delaunay3d.findNearestTetrahedron(Vec3)
 	ES_MFUNCTION(typeObject, Delaunay3d_t, "findNearestTetrahedron", 1, 1, {
-		const Geometry::Vec3 & pos = parameter[0].to<const Geometry::Vec3&>(rt);
+		const Geometry::Vec3 & pos = parameter[0].to<Geometry::Vec3>(rt);
 		const auto * tetrahedron = thisObj->findNearestTetrahedron(pos);
 		EScript::Array * points = EScript::Array::create();
 		points->pushBack(convertToEScriptObject(tetrahedron->getA()));

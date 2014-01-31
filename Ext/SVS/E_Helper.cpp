@@ -53,7 +53,7 @@ void init(EScript::Namespace & lib) {
 					**EScript::assertType<E_AbstractCameraNode>(rt, parameter[0]),
 					parameter[1].to<const Geometry::Sphere_f&>(rt),
 					parameter[2].to<const Geometry::Matrix4x4&>(rt),
-					parameter[3].to<const Geometry::Vec3&>(rt)
+					parameter[3].to<Geometry::Vec3>(rt)
 				 ), EScript::create(nullptr)))
 
 	//! [ESF] Texture SVS.createColorTexture(Number, Number, VisibilitySphere, Number)

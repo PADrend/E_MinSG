@@ -47,7 +47,7 @@ void E_ValuatedRegionNode::init(EScript::Namespace & lib) {
 
 	//! [ESMF] Object ValuatedRegionNode.getNodeAtPosition(Vec3)
 	ES_MFUN(typeObject,ValuatedRegionNode,"getNodeAtPosition",1,1,
-					EScript::create(thisObj->getNodeAtPosition(parameter[0].to<const Geometry::Vec3&>(rt))))
+					EScript::create(thisObj->getNodeAtPosition(parameter[0].to<Geometry::Vec3>(rt))))
 
 	//! [ESMF] Vec3 ValuatedRegionNode.getPosition(cellX,cellY,cellZ)
 	ES_MFUN(typeObject,ValuatedRegionNode,"getPosition",3,3,new E_Geometry::E_Vec3( thisObj->
@@ -55,7 +55,7 @@ void E_ValuatedRegionNode::init(EScript::Namespace & lib) {
 
 	//! [ESMF] Object ValuatedRegionNode.getValueAtPosition(Vec3)
 	ES_MFUN(typeObject,ValuatedRegionNode,"getValueAtPosition",1,1,
-					E_Util::E_Utils::convertGenericAttributeToEScriptObject(thisObj->getValueAtPosition(parameter[0].to<const Geometry::Vec3&>(rt))))
+					E_Util::E_Utils::convertGenericAttributeToEScriptObject(thisObj->getValueAtPosition(parameter[0].to<Geometry::Vec3>(rt))))
 
 	//! [ESMF] number ValuatedRegionNode.getValueAsNumber()
 	ES_MFUN(typeObject,ValuatedRegionNode,"getValueAsNumber",0,0,thisObj->getValueAsNumber())

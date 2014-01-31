@@ -49,7 +49,7 @@ void init(EScript::Namespace & lib) {
 	ES_FUNCTION2( ns, "createDistanceHistogram",2,2,{
 		std::vector<Geometry::Vec3> positions;
 		for(auto & entry : *parameter[0].to<EScript::Array*>(rt))
-			positions.emplace_back( entry.to<const Geometry::Vec3&>(rt) );
+			positions.emplace_back( entry.to<Geometry::Vec3>(rt) );
 		return createEHistogram(createDistanceHistogram(positions,parameter[1].toInt()));
 	})
 
@@ -57,7 +57,7 @@ void init(EScript::Namespace & lib) {
 	ES_FUNCTION2( ns, "create2dDistanceHistogram",2,2,{
 		std::vector<Geometry::Vec3> positions;
 		for(auto & entry : *parameter[0].to<EScript::Array*>(rt))
-			positions.emplace_back( entry.to<const Geometry::Vec3&>(rt) );
+			positions.emplace_back( entry.to<Geometry::Vec3>(rt) );
 		return EScript::create(create2dDistanceHistogram(positions,parameter[1].toInt()));
 	})
 
@@ -65,7 +65,7 @@ void init(EScript::Namespace & lib) {
 	ES_FUNCTION2( ns, "createAngleHistogram",2,2,{
 		std::vector<Geometry::Vec3> positions;
 		for(auto & entry : *parameter[0].to<EScript::Array*>(rt))
-			positions.emplace_back( entry.to<const Geometry::Vec3&>(rt) );
+			positions.emplace_back( entry.to<Geometry::Vec3>(rt) );
 		return createEHistogram(createAngleHistogram(positions,parameter[1].toInt()));
 	})
 
@@ -73,7 +73,7 @@ void init(EScript::Namespace & lib) {
 	ES_FUNCTION2( ns, "createClosestPointDistanceHistogram",2,2,{
 		std::vector<Geometry::Vec3> positions;
 		for(auto & entry : *parameter[0].to<EScript::Array*>(rt))
-			positions.emplace_back( entry.to<const Geometry::Vec3&>(rt) );
+			positions.emplace_back( entry.to<Geometry::Vec3>(rt) );
 		return createEHistogram(createClosestPointDistanceHistogram(positions,parameter[1].toInt()));
 	})
 
