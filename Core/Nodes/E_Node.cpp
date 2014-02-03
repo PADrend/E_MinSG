@@ -371,17 +371,29 @@ void E_Node::init(EScript::Namespace & lib) {
 						  parameter[1].to<Geometry::Vec3>(rt) :
 						  Geometry::Vec3(parameter[1].toFloat(),parameter[2].toFloat(),parameter[3].toFloat())),thisEObj))
 
-	//! [ESMF] Vec3 MinSG.Node.getWorldPosition()
-	ES_MFUN(typeObject,const Node,"getWorldPosition",0,0,thisObj->getWorldPosition())
+	//! [ESMF] Vec3 MinSG.Node.getWorldOrigin()
+	ES_MFUN(typeObject,const Node,"getWorldOrigin",0,0,thisObj->getWorldOrigin())
 
-	//! [ESMF] self MinSG.Node.setWorldPosition(Vec3 position)
-	ES_MFUN(typeObject,Node,"setWorldPosition",1,1,(thisObj->setWorldPosition(parameter[0].to<Geometry::Vec3>(rt)),thisEObj))
+	//! [ESMF] Vec3 MinSG.Node.getWorldPosition()
+	ES_MFUN(typeObject,const Node,"getWorldPosition",0,0,thisObj->getWorldOrigin())
+
+	//! [ESMF] self MinSG.Node.setWorldOrigin(Vec3)
+	ES_MFUN(typeObject,Node,"setWorldOrigin",1,1,(thisObj->setWorldOrigin(parameter[0].to<Geometry::Vec3>(rt)),thisEObj))
+
+	//! [ESMF] self MinSG.Node.setWorldPosition(Vec3)
+	ES_MFUN(typeObject,Node,"setWorldPosition",1,1,(thisObj->setWorldOrigin(parameter[0].to<Geometry::Vec3>(rt)),thisEObj))
+
+	//! [ESMF] Vec3 MinSG.Node.getRelOrigin()
+	ES_MFUN(typeObject,const Node,"getRelOrigin",0,0,thisObj->getRelOrigin())
 
 	//! [ESMF] Vec3 MinSG.Node.getRelPosition()
-	ES_MFUN(typeObject,const Node,"getRelPosition",0,0,thisObj->getRelPosition())
+	ES_MFUN(typeObject,const Node,"getRelPosition",0,0,thisObj->getRelOrigin())
 
-	//! [ESMF] self MinSG.Node.setRelPosition(Vec3 position)
-	ES_MFUN(typeObject,Node,"setRelPosition",1,1,(thisObj->setRelPosition(parameter[0].to<Geometry::Vec3>(rt)),thisEObj))
+	//! [ESMF] self MinSG.Node.setRelOrigin(Vec3)
+	ES_MFUN(typeObject,Node,"setRelOrigin",1,1,(thisObj->setRelOrigin(parameter[0].to<Geometry::Vec3>(rt)),thisEObj))
+
+	//! [ESMF] self MinSG.Node.setRelPosition(Vec3)
+	ES_MFUN(typeObject,Node,"setRelPosition",1,1,(thisObj->setRelOrigin(parameter[0].to<Geometry::Vec3>(rt)),thisEObj))
 
 	//! [ESMF] self MinSG.Node.lookAtAbs(Vec3 worldPosition)
 	ES_MFUNCTION(typeObject,Node,"lookAtAbs",1,1,{
