@@ -36,16 +36,16 @@ void E_VoxelStorage::init(EScript::Namespace & lib) {
 	//! [ESF] new VoxelStorage(nullVoxel=0)
 	ES_CTOR(typeObject,0,1, new E_VoxelStorage( parameter[0].toUInt(0)))
 
-	//! [ESMF] Number VoxelStorage.get(Vec3 )
+	//! [ESMF] Number VoxelStorage.get(Vec3)
 	ES_MFUN(typeObject, const simpleVoxelStorage_t,"get",1,1,	thisObj->get(parameter[0].to<Geometry::_Vec3<int32_t>>(rt)))
 	
 	//! [ESMF] Box VoxelStorage.getBlockBounds()
 	ES_MFUN(typeObject, const simpleVoxelStorage_t,"getBlockBounds",0,0,	thisObj->getBlockBounds())
 	
-	//! [ESMF] self VoxelStorage.fill(Box, int )
+	//! [ESMF] self VoxelStorage.fill(Box, int)
 	ES_MFUN(typeObject, simpleVoxelStorage_t,"fill",2,2,	(thisObj->fill(parameter[0].to<Geometry::_Box<int32_t>>(rt),parameter[1].to<uint32_t>(rt)),thisEObj))
 
-	//! [ESMF] self VoxelStorage.get(Vec3,int )
+	//! [ESMF] self VoxelStorage.set(Vec3, int)
 	ES_MFUN(typeObject, simpleVoxelStorage_t,"set",2,2,	(thisObj->set(parameter[0].to<Geometry::_Vec3<int32_t>>(rt),parameter[1].to<uint32_t>(rt)),thisEObj))
 
 }
