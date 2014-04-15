@@ -27,6 +27,10 @@ Type * E_ImportContext::getTypeObject(){
 void E_ImportContext::init(EScript::Namespace & lib) {
 	EScript::Type * typeObject = getTypeObject();
 	declareConstant(&lib,getClassName(),typeObject);
+	
+	//! [ESMF] self ImportContext.addShaderSearchPath( String );
+	ES_MFUN(typeObject,ImportContext,"addShaderSearchPath",1,1,(thisObj->addShaderSearchPath(parameter[0].toString()),thisEObj))
+	
 }
 
 }

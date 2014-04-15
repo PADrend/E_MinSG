@@ -35,4 +35,7 @@ class E_ImportContext : public EScript::ReferenceObject<MinSG::SceneManagement::
 
 }
 
+ES_CONV_EOBJ_TO_OBJ(E_MinSG::E_ImportContext,		MinSG::SceneManagement::ImportContext*,		&**eObj)
+ES_CONV_EOBJ_TO_OBJ(E_MinSG::E_ImportContext,		MinSG::SceneManagement::ImportContext&,		**eObj)
+
 #endif // E_IMPORTCONTEXT_H
