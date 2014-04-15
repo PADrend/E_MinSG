@@ -16,7 +16,7 @@
 #include "../../Core/E_FrameContext.h"
 #include "../../SceneManagement/E_SceneManager.h"
 #include "../../../E_Rendering/Mesh/E_Mesh.h"
-#include <EScript/Utils/DeprecatedMacros.h>
+
 #include <EScript/Basics.h>
 #include <EScript/StdObjects.h>
 #include <E_Util/Graphics/E_PixelAccessor.h>
@@ -39,7 +39,7 @@ void init(EScript::Namespace & lib) {
 	declareConstant(&lib, "ALG_RANDOM", EScript::Number::create(MinSG::ThesisJonas::ALG_RANDOM));
 
 	//! [ESF] Void ThesisJonas.approximateNodeFromImage(Node, PixelAccessor, parameters)
-	ES_FUNCTION2(&lib, "approximateNodeFromImage", 3, 3, {
+	ES_FUNCTION(&lib, "approximateNodeFromImage", 3, 3, {
 		MinSG::Node * node = **EScript::assertType<E_Node>(rt, parameter[0]);
 //		Util::PixelAccessor * pix = (*EScript::assertType<E_Util::E_PixelAccessor>(rt,parameter[1])).ref().get();
 
@@ -62,7 +62,7 @@ void init(EScript::Namespace & lib) {
 	})
 
 	//! [ESF] Void ThesisJonas.randomizeTriangleOrder(GeoNode)
-	ES_FUNCTION2(&lib, "randomizeTriangleOrder", 1, 1, {
+	ES_FUNCTION(&lib, "randomizeTriangleOrder", 1, 1, {
 		MinSG::GeometryNode * geoNode = **EScript::assertType<E_GeometryNode>(rt, parameter[0]);
 
 		randomizeTriangleOrder(geoNode);
@@ -70,7 +70,7 @@ void init(EScript::Namespace & lib) {
 	})
 
 	//! [ESF] Void ThesisJonas.printHistoHistogramOfNode(Node)
-	ES_FUNCTION2(&lib, "printHistoHistogramOfNode", 1, 1, {
+	ES_FUNCTION(&lib, "printHistoHistogramOfNode", 1, 1, {
 		MinSG::Node * n = **EScript::assertType<E_Node>(rt, parameter[0]);
 
 		printHistoHistogramOfNode(n);
@@ -83,7 +83,7 @@ void init(EScript::Namespace & lib) {
 
 
 	//! [ESF] Void ThesisJonas.initPreprocessing(Node, parameters)
-	ES_FUNCTION2(&lib, "initPreprocessing", 2, 2, {
+	ES_FUNCTION(&lib, "initPreprocessing", 2, 2, {
 		MinSG::Node * node = **EScript::assertType<E_Node>(rt, parameter[0]);
 
 		// copy parameter values
@@ -98,7 +98,7 @@ void init(EScript::Namespace & lib) {
 	})
 
 	 //! [ESF] Void ThesisJonas.extractTrianglesFromNewDirection(Image)
-	ES_FUNCTION2(&lib, "extractTrianglesFromNewDirection", 1, 1, {
+	ES_FUNCTION(&lib, "extractTrianglesFromNewDirection", 1, 1, {
 		Util::PixelAccessor * img = (*EScript::assertType<E_Util::E_PixelAccessor>(rt,parameter[0])).ref().get();
 
 		MinSG::ThesisJonas::extractTrianglesFromNewDirection(img);

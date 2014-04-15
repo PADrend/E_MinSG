@@ -9,7 +9,7 @@
 #ifdef MINSG_EXT_SVS
 
 #include "E_SphereVisualizationRenderer.h"
-#include <EScript/Utils/DeprecatedMacros.h>
+
 #include <EScript/Basics.h>
 #include <EScript/StdObjects.h>
 #include <MinSG/Ext/SVS/SphereVisualizationRenderer.h>

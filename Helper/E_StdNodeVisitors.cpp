@@ -24,7 +24,7 @@
 #include "../Core/States/E_State.h"
 #include "../Core/E_FrameContext.h"
 
-#include <EScript/Utils/DeprecatedMacros.h>
+
 #include <EScript/Basics.h>
 #include <EScript/StdObjects.h>
 
@@ -43,40 +43,40 @@ namespace E_MinSG {
 void init_stdNodeVisitors(EScript::Namespace * lib) {
 
 	//! [ESF] Array collectClosedNodes(root)
-	ES_FUNCTION2(lib, "collectClosedNodes", 1, 1, {
+	ES_FUNCTION(lib, "collectClosedNodes", 1, 1, {
 		const auto nodes = collectClosedNodes((parameter[0].to<MinSG::Node*>(rt)));
 		return getENodeArray(nodes.begin(), nodes.end());
 	})
 
 	//! [ESF] Array collectClosedNodesAtPosition(root,position)
-	ES_FUNCTION2(lib, "collectClosedNodesAtPosition", 2, 2, {
+	ES_FUNCTION(lib, "collectClosedNodesAtPosition", 2, 2, {
 		const auto nodes = collectClosedNodesAtPosition((parameter[0].to<MinSG::Node*>(rt)),
 														parameter[1].to<Geometry::Vec3>(rt));
 		return getENodeArray(nodes.begin(), nodes.end());
 	})
 
 	//! [ESF] Array collectClosedNodesIntersectingBox(root,box)
-	ES_FUNCTION2(lib, "collectClosedNodesIntersectingBox", 2, 2, {
+	ES_FUNCTION(lib, "collectClosedNodesIntersectingBox", 2, 2, {
 		const auto nodes = collectClosedNodesIntersectingBox((parameter[0].to<MinSG::Node*>(rt)),
 															 parameter[1].to<const Geometry::Box&>(rt));
 		return getENodeArray(nodes.begin(), nodes.end());
 	})
 
 	//! [ESF] Array collectGeoNodes(root)
-	ES_FUNCTION2(lib, "collectGeoNodes", 1, 1, {
+	ES_FUNCTION(lib, "collectGeoNodes", 1, 1, {
 		const auto nodes = collectNodes<GeometryNode>((parameter[0].to<MinSG::Node*>(rt)));
 		return getENodeArray(nodes.begin(), nodes.end());
 	})
 
 	//! [ESF] Array collectGeoNodesAtPosition(root,position)
-	ES_FUNCTION2(lib, "collectGeoNodesAtPosition", 2, 2, {
+	ES_FUNCTION(lib, "collectGeoNodesAtPosition", 2, 2, {
 		const auto nodes = collectGeoNodesAtPosition((parameter[0].to<MinSG::Node*>(rt)),
 													 parameter[1].to<Geometry::Vec3>(rt));
 		return getENodeArray(nodes.begin(), nodes.end());
 	})
 
 	//! [ESF] Array collectGeoNodesInFrustum(root,frustum, [bool includeIntersectingNodes])
-	ES_FUNCTION2(lib, "collectGeoNodesInFrustum", 2, 3, {
+	ES_FUNCTION(lib, "collectGeoNodesInFrustum", 2, 3, {
            const auto nodes = collectNodesInFrustum<GeometryNode>((parameter[0].to<MinSG::Node*>(rt)),
                                     parameter[1].to<const Geometry::Frustum&>(rt),parameter[2].toBool(true));
             return getENodeArray(nodes.begin(), nodes.end());
@@ -85,27 +85,27 @@ void init_stdNodeVisitors(EScript::Namespace * lib) {
 	})
 
 	//! [ESF] Array collectGeoNodesIntersectingBox(root,box)
-	ES_FUNCTION2(lib, "collectGeoNodesIntersectingBox", 2, 2, {
+	ES_FUNCTION(lib, "collectGeoNodesIntersectingBox", 2, 2, {
 		const auto nodes = collectGeoNodesIntersectingBox((parameter[0].to<MinSG::Node*>(rt)),
 														  parameter[1].to<const Geometry::Box&>(rt));
 		return getENodeArray(nodes.begin(), nodes.end());
 	})
 	
 	//! [ESF] Array collectInstances(Node root,Node prototype)
-	ES_FUNCTION2(lib, "collectInstances", 2, 2, {
+	ES_FUNCTION(lib, "collectInstances", 2, 2, {
 		const auto nodes = collectInstances(	(parameter[0].to<MinSG::Node*>(rt)),
 												(parameter[1].to<MinSG::Node*>(rt)));
 		return getENodeArray(nodes.begin(), nodes.end());
 	})
 
 	//! [ESF] Array collectLightNodes(root)
-	ES_FUNCTION2(lib, "collectLightNodes", 1, 1, {
+	ES_FUNCTION(lib, "collectLightNodes", 1, 1, {
 		const auto nodes = collectNodes<LightNode>((parameter[0].to<MinSG::Node*>(rt)));
 		return getENodeArray(nodes.begin(), nodes.end());
 	})
 
 	//! [ESF] Array collectNodes(root[, type])
-	ES_FUNCTION2(lib, "collectNodes", 1, 2, {
+	ES_FUNCTION(lib, "collectNodes", 1, 2, {
 		const auto nodes = collectNodes<Node>((parameter[0].to<MinSG::Node*>(rt)));
 		Type * nodeType = parameter.count() > 1 ? EScript::assertType<Type>(rt, parameter[1]) : nullptr;
 
@@ -120,25 +120,25 @@ void init_stdNodeVisitors(EScript::Namespace * lib) {
 	})
 
 	//! [ESF] Array collectNextNodesReferencingAttribute(root, attrName)
-	ES_FUNCTION2(lib, "collectNextNodesReferencingAttribute", 2, 2, {
+	ES_FUNCTION(lib, "collectNextNodesReferencingAttribute", 2, 2, {
 		const auto nodes = collectNextNodesReferencingAttribute((parameter[0].to<MinSG::Node*>(rt)),parameter[1].toString());
 		return getENodeArray(nodes.begin(), nodes.end());
 	})
 	
 	//! [ESF] Array collectNodesReferencingAttribute(root, attrName)
-	ES_FUNCTION2(lib, "collectNodesReferencingAttribute", 2, 2, {
+	ES_FUNCTION(lib, "collectNodesReferencingAttribute", 2, 2, {
 		const auto nodes = collectNodesReferencingAttribute((parameter[0].to<MinSG::Node*>(rt)),parameter[1].toString());
 		return getENodeArray(nodes.begin(), nodes.end());
 	})
 	
 	//! [ESF] Array collectNodesWithAttribute(root, attrName)
-	ES_FUNCTION2(lib, "collectNodesWithAttribute", 2, 2, {
+	ES_FUNCTION(lib, "collectNodesWithAttribute", 2, 2, {
 		const auto nodes = collectNodesWithAttribute((parameter[0].to<MinSG::Node*>(rt)),parameter[1].toString());
 		return getENodeArray(nodes.begin(), nodes.end());
 	})
 
 	//! [ESF] Array collectVisibleNodes(root,FrameContext [[, Number or false maxDistance],bool fillDepthBuffer=false])
-	ES_FUNCTION2(lib, "collectVisibleNodes", 2, 4, {
+	ES_FUNCTION(lib, "collectVisibleNodes", 2, 4, {
 		const auto visNodes = collectVisibleNodes((parameter[0].to<MinSG::Node*>(rt)),
 												parameter[1].to<MinSG::FrameContext&>(rt),
 												parameter[2].toBool() ? parameter[2].toFloat() : -1.0,
@@ -155,7 +155,7 @@ void init_stdNodeVisitors(EScript::Namespace * lib) {
 	})
 
 	//! [ESF] Array collectStates(root[, type])
-	ES_FUNCTION2(lib, "collectStates", 1, 2, {
+	ES_FUNCTION(lib, "collectStates", 1, 2, {
 		const auto states = collectStates<State>((parameter[0].to<MinSG::Node*>(rt)));
 		Type * stateType = parameter.count() > 1 ? EScript::assertType<Type>(rt, parameter[1]) : nullptr;
 
@@ -185,7 +185,7 @@ void init_stdNodeVisitors(EScript::Namespace * lib) {
 				)))
 
 	//! [ESF] number countGeoNodesInFrustum(root,camera)
-	ES_FUNCTION2(lib, "countGeoNodesInFrustum", 2, 2, {
+	ES_FUNCTION(lib, "countGeoNodesInFrustum", 2, 2, {
 		Node * root = parameter[0].to<MinSG::Node*>(rt);
 		const CameraNode * camera = **EScript::assertType<E_CameraNode>(rt, parameter[1]);
 		const Geometry::Frustum & frustum = camera->getFrustum();
@@ -193,13 +193,13 @@ void init_stdNodeVisitors(EScript::Namespace * lib) {
 	})
 
 	//! [ESF] Array getChildNodes(root)
-	ES_FUNCTION2(lib, "getChildNodes", 1, 1, {
+	ES_FUNCTION(lib, "getChildNodes", 1, 1, {
 		const auto children = getChildNodes((parameter[0].to<MinSG::Node*>(rt)));
 		return getENodeArray(children.begin(), children.end());
 	})
 
 	//! [ESF] Array countNodesInLevels(MinSG.Node)
-	ES_FUNCTION2(lib, "countNodesInLevels", 1, 1, {
+	ES_FUNCTION(lib, "countNodesInLevels", 1, 1, {
 		const auto levelCounts = countNodesInLevels(parameter[0].to<MinSG::Node*>(rt));
 
 		Array * eLevelCounts = Array::create();

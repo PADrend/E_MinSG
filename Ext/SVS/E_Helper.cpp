@@ -13,7 +13,7 @@
 #include "../../Core/Nodes/E_CameraNodeOrtho.h"
 #include "../../Core/Nodes/E_GroupNode.h"
 #include "../../ELibMinSG.h"
-#include <EScript/Utils/DeprecatedMacros.h>
+
 #include <EScript/Basics.h>
 #include <EScript/StdObjects.h>
 #include <E_Geometry/E_Matrix4x4.h>
@@ -57,7 +57,7 @@ void init(EScript::Namespace & lib) {
 				 ), EScript::create(nullptr)))
 
 	//! [ESF] Texture SVS.createColorTexture(Number, Number, VisibilitySphere, Number)
-	ES_FUNCTION2(&lib, "createColorTexture", 4, 4, {
+	ES_FUNCTION(&lib, "createColorTexture", 4, 4, {
 		const uint32_t width = parameter[0].to<uint32_t>(rt);
 		const uint32_t height = parameter[1].to<uint32_t>(rt);
 		const VisibilitySphere & visibilitySphere = EScript::assertType<E_VisibilitySphere>(rt, parameter[2])->ref();

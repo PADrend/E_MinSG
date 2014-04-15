@@ -11,7 +11,7 @@
 
 #include "E_SamplingAnalysis.h"
 #include "../../ELibMinSG.h"
-#include <EScript/Utils/DeprecatedMacros.h>
+
 #include <E_Geometry/E_Vec3.h>
 #include <E_Util/Graphics/E_Bitmap.h>
 #include <MinSG/Ext/SamplingAnalysis/SamplingAnalysis.h>
@@ -46,7 +46,7 @@ void init(EScript::Namespace & lib) {
 
 
 	//! result createDistanceHistogram(Array Vec3, numberOfBuckets)
-	ES_FUNCTION2( ns, "createDistanceHistogram",2,2,{
+	ES_FUNCTION( ns, "createDistanceHistogram",2,2,{
 		std::vector<Geometry::Vec3> positions;
 		for(auto & entry : *parameter[0].to<EScript::Array*>(rt))
 			positions.emplace_back( entry.to<Geometry::Vec3>(rt) );
@@ -54,7 +54,7 @@ void init(EScript::Namespace & lib) {
 	})
 
 	//! result create2dDistanceHistogram(Array Vec3, numberOfBuckets)
-	ES_FUNCTION2( ns, "create2dDistanceHistogram",2,2,{
+	ES_FUNCTION( ns, "create2dDistanceHistogram",2,2,{
 		std::vector<Geometry::Vec3> positions;
 		for(auto & entry : *parameter[0].to<EScript::Array*>(rt))
 			positions.emplace_back( entry.to<Geometry::Vec3>(rt) );
@@ -62,7 +62,7 @@ void init(EScript::Namespace & lib) {
 	})
 
 	//! result createAngleHistogram(Array Vec3, numberOfBuckets)
-	ES_FUNCTION2( ns, "createAngleHistogram",2,2,{
+	ES_FUNCTION( ns, "createAngleHistogram",2,2,{
 		std::vector<Geometry::Vec3> positions;
 		for(auto & entry : *parameter[0].to<EScript::Array*>(rt))
 			positions.emplace_back( entry.to<Geometry::Vec3>(rt) );
@@ -70,7 +70,7 @@ void init(EScript::Namespace & lib) {
 	})
 
 	//! result createClosestPointDistanceHistogram(Array Vec3, numberOfBuckets)
-	ES_FUNCTION2( ns, "createClosestPointDistanceHistogram",2,2,{
+	ES_FUNCTION( ns, "createClosestPointDistanceHistogram",2,2,{
 		std::vector<Geometry::Vec3> positions;
 		for(auto & entry : *parameter[0].to<EScript::Array*>(rt))
 			positions.emplace_back( entry.to<Geometry::Vec3>(rt) );

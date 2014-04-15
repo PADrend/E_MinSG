@@ -49,7 +49,6 @@
 #include "Helper/E_GraphVizOutput.h"
 #include "Helper/E_StdNodeVisitors.h"
 
-#include <EScript/Utils/DeprecatedMacros.h>
 #include <EScript/Basics.h>
 #include <EScript/StdObjects.h>
 
@@ -125,14 +124,14 @@ void init(EScript::Namespace * globals) {
 	// ---- Helper
 
 	//! [ESF] void MinSG.changeParentKeepTransformation(Node child, GroupNode newParent)
-	ES_FUNCTION2(lib,"changeParentKeepTransformation",2,2, {
+	ES_FUNCTION(lib,"changeParentKeepTransformation",2,2, {
 		auto ep = parameter[1].toType<E_GroupNode>();
 		MinSG::changeParentKeepTransformation(parameter[0].to<MinSG::Node*>(rt), ep ? **ep : nullptr);
 		return nullptr;
 	})
 
 	//! [ESF] Box MinSG.combineNodesWorldBBs(Array nodes)
-	ES_FUNCTION2(lib,"combineNodesWorldBBs",1,1, {
+	ES_FUNCTION(lib,"combineNodesWorldBBs",1,1, {
 		std::vector<MinSG::Node*> nodes;
 		for(const auto & eNode : *assertType<EScript::Array>(rt,parameter[0]))
 			nodes.push_back( **EScript::assertType<E_Node>(rt,eNode));
@@ -141,42 +140,43 @@ void init(EScript::Namespace * globals) {
 
 
 	//! [ESF] void MinSG.destroy(Node)
-	ES_FUNCTION2(lib,"destroy",1,1, {
+	ES_FUNCTION(lib,"destroy",1,1, {
 		MinSG::Node * n=parameter[0].to<MinSG::Node*>(rt);
 		MinSG::destroy(n);
 		return nullptr;
 	})
 
 	//! [ESF] void MinSG.initShaderState(ShaderState, Array vsFiles, Array gsFiles, Array fsFile, [Shader::flag_t usage])
-	ES_FUNCTION2(lib,"initShaderState",4,5, {
+	ES_FUNCTION(lib,"initShaderState",4,5, {
 		MinSG::ShaderState * s=**EScript::assertType<E_ShaderState>(rt,parameter[0]);
 
 		EScript::Collection * c;
 
 		c = EScript::assertType<EScript::Collection>(rt,parameter[1]);
-		std::deque<std::string> vsFiles;
+		std::vector<std::string> vsFiles;
 		for(ERef<Iterator> iRef=c->getIterator(); !iRef->end() ;iRef->next()){
 			ObjRef value=iRef->value();
 			vsFiles.push_back(value.toString());
 		}
 		c = EScript::assertType<EScript::Collection>(rt,parameter[2]);
-		std::deque<std::string> gsFiles;
+		std::vector<std::string> gsFiles;
 		for(ERef<Iterator> iRef=c->getIterator(); !iRef->end() ;iRef->next()){
 			ObjRef value=iRef->value();
 			gsFiles.push_back(value.toString());
 		}
 		c = EScript::assertType<EScript::Collection>(rt,parameter[3]);
-		std::deque<std::string> fsFiles;
+		std::vector<std::string> fsFiles;
 		for(ERef<Iterator> iRef=c->getIterator(); !iRef->end() ;iRef->next()){
 			ObjRef value=iRef->value();
 			fsFiles.push_back(value.toString());
 		}
-		MinSG::initShaderState(s,vsFiles,gsFiles,fsFiles, parameter[4].toUInt(Rendering::Shader::USE_UNIFORMS | Rendering::Shader::USE_GL ));
+		std::vector<std::string> searchPaths;
+		MinSG::initShaderState(s,searchPaths,vsFiles,gsFiles,fsFiles, parameter[4].toUInt(Rendering::Shader::USE_UNIFORMS | Rendering::Shader::USE_GL ));
 		return nullptr;
 	})
 
 	//! [ESF] MinSG.Node MinSG.loadModel(filename[,flags[,TransMat]])
-	ES_FUNCTION2(lib,"loadModel",1,3, {
+	ES_FUNCTION(lib,"loadModel",1,3, {
 		E_Geometry::E_Matrix4x4 *em=parameter[2].toType<E_Geometry::E_Matrix4x4>();
 		Util::FileName file(parameter[0].toString());
 		MinSG::Node * n=MinSG::loadModel(

@@ -19,7 +19,6 @@
 #include "E_SyncHandler.h"
 #include "E_ConsoleStream.h"
 
-#include <EScript/Utils/DeprecatedMacros.h>
 
 #include <E_Geometry/E_SRT.h>
 #include <E_Geometry/E_Vec3.h>
@@ -183,32 +182,32 @@ void E_D3Fact::init(EScript::Namespace * minsg) {
 	E_SyncHandler::init(*lib);
 	E_ConsoleStream::init(*lib);
 
-	ES_FUNCTION2(lib, "crc32", 1, 1, {
+	ES_FUNCTION(lib, "crc32", 1, 1, {
 		return Number::create(Tools::crc32(parameter[0].toString()));
 	})
 
-	ES_FUNCTION2(lib, "handleGetAllPositions",2,2,{
+	ES_FUNCTION(lib, "handleGetAllPositions",2,2,{
 		Message * msg = EScript::assertType<E_Message>(rt, parameter[1])->ref();
 		ObjectRegistry<Object> * reg = EScript::assertType<E_ObjectRegistry>(rt, parameter[0])->getObjectRegistry();
 		updateNodePositions(rt, msg->accessBody(), sizeof(int64_t), reg);
 		return EScript::create(nullptr);
 	})
 
-	ES_FUNCTION2(lib, "handleSRTUpdate",2,2,{
+	ES_FUNCTION(lib, "handleSRTUpdate",2,2,{
 		Message * msg = EScript::assertType<E_Message>(rt, parameter[1])->ref();
 		ObjectRegistry<Object> * reg = EScript::assertType<E_ObjectRegistry>(rt, parameter[0])->getObjectRegistry();
 		updateNodePositions(rt, msg->accessBody(), sizeof(int32_t) + sizeof(int64_t), reg);
 		return EScript::create(nullptr);
 	})
 
-	ES_FUNCTION2(lib, "decodeSRT",1,1,{
+	ES_FUNCTION(lib, "decodeSRT",1,1,{
 		Geometry::SRT srt;
 		std::vector<uint8_t> data = Util::decodeBase64(parameter[0].toString());
 		convertSRT(srt, data, 0);
 		return EScript::create(srt);
 	})
 
-	ES_FUNCTION2(lib, "encodeSRT",1,1,{
+	ES_FUNCTION(lib, "encodeSRT",1,1,{
 		Geometry::SRT srt = EScript::assertType<E_Geometry::E_SRT>(rt, parameter[0])->ref();
 		std::vector<uint8_t> data(13*sizeof(float));
 		writeSRT(srt, data, 0);
@@ -216,21 +215,21 @@ void E_D3Fact::init(EScript::Namespace * minsg) {
 		return EScript::create(encoded);
 	})
 
-	ES_FUNCTION2(lib, "initSRTListener",1,1,{
+	ES_FUNCTION(lib, "initSRTListener",1,1,{
 		MinSG::Node* root = parameter[0].to<MinSG::Node*>(rt);
 		//node->clearTransformationObservers();
  		root->addTransformationObserver(std::bind(onSRTChanged, std::ref(rt), std::placeholders::_1));
 		return EScript::create(nullptr);
 	})
 
-	ES_FUNCTION2(lib, "copyD3FactFileAsync",3,3,{
+	ES_FUNCTION(lib, "copyD3FactFileAsync",3,3,{
 		using namespace std::placeholders;
 		std::string src = parameter[1].toString();
 		std::string dest = parameter[2].toString();
 		return EScript::create(Tools::asyncCopy(src, dest, std::bind(fileCopied, parameter[0].toInt(), _1, _2, _3)));
 	})
 
-	ES_FUNCTION2(lib, "createShape",2,2,{
+	ES_FUNCTION(lib, "createShape",2,2,{
 		std::string shape = parameter[0].toString();
 		Array * points = parameter[1].to<EScript::Array*>(rt);
 		std::vector<Geometry::Vec3> v;
@@ -240,7 +239,7 @@ void E_D3Fact::init(EScript::Namespace * minsg) {
 		return EScript::create(Shape::createShape(shape, v));
 	})
 
-	ES_FUNCTION2(lib, "updateShape",3,3,{
+	ES_FUNCTION(lib, "updateShape",3,3,{
 		std::string shape = parameter[0].toString();
 		Util::Reference<Rendering::Mesh> mesh = parameter[1].to<Rendering::Mesh*>(rt);
 		Array * points = parameter[2].to<EScript::Array*>(rt);

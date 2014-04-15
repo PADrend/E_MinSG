@@ -13,7 +13,7 @@
 #include "../../Core/E_FrameContext.h"
 #include "../../ELibMinSG.h"
 
-#include <EScript/Utils/DeprecatedMacros.h>
+
 #include <EScript/Basics.h>
 
 #include <MinSG/Core/Nodes/GeometryNode.h>
@@ -25,14 +25,14 @@ namespace E_ImpostorFactory {
 
 void init(EScript::Namespace * lib) {
 	//! [ESF] GeometryNode MinSG.createReliefBoardForNode(FrameContext, Node)
-	ES_FUNCTION2(lib, "createReliefBoardForNode", 2, 2, {
+	ES_FUNCTION(lib, "createReliefBoardForNode", 2, 2, {
 		MinSG::FrameContext & frameContext = parameter[0].to<MinSG::FrameContext&>(rt);
 		MinSG::Node * node = parameter[1].to<MinSG::Node*>(rt);
 		return EScript::create(MinSG::ImpostorFactory::createReliefBoardForNode(frameContext, node));
 	})
 
 	//! [ESF] GeometryNode MinSG.createTexturedDepthMeshForNode(FrameContext, Node)
-	ES_FUNCTION2(lib, "createTexturedDepthMeshForNode", 2, 2, {
+	ES_FUNCTION(lib, "createTexturedDepthMeshForNode", 2, 2, {
 		MinSG::FrameContext & frameContext = parameter[0].to<MinSG::FrameContext&>(rt);
 		MinSG::Node * node = parameter[1].to<MinSG::Node*>(rt);
 		return EScript::create(MinSG::ImpostorFactory::createTexturedDepthMeshForNode(frameContext, node));

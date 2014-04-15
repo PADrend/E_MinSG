@@ -27,7 +27,7 @@
 #include <Util/Serialization/Serialization.h>
 
 #include <EScript/EScript.h>
-#include <EScript/Utils/DeprecatedMacros.h>
+
 
 using namespace Rendering;
 using namespace MinSG;
@@ -55,7 +55,7 @@ void init(EScript::Namespace * minsg) {
     E_SurfelRenderer::init(*lib);
 
     typedef std::map<uint32_t, uint32_t> result_t;
-    ES_FUNCTION2(lib, "getPixelPerAlgo", 1, 1, {
+    ES_FUNCTION(lib, "getPixelPerAlgo", 1, 1, {
                     result_t result;
                      Util::Reference<Util::Bitmap> bitmap = Util::Serialization::loadBitmap(Util::FileName(parameter[0].to<std::string>(rt)));
                     uint32_t size = bitmap->getWidth() * bitmap->getHeight();

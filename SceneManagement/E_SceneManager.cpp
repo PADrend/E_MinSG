@@ -18,7 +18,7 @@
 #include "../Core/Behaviours/E_AbstractBehaviour.h"
 #include "../Core/Behaviours/E_BehaviourManager.h"
 
-#include <EScript/Utils/DeprecatedMacros.h>
+
 #include <EScript/Basics.h>
 #include <EScript/StdObjects.h>
 #include <E_Util/E_Utils.h>
@@ -145,7 +145,7 @@ void E_SceneManager::init(EScript::Namespace & lib) {
 	})
 
 	//! [ESMF] Array|false MinSG.SceneManager.loadMinSGString(ImportContext, String)
-    ES_FUNCTION2(typeObject,  "loadMinSGString", 2, 2, {
+    ES_FUNCTION(typeObject,  "loadMinSGString", 2, 2, {
 		auto & importContext = **EScript::assertType<E_ImportContext>(rt, parameter[0]);
 		std::stringstream stream(parameter[1].toString());
 		auto nodes = loadMinSGStream(importContext, stream);
@@ -184,7 +184,7 @@ void E_SceneManager::init(EScript::Namespace & lib) {
 	})
 
 	//! [ESF] bool MinSG.SceneManager.saveCOLLADA(filename, root)
-	ES_FUNCTION2(typeObject,"saveCOLLADA",2,2,{
+	ES_FUNCTION(typeObject,"saveCOLLADA",2,2,{
 		Util::FileName file(parameter[0].toString());
 		Node * root = parameter[1].to<MinSG::Node*>(rt);
 		bool result = MinSG::SceneManagement::WriterDAE::saveFile(file, root);
@@ -192,13 +192,13 @@ void E_SceneManager::init(EScript::Namespace & lib) {
 	})
 
 	//! [ESMF] void MinSG.SceneManager.saveMeshesInSubtreeAsPLY(rootNode, dirName [,saveRegisteredNodes=false])  \deprecated
-    ES_FUNCTION2(typeObject,"saveMeshesInSubtreeAsPLY",2,3,{
+    ES_FUNCTION(typeObject,"saveMeshesInSubtreeAsPLY",2,3,{
 		saveMeshesInSubtreeAsPLY(parameter[0].to<MinSG::Node*>(rt), parameter[1].toString(), parameter[2].toBool(false));
 		return nullptr;
 	})
 
 	//! [ESMF] void MinSG.SceneManager.saveMeshesInSubtreeAsMMF(rootNode, dirName [,saveRegisteredNodes=false])  \deprecated
-    ES_FUNCTION2(typeObject,"saveMeshesInSubtreeAsMMF",2,3,{
+    ES_FUNCTION(typeObject,"saveMeshesInSubtreeAsMMF",2,3,{
 		saveMeshesInSubtreeAsMMF(parameter[0].to<MinSG::Node*>(rt), parameter[1].toString(), parameter[2].toBool(false));
 		return nullptr;
 	})

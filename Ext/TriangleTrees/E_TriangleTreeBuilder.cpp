@@ -12,7 +12,7 @@
 #include "../../Core/Nodes/E_GeometryNode.h"
 #include "../../Core/Nodes/E_Node.h"
 #include "../../ELibMinSG.h"
-#include <EScript/Utils/DeprecatedMacros.h>
+
 #include <EScript/Basics.h>
 #include <EScript/StdObjects.h>
 #include <E_Rendering/Mesh/E_Mesh.h>
@@ -36,7 +36,7 @@ namespace E_TriangleTreeBuilder {
 
 void init(EScript::Namespace & lib) {
 	//! [ESF] Mesh mergeGeometry(Array)
-	ES_FUNCTION2(&lib, "mergeGeometry", 1, 1, {
+	ES_FUNCTION(&lib, "mergeGeometry", 1, 1, {
 		EScript::Array * eGeoNodes = parameter[0].to<EScript::Array*>(rt);
 		std::vector<MinSG::GeometryNode *> geoNodes;
 		geoNodes.reserve(eGeoNodes->size());
@@ -51,28 +51,28 @@ void init(EScript::Namespace & lib) {
 		return EScript::create(mesh);
 	})
 	//! createABTree(Mesh, Number, Number)
-	ES_FUNCTION2(&lib, "createABTree", 3, 3, {
+	ES_FUNCTION(&lib, "createABTree", 3, 3, {
 		Rendering::Mesh * mesh = parameter[0].to<Rendering::Mesh*>(rt);
 		MinSG::TriangleTrees::ABTreeBuilder builder(static_cast<std::size_t>(parameter[1].toInt()), parameter[2].toFloat());
 		MinSG::Node * node = MinSG::TriangleTrees::Builder::buildMinSGTree(mesh, builder);
 		return EScript::create(node);
 	})
 	//! createkDTree(Mesh, Number, Number)
-	ES_FUNCTION2(&lib, "createkDTree", 3, 3, {
+	ES_FUNCTION(&lib, "createkDTree", 3, 3, {
 		Rendering::Mesh * mesh = parameter[0].to<Rendering::Mesh*>(rt);
 		MinSG::TriangleTrees::kDTreeBuilder builder(static_cast<std::size_t>(parameter[1].toInt()), parameter[2].toFloat());
 		MinSG::Node * node = MinSG::TriangleTrees::Builder::buildMinSGTree(mesh, builder);
 		return EScript::create(node);
 	})
 	//! createOctree(Mesh, Number, Number)
-	ES_FUNCTION2(&lib, "createOctree", 3, 3, {
+	ES_FUNCTION(&lib, "createOctree", 3, 3, {
 		Rendering::Mesh * mesh = parameter[0].to<Rendering::Mesh*>(rt);
 		MinSG::TriangleTrees::OctreeBuilder builder(static_cast<std::size_t>(parameter[1].toInt()), parameter[2].toFloat());
 		MinSG::Node * node = MinSG::TriangleTrees::Builder::buildMinSGTree(mesh, builder);
 		return EScript::create(node);
 	})
 	//! createRandomizedSampleTree(Mesh)
-	ES_FUNCTION2(&lib, "createRandomizedSampleTree", 1, 1, {
+	ES_FUNCTION(&lib, "createRandomizedSampleTree", 1, 1, {
 		Rendering::Mesh * mesh = parameter[0].to<Rendering::Mesh*>(rt);
 		MinSG::TriangleTrees::RandomizedSampleTreeBuilder builder;
 		MinSG::Node * node = MinSG::TriangleTrees::Builder::buildMinSGTree(mesh, builder);

@@ -14,7 +14,7 @@
 #include "../../Core/Nodes/E_ListNode.h"
 #include "../../Core/Nodes/E_GroupNode.h"
 
-#include <EScript/Utils/DeprecatedMacros.h>
+
 
 #include <E_Util/E_Utils.h>
 
@@ -39,7 +39,7 @@ void E_TreeBuilder::init(EScript::Namespace & globals) {
 	declareConstant(lib, "PREFERE_CUBES", String::create(MinSG::TreeBuilder::PREFERE_CUBES));
 	declareConstant(lib, "USE_GEOMETRY_BB", String::create(MinSG::TreeBuilder::USE_GEOMETRY_BB));
 
-	ES_FUNCTION2(lib, "rebuildAsBinaryTree", 2, 2, {
+	ES_FUNCTION(lib, "rebuildAsBinaryTree", 2, 2, {
 			MinSG::GroupNode * root = parameter[0].to<MinSG::GroupNode*>(rt);
 			EScript::Map * emap = parameter[1].to<EScript::Map*>(rt);
 			Util::GenericAttributeMap * map = dynamic_cast<Util::GenericAttributeMap *>(E_Util::E_Utils::convertEScriptObjectToGenericAttribute(emap));
@@ -51,7 +51,7 @@ void E_TreeBuilder::init(EScript::Namespace & globals) {
 			return EScript::create(nullptr);
 	})
 
-	ES_FUNCTION2(lib, "rebuildAsOcTree", 2, 2, {
+	ES_FUNCTION(lib, "rebuildAsOcTree", 2, 2, {
 			MinSG::GroupNode * root = parameter[0].to<MinSG::GroupNode*>(rt);
 			EScript::Map * emap = parameter[1].to<EScript::Map*>(rt);
 			Util::GenericAttributeMap * map = dynamic_cast<Util::GenericAttributeMap *>(E_Util::E_Utils::convertEScriptObjectToGenericAttribute(emap));
@@ -63,7 +63,7 @@ void E_TreeBuilder::init(EScript::Namespace & globals) {
 			return EScript::create(nullptr);
 	})
 
-	ES_FUNCTION2(lib, "rebuildAsKDTree", 2, 2, {
+	ES_FUNCTION(lib, "rebuildAsKDTree", 2, 2, {
 			MinSG::GroupNode * root = parameter[0].to<MinSG::GroupNode*>(rt);
 			EScript::Map * emap = parameter[1].to<EScript::Map*>(rt);
 			Util::GenericAttributeMap * map = dynamic_cast<Util::GenericAttributeMap *>(E_Util::E_Utils::convertEScriptObjectToGenericAttribute(emap));
@@ -75,7 +75,7 @@ void E_TreeBuilder::init(EScript::Namespace & globals) {
 			return EScript::create(nullptr);
 	})
 
-	ES_FUNCTION2(lib, "rebuildAsQuadTree", 2, 2, {
+	ES_FUNCTION(lib, "rebuildAsQuadTree", 2, 2, {
 			MinSG::GroupNode * root = parameter[0].to<MinSG::GroupNode*>(rt);
 			EScript::Map * emap = parameter[1].to<EScript::Map*>(rt);
 			Util::GenericAttributeMap * map = dynamic_cast<Util::GenericAttributeMap *>(E_Util::E_Utils::convertEScriptObjectToGenericAttribute(emap));
@@ -87,7 +87,7 @@ void E_TreeBuilder::init(EScript::Namespace & globals) {
 			return EScript::create(nullptr);
 	})
 
-	ES_FUNCTION2(lib, "rebuildAsList", 2, 2, {
+	ES_FUNCTION(lib, "rebuildAsList", 2, 2, {
 			MinSG::GroupNode * root = parameter[0].to<MinSG::GroupNode*>(rt);
 			EScript::Map * emap = parameter[1].to<EScript::Map*>(rt);
 			Util::GenericAttributeMap * map = dynamic_cast<Util::GenericAttributeMap *>(E_Util::E_Utils::convertEScriptObjectToGenericAttribute(emap));

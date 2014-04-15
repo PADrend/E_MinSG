@@ -11,7 +11,7 @@
 #include "E_Renderer.h"
 
 #include "../../ELibMinSG.h"
-#include <EScript/Utils/DeprecatedMacros.h>
+
 #include <EScript/Basics.h>
 #include <EScript/StdObjects.h>
 

@@ -17,7 +17,7 @@
 #include "../../../ELibMinSG.h"
 #include "../../../Core/Nodes/E_GeometryNode.h"
 
-#include <EScript/Utils/DeprecatedMacros.h>
+
 #include <EScript/EScript.h>
 
 #include <MinSG/Ext/SkeletalAnimation/Util/SkeletalAnimationUtils.h>
@@ -38,14 +38,14 @@ namespace E_MinSG {
     void initSkeletalAnimationUtils(EScript::Namespace * lib)
     {
         //! [ESF] SkeletalNode MinSG.generateSkeletalNode(MinSG.GeometryNode, MinSG.ArmatureNode, weightRadius, precision)
-        ES_FUNCTION2(lib, "generateSkeletalNode", 2, 4, {
+        ES_FUNCTION(lib, "generateSkeletalNode", 2, 4, {
             E_GeometryNode * geoNode = EScript::assertType<E_GeometryNode>(rt, parameter[0]);
             E_ArmatureNode * armNode = EScript::assertType<E_ArmatureNode>(rt, parameter[1]);
             
             return EScript::create(SkeletalAnimationUtils::generateSkeletalNode(**geoNode, **armNode, parameter[2].toFloat(1.0), parameter[3].toInt(0)));
         })
         
-        ES_FUNCTION2(lib, "normalizeAnimationDuration", 1, 1, {
+        ES_FUNCTION(lib, "normalizeAnimationDuration", 1, 1, {
             E_SkeletalAnimationBehaviour *aniBehaviour = parameter[0].toType<E_SkeletalAnimationBehaviour>();
             if(**aniBehaviour != nullptr)
                 SkeletalAnimationUtils::normalizeAnimationDuration(***aniBehaviour);
@@ -53,21 +53,21 @@ namespace E_MinSG {
             return nullptr;
         })
         
-        ES_FUNCTION2(lib, "normalizeSkeletalWeights", 1, 2, {
+        ES_FUNCTION(lib, "normalizeSkeletalWeights", 1, 2, {
             E_GeometryNode *geoNode = EScript::assertType<E_GeometryNode>(rt, parameter[0]);
             SkeletalAnimationUtils::normalizeWeights(&(**geoNode)->getMesh()->openVertexData(), parameter[1].toFloat(0.01));
             
             return nullptr;
         })
         
-        ES_FUNCTION2(lib, "convertJointsToRigids", 1, 2, {
+        ES_FUNCTION(lib, "convertJointsToRigids", 1, 2, {
             E_ArmatureNode *armature = EScript::assertType<E_ArmatureNode>(rt, parameter[0]);
             SkeletalAnimationUtils::convertJointNodesToRigidNodes(**armature, parameter[1].toBool(true));
             
             return nullptr;
         })
         
-        ES_FUNCTION2(lib, "removeGeometryFromSkeleton", 1, 1, {
+        ES_FUNCTION(lib, "removeGeometryFromSkeleton", 1, 1, {
             E_SkeletalNode *skeleton = EScript::assertType<E_SkeletalNode>(rt, parameter[0]);
             SkeletalAnimationUtils::removeGeometryFromSkeleton(**skeleton);
             

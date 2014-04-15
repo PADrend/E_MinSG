@@ -15,7 +15,7 @@
 #include "../../Core/E_FrameContext.h"
 #include "../../SceneManagement/E_SceneManager.h"
 
-#include <EScript/Utils/DeprecatedMacros.h>
+
 #include <EScript/Basics.h>
 #include <EScript/StdObjects.h>
 
@@ -46,7 +46,7 @@ void init(EScript::Namespace & lib) {
 									EScript::create(nullptr)))
 
 	//! [ESF] Number MinSG.OutOfCore.addCacheLevel(Number, Number)
-	ES_FUNCTION2(ns, "addCacheLevel", 2, 2, {
+	ES_FUNCTION(ns, "addCacheLevel", 2, 2, {
 		const uint64_t mebibyte = 1024 * 1024;
 		const auto type = static_cast<CacheLevelType>(parameter[0].toUInt());
 		const uint64_t size = static_cast<uint64_t>(parameter[1].toInt());
@@ -60,7 +60,7 @@ void init(EScript::Namespace & lib) {
 	})
 
 	//! [ESF] Map|Void MinSG.OutOfCore.getStatisticsForLevel(Number)
-	ES_FUNCTION2(ns, "getStatisticsForLevel", 1, 1, {
+	ES_FUNCTION(ns, "getStatisticsForLevel", 1, 1, {
 		const double mebibyte = 1024.0 * 1024.0;
 		const CacheManager & manager = getCacheManager();
 

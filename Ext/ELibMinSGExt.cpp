@@ -249,7 +249,7 @@
 
 #include "../SceneManagement/E_SceneManager.h"
 #include <MinSG/Helper/StdNodeVisitors.h>
-#include <EScript/Utils/DeprecatedMacros.h>
+
 #include <E_Geometry/E_Vec3.h>
 #include <E_Geometry/E_Matrix4x4.h>
 #include <E_Rendering/Texture/E_Texture.h>
@@ -378,7 +378,7 @@ void init_ext(EScript::Namespace * /*globals*/,EScript::Namespace * lib) {
 	 From IES Lighting Handbook pg 361
 	 \see http://www.cs.utah.edu/~shirley/papers/sunsky/code/
 	*/
-	ES_FUNCTION2(lib,"calculateSunPosition",1,5,{
+	ES_FUNCTION(lib,"calculateSunPosition",1,5,{
 		// InitSunThetaPhi
 		const float timeOfDay=parameter[0].toFloat();
 		int julianDay=parameter[1].toInt(0);
@@ -620,7 +620,7 @@ void init_ext(EScript::Namespace * /*globals*/,EScript::Namespace * lib) {
 	// [ext:VisibilityMerge]
 #ifdef MINSG_EXT_VISIBILITYMERGE
 	//! [ValuatedRegionNode, ListNode] visibilityMerge(SceneManager, ValuatedRegionNode, Number, Number, Number, Number)
-	ES_FUNCTION2(lib, "visibilityMerge", 6, 6, {
+	ES_FUNCTION(lib, "visibilityMerge", 6, 6, {
 		SceneManagement::SceneManager * mgr = **EScript::assertType<E_SceneManager>(rt, parameter[0]);
 		ValuatedRegionNode * vrNode = **EScript::assertType<E_ValuatedRegionNode>(rt, parameter[1]);
 		const auto result =
@@ -637,7 +637,7 @@ void init_ext(EScript::Namespace * /*globals*/,EScript::Namespace * lib) {
 	});
 
 	//! Array getVisibilityCells(ValuatedRegionNode)
-	ES_FUNCTION2(lib, "getVisibilityCells", 1, 1, {
+	ES_FUNCTION(lib, "getVisibilityCells", 1, 1, {
 		ValuatedRegionNode * root = **EScript::assertType<E_ValuatedRegionNode>(rt, parameter[0]);
 
 		const auto cells = MinSG::VisibilityMerge::Helper::collectVisibilityCells(root);

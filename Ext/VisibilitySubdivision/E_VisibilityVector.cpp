@@ -15,7 +15,7 @@
 #include "../../Core/Nodes/E_Node.h"
 #include "../../SceneManagement/E_SceneManager.h"
 #include "../../ELibMinSG.h"
-#include <EScript/Utils/DeprecatedMacros.h>
+
 #include <EScript/Basics.h>
 #include <EScript/StdObjects.h>
 #include <E_Util/E_Utils.h>
@@ -82,7 +82,7 @@ void E_VisibilityVector::init(EScript::Namespace & lib) {
 	})
 
 	//! [ESMF] VisibilityVector VisibilityVector.makeWeightedThree(Number, VisibilityVector, Number, VisibilityVector, Number, VisibilityVector)
-	ES_FUNCTION2(typeObject, "makeWeightedThree", 6, 6, {
+	ES_FUNCTION(typeObject, "makeWeightedThree", 6, 6, {
 		const auto & vv1 = **EScript::assertType<E_VisibilityVector>(rt, parameter[1]);
 		const auto & vv2 = **EScript::assertType<E_VisibilityVector>(rt, parameter[3]);
 		const auto & vv3 = **EScript::assertType<E_VisibilityVector>(rt, parameter[5]);
@@ -151,7 +151,7 @@ void E_VisibilityVector::init(EScript::Namespace & lib) {
 	})
 
 	//! [ESMF] VisibilityVector VisibilityVector.unserialize(String, SceneManager)
-	ES_FUNCTION2(typeObject, "unserialize", 2, 2, {
+	ES_FUNCTION(typeObject, "unserialize", 2, 2, {
 		std::istringstream stream(parameter[0].toString());
 		const MinSG::SceneManagement::SceneManager & sceneManager = ***EScript::assertType<E_SceneManager>(rt, parameter[1]);
 		return new E_VisibilityVector(VisibilityVector::unserialize(stream, sceneManager));

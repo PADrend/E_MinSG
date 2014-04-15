@@ -16,7 +16,7 @@
 #include "../../Core/E_FrameContext.h"
 #include "../../SceneManagement/E_SceneManager.h"
 
-#include <EScript/Utils/DeprecatedMacros.h>
+
 #include <EScript/EScript.h>
 #include <E_Geometry/E_Box.h>
 #include <E_Geometry/E_Vec3.h>
@@ -69,7 +69,7 @@ void E_VisibilitySubdivisionRenderer::init(EScript::Namespace & lib) {
 	ES_MFUN(typeObject, VisibilitySubdivisionRenderer, "getAccumRendering", 0, 0, Bool::create(thisObj->getAccumRendering()))
 
 	//! [ESF] Bool VisibilitySubdivisionRenderer.renderCellSubset(FrameContext, ValuatedRegionNode, Number, Number)
-	ES_FUNCTION2(typeObject, "renderCellSubset", 4, 4, {
+	ES_FUNCTION(typeObject, "renderCellSubset", 4, 4, {
 		MinSG::FrameContext & context = parameter[0].to<MinSG::FrameContext&>(rt);
 		MinSG::ValuatedRegionNode * vrn = (**EScript::assertType<E_ValuatedRegionNode>(rt, parameter[1]));
 		return Bool::create(MinSG::VisibilitySubdivision::VisibilitySubdivisionRenderer::renderCellSubset(context, vrn, parameter[2].toUInt(), parameter[3].toUInt()));

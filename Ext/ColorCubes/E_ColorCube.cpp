@@ -14,7 +14,6 @@
 #include "E_ColorCube.h"
 #include "../../Core/Nodes/E_Node.h"
 #include "../../Core/E_FrameContext.h"
-#include <EScript/Utils/DeprecatedMacros.h>
 #include <EScript/Basics.h>
 #include <EScript/StdObjects.h>
 
@@ -29,7 +28,7 @@ void init(EScript::Namespace & lib) {
 
 
 	//! [ESF] Void ColorCube.buildColorCubes(FrameContext, Node [, nodeCount=100 [, triangleCount=10000] ] )
-	ES_FUNCTION2(ns, "buildColorCubes", 2, 4, {
+	ES_FUNCTION(ns, "buildColorCubes", 2, 4, {
 		MinSG::FrameContext & context = parameter[0].to<MinSG::FrameContext&>(rt);
 		MinSG::Node * node = parameter[1].to<MinSG::Node*>(rt);
 
