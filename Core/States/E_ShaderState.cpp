@@ -90,6 +90,9 @@ void E_ShaderState::init(EScript::Namespace & lib) {
 		
 	typeObject->setAttribute("STATE_ATTR_SHADER_FILES",
 					EScript::Attribute(EScript::create(MinSG::SceneManagement::Consts::STATE_ATTR_SHADER_FILES.toString()),EScript::Attribute::TYPE_ATTR_BIT|EScript::Attribute::CONST_BIT));
+
+	typeObject->setAttribute("STATE_ATTR_SHADER_NAME",
+					EScript::Attribute(EScript::create(MinSG::SceneManagement::Consts::STATE_ATTR_SHADER_NAME.toString()),EScript::Attribute::TYPE_ATTR_BIT|EScript::Attribute::CONST_BIT));
 }
 
 // ------------------------------------------------------------
