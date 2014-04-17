@@ -69,6 +69,7 @@
 
 #include <E_Geometry/E_Box.h>
 
+#include <E_Util/IO/E_FileLocator.h>
 #include <Util/IO/FileName.h>
 #include <Util/Macros.h>
 
@@ -146,8 +147,8 @@ void init(EScript::Namespace * globals) {
 		return nullptr;
 	})
 
-	//! [ESF] void MinSG.initShaderState(ShaderState, Array vsFiles, Array gsFiles, Array fsFile, [Shader::flag_t usage])
-	ES_FUNCTION(lib,"initShaderState",4,5, {
+	//! [ESF] void MinSG.initShaderState(ShaderState, Array vsFiles, Array gsFiles, Array fsFiles, [Shader::flag_t _usage], _Util::FileLocator )
+	ES_FUNCTION(lib,"initShaderState",4,6, {
 		MinSG::ShaderState * s=**EScript::assertType<E_ShaderState>(rt,parameter[0]);
 
 		EScript::Collection * c;
@@ -170,8 +171,16 @@ void init(EScript::Namespace * globals) {
 			ObjRef value=iRef->value();
 			fsFiles.push_back(value.toString());
 		}
-		Util::FileLocator searchPaths;
-		MinSG::initShaderState(s,searchPaths,vsFiles,gsFiles,fsFiles, parameter[4].toUInt(Rendering::Shader::USE_UNIFORMS | Rendering::Shader::USE_GL ));
+				
+		;
+		if(parameter.count()>5){
+			const Util::FileLocator searchPaths = parameter[5].to<const Util::FileLocator&>(rt);
+			MinSG::initShaderState(s,vsFiles,gsFiles,fsFiles, parameter[4].toUInt(Rendering::Shader::USE_UNIFORMS | Rendering::Shader::USE_GL),searchPaths);
+		}else{
+			const Util::FileLocator searchPaths;
+			MinSG::initShaderState(s,vsFiles,gsFiles,fsFiles, parameter[4].toUInt(Rendering::Shader::USE_UNIFORMS | Rendering::Shader::USE_GL),searchPaths);
+		}
+		
 		return nullptr;
 	})
 
