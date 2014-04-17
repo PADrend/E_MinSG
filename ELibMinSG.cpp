@@ -170,7 +170,7 @@ void init(EScript::Namespace * globals) {
 			ObjRef value=iRef->value();
 			fsFiles.push_back(value.toString());
 		}
-		std::vector<std::string> searchPaths;
+		Util::FileLocator searchPaths;
 		MinSG::initShaderState(s,searchPaths,vsFiles,gsFiles,fsFiles, parameter[4].toUInt(Rendering::Shader::USE_UNIFORMS | Rendering::Shader::USE_GL ));
 		return nullptr;
 	})
