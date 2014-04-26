@@ -14,6 +14,7 @@
 
 #include <EScript/Basics.h>
 #include <EScript/StdObjects.h>
+#include <EScript/Utils/DeprecatedMacros.h>
 
 namespace E_MinSG {
 namespace ThesisJonas {
