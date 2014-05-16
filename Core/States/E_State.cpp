@@ -110,11 +110,9 @@ void E_State::init(EScript::Namespace & lib) {
 		return E_Util::E_Utils::convertGenericAttributeToEScriptObject(attribute);
 	})
 
-	//!	[ESMF] Bool MinSG.State.isActive()	*/
+	//!	[ESMF] Bool MinSG.State.isActive()	
 	ES_MFUN(typeObject, const State, "isActive", 0,  0,thisObj->isActive())
 
-	//!	[ESMF] Bool MinSG.State.isTempState()	*/
-	ES_MFUN(typeObject, const State, "isTempState", 0,  0,thisObj->isTempState())
 
 	//!	[ESMF] thisEObj MinSG.State.activate()
 	ES_MFUN(typeObject, State, "activate", 0, 0,  (thisObj->activate(), thisEObj))
@@ -122,6 +120,15 @@ void E_State::init(EScript::Namespace & lib) {
 	//!	[ESMF] thisEObj MinSG.State.deactivate()
 	ES_MFUN(typeObject, State, "deactivate", 0, 0,  (thisObj->deactivate(), thisEObj))
 
+	//!	[ESMF] Number MinSG.State.getRenderingLayers()	
+	ES_MFUN(typeObject, const State, "getRenderingLayers", 0,  0, static_cast<uint32_t>(thisObj->getRenderingLayers()))
+
+	//!	[ESMF] Bool MinSG.State.isTempState()	
+	ES_MFUN(typeObject, const State, "isTempState", 0,  0,thisObj->isTempState())
+
+	//!	[ESMF] thisEObj MinSG.State.setRenderingLayers(Number)
+	ES_MFUN(typeObject, State, "setRenderingLayers", 1, 1,  (thisObj->setRenderingLayers(static_cast<renderingLayerMask_t>(parameter[0].to<uint32_t>(rt))), thisEObj))
+	
 	//! [ESF] thisEObj MinSG.State.setStateAttribute(string key,value)
 	ES_MFUNCTION(typeObject, State, "setStateAttribute",2, 2, {
 		Util::GenericAttribute * g=E_Util::E_Utils::convertEScriptObjectToGenericAttribute(parameter[1]);
@@ -129,14 +136,15 @@ void E_State::init(EScript::Namespace & lib) {
 		return thisEObj;
 	})
 
-	//! [ESF] thisEObj MinSG.State.unsetStateAttribute(string key)
-	ES_MFUN(typeObject, State, "unsetStateAttribute",1, 1, 
-				(thisObj->unsetAttribute(parameter[0].toString()),thisEObj))
-
-
 	//!	[ESMF] thisEObj MinSG.State.setTempState(bool)
 	ES_MFUN(typeObject, State, "setTempState", 1, 1,  (thisObj->setTempState(parameter[0].to<bool>(rt)), thisEObj))
 
+	//!	[ESMF] bool MinSG.State.testRenderingLayer(Number)
+	ES_MFUN(typeObject, const State, "testRenderingLayer", 1, 1,  thisObj->testRenderingLayer(static_cast<renderingLayerMask_t>(parameter[0].to<uint32_t>(rt))))
+	
+	//! [ESF] thisEObj MinSG.State.unsetStateAttribute(string key)
+	ES_MFUN(typeObject, State, "unsetStateAttribute",1, 1, 
+				(thisObj->unsetAttribute(parameter[0].toString()),thisEObj))
 }
 
 // ------------------------------------------------------------

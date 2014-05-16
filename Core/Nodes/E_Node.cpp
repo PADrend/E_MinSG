@@ -251,6 +251,18 @@ void E_Node::init(EScript::Namespace & lib) {
 	}
 
 	// -----------------------------------
+	// ---- Rendering Layers
+	
+	//!	[ESMF] Number MinSG.Node.getRenderingLayers()	
+	ES_MFUN(typeObject, const Node, "getRenderingLayers", 0,  0, static_cast<uint32_t>(thisObj->getRenderingLayers()))
+
+	//!	[ESMF] thisEObj MinSG.Node.setRenderingLayers(Number)
+	ES_MFUN(typeObject, Node, "setRenderingLayers", 1, 1,  (thisObj->setRenderingLayers(static_cast<renderingLayerMask_t>(parameter[0].to<uint32_t>(rt))), thisEObj))
+
+	//!	[ESMF] bool MinSG.Node.testRenderingLayer(Number)
+	ES_MFUN(typeObject, const Node, "testRenderingLayer", 1, 1,  thisObj->testRenderingLayer(static_cast<renderingLayerMask_t>(parameter[0].to<uint32_t>(rt))))
+	
+	// -----------------------------------
 	// ---- SRT
 
 	//! [ESMF] Bool MinSG.Node.hasSRT()

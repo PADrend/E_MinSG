@@ -44,6 +44,10 @@ void E_RenderParam::init(EScript::Namespace & lib) {
 	ES_MFUN(typeObject, const RenderParam,"getFlags",0,0,
 				thisObj->getFlags())
 
+	//!	[ESMF] Number MinSG.Node.getRenderingLayers()	
+	ES_MFUN(typeObject, const RenderParam, "getRenderingLayers", 0,  0, 
+				static_cast<uint32_t>(thisObj->getRenderingLayers()))
+
 	//! [ESMF] thisEObj RenderParam.setChannel(String)
 	ES_MFUN(typeObject, RenderParam,"setChannel",1,1,
 				(thisObj->setChannel(parameter[0].toString()),thisEObj))
@@ -55,10 +59,13 @@ void E_RenderParam::init(EScript::Namespace & lib) {
 	//! [ESMF] thisEObj RenderParam.setFlags(Number)
 	ES_MFUN(typeObject, RenderParam,"setFlags",1,1,
 				(thisObj->setFlags(parameter[0].toUInt()),thisEObj))
+				
+	//!	[ESMF] thisEObj MinSG.Node.setRenderingLayers(Number)
+	ES_MFUN(typeObject, RenderParam, "setRenderingLayers", 1, 1,  
+				(thisObj->setRenderingLayers(static_cast<renderingLayerMask_t>(parameter[0].to<uint32_t>(rt))), thisEObj))
 
 	//! [ESMF] thisEObj RenderParam.unsetFlag(Number)
 	ES_MFUN(typeObject, RenderParam,"unsetFlag",1,1,
 				(thisObj->unsetFlag(parameter[0].toUInt()),thisEObj))
-
 }
 }
