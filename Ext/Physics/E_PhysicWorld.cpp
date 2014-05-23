@@ -1,7 +1,7 @@
 /*
 	This file is part of the E_MinSG library extension Physics.
 	Copyright (C) 2013 Benjamin Eikel <benjamin@eikel.org>
-	Copyright (C) 2013 Claudius JÃ¤hn <claudius@uni-paderborn.de>
+	Copyright (C) 2013 Claudius Jähn <claudius@uni-paderborn.de>
 	Copyright (C) 2013 Mouns Almarrani
 
 	This library is subject to the terms of the Mozilla Public License, v. 2.0.
@@ -47,7 +47,7 @@ void E_PhysicWorld::init(EScript::Namespace & lib) {
 	declareConstant(ns,"SHAPE_TYPE_STATIC_TRIANGLE_MESH",EScript::create(PhysicWorld::SHAPE_TYPE_STATIC_TRIANGLE_MESH));
 
 	//! [ESF] Bool MinSG.Physics.hasPhysicsProperties(Node)
-	ES_FUN(ns, "hasPhysicsProperties", 1, 1,	(PhysicWorld::hasPhysicsProperties(parameter[0].to<MinSG::Node*>(rt))))
+//	ES_FUN(ns, "hasPhysicsProperties", 1, 1,	(PhysicWorld::hasPhysicsProperties(parameter[0].to<MinSG::Node*>(rt))))
 
 	// ---------------------------
 
@@ -55,7 +55,8 @@ void E_PhysicWorld::init(EScript::Namespace & lib) {
 	ES_FUN(ns,"createBulletWorld",0,0,								EScript::create(PhysicWorld::createBulletWorld()))
 
 	//! [ESMF] thisEObj PhysicWorld.addNodeToPhyiscWorld(Node)
-	ES_MFUN(typeObject, PhysicWorld, "addNodeToPhyiscWorld", 1, 1,	(thisObj->addNodeToPhyiscWorld(parameter[0].to<MinSG::Node*>(rt)),thisEObj))
+	ES_MFUN(typeObject, PhysicWorld, "addNodeToPhyiscWorld", 2, 2,	(thisObj->addNodeToPhyiscWorld(parameter[0].to<MinSG::Node*>(rt),
+                                                                            dynamic_cast< Util::GenericAttributeMap*>( E_Util::E_Utils::convertEScriptObjectToGenericAttribute( parameter[1].to<EScript::Map*>(rt) ))),thisEObj))
 
     //! [ESMF] thisEObj PhysicWorld.applyHingeConstraint(Node, Node, Geometry::Vec3, Geometry::Vec3)
 	ES_MFUN(typeObject, PhysicWorld, "applyHingeConstraint", 4, 4, (thisObj->applyHingeConstraint(parameter[0].to<MinSG::Node*>(rt), parameter[1].to<MinSG::Node*>(rt), parameter[2].to<Geometry::Vec3>(rt), parameter[3].to<Geometry::Vec3>(rt)),thisEObj))
@@ -69,26 +70,26 @@ void E_PhysicWorld::init(EScript::Namespace & lib) {
 	//! [ESMF] thisEObj PhysicWorld.createGroundPlane(Geometry::Plane)
 	ES_MFUN(typeObject, PhysicWorld, "createGroundPlane", 1, 1,		(thisObj->createGroundPlane(parameter[0].to<const Geometry::Plane&>(rt)),thisEObj))
 
-	//! [ESMF] String PhysicWorld.getConstraintPivot(Node)
-	ES_MFUN(typeObject, PhysicWorld, "getConstraintPivot", 1, 1,	(thisObj->getConstraintPivot(parameter[0].to<MinSG::Node*>(rt))))
-
-	//! [ESMF] Number PhysicWorld.getFriction(Node)
-	ES_MFUN(typeObject, PhysicWorld, "getFriction", 1, 1,			(thisObj->getFriction(parameter[0].to<MinSG::Node*>(rt))))
-
+//	//! [ESMF] String PhysicWorld.getConstraintPivot(Node)
+//	ES_MFUN(typeObject, PhysicWorld, "getConstraintPivot", 1, 1,	(thisObj->getConstraintPivot(parameter[0].to<MinSG::Node*>(rt))))
+//
+//	//! [ESMF] Number PhysicWorld.getFriction(Node)
+//	ES_MFUN(typeObject, PhysicWorld, "getFriction", 1, 1,			(thisObj->getFriction(parameter[0].to<MinSG::Node*>(rt))))
+//
 	//! [ESMF] Geometry.Vec3 PhysicWorld.getGravity()
 	ES_MFUN(typeObject, PhysicWorld, "getGravity", 0, 0,			EScript::create((thisObj->getGravity())))
-
-	//! [ESMF] Number PhysicWorld.getLocalSurfaceVelocity(Node)
-	ES_MFUN(typeObject, PhysicWorld, "getLocalSurfaceVelocity", 1, 1,	(thisObj->getLocalSurfaceVelocity(parameter[0].to<MinSG::Node*>(rt))))
-
-	//! [ESMF] Number PhysicWorld.getMass(Node)
-	ES_MFUN(typeObject, PhysicWorld, "getMass", 1, 1,				(thisObj->getMass(parameter[0].to<MinSG::Node*>(rt))))
-
-	//! [ESMF] Number PhysicWorld.getRollingFriction(Node)
-	ES_MFUN(typeObject, PhysicWorld, "getRollingFriction", 1, 1,	(thisObj->getRollingFriction(parameter[0].to<MinSG::Node*>(rt))))
-
-	//! [ESMF] Number PhysicWorld.getShapeDescription(Node)
-	ES_MFUN(typeObject, PhysicWorld, "getShapeDescription", 1, 1,	(E_Util::E_Utils::convertGenericAttributeToEScriptObject((thisObj->getShapeDescription(parameter[0].to<MinSG::Node*>(rt))))))
+//
+//	//! [ESMF] Number PhysicWorld.getLocalSurfaceVelocity(Node)
+//	ES_MFUN(typeObject, PhysicWorld, "getLocalSurfaceVelocity", 1, 1,	(thisObj->getLocalSurfaceVelocity(parameter[0].to<MinSG::Node*>(rt))))
+//
+//	//! [ESMF] Number PhysicWorld.getMass(Node)
+//	ES_MFUN(typeObject, PhysicWorld, "getMass", 1, 1,				(thisObj->getMass(parameter[0].to<MinSG::Node*>(rt))))
+//
+//	//! [ESMF] Number PhysicWorld.getRollingFriction(Node)
+//	ES_MFUN(typeObject, PhysicWorld, "getRollingFriction", 1, 1,	(thisObj->getRollingFriction(parameter[0].to<MinSG::Node*>(rt))))
+//
+//	//! [ESMF] Number PhysicWorld.getShapeDescription(Node)
+//	ES_MFUN(typeObject, PhysicWorld, "getShapeDescription", 1, 1,	(E_Util::E_Utils::convertGenericAttributeToEScriptObject((thisObj->getShapeDescription(parameter[0].to<MinSG::Node*>(rt))))))
 
 	 //! [ESMF] thisEObj PhysicWorld.initNodeObserver(Node)
 	ES_MFUN(typeObject, PhysicWorld, "initNodeObserver", 1, 1,		(thisObj->initNodeObserver(parameter[0].to<MinSG::Node*>(rt)),thisEObj))
