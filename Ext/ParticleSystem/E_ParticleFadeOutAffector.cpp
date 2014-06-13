@@ -18,6 +18,7 @@
 #include "../../ELibMinSG.h"
 
 #include <E_Geometry/E_Vec3.h>
+#include <EScript/Basics.h>
 
 using namespace MinSG;
 using E_Geometry::E_Vec3;

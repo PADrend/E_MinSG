@@ -112,6 +112,7 @@ add_library(E_MinSG
 	Ext/ParticleSystem/E_ParticleFadeOutAffector.cpp
 	Ext/ParticleSystem/E_ParticleGravityAffector.cpp
 	Ext/ParticleSystem/E_ParticlePointEmitter.cpp
+	Ext/ParticleSystem/E_ParticleReflectionAffector.cpp
 	Ext/ParticleSystem/E_ParticleStates.cpp
 	Ext/ParticleSystem/E_ParticleSystemNode.cpp
 	Ext/Physics/E_PhysicWorld.cpp

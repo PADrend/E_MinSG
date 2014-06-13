@@ -143,6 +143,7 @@
 #include "ParticleSystem/E_ParticlePointEmitter.h"
 #include "ParticleSystem/E_ParticleBoxEmitter.h"
 #include "ParticleSystem/E_ParticleGravityAffector.h"
+#include "ParticleSystem/E_ParticleReflectionAffector.h"
 #include "ParticleSystem/E_ParticleFadeOutAffector.h"
 #include "ParticleSystem/E_ParticleAnimator.h"
 #endif // MINSG_EXT_PARTICLE
@@ -549,6 +550,7 @@ void init_ext(EScript::Namespace * /*globals*/,EScript::Namespace * lib) {
 	E_ParticleBoxEmitter::init(*lib);
 	E_ParticleGravityAffector::init(*lib);
 	E_ParticleFadeOutAffector::init(*lib);
+	E_ParticleReflectionAffector::init(*lib);
 	E_ParticleAnimator::init(*lib);
 #endif // MINSG_EXT_PARTICLE
 

@@ -17,7 +17,6 @@
 
 #include <MinSG/Ext/ParticleSystem/ParticleEmitters.h>
 #include <MinSG/Ext/ParticleSystem/ParticleAffectors.h>
-#include <EScript/EScript.h>
 
 #include "../../Core/Behaviours/E_AbstractBehaviour.h"
 
