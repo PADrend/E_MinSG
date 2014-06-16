@@ -177,8 +177,7 @@ void init(EScript::Namespace * globals) {
 			const Util::FileLocator searchPaths = parameter[5].to<const Util::FileLocator&>(rt);
 			MinSG::initShaderState(s,vsFiles,gsFiles,fsFiles, parameter[4].toUInt(Rendering::Shader::USE_UNIFORMS | Rendering::Shader::USE_GL),searchPaths);
 		}else{
-			const Util::FileLocator searchPaths;
-			MinSG::initShaderState(s,vsFiles,gsFiles,fsFiles, parameter[4].toUInt(Rendering::Shader::USE_UNIFORMS | Rendering::Shader::USE_GL),searchPaths);
+			MinSG::initShaderState(s,vsFiles,gsFiles,fsFiles, parameter[4].toUInt(Rendering::Shader::USE_UNIFORMS | Rendering::Shader::USE_GL), Util::FileLocator());
 		}
 		
 		return nullptr;
