@@ -137,21 +137,14 @@ void init_stdNodeVisitors(EScript::Namespace * lib) {
 		return getENodeArray(nodes.begin(), nodes.end());
 	})
 
-	//! [ESF] Array collectVisibleNodes(root,FrameContext [[, Number or false maxDistance],bool fillDepthBuffer=false])
-	ES_FUNCTION(lib, "collectVisibleNodes", 2, 4, {
+	//! [ESF] Array collectVisibleNodes(root,FrameContext [[, Number or false maxDistance],bool fillDepthBuffer=false, Number renderingLayers])
+	ES_FUNCTION(lib, "collectVisibleNodes", 2, 5, {
 		const auto visNodes = collectVisibleNodes((parameter[0].to<MinSG::Node*>(rt)),
 												parameter[1].to<MinSG::FrameContext&>(rt),
 												parameter[2].toBool() ? parameter[2].toFloat() : -1.0,
-												parameter[3].toBool(false));
-
-		EScript::Array * nodeArray = EScript::Array::create();
-		for(const auto ptrNodePair : visNodes) {
-			ObjRef en = EScript::create(ptrNodePair.second);
-			if(en.isNotNull()) {
-				nodeArray->pushBack(en);
-			}
-		}
-		return nodeArray;
+												parameter[3].toBool(false),
+												static_cast<renderingLayerMask_t>(parameter[4].toUInt(1)));
+		return getENodeArray(visNodes.begin(),visNodes.end());
 	})
 
 	//! [ESF] Array collectStates(root[, type])
