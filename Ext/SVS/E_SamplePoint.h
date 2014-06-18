@@ -38,13 +38,15 @@ class E_SamplePoint : public EScript::ExtReferenceObject<MinSG::SVS::SamplePoint
 		}
 		virtual ~E_SamplePoint();
 
-		virtual E_SamplePoint * clone() const;
+		E_SamplePoint * clone() const override;
 
-		virtual std::string toString() const;
+		std::string toString() const override;
 };
 
 }
 }
+
+ES_CONV_EOBJ_TO_OBJ(E_MinSG::SVS::E_SamplePoint,	MinSG::SVS::SamplePoint*,	&**eObj)
 
 #endif /* E_MINSG_SVS_E_SAMPLEPOINT_H_ */
 

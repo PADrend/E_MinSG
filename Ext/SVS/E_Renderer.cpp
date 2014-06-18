@@ -10,7 +10,6 @@
 
 #include "E_Renderer.h"
 #include "../../ELibMinSG.h"
-#include <EScript/Utils/DeprecatedMacros.h>
 #include <EScript/Basics.h>
 #include <EScript/StdObjects.h>
 #include <MinSG/Ext/SVS/Definitions.h>
@@ -32,36 +31,38 @@ void E_Renderer::init(EScript::Namespace & lib) {
 	declareConstant(&lib, "Renderer", typeObject);
 	addFactory<MinSG::SVS::Renderer, E_Renderer>();
 
+	using namespace MinSG::SVS;
+	
 	//! [ESF] new MinSG.SVS.Renderer()
 	ES_CTOR(typeObject, 0, 0, EScript::create(new MinSG::SVS::Renderer()))
 
 	//! [ESMF] Number Renderer.getInterpolationMethod()
-	ESMF_DECLARE(typeObject, const E_Renderer, "getInterpolationMethod", 0, 0, EScript::Number::create((**self)->getInterpolationMethod()))
+	ES_MFUN(typeObject, const Renderer, "getInterpolationMethod", 0, 0, static_cast<uint32_t>(thisObj->getInterpolationMethod()))
 
 	//! [ESMF] self Renderer.setInterpolationMethod(Number)
-	ES_MFUNCTION_DECLARE(typeObject, E_Renderer, "setInterpolationMethod", 1, 1, {
-		const uint32_t interpolationValue = parameter[0].to<uint32_t>(runtime);
-		(**self)->setInterpolationMethod(MinSG::SVS::interpolationFromUInt(interpolationValue));
-		return self;
+	ES_MFUNCTION(typeObject, Renderer, "setInterpolationMethod", 1, 1, {
+		const uint32_t interpolationValue = parameter[0].to<uint32_t>(rt);
+		thisObj->setInterpolationMethod(MinSG::SVS::interpolationFromUInt(interpolationValue));
+		return thisEObj;
 	})
 
 	//! [ESMF] Bool Renderer.isSphereOcclusionTestEnabled()
-	ESMF_DECLARE(typeObject, const E_Renderer, "isSphereOcclusionTestEnabled", 0, 0, EScript::Bool::create((**self)->isSphereOcclusionTestEnabled()))
+	ES_MFUN(typeObject, const Renderer, "isSphereOcclusionTestEnabled", 0, 0, thisObj->isSphereOcclusionTestEnabled())
 
 	//! [ESMF] self Renderer.enableSphereOcclusionTest()
-	ESMF_DECLARE(typeObject, E_Renderer, "enableSphereOcclusionTest", 0, 0, ((**self)->enableSphereOcclusionTest(), self))
+	ES_MFUN(typeObject, Renderer, "enableSphereOcclusionTest", 0, 0, (thisObj->enableSphereOcclusionTest(), thisEObj))
 
 	//! [ESMF] self Renderer.disableSphereOcclusionTest()
-	ESMF_DECLARE(typeObject, E_Renderer, "disableSphereOcclusionTest", 0, 0, ((**self)->disableSphereOcclusionTest(), self))
+	ES_MFUN(typeObject, Renderer, "disableSphereOcclusionTest", 0, 0, (thisObj->disableSphereOcclusionTest(), thisEObj))
 
 	//! [ESMF] Bool Renderer.isGeometryOcclusionTestEnabled()
-	ESMF_DECLARE(typeObject, const E_Renderer, "isGeometryOcclusionTestEnabled", 0, 0, EScript::Bool::create((**self)->isGeometryOcclusionTestEnabled()))
+	ES_MFUN(typeObject, const Renderer, "isGeometryOcclusionTestEnabled", 0, 0, thisObj->isGeometryOcclusionTestEnabled())
 
 	//! [ESMF] self Renderer.enableGeometryOcclusionTest()
-	ESMF_DECLARE(typeObject, E_Renderer, "enableGeometryOcclusionTest", 0, 0, ((**self)->enableGeometryOcclusionTest(), self))
+	ES_MFUN(typeObject, Renderer, "enableGeometryOcclusionTest", 0, 0, (thisObj->enableGeometryOcclusionTest(), thisEObj))
 
 	//! [ESMF] self Renderer.disableGeometryOcclusionTest()
-	ESMF_DECLARE(typeObject, E_Renderer, "disableGeometryOcclusionTest", 0, 0, ((**self)->disableGeometryOcclusionTest(), self))
+	ES_MFUN(typeObject, Renderer, "disableGeometryOcclusionTest", 0, 0, (thisObj->disableGeometryOcclusionTest(), thisEObj))
 
 }
 

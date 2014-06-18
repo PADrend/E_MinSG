@@ -14,7 +14,6 @@
 
 #include "E_ParticleSystemNode.h"
 #include "../../ELibMinSG.h"
-#include <EScript/Utils/DeprecatedMacros.h>
 #include <EScript/Basics.h>
 
 
@@ -34,8 +33,7 @@ void E_ParticleReflectionAffector::init(EScript::Namespace & lib) {
 	declareConstant(&lib,getClassName(),typeObject);
 
 	//! [ESMF] new MinSG.ParticleReflectionAffector( particleSystem )	
-	ES_CTOR(typeObject,1,1,E_Behavior::create(
-					new ParticleReflectionAffector(**EScript::assertType<E_ParticleSystemNode>(rt,parameter[0]))))
+	ES_CTOR(typeObject,1,1,E_Behavior::create(new ParticleReflectionAffector(parameter[0].to<ParticleSystemNode*>(rt))))
 
 	//! [ESMF] Number MinSG.ParticleEmitter.getAdherence()	
 	ES_MFUN(typeObject, const ParticleReflectionAffector,"getAdherence",0,0, thisObj->getAdherence())

@@ -26,14 +26,16 @@ public:
 	static EScript::Type* typeObject;
 	static void init(EScript::Namespace & lib);
 
-	E_ParticlePointEmitter(MinSG::ParticlePointEmitter * c, EScript::Type * type=nullptr);
-	virtual ~E_ParticlePointEmitter();
+	E_ParticlePointEmitter(MinSG::ParticlePointEmitter * c, EScript::Type * type=nullptr):E_ParticleEmitter(c,type?type:typeObject) {}
+	virtual ~E_ParticlePointEmitter(){}
 
 	const MinSG::ParticlePointEmitter * operator*()const		{	return static_cast<const MinSG::ParticlePointEmitter*>(ref().get());	}
 	MinSG::ParticlePointEmitter * operator*()					{	return static_cast<MinSG::ParticlePointEmitter*>(ref().get());	}
 };
 
 }
+
+ES_CONV_EOBJ_TO_OBJ(E_MinSG::E_ParticlePointEmitter,	MinSG::ParticlePointEmitter*,	**eObj)
 
 #endif /* E_PARTICLEPOINTEMITTER_H_ */
 #endif

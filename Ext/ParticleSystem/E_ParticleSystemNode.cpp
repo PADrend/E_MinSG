@@ -12,26 +12,10 @@
 #ifdef MINSG_EXT_PARTICLE
 
 #include "E_ParticleSystemNode.h"
-
-#include <EScript/Utils/DeprecatedMacros.h>
-#include <EScript/EScript.h>
 #include <E_Util/E_Utils.h>
-
 #include "../../ELibMinSG.h"
 
-#include "../../Core/Behaviours/E_BehaviourManager.h"
-
-#include <MinSG/Ext/ParticleSystem/ParticleEmitters.h>
-#include <MinSG/Ext/ParticleSystem/ParticleAffectors.h>
-
-#include "E_ParticleStates.h"
-
-// affectors
-#include "E_ParticleGravityAffector.h"
-#include "E_ParticleFadeOutAffector.h"
-
-// emitters
-#include "E_ParticlePointEmitter.h"
+#include <EScript/EScript.h>
 
 namespace E_MinSG {
 
@@ -39,39 +23,32 @@ EScript::Type * E_ParticleSystemNode::typeObject = nullptr;
 
 //! initMembers
 void E_ParticleSystemNode::init(EScript::Namespace & lib) {
+	using namespace MinSG;
+	
 	/// [E_ParticleSystemNode] ---|> [E_Node]
 	typeObject = new EScript::Type(E_Node::getTypeObject());
 	declareConstant(&lib,getClassName(),typeObject);
 
 	//! [ESMF] new MinSG.ParticleSystemNode
-	ES_CTOR(typeObject,0,0,EScript::create(new MinSG::ParticleSystemNode))
+	ES_CTOR(typeObject,0,0,EScript::create(new ParticleSystemNode))
 
 	//! [ESMF] Number ParticleSystemNode.getRendererType()	
-	ESMF_DECLARE(typeObject,const E_ParticleSystemNode,"getRendererType",0,0,static_cast<uint32_t>((**self)->getRendererType()))
+	ES_MFUN(typeObject,const ParticleSystemNode,"getRendererType",0,0,static_cast<uint32_t>(thisObj->getRendererType()))
 
 	//! [ESMF] Number ParticleSystemNode.getMaxParticleCount()	
-	ESMF_DECLARE(typeObject,const E_ParticleSystemNode,"getMaxParticleCount",0,0,EScript::Number::create((**self)->getMaxParticleCount()))
+	ES_MFUN(typeObject,const ParticleSystemNode,"getMaxParticleCount",0,0,EScript::Number::create(thisObj->getMaxParticleCount()))
 
 	//! [ESMF] self ParticleSystemNode.setMaxParticleCount(Number)	
-	ESMF_DECLARE(typeObject,E_ParticleSystemNode,"setMaxParticleCount",1,1,((**self)->setMaxParticleCount(parameter[0].toInt()), caller))
+	ES_MFUN(typeObject, ParticleSystemNode,"setMaxParticleCount",1,1,(thisObj->setMaxParticleCount(parameter[0].toInt()), thisEObj))
 
 	//! [ESMF] self ParticleSystemNode.setRenderer(Number)	
-	ESMF_DECLARE(typeObject,E_ParticleSystemNode,"setRenderer",1,1,
-					((**self)->setRenderer(static_cast<MinSG::ParticleSystemNode::renderer_t>(parameter[0].toUInt())), caller))
+	ES_MFUN(typeObject, ParticleSystemNode,"setRenderer",1,1,
+					(thisObj->setRenderer(static_cast<ParticleSystemNode::renderer_t>(parameter[0].toUInt())), thisEObj))
 
-	declareConstant(typeObject,"POINT_RENDERER",static_cast<uint32_t>(MinSG::ParticleSystemNode::POINT_RENDERER));
-	declareConstant(typeObject,"BILLBOARD_RENDERER",static_cast<uint32_t>(MinSG::ParticleSystemNode::BILLBOARD_RENDERER));
+	declareConstant(typeObject,"POINT_RENDERER",static_cast<uint32_t>(ParticleSystemNode::POINT_RENDERER));
+	declareConstant(typeObject,"BILLBOARD_RENDERER",static_cast<uint32_t>(ParticleSystemNode::BILLBOARD_RENDERER));
 
-	addFactory<MinSG::ParticleSystemNode,E_ParticleSystemNode>();
-}
-
-//! [ctor]
-E_ParticleSystemNode::E_ParticleSystemNode(MinSG::ParticleSystemNode * gNode, EScript::Type * type) :
-		E_Node(gNode, type ? type : typeObject) {
-}
-
-//! [dtor]
-E_ParticleSystemNode::~E_ParticleSystemNode() {
+	addFactory<ParticleSystemNode,E_ParticleSystemNode>();
 }
 
 }

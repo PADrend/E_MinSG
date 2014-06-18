@@ -41,6 +41,8 @@ class E_PreprocessingContext : public EScript::ReferenceObject<MinSG::SVS::Prepr
 }
 }
 
+ES_CONV_EOBJ_TO_OBJ(E_MinSG::SVS::E_PreprocessingContext,	MinSG::SVS::PreprocessingContext*,	&**eObj)
+
 #endif /* E_MINSG_SVS_E_PREPROCESSINGCONTEXT_H_ */
 
 #endif /* MINSG_EXT_SVS */

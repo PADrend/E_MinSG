@@ -14,7 +14,6 @@
 
 #include <EScript/Basics.h>
 #include <EScript/StdObjects.h>
-#include <EScript/Utils/DeprecatedMacros.h>
 
 namespace E_MinSG {
 namespace ThesisJonas {
@@ -37,129 +36,129 @@ void E_Renderer::init(EScript::Namespace & lib) {
 
 	//! [ESF] Void Renderer.addRendererToNode(Node)
 	ES_FUN(typeObject, "addRendererToNode", 1, 1,
-				 (MinSG::ThesisJonas::Renderer::addRendererToNode(EScript::assertType<E_Node>(rt, parameter[0])->ref().get()), EScript::Void::get()))
+				 (MinSG::ThesisJonas::Renderer::addRendererToNode( parameter[0].to<MinSG::Node*>(rt) ),EScript::create(nullptr)))
 
 	 //! [ESMF] Number Renderer.getRenderTriangles()
-	ESMF_DECLARE(typeObject, const E_Renderer, "getRenderTriangles", 0, 0,
-				 EScript::Bool::create((**self)->getRenderTriangles()))
+	ES_MFUN(typeObject, const Renderer, "getRenderTriangles", 0, 0,
+				 (thisObj->getRenderTriangles()))
 
 	//! [ESMF] Void Renderer.setRenderTriangles(Bool)
-	ESMF_DECLARE(typeObject, E_Renderer, "setRenderTriangles", 1, 1,
-				 ((**self)->setRenderTriangles(EScript::assertType<EScript::Bool>(runtime, parameter[0])->toBool()), EScript::Void::get()))
+	ES_MFUN(typeObject, Renderer, "setRenderTriangles", 1, 1,
+				 (thisObj->setRenderTriangles(parameter[0].toBool()),EScript::create(nullptr)))
 
 	//! [ESMF] Number Renderer.getRenderPoints()
-	ESMF_DECLARE(typeObject, const E_Renderer, "getRenderPoints", 0, 0,
-				 EScript::Bool::create((**self)->getRenderPoints()))
+	ES_MFUN(typeObject, const Renderer, "getRenderPoints", 0, 0,
+				 (thisObj->getRenderPoints()))
 
 	//! [ESMF] Void Renderer.setRenderPoints(Bool)
-	ESMF_DECLARE(typeObject, E_Renderer, "setRenderPoints", 1, 1,
-				 ((**self)->setRenderPoints(EScript::assertType<EScript::Bool>(runtime, parameter[0])->toBool()), EScript::Void::get()))
+	ES_MFUN(typeObject, Renderer, "setRenderPoints", 1, 1,
+				 (thisObj->setRenderPoints(parameter[0].toBool()),EScript::create(nullptr)))
 
 	//! [ESMF] Number Renderer.getRenderOriginal()
-	ESMF_DECLARE(typeObject, const E_Renderer, "getRenderOriginal", 0, 0,
-				 EScript::Bool::create((**self)->getRenderOriginal()))
+	ES_MFUN(typeObject, const Renderer, "getRenderOriginal", 0, 0,
+				 (thisObj->getRenderOriginal()))
 
 	//! [ESMF] Void Renderer.setRenderOriginal(Bool)
-	ESMF_DECLARE(typeObject, E_Renderer, "setRenderOriginal", 1, 1,
-				 ((**self)->setRenderOriginal(EScript::assertType<EScript::Bool>(runtime, parameter[0])->toBool()), EScript::Void::get()))
+	ES_MFUN(typeObject, Renderer, "setRenderOriginal", 1, 1,
+				 (thisObj->setRenderOriginal(parameter[0].toBool()),EScript::create(nullptr)))
 
 	//! [ESMF] Number Renderer.getTraverseAlgorithm()
-	ESMF_DECLARE(typeObject, const E_Renderer, "getTraverseAlgorithm", 0, 0,
-				 EScript::Number::create((**self)->getTraverseAlgorithm()))
+	ES_MFUN(typeObject, const Renderer, "getTraverseAlgorithm", 0, 0,
+				 EScript::Number::create(thisObj->getTraverseAlgorithm()))
 
 	//! [ESMF] Void Renderer.setTraverseAlgorithm(Number)
-	ES_MFUNCTION_DECLARE(typeObject, E_Renderer, "setTraverseAlgorithm", 1, 1, {
+	ES_MFUNCTION(typeObject, Renderer, "setTraverseAlgorithm", 1, 1, {
 		switch(parameter[0].to<uint32_t>(runtime)) {
 			case MinSG::ThesisJonas::Renderer::NO_TRAVERSAL:
-				(**self)->setTraverseAlgorithm(MinSG::ThesisJonas::Renderer::NO_TRAVERSAL);
+				thisObj->setTraverseAlgorithm(MinSG::ThesisJonas::Renderer::NO_TRAVERSAL);
 				break;
 			case MinSG::ThesisJonas::Renderer::FIXED_PROJECTED_SIZE:
-				(**self)->setTraverseAlgorithm(MinSG::ThesisJonas::Renderer::FIXED_PROJECTED_SIZE);
+				thisObj->setTraverseAlgorithm(MinSG::ThesisJonas::Renderer::FIXED_PROJECTED_SIZE);
 				break;
 			case MinSG::ThesisJonas::Renderer::FIXED_PROJECTED_SIZE_PREPROCESSED_DPC:
-				(**self)->setTraverseAlgorithm(MinSG::ThesisJonas::Renderer::FIXED_PROJECTED_SIZE_PREPROCESSED_DPC);
+				thisObj->setTraverseAlgorithm(MinSG::ThesisJonas::Renderer::FIXED_PROJECTED_SIZE_PREPROCESSED_DPC);
 				break;
 
 			case MinSG::ThesisJonas::Renderer::INSIDE_BB:
 			default:
-				(**self)->setTraverseAlgorithm(MinSG::ThesisJonas::Renderer::INSIDE_BB);
+				thisObj->setTraverseAlgorithm(MinSG::ThesisJonas::Renderer::INSIDE_BB);
 				break;
 		}
-		return EScript::Void::get();
+		returnEScript::create(nullptr);
 	})
 
 	//! [ESMF] Number Renderer.getProjectedSize()
-	ESMF_DECLARE(typeObject, const E_Renderer, "getProjectedSize", 0, 0,
-				 EScript::Number::create((**self)->getProjectedSize()))
+	ES_MFUN(typeObject, const Renderer, "getProjectedSize", 0, 0,
+				 EScript::Number::create(thisObj->getProjectedSize()))
 
 	//! [ESMF] Void Renderer.setProjectedSize(Number)
-	ESMF_DECLARE(typeObject, E_Renderer, "setProjectedSize", 1, 1,
-				 ((**self)->setProjectedSize(parameter[0].to<float>(runtime)), EScript::Void::get()))
+	ES_MFUN(typeObject, Renderer, "setProjectedSize", 1, 1,
+				 (thisObj->setProjectedSize(parameter[0].to<float>(runtime)),EScript::create(nullptr)))
 
 	//! [ESMF] Void Renderer.setDynamicPrimitiveCount(Bool)
-	ESMF_DECLARE(typeObject, E_Renderer, "setDynamicPrimitiveCount", 1, 1,
-				 ((**self)->setDynamicPrimitiveCount(EScript::assertType<EScript::Bool>(runtime, parameter[0])->toBool()), EScript::Void::get()))
+	ES_MFUN(typeObject, Renderer, "setDynamicPrimitiveCount", 1, 1,
+				 (thisObj->setDynamicPrimitiveCount(parameter[0].toBool()),EScript::create(nullptr)))
 
 	//! [ESMF] Number Renderer.getDynamicPrimitiveCount()
-	ESMF_DECLARE(typeObject, const E_Renderer, "getDynamicPrimitiveCount", 0, 0,
-				 EScript::Bool::create((**self)->getDynamicPrimitiveCount()))
+	ES_MFUN(typeObject, const Renderer, "getDynamicPrimitiveCount", 0, 0,
+				 (thisObj->getDynamicPrimitiveCount()))
 
 	//! [ESMF] Void Renderer.setFrustumCulling(Bool)
-	ESMF_DECLARE(typeObject, E_Renderer, "setFrustumCulling", 1, 1,
-				 ((**self)->setFrustumCulling(EScript::assertType<EScript::Bool>(runtime, parameter[0])->toBool()), EScript::Void::get()))
+	ES_MFUN(typeObject, Renderer, "setFrustumCulling", 1, 1,
+				 (thisObj->setFrustumCulling(parameter[0].toBool()),EScript::create(nullptr)))
 
 	//! [ESMF] Number Renderer.getFrustumCulling()
-	ESMF_DECLARE(typeObject, const E_Renderer, "getFrustumCulling", 0, 0,
-				 EScript::Bool::create((**self)->getFrustumCulling()))
+	ES_MFUN(typeObject, const Renderer, "getFrustumCulling", 0, 0,
+				 (thisObj->getFrustumCulling()))
 
 	//! [ESMF] Void Renderer.setUseTotalBudget(Bool)
-	ESMF_DECLARE(typeObject, E_Renderer, "setUseTotalBudget", 1, 1,
-				 ((**self)->setUseTotalBudget(EScript::assertType<EScript::Bool>(runtime, parameter[0])->toBool()), EScript::Void::get()))
+	ES_MFUN(typeObject, Renderer, "setUseTotalBudget", 1, 1,
+				 (thisObj->setUseTotalBudget(parameter[0].toBool()),EScript::create(nullptr)))
 
 	//! [ESMF] Number Renderer.getUseTotalBudget()
-	ESMF_DECLARE(typeObject, const E_Renderer, "getUseTotalBudget", 0, 0,
-				 EScript::Bool::create((**self)->getUseTotalBudget()))
+	ES_MFUN(typeObject, const Renderer, "getUseTotalBudget", 0, 0,
+				 (thisObj->getUseTotalBudget()))
 
 	//! [ESMF] Void Renderer.setRenderSMwhenTBtooLow(Bool)
-	ESMF_DECLARE(typeObject, E_Renderer, "setRenderSMwhenTBtooLow", 1, 1,
-				 ((**self)->setRenderSMwhenTBtooLow(EScript::assertType<EScript::Bool>(runtime, parameter[0])->toBool()), EScript::Void::get()))
+	ES_MFUN(typeObject, Renderer, "setRenderSMwhenTBtooLow", 1, 1,
+				 (thisObj->setRenderSMwhenTBtooLow(parameter[0].toBool()),EScript::create(nullptr)))
 
 	//! [ESMF] Number Renderer.getRenderSMwhenTBtooLow()
-	ESMF_DECLARE(typeObject, const E_Renderer, "getRenderSMwhenTBtooLow", 0, 0,
-				 EScript::Bool::create((**self)->getRenderSMwhenTBtooLow()))
+	ES_MFUN(typeObject, const Renderer, "getRenderSMwhenTBtooLow", 0, 0,
+				 (thisObj->getRenderSMwhenTBtooLow()))
 
 	//! [ESMF] Number Renderer.getTriangleBudget()
-	ESMF_DECLARE(typeObject, const E_Renderer, "getTriangleBudget", 0, 0,
-				 EScript::Number::create((**self)->getTriangleBudget()))
+	ES_MFUN(typeObject, const Renderer, "getTriangleBudget", 0, 0,
+				 EScript::Number::create(thisObj->getTriangleBudget()))
 
 	//! [ESMF] Void Renderer.setTriangleBudget(Number)
-	ESMF_DECLARE(typeObject, E_Renderer, "setTriangleBudget", 1, 1,
-				 ((**self)->setTriangleBudget(parameter[0].to<double>(runtime)), EScript::Void::get()))
+	ES_MFUN(typeObject, Renderer, "setTriangleBudget", 1, 1,
+				 (thisObj->setTriangleBudget(parameter[0].to<double>(runtime)),EScript::create(nullptr)))
 
 	 //! [ESMF] Number Renderer.getTriangleBudgetDistributionType()
-	ESMF_DECLARE(typeObject, const E_Renderer, "getTriangleBudgetDistributionType", 0, 0,
-				 EScript::Number::create((**self)->getTriangleBudgetDistributionType()))
+	ES_MFUN(typeObject, const Renderer, "getTriangleBudgetDistributionType", 0, 0,
+				 EScript::Number::create(thisObj->getTriangleBudgetDistributionType()))
 
 	//! [ESMF] Void Renderer.setTriangleBudgetDistributionType(Number)
-	ES_MFUNCTION_DECLARE(typeObject, E_Renderer, "setTriangleBudgetDistributionType", 1, 1, {
+	ES_MFUNCTION(typeObject, Renderer, "setTriangleBudgetDistributionType", 1, 1, {
 		switch(parameter[0].to<uint32_t>(runtime)) {
 			case MinSG::BudgetAnnotationState::DISTRIBUTE_EVEN:
-				(**self)->setTriangleBudgetDistributionType(MinSG::BudgetAnnotationState::DISTRIBUTE_EVEN);
+				thisObj->setTriangleBudgetDistributionType(MinSG::BudgetAnnotationState::DISTRIBUTE_EVEN);
 				break;
 			case MinSG::BudgetAnnotationState::DISTRIBUTE_PROJECTED_SIZE:
-				(**self)->setTriangleBudgetDistributionType(MinSG::BudgetAnnotationState::DISTRIBUTE_PROJECTED_SIZE);
+				thisObj->setTriangleBudgetDistributionType(MinSG::BudgetAnnotationState::DISTRIBUTE_PROJECTED_SIZE);
 				break;
 			case MinSG::BudgetAnnotationState::DISTRIBUTE_PROJECTED_SIZE_AND_PRIMITIVE_COUNT:
-				(**self)->setTriangleBudgetDistributionType(MinSG::BudgetAnnotationState::DISTRIBUTE_PROJECTED_SIZE_AND_PRIMITIVE_COUNT);
+				thisObj->setTriangleBudgetDistributionType(MinSG::BudgetAnnotationState::DISTRIBUTE_PROJECTED_SIZE_AND_PRIMITIVE_COUNT);
 				break;
 			case MinSG::BudgetAnnotationState::DISTRIBUTE_PROJECTED_SIZE_AND_PRIMITIVE_COUNT_ITERATIVE:
-				(**self)->setTriangleBudgetDistributionType(MinSG::BudgetAnnotationState::DISTRIBUTE_PROJECTED_SIZE_AND_PRIMITIVE_COUNT_ITERATIVE);
+				thisObj->setTriangleBudgetDistributionType(MinSG::BudgetAnnotationState::DISTRIBUTE_PROJECTED_SIZE_AND_PRIMITIVE_COUNT_ITERATIVE);
 				break;
 			default:
-				(**self)->setTriangleBudgetDistributionType(MinSG::BudgetAnnotationState::DISTRIBUTE_EVEN);
+				thisObj->setTriangleBudgetDistributionType(MinSG::BudgetAnnotationState::DISTRIBUTE_EVEN);
 				break;
 		}
-		return EScript::Void::get();
+		returnEScript::create(nullptr);
 	})
 }
 

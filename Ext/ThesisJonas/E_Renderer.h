@@ -49,6 +49,8 @@ class E_Renderer : public E_NodeRendererState { // TODO: inherit from E_BudgetAn
 }
 }
 
+ES_CONV_EOBJ_TO_OBJ(E_MinSG::ThesisJonas::E_Renderer,	MinSG::ThesisJonas::Renderer*,	**eObj)
+
 #endif /* E_MINSG_THESISJONAS_E_RENDERER_H_ */
 
 #endif /* MINSG_EXT_THESISJONAS */

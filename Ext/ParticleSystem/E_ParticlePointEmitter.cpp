@@ -15,11 +15,9 @@
 
 #include "E_ParticleSystemNode.h"
 
-#include <EScript/Utils/DeprecatedMacros.h>
 #include <EScript/EScript.h>
 #include "../../ELibMinSG.h"
 
-using namespace EScript;
 using namespace MinSG;
 
 namespace E_MinSG {
@@ -35,29 +33,22 @@ void E_ParticlePointEmitter::init(EScript::Namespace & lib) {
 	declareConstant(&lib,getClassName(),typeObject);
 
 	//! [ESMF] new MinSG.ParticlePointEmitter( particleSystem )	
-	ES_CTOR(typeObject,1,1,E_Behavior::create(
-					new ParticlePointEmitter(**EScript::assertType<E_ParticleSystemNode>(rt,parameter[0]))))
+	ES_CTOR(typeObject,1,1,E_Behavior::create(new ParticlePointEmitter(parameter[0].to<ParticleSystemNode*>(rt))))
 
 	//! [ESMF] Number ParticlePointEmitter.getMinOffset()	
-	ESMF_DECLARE(typeObject,E_ParticlePointEmitter,"getMinOffset",0,0,Number::create((**self)->getMinOffset()))
+	ES_MFUN(typeObject, const ParticlePointEmitter,"getMinOffset",0,0, thisObj->getMinOffset())
 
 	//! [ESMF] self ParticlePointEmitter.setMinOffset(Number)	
-	ESMF_DECLARE(typeObject,E_ParticlePointEmitter,"setMinOffset",1,1,((**self)->setMinOffset(parameter[0].toFloat()), self))
+	ES_MFUN(typeObject, ParticlePointEmitter,"setMinOffset",1,1,(thisObj->setMinOffset(parameter[0].toFloat()), thisEObj))
 
 	//! [ESMF] Number ParticlePointEmitter.getMaxOffset()	
-	ESMF_DECLARE(typeObject,E_ParticlePointEmitter,"getMaxOffset",0,0,Number::create((**self)->getMaxOffset()))
+	ES_MFUN(typeObject, const ParticlePointEmitter,"getMaxOffset",0,0, thisObj->getMaxOffset())
 
 	//! [ESMF] self ParticlePointEmitter.setMaxOffset(Number)	
-	ESMF_DECLARE(typeObject,E_ParticlePointEmitter,"setMaxOffset",1,1,((**self)->setMaxOffset(parameter[0].toFloat()), self))
+	ES_MFUN(typeObject, ParticlePointEmitter,"setMaxOffset",1,1,(thisObj->setMaxOffset(parameter[0].toFloat()), thisEObj))
 
 
 	addFactory<MinSG::ParticlePointEmitter, E_ParticlePointEmitter>();
-}
-
-E_ParticlePointEmitter::E_ParticlePointEmitter(ParticlePointEmitter * c,Type * type):E_ParticleEmitter(c,type?type:typeObject) {
-}
-
-E_ParticlePointEmitter::~E_ParticlePointEmitter() {
 }
 
 }

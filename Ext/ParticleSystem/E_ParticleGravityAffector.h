@@ -26,16 +26,15 @@ public:
 	static EScript::Type* typeObject;
 	static void init(EScript::Namespace & lib);
 
-	E_ParticleGravityAffector(MinSG::ParticleGravityAffector * c, EScript::Type * type=nullptr);
-	virtual ~E_ParticleGravityAffector();
+	E_ParticleGravityAffector(MinSG::ParticleGravityAffector * c, EScript::Type * type=nullptr):E_ParticleAffector(c,type?type:typeObject){}
+	virtual ~E_ParticleGravityAffector(){}
 
 	const MinSG::ParticleGravityAffector * operator*()const		{	return static_cast<const MinSG::ParticleGravityAffector*>(ref().get());	}
 	MinSG::ParticleGravityAffector * operator*()				{	return static_cast<MinSG::ParticleGravityAffector*>(ref().get());	}
-
 };
-
 }
 
-#endif /* E_PARTICLEGRAVITYAFFECTOR_H_ */
+ES_CONV_EOBJ_TO_OBJ(E_MinSG::E_ParticleGravityAffector,	MinSG::ParticleGravityAffector*,	**eObj)
 
+#endif /* E_PARTICLEGRAVITYAFFECTOR_H_ */
 #endif

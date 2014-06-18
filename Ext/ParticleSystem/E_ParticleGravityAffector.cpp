@@ -14,7 +14,6 @@
 #include "E_ParticleGravityAffector.h"
 #include "E_ParticleSystemNode.h"
 #include "../../ELibMinSG.h"
-#include <EScript/Utils/DeprecatedMacros.h>
 #include <E_Geometry/E_Vec3.h>
 #include <EScript/Basics.h>
 
@@ -36,22 +35,16 @@ void E_ParticleGravityAffector::init(EScript::Namespace & lib) {
 
 	//! [ESMF] new MinSG.ParticleGravityAffector( particleSystem )	
 	ES_CTOR(typeObject,1,1,E_Behavior::create(
-					new ParticleGravityAffector(**EScript::assertType<E_ParticleSystemNode>(rt,parameter[0]))))
+					new ParticleGravityAffector(parameter[0].to<ParticleSystemNode*>(rt))))
 
 	//! [ESMF] Vec3 MinSG.ParticleEmitter.getDirection()	
-	ESMF_DECLARE(typeObject,E_ParticleGravityAffector,"getGravity",0,0,EScript::create((**self)->getGravity()))
+	ES_MFUN(typeObject, const ParticleGravityAffector,"getGravity",0,0, EScript::create(thisObj->getGravity()))
 
 	//! [ESMF] self MinSG.ParticleEmitter.setDirection(Vec3)	
-	ESMF_DECLARE(typeObject,E_ParticleGravityAffector,"setGravity",1,1,((**self)->setGravity( EScript::assertType<E_Vec3>(runtime, parameter[0])->ref()), self))
+	ES_MFUN(typeObject, ParticleGravityAffector,"setGravity",1,1,(thisObj->setGravity( parameter[0].to<Geometry::Vec3>(rt) ), thisEObj))
 
 
 	addFactory<MinSG::ParticleGravityAffector, E_ParticleGravityAffector>();
-}
-
-E_ParticleGravityAffector::E_ParticleGravityAffector(ParticleGravityAffector * c,EScript::Type * type):E_ParticleAffector(c,type?type:typeObject) {
-}
-
-E_ParticleGravityAffector::~E_ParticleGravityAffector() {
 }
 
 }

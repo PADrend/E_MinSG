@@ -51,6 +51,8 @@ class E_GeometryNodeCollector : public E_NodeRendererState {
 }
 }
 
+ES_CONV_EOBJ_TO_OBJ(E_MinSG::SVS::E_GeometryNodeCollector,	MinSG::SVS::GeometryNodeCollector*,	**eObj)
+
 #endif /* E_MINSG_SVS_E_GEOMETRYNODECOLLECTOR_H */
 
 #endif /* MINSG_EXT_SVS */

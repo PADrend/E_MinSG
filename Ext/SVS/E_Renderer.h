@@ -47,6 +47,8 @@ class E_Renderer : public E_NodeRendererState {
 }
 }
 
+ES_CONV_EOBJ_TO_OBJ(E_MinSG::SVS::E_Renderer,	MinSG::SVS::Renderer*,	**eObj)
+
 #endif /* E_MINSG_SVS_E_RENDERER_H_ */
 
 #endif /* MINSG_EXT_SVS */

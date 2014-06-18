@@ -12,14 +12,11 @@
 #ifdef MINSG_EXT_PARTICLE
 
 #include "E_ParticleBoxEmitter.h"
-
 #include "E_ParticleSystemNode.h"
-
-#include <EScript/Utils/DeprecatedMacros.h>
-#include <EScript/EScript.h>
 #include "../../ELibMinSG.h"
 
 #include <E_Geometry/E_Box.h>
+#include <EScript/EScript.h>
 
 using namespace MinSG;
 
@@ -36,25 +33,18 @@ void E_ParticleBoxEmitter::init(EScript::Namespace & lib) {
 	declareConstant(&lib,getClassName(),typeObject);
 
 	//! [ESMF] new MinSG.ParticleBoxEmitter( particleSystem )	
-	ES_CTOR(typeObject,1,1,E_Behavior::create(
-					new ParticleBoxEmitter(**EScript::assertType<E_ParticleSystemNode>(rt,parameter[0]))))
+	ES_CTOR(typeObject,1,1,E_Behavior::create(new ParticleBoxEmitter( parameter[0].to<ParticleSystemNode*>(rt) )))
 
 	//!	[ESMF] Box MinSG.ParticleBoxEmitter.getDirection()
-	ESMF_DECLARE(typeObject,E_ParticleBoxEmitter,"getEmitBounds",0,0,EScript::create((**self)->getEmitBounds()))
+	ES_MFUN(typeObject, const ParticleBoxEmitter,"getEmitBounds",0,0,EScript::create(thisObj->getEmitBounds()))
 
 	//! [ESMF] self MinSG.ParticleBoxEmitter.setDirection(Box)	
-	ESMF_DECLARE(typeObject,E_ParticleBoxEmitter,"setEmitBounds",1,1,((**self)->setEmitBounds(
-				parameter[0].to<const Geometry::Box&>(runtime)), self))
+	ES_MFUN(typeObject, ParticleBoxEmitter,"setEmitBounds",1,1,(thisObj->setEmitBounds(parameter[0].to<const Geometry::Box&>(rt)), thisEObj))
 
 
 	addFactory<MinSG::ParticleBoxEmitter, E_ParticleBoxEmitter>();
 }
 
-E_ParticleBoxEmitter::E_ParticleBoxEmitter(ParticleBoxEmitter * c,EScript::Type * type):E_ParticleEmitter(c,type?type:typeObject) {
-}
-
-E_ParticleBoxEmitter::~E_ParticleBoxEmitter() {
-}
 
 }
 

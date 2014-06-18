@@ -28,16 +28,18 @@ public:
 	static EScript::Type * typeObject;
 	static void init(EScript::Namespace & lib);
 
-	virtual ~E_ParticleSystemNode();
+	virtual ~E_ParticleSystemNode(){}
 
 	const MinSG::ParticleSystemNode * operator*()const	{	return static_cast<const MinSG::ParticleSystemNode*>(ref().get());	}
 	MinSG::ParticleSystemNode * operator*()				{	return static_cast<MinSG::ParticleSystemNode*>(ref().get());	}
 
 protected:
-	E_ParticleSystemNode(MinSG::ParticleSystemNode * gNode, EScript::Type * type = nullptr);
+	E_ParticleSystemNode(MinSG::ParticleSystemNode * gNode, EScript::Type * type = nullptr) : E_Node(gNode, type ? type : typeObject) {}
 };
 
 }
+
+ES_CONV_EOBJ_TO_OBJ(E_MinSG::E_ParticleSystemNode,	MinSG::ParticleSystemNode*,	**eObj)
 
 #endif /* E_PARTICLESYSTEM_H_ */
 #endif

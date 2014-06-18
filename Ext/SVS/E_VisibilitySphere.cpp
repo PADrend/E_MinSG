@@ -16,9 +16,6 @@
 #include "../../Core/Nodes/E_CameraNodeOrtho.h"
 #include "../../Core/Nodes/E_Node.h"
 #include "../../Core/E_FrameContext.h"
-#include <EScript/Utils/DeprecatedMacros.h>
-#include <EScript/Basics.h>
-#include <EScript/StdObjects.h>
 #include <E_Geometry/E_Sphere.h>
 #include <E_Geometry/E_Vec3.h>
 #include <E_Util/E_Utils.h>
@@ -30,6 +27,10 @@
 #include <MinSG/Ext/SVS/VisibilitySphere.h>
 #include <Util/GenericAttribute.h>
 #include <Util/References.h>
+
+#include <EScript/Basics.h>
+#include <EScript/StdObjects.h>
+
 #include <sstream>
 #include <stdexcept>
 #include <string>
@@ -68,12 +69,12 @@ void E_VisibilitySphere::init(EScript::Namespace & lib) {
 	})
 
 	//! [ESMF] Sphere VisibilitySphere.getSphere()
-	ESMF_DECLARE(typeObject, const E_VisibilitySphere, "getSphere", 0, 0,
-				new E_Geometry::E_Sphere((**self).getSphere()))
+	ES_MFUN(typeObject, const VisibilitySphere, "getSphere", 0, 0,
+				new E_Geometry::E_Sphere(thisObj->getSphere()))
 
 	//! [ESMF] Array VisibilitySphere.getSamples()
-	ES_MFUNCTION_DECLARE(typeObject, const E_VisibilitySphere, "getSamples", 0, 0, {
-		const std::vector<SamplePoint> & samples = (**self).getSamples();
+	ES_MFUNCTION(typeObject, const VisibilitySphere, "getSamples", 0, 0, {
+		const std::vector<SamplePoint> & samples = thisObj->getSamples();
 		EScript::Array * array = EScript::Array::create();
 		array->reserve(samples.size());
 		for(std::vector<SamplePoint>::const_iterator it = samples.begin(); it != samples.end(); ++it) {
@@ -83,28 +84,28 @@ void E_VisibilitySphere::init(EScript::Namespace & lib) {
 	})
 
 	//! [ESMF] Sphere VisibilitySphere.getMemoryUsage()
-	ESMF_DECLARE(typeObject, const E_VisibilitySphere, "getMemoryUsage", 0, 0,
-				static_cast<double>((**self).getMemoryUsage()))
+	ES_MFUN(typeObject, const VisibilitySphere, "getMemoryUsage", 0, 0,
+				static_cast<double>(thisObj->getMemoryUsage()))
 
 	//! [ESMF] Node VisibilitySphere.getTriangulationMinSGNodes()
-	ESMF_DECLARE(typeObject, const E_VisibilitySphere, "getTriangulationMinSGNodes", 0, 0, 
-				EScript::create((**self).getTriangulationMinSGNodes()))
+	ES_MFUN(typeObject, const VisibilitySphere, "getTriangulationMinSGNodes", 0, 0, 
+				EScript::create(thisObj->getTriangulationMinSGNodes()))
 
 	//! [ESMF] self VisibilitySphere.evaluateAllSamples(FrameContext, Evaluator, CameraNodeOrtho, Node)
-	ES_MFUNCTION_DECLARE(typeObject, E_VisibilitySphere, "evaluateAllSamples", 4, 4, {
-		MinSG::FrameContext & frameContext = parameter[0].to<MinSG::FrameContext&>(runtime);
-		MinSG::Evaluators::Evaluator * evaluator = parameter[1].to<MinSG::Evaluators::Evaluator*>(runtime);
-		Util::Reference<MinSG::CameraNodeOrtho> camera = **EScript::assertType<E_CameraNodeOrtho>(runtime, parameter[2]);
-		Util::Reference<MinSG::Node> node = parameter[3].to<MinSG::Node*>(runtime);
-		(**self).evaluateAllSamples(frameContext, *evaluator, camera.get(), node.get());
-		return self;
+	ES_MFUNCTION(typeObject, VisibilitySphere, "evaluateAllSamples", 4, 4, {
+		MinSG::FrameContext & frameContext = parameter[0].to<MinSG::FrameContext&>(rt);
+		MinSG::Evaluators::Evaluator * evaluator = parameter[1].to<MinSG::Evaluators::Evaluator*>(rt);
+		Util::Reference<MinSG::CameraNodeOrtho> camera = parameter[2].to<MinSG::CameraNodeOrtho*>(rt);
+		Util::Reference<MinSG::Node> node = parameter[3].to<MinSG::Node*>(rt);
+		thisObj->evaluateAllSamples(frameContext, *evaluator, camera.get(), node.get());
+		return thisEObj;
 	})
 
 	//! [ESMF] VisibilityVector VisibilitySphere.queryValue(Vec3, Number)
-	ES_MFUNCTION_DECLARE(typeObject, const E_VisibilitySphere, "queryValue", 2, 2, {
-		const auto & query = parameter[0].to<const Geometry::Vec3 &>(runtime);
-		const auto interpolation = interpolationFromUInt(parameter[1].to<uint32_t>(runtime));
-		return new E_VisibilityVector((**self).queryValue(query, interpolation));
+	ES_MFUNCTION(typeObject, const VisibilitySphere, "queryValue", 2, 2, {
+		const auto & query = parameter[0].to<const Geometry::Vec3 &>(rt);
+		const auto interpolation = interpolationFromUInt(parameter[1].to<uint32_t>(rt));
+		return new E_VisibilityVector(thisObj->queryValue(query, interpolation));
 	})
 
 	//! @note The converter creates a copy of the object. Changes will not be visible "on the other side".

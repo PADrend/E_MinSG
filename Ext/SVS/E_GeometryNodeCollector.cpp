@@ -10,12 +10,12 @@
 
 #include "E_GeometryNodeCollector.h"
 #include "../../Core/Nodes/E_GeometryNode.h"
-#include <EScript/Utils/DeprecatedMacros.h>
-#include <EScript/Basics.h>
-#include <EScript/StdObjects.h>
 #include <MinSG/Ext/SVS/GeometryNodeCollector.h>
 #include <cstdint>
 #include <unordered_map>
+
+#include <EScript/Basics.h>
+#include <EScript/StdObjects.h>
 
 namespace E_MinSG {
 namespace SVS {
@@ -31,12 +31,14 @@ void E_GeometryNodeCollector::init(EScript::Namespace & lib) {
 	declareConstant(&lib, "GeometryNodeCollector", typeObject);
 	addFactory<MinSG::SVS::GeometryNodeCollector, E_GeometryNodeCollector>();
 
+	using namespace MinSG::SVS;
+	
 	//! [ESF] new MinSG.SVS.GeometryNodeCollector()
 	ES_CTOR(typeObject, 0, 0, EScript::create(new MinSG::SVS::GeometryNodeCollector()))
 
 	//! [ESMF] Array GeometryNodeCollector.getCollectedNodes()
-	ES_MFUNCTION_DECLARE(typeObject, E_GeometryNodeCollector, "getCollectedNodes", 0, 0, {
-		const auto & collectedNodes = (**self)->getCollectedNodes();
+	ES_MFUNCTION(typeObject, GeometryNodeCollector, "getCollectedNodes", 0, 0, {
+		const auto & collectedNodes = thisObj->getCollectedNodes();
 		auto array = EScript::Array::create();
 		for(const auto & node : collectedNodes) {
 			E_Node * eNode = EScript::create(node);

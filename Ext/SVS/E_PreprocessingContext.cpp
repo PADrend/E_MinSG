@@ -12,12 +12,14 @@
 #include "../../Core/Nodes/E_GroupNode.h"
 #include "../../Core/E_FrameContext.h"
 #include "../../SceneManagement/E_SceneManager.h"
-#include <EScript/Utils/DeprecatedMacros.h>
-#include <EScript/Basics.h>
-#include <EScript/StdObjects.h>
+
 #include <E_Geometry/E_Vec3.h>
 #include <MinSG/Ext/SVS/PreprocessingContext.h>
 #include <Util/References.h>
+
+#include <EScript/Basics.h>
+#include <EScript/StdObjects.h>
+
 #include <cstdint>
 #include <string>
 #include <utility>
@@ -35,12 +37,14 @@ void E_PreprocessingContext::init(EScript::Namespace & lib) {
 	EScript::Type * typeObject = E_PreprocessingContext::getTypeObject();
 	declareConstant(&lib, getClassName(), typeObject);
 
+	using namespace MinSG::SVS;
+	
 	//! [ESF] new SVS.PreprocessingContext(SceneManager, FrameContext, GroupNode, Array, Number, Bool, Bool)
 	ES_CONSTRUCTOR(typeObject, 7, 7, {
-		MinSG::SceneManagement::SceneManager & sceneManager = ***EScript::assertType<E_SceneManager>(rt, parameter[0]);
+		MinSG::SceneManagement::SceneManager & sceneManager = parameter[0].to<MinSG::SceneManagement::SceneManager&>(rt);
 		MinSG::FrameContext & frameContext = parameter[1].to<MinSG::FrameContext&>(rt);
 		MinSG::GroupNode * rootNode = parameter[2].to<MinSG::GroupNode*>(rt);
-		EScript::Array * array = EScript::assertType<EScript::Array>(rt, parameter[3]);
+		EScript::Array * array = parameter[3].to<EScript::Array*>(rt);
 		const uint32_t resolution = parameter[4].to<uint32_t>(rt);
 		const bool useExistingVisibilityResults = parameter[5].to<bool>(rt);
 		const bool computeTightInnerBoundingSpheres = parameter[6].to<bool>(rt);
@@ -58,16 +62,14 @@ void E_PreprocessingContext::init(EScript::Namespace & lib) {
 	})
 
 	//! [ESMF] Void PreprocessingContext.preprocessSingleNode()
-	ESMF_DECLARE(typeObject, E_PreprocessingContext, "preprocessSingleNode", 0, 0,
-				((**self).preprocessSingleNode(), EScript::create(nullptr)))
+	ES_MFUN(typeObject, PreprocessingContext, "preprocessSingleNode", 0, 0,
+				(thisObj->preprocessSingleNode(), EScript::create(nullptr)))
 
 	//! [ESMF] Bool PreprocessingContext.isFinished()
-	ESMF_DECLARE(typeObject, const E_PreprocessingContext, "isFinished", 0, 0,
-				EScript::Bool::create((**self).isFinished()))
+	ES_MFUN(typeObject, const PreprocessingContext, "isFinished", 0, 0,thisObj->isFinished())
 
 	//! [ESMF] Number PreprocessingContext.getNumRemainingNodes()
-	ESMF_DECLARE(typeObject, const E_PreprocessingContext, "getNumRemainingNodes", 0, 0,
-				EScript::Number::create((**self).getNumRemainingNodes()))
+	ES_MFUN(typeObject, const PreprocessingContext, "getNumRemainingNodes", 0, 0, static_cast<uint32_t>(thisObj->getNumRemainingNodes()))
 }
 
 E_PreprocessingContext::~E_PreprocessingContext() = default;

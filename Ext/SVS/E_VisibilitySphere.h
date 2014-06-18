@@ -42,6 +42,8 @@ class E_VisibilitySphere : public EScript::ExtReferenceObject<MinSG::SVS::Visibi
 }
 }
 
+ES_CONV_EOBJ_TO_OBJ(E_MinSG::SVS::E_VisibilitySphere,	MinSG::SVS::VisibilitySphere*,	&**eObj)
+
 #endif /* E_MINSG_SVS_E_VISIBILITYSPHERE_H_ */
 
 #endif /* MINSG_EXT_SVS */

@@ -10,13 +10,14 @@
 
 #include "E_SamplePoint.h"
 #include "../VisibilitySubdivision/E_VisibilityVector.h"
-#include <EScript/Utils/DeprecatedMacros.h>
-#include <EScript/Basics.h>
-#include <EScript/StdObjects.h>
 #include <E_Geometry/E_Vec3.h>
 #include <Geometry/Vec3.h>
 #include <MinSG/Ext/SVS/SamplePoint.h>
 #include <Util/References.h>
+
+#include <EScript/Basics.h>
+#include <EScript/StdObjects.h>
+
 #include <sstream>
 #include <string>
 
@@ -38,21 +39,21 @@ void E_SamplePoint::init(EScript::Namespace & lib) {
 	EScript::Type * typeObject = E_SamplePoint::getTypeObject();
 	declareConstant(&lib, getClassName(), typeObject);
 
+	using namespace MinSG::SVS;
+	
 	//! [ESF] new SamplePoint(Vec3)
 	ES_CTOR(typeObject, 1, 1,
 				new E_SamplePoint(parameter[0].to<const Geometry::Vec3 &>(rt)))
 
 	//! [ESMF] Vec3 SamplePoint.getPosition()
-	ESMF_DECLARE(typeObject, const E_SamplePoint, "getPosition", 0, 0,
-				 new E_Geometry::E_Vec3((**self).getPosition()))
+	ES_MFUN(typeObject, const SamplePoint, "getPosition", 0, 0,	EScript::create(thisObj->getPosition()))
 
 	//! [ESMF] VisibilityVector SamplePoint.getValue()
-	ESMF_DECLARE(typeObject, const E_SamplePoint, "getValue", 0, 0,
-				 new E_VisibilityVector((**self).getValue()))
+	ES_MFUN(typeObject, const SamplePoint, "getValue", 0, 0, new E_VisibilityVector(thisObj->getValue()))
 
 	//! [ESMF] self SamplePoint.setValue(VisibilityVector)
-	ESMF_DECLARE(typeObject, E_SamplePoint, "setValue", 1, 1,
-				((**self).setValue(**EScript::assertType<E_VisibilityVector>(runtime, parameter[0])), self))
+	ES_MFUN(typeObject, SamplePoint, "setValue", 1, 1,
+				(thisObj->setValue( parameter[0].to<const MinSG::VisibilitySubdivision::VisibilityVector&>(rt)), thisEObj))
 }
 
 E_SamplePoint::~E_SamplePoint() = default;
