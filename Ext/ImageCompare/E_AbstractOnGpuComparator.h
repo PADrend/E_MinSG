@@ -15,17 +15,7 @@
 #define E_ABSTRACTONGPUCOMPARATOR_H
 
 #include "E_AbstractImageComparator.h"
-
-namespace EScript {
-class Namespace;
-class Type;
-}
-
-namespace MinSG {
-namespace ImageCompare {
-class AbstractOnGpuComparator;
-}
-}
+#include <MinSG/Ext/ImageCompare/AbstractOnGpuComparator.h>
 
 namespace E_MinSG {
 
@@ -38,15 +28,18 @@ class E_AbstractOnGpuComparator : public E_AbstractImageComparator {
 		static EScript::Type * getTypeObject();
 		static void init(EScript::Namespace & lib);
 
-		MinSG::ImageCompare::AbstractOnGpuComparator * operator*();
+		const MinSG::ImageCompare::AbstractOnGpuComparator * operator*()const	{	return static_cast<const MinSG::ImageCompare::AbstractOnGpuComparator *>(ref().get());	}
+		MinSG::ImageCompare::AbstractOnGpuComparator * operator*()				{	return static_cast<MinSG::ImageCompare::AbstractOnGpuComparator *>(ref().get());	}
 
 	protected:
-		E_AbstractOnGpuComparator(MinSG::ImageCompare::AbstractOnGpuComparator * comparator, EScript::Type * type);
+		E_AbstractOnGpuComparator(MinSG::ImageCompare::AbstractOnGpuComparator * comparator, EScript::Type * type) : E_AbstractImageComparator(comparator, type){}
 	public:
-		virtual ~E_AbstractOnGpuComparator();
+		virtual ~E_AbstractOnGpuComparator(){}
 };
 
 }
+
+ES_CONV_EOBJ_TO_OBJ(E_MinSG::E_AbstractOnGpuComparator,	MinSG::ImageCompare::AbstractOnGpuComparator*,	**eObj)
 
 #endif /* E_ABSTRACTONGPUCOMPARATOR_H */
 

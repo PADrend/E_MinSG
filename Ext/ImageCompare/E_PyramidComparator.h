@@ -19,10 +19,6 @@
 
 #include "E_AbstractOnGpuComparator.h"
 
-namespace EScript {
-class Namespace;
-class Type;
-}
 namespace E_MinSG{
 
 /*!	EScript wrapper class for MinSG::ImageCompare::PyramidComparator.
@@ -31,16 +27,14 @@ namespace E_MinSG{
 			|
 			--------------> MinSG::ImageCompare::PyramidComparator		*/
 class E_PyramidComparator : public E_AbstractOnGpuComparator {
-
 		ES_PROVIDES_TYPE_NAME(PyramidComparator)
-
 	public:
-
 		static EScript::Type * getTypeObject();
 
 		static void init(EScript::Namespace & lib);
 
-		MinSG::ImageCompare::PyramidComparator * operator*();
+		const MinSG::ImageCompare::PyramidComparator * operator*()const		{	return static_cast<const MinSG::ImageCompare::PyramidComparator *>(ref().get());	}
+		MinSG::ImageCompare::PyramidComparator * operator*()				{	return static_cast<MinSG::ImageCompare::PyramidComparator *>(ref().get());	}
 
 		E_PyramidComparator(MinSG::ImageCompare::PyramidComparator * _obj) :
 				E_AbstractOnGpuComparator(_obj, E_PyramidComparator::getTypeObject()) {}
@@ -49,6 +43,8 @@ class E_PyramidComparator : public E_AbstractOnGpuComparator {
 
 };
 }
+
+ES_CONV_EOBJ_TO_OBJ(E_MinSG::E_PyramidComparator,	MinSG::ImageCompare::PyramidComparator*,	**eObj)
 
 #endif // _E_MinSG_E_PyramidComparator_H_
 #endif // MINSG_EXT_IMAGECOMPARE

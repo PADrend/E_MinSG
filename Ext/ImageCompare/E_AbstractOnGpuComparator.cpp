@@ -12,15 +12,15 @@
 #ifdef MINSG_EXT_IMAGECOMPARE
 
 #include "E_AbstractOnGpuComparator.h"
-#include <EScript/Utils/DeprecatedMacros.h>
-#include <EScript/Basics.h>
-#include <EScript/StdObjects.h>
 #include <MinSG/Ext/ImageCompare/AbstractOnGpuComparator.h>
 #include <MinSG/Ext/ImageCompare/SSIMComparator.h>
 #include <MinSG/Ext/ImageCompare/AverageComparator.h>
 #include <MinSG/Ext/ImageCompare/PyramidComparator.h>
 
 #include <E_Rendering/E_FBO.h>
+#include <E_Util/IO/E_FileLocator.h>
+#include <EScript/Basics.h>
+#include <EScript/StdObjects.h>
 
 namespace E_MinSG {
 
@@ -33,44 +33,40 @@ EScript::Type * E_AbstractOnGpuComparator::getTypeObject() {
 }
 
 void E_AbstractOnGpuComparator::init(EScript::Namespace & lib) {
+	using namespace MinSG::ImageCompare;
+	
 	EScript::Type * typeObject = getTypeObject();
 	declareConstant(&lib, getClassName(), getTypeObject());
 
 	//! [ESMF] Number AbstractOnGpuComparator.getFilterSize()
-	ESMF_DECLARE(typeObject, E_AbstractOnGpuComparator, "getFilterSize", 0, 0, EScript::Number::create((**self)->getFilterSize()));
+	ES_MFUN(typeObject, const AbstractOnGpuComparator, "getFilterSize", 0, 0, EScript::create(thisObj->getFilterSize()))
 
 	//! [ESMF] self AbstractOnGpuComparator.setFilterSize(Bool)
-	ESMF_DECLARE(typeObject, E_AbstractOnGpuComparator, "setFilterSize", 1, 1, ((**self)->setFilterSize(parameter[0].toInt()), self));
+	ES_MFUN(typeObject, AbstractOnGpuComparator, "setFilterSize", 1, 1, (thisObj->setFilterSize(parameter[0].toInt()), thisEObj))
 
 	//! [ESMF] self AbstractOnGpuComparator.setFBO(FBO)
-	ESMF_DECLARE(typeObject, E_AbstractOnGpuComparator, "setFBO", 1, 1,
-			((**self)->setFBO(parameter[0].to<Rendering::FBO*>(runtime)), self));
+	ES_MFUN(typeObject, AbstractOnGpuComparator, "setFBO", 1, 1,
+			(thisObj->setFBO(parameter[0].to<Rendering::FBO*>(rt)), thisEObj))
 
 	//! [ESMF] Number AbstractOnGpuComparator.getTextureDownloadSize()
-	ESMF_DECLARE(typeObject, E_AbstractOnGpuComparator, "getTextureDownloadSize", 0, 0, EScript::Number::create((**self)->getTextureDownloadSize()));
+	ES_MFUN(typeObject, AbstractOnGpuComparator, "getTextureDownloadSize", 0, 0, EScript::create(thisObj->getTextureDownloadSize()))
 
 	//! [ESMF] self AbstractOnGpuComparator.setTextureDownloadSize(sideLength)
-	ESMF_DECLARE(typeObject, E_AbstractOnGpuComparator, "setTextureDownloadSize", 1, 1,
-			((**self)->setTextureDownloadSize(parameter[0].toUInt()), self));
+	ES_MFUN(typeObject, AbstractOnGpuComparator, "setTextureDownloadSize", 1, 1,
+			(thisObj->setTextureDownloadSize(parameter[0].toUInt()), thisEObj))
 
-	ESMF_DECLARE(typeObject, E_AbstractOnGpuComparator, "setFilterType", 1, 1, ((**self)->setFilterType(static_cast<MinSG::ImageCompare::AbstractOnGpuComparator::FilterType>(parameter[0].toInt())), self))
+	ES_MFUN(typeObject, AbstractOnGpuComparator, "setFilterType", 1, 1, (thisObj->setFilterType(static_cast<MinSG::ImageCompare::AbstractOnGpuComparator::FilterType>(parameter[0].toInt())), thisEObj))
 
-	ESMF_DECLARE(typeObject, E_AbstractOnGpuComparator, "getFilterType", 0, 0, Number::create((**self)->getFilterType()))
+	ES_MFUN(typeObject, const AbstractOnGpuComparator, "getFilterType", 0, 0, EScript::create(static_cast<uint32_t>(thisObj->getFilterType())))
+	
+	
+	//! void AbstractOnGpuComparator.initShaderFileLocator(Util.FileLocator)
+	ES_FUN(typeObject,  "initShaderFileLocator", 1, 1, (AbstractOnGpuComparator::initShaderFileLocator(*parameter[0].to<Util::FileLocator*>(rt)),EScript::create(nullptr)))
 
-	declareConstant(typeObject, "GAUSS", Number::create(MinSG::ImageCompare::AbstractOnGpuComparator::GAUSS));
-	declareConstant(typeObject, "BOX", Number::create(MinSG::ImageCompare::AbstractOnGpuComparator::BOX));
+	declareConstant(typeObject, "GAUSS", EScript::create(static_cast<uint32_t>(MinSG::ImageCompare::AbstractOnGpuComparator::GAUSS)));
+	declareConstant(typeObject, "BOX", EScript::create(static_cast<uint32_t>(MinSG::ImageCompare::AbstractOnGpuComparator::BOX)));
 }
 
-E_AbstractOnGpuComparator::E_AbstractOnGpuComparator(MinSG::ImageCompare::AbstractOnGpuComparator * comparator, EScript::Type * type) :
-		E_AbstractImageComparator(comparator, type) {
-}
-
-E_AbstractOnGpuComparator::~E_AbstractOnGpuComparator() {
-}
-
-MinSG::ImageCompare::AbstractOnGpuComparator * E_AbstractOnGpuComparator::operator*() {
-	return static_cast<MinSG::ImageCompare::AbstractOnGpuComparator *>(E_AbstractImageComparator::ref().get());
-}
 
 }
 

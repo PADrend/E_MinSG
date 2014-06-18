@@ -14,7 +14,6 @@
 #include "E_PyramidComparator.h"
 #include "E_SSIMComparator.h"
 #include "E_AverageComparator.h"
-#include <EScript/Utils/DeprecatedMacros.h>
 #include <EScript/Basics.h>
 #include <EScript/StdObjects.h>
 
@@ -35,7 +34,7 @@ EScript::Type * E_PyramidComparator::getTypeObject() {
 
 //! (static) init members
 void E_PyramidComparator::init(EScript::Namespace & lib) {
-
+	using namespace MinSG::ImageCompare;
 	EScript::Type * typeObject = E_PyramidComparator::getTypeObject();
 
 	declareConstant(&lib, getClassName(), typeObject);
@@ -43,8 +42,8 @@ void E_PyramidComparator::init(EScript::Namespace & lib) {
 	//! [ESF] PyramidComparator new PyramidComparator()
 	ES_CTOR(typeObject, 0, 0, new E_PyramidComparator(new MinSG::ImageCompare::PyramidComparator))
 
-	ES_MFUNCTION_DECLARE(typeObject, E_PyramidComparator, "getInternalComparator", 0, 0, {
-			MinSG::ImageCompare::AbstractOnGpuComparator * comp = (**self)->getInternalComparator();
+	ES_MFUNCTION(typeObject, PyramidComparator, "getInternalComparator", 0, 0, {
+			MinSG::ImageCompare::AbstractOnGpuComparator * comp = thisObj->getInternalComparator();
 			MinSG::ImageCompare::SSIMComparator *ssim = dynamic_cast<MinSG::ImageCompare::SSIMComparator*>(comp);
 			if(ssim)
 				return new E_SSIMComparator(ssim);
@@ -57,18 +56,15 @@ void E_PyramidComparator::init(EScript::Namespace & lib) {
 	})
 
 	//! [ESMF] void PyramidComparator.setInternalComparator(AbstractOnGpuComparator)
-	ESMF_DECLARE(typeObject, E_PyramidComparator, "setInternalComparator", 1, 1,
-			( (**self)->setInternalComparator(**EScript::assertType<E_AbstractOnGpuComparator>(runtime, parameter[0])), EScript::create(nullptr)))
+	ES_MFUN(typeObject, PyramidComparator, "setInternalComparator", 1, 1,
+			( thisObj->setInternalComparator( parameter[0].to<AbstractOnGpuComparator*>(rt) ), EScript::create(nullptr)))
 
 	//! [ESMF] void PyramidComparator.setMinimalTestSize(Number sideLength)
-	ESMF_DECLARE(typeObject, E_PyramidComparator, "setMinimalTestSize", 1, 1, ( (**self)->setMinimalTestSize(parameter[0].toUInt()), EScript::create(nullptr)))
+	ES_MFUN(typeObject, PyramidComparator, "setMinimalTestSize", 1, 1, ( thisObj->setMinimalTestSize(parameter[0].toUInt()), EScript::create(nullptr)))
 
 	//! [ESMF] Number PyramidComparator.getMinimalTestSize()
-	ESMF_DECLARE(typeObject, E_PyramidComparator, "getMinimalTestSize", 0, 0, Number::create((**self)->getMinimalTestSize()))
+	ES_MFUN(typeObject, PyramidComparator, "getMinimalTestSize", 0, 0, thisObj->getMinimalTestSize())
 }
 
-MinSG::ImageCompare::PyramidComparator * E_PyramidComparator::operator*() {
-	return static_cast<MinSG::ImageCompare::PyramidComparator *>(E_AbstractImageComparator::ref().get());
-}
 }
 #endif // MINSG_EXT_IMAGECOMPARE

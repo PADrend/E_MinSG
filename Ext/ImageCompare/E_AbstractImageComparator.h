@@ -16,18 +16,13 @@
 
 #include <EScript/Objects/ReferenceObject.h>
 #include <string>
+#include <MinSG/Ext/ImageCompare/AbstractOnGpuComparator.h>
 
 #include <Util/References.h>
 
 namespace EScript {
 class Namespace;
 class Type;
-}
-
-namespace MinSG {
-namespace ImageCompare {
-class AbstractImageComparator;
-}
 }
 
 namespace E_MinSG {
@@ -50,6 +45,9 @@ class E_AbstractImageComparator : public EScript::ReferenceObject<Util::Referenc
 };
 
 }
+
+ES_CONV_EOBJ_TO_OBJ(E_MinSG::E_AbstractImageComparator,	MinSG::ImageCompare::AbstractImageComparator*,	(**eObj).get())
+
 
 #endif /* E_ABSTRACTIMAGECOMPARATOR_H */
 

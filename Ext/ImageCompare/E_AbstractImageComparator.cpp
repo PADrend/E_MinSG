@@ -12,17 +12,15 @@
 #ifdef MINSG_EXT_IMAGECOMPARE
 
 #include "E_AbstractImageComparator.h"
-#include <EScript/Utils/DeprecatedMacros.h>
-#include <EScript/Basics.h>
-#include <EScript/StdObjects.h>
-
-#include <MinSG/Ext/ImageCompare/AbstractImageComparator.h>
 #include <MinSG/Ext/ImageCompare/SimilarPixelCounter.h>
 #include <Util/References.h>
 #include <Rendering/Texture/Texture.h>
 
 #include <E_Rendering/E_RenderingContext.h>
 #include <E_Rendering/Texture/E_Texture.h>
+
+#include <EScript/Basics.h>
+#include <EScript/StdObjects.h>
 
 namespace E_MinSG {
 
@@ -35,19 +33,21 @@ EScript::Type * E_AbstractImageComparator::getTypeObject() {
 }
 
 void E_AbstractImageComparator::init(EScript::Namespace & lib) {
+	using namespace MinSG::ImageCompare;
+
 	declareConstant(&lib, getClassName(), getTypeObject());
 
 	//! [ESMF] [Number, void] ImageComparator.compare(RenderingContext, Texture inA, Texture inB, Texture out)
-	ES_MFUNCTION_DECLARE( getTypeObject(),E_AbstractImageComparator, "compare", 3, 4, {
-			Rendering::RenderingContext & context = parameter[0].to<Rendering::RenderingContext&>(runtime);
-			Util::Reference<Rendering::Texture> inA = parameter[1].to<Rendering::Texture*>(runtime);
-			Util::Reference<Rendering::Texture> inB = parameter[2].to<Rendering::Texture*>(runtime);
+	ES_MFUNCTION( getTypeObject(), AbstractImageComparator, "compare", 3, 4, {
+			Rendering::RenderingContext & context = parameter[0].to<Rendering::RenderingContext&>(rt);
+			Util::Reference<Rendering::Texture> inA = parameter[1].to<Rendering::Texture*>(rt);
+			Util::Reference<Rendering::Texture> inB = parameter[2].to<Rendering::Texture*>(rt);
 			Util::Reference<Rendering::Texture> out;
 			if(parameter.count() == 4)
-				out = parameter[3].to<Rendering::Texture*>(runtime);
+				out = parameter[3].to<Rendering::Texture*>(rt);
 			double quality = 0;
-			if((**self)->compare(context, inA.get(), inB.get(), quality, out.get()))
-				return Number::create(quality);
+			if(thisObj->compare(context, inA.get(), inB.get(), quality, out.get()))
+				return EScript::create(quality);
 			else
 				return EScript::create(nullptr); });
 
