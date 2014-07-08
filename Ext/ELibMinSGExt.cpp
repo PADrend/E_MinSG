@@ -1,7 +1,7 @@
 /*
 	This file is part of the E_MinSG library.
 	Copyright (C) 2007-2012 Benjamin Eikel <benjamin@eikel.org>
-	Copyright (C) 2007-2012 Claudius Jähn <claudius@uni-paderborn.de>
+	Copyright (C) 2007-2014 Claudius Jähn <claudius@uni-paderborn.de>
 	Copyright (C) 2007-2012 Ralf Petring <ralf@petring.net>
 
 	This library is subject to the terms of the Mozilla Public License, v. 2.0.
@@ -30,6 +30,7 @@
 // [ext:BlueSurfels]
 #ifdef MINSG_EXT_BLUE_SURFELS
 #include "BlueSurfels/E_SurfelGenerator.h"
+#include "BlueSurfels/E_SurfelRenderer.h"
 #endif // MINSG_EXT_BLUE_SURFELS
 
 // [ext:ColorCubes]
@@ -290,6 +291,7 @@ void init_ext(EScript::Namespace * /*globals*/,EScript::Namespace * lib) {
 	// [ext:BlueSurfels]
 	#ifdef MINSG_EXT_BLUE_SURFELS
 	BlueSurfels::E_SurfelGenerator::init(*lib);
+	BlueSurfels::E_SurfelRenderer::init(*lib);
 	#endif // MINSG_EXT_BLUE_SURFELS
 
 	// [ext:FancyStuff]
