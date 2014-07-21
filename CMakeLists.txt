@@ -3,7 +3,7 @@
 # Copyright (C) 2009-2013 Benjamin Eikel <benjamin@eikel.org>
 #
 # This library is subject to the terms of the Mozilla Public License, v. 2.0.
-# You should have received a copy of the MPL along with this library; see the 
+# You should have received a copy of the MPL along with this library; see the
 # file LICENSE. If not, you can obtain one at http://mozilla.org/MPL/2.0/.
 #
 cmake_minimum_required(VERSION 2.8.11)
@@ -23,7 +23,7 @@ add_library(E_MinSG
 	Core/Behaviours/E_Behavior.cpp
 	Core/Behaviours/E_BehaviorStatus.cpp
 	Core/Behaviours/E_BehaviourManager.cpp
-	Core/Behaviours/E_ScriptedBehavior.cpp	
+	Core/Behaviours/E_ScriptedBehavior.cpp
 	Core/E_FrameContext.cpp
 	Core/E_RenderParam.cpp
 	Core/E_Statistics.cpp
@@ -150,6 +150,7 @@ add_library(E_MinSG
 	Ext/SVS/E_VisibilitySphere.cpp
 	Ext/ThesisJonas/E_Preprocessor.cpp
 	Ext/ThesisJonas/E_Renderer.cpp
+	Ext/ThesisPeter/E_LightNodeManager.cpp
 	Ext/Tools/E_DebugCamera.cpp
 	Ext/Tools/E_StatChart.cpp
 	Ext/TreeBuilder/E_TreeBuilder.cpp
