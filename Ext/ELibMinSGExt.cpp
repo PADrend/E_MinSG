@@ -61,6 +61,11 @@
 #include "ThesisJonas/E_Preprocessor.h"
 #endif /* MINSG_EXT_THESISJONAS */
 
+// [ext:ThesisPeter]
+#ifdef MINSG_EXT_THESISPETER
+#include "ThesisPeter/E_LightNodeManager.h"
+#endif /* MINSG_EXT_THESISPETER */
+
 // [ext:Triangulation]
 #ifdef MINSG_EXT_TRIANGULATION
 #include "Triangulation/E_Delaunay2d.h"
@@ -304,14 +309,14 @@ void init_ext(EScript::Namespace * /*globals*/,EScript::Namespace * lib) {
 	E_ProjSizeFilterState::init(*lib);
 	E_RandomColorRenderer::init(*lib);
 	E_ShadowState::init(*lib);
-	
+
 	// -----------------------------------------------------------
 	// scripted states
 	E_ScriptedState::init(*lib);
 	E_ScriptedNodeRendererState::init(*lib);
 	{ // export/import scripted states
 		static const char *const STATE_TYPE_SCRIPTED_STATE = "scriptedState";
-	
+
 		using namespace MinSG::SceneManagement;
 
 		static std::unique_ptr<std::pair<EScript::Runtime&,EScript::ObjRef>> exportHandler;
@@ -319,14 +324,14 @@ void init_ext(EScript::Namespace * /*globals*/,EScript::Namespace * lib) {
 		const auto exporterFn = [&](ExporterContext &,NodeDescription & desc,State *state) {
 			desc.setString(Consts::ATTR_STATE_TYPE, STATE_TYPE_SCRIPTED_STATE);
 //			std::cout << "Exporting ScriptedState..."<<std::endl;
-			
+
 			if(exportHandler){
 				Util::Reference<State> refHolder(state);
 
 				EScript::ObjRef eDescription = E_Util::E_Utils::convertGenericAttributeToEScriptObject(&desc);
 				EScript::ObjRef result = EScript::callFunction(exportHandler->first,exportHandler->second.get(),
 											EScript::ParameterValues(EScript::create(state),eDescription));
-				
+
 				std::unique_ptr<Util::GenericAttribute> desc2(E_Util::E_Utils::convertEScriptObjectToGenericAttribute(eDescription));
 				if( dynamic_cast<Util::GenericAttributeMap*>(desc2.get()) )
 					desc = std::move( *dynamic_cast<Util::GenericAttributeMap*>(desc2.get()) );
@@ -336,7 +341,7 @@ void init_ext(EScript::Namespace * /*globals*/,EScript::Namespace * lib) {
 
 		ExporterTools::registerStateExporter(ScriptedState::getClassId(),exporterFn);
 		ExporterTools::registerStateExporter(ScriptedNodeRendererState::getClassId(),exporterFn);
-		
+
 		//! [ESMF] MinSG.setScriptedStateImporter( callback(state,Map stateDescription) )
 		ES_FUNCTION(lib,"setScriptedStateExporter",1,1,{
 			if(parameter[0].toBool())
@@ -353,12 +358,12 @@ void init_ext(EScript::Namespace * /*globals*/,EScript::Namespace * lib) {
 				return false;
 //			std::cout << "Importing ScriptedState..."<<std::endl;
 			Util::Reference<Node> refHolder(parent);
-			
+
 			EScript::ObjRef eDescription = E_Util::E_Utils::convertGenericAttributeToEScriptObject(&desc);
 			EScript::ObjRef result = EScript::callFunction(importHandler->first,importHandler->second.get(),
 												EScript::ParameterValues(EScript::create(parent),eDescription));
 			refHolder.detachAndDecrease();
-			return result.toBool();			
+			return result.toBool();
 		});
 		//! [ESMF] MinSG.setScriptedStateImporter( callback(node,Map stateDescription) )
 		ES_FUNCTION(lib,"setScriptedStateImporter",1,1,{
