@@ -33,16 +33,13 @@ namespace ThesisPeter {
 //!	EScript wrapper class for MinSG::ThesisPeter::LightNodeManager
 class E_LightNodeManager : public EScript::ReferenceObject<MinSG::ThesisPeter::LightNodeManager,
 														EScript::Policies::SameEObjects_ComparePolicy> {
-	ES_PROVIDES_TYPE_NAME(ThesisPeterLightNodeManager)
+	ES_PROVIDES_TYPE_NAME(LightNodeManager)
 	public:
 		static EScript::Type * getTypeObject();
 		static void init(EScript::Namespace & lib);
 
-		E_LightNodeManager(MinSG::ThesisPeter::LightNodeManager && context) : ReferenceObject_t(getTypeObject(), context) {}
+		E_LightNodeManager() : ReferenceObject_t(getTypeObject()) {}
 		virtual ~E_LightNodeManager();
-
-//		const MinSG::ThesisPeter::LightNodeManager* operator*()const	{	return static_cast<const MinSG::ThesisPeter::LightNodeManager*>(ref().get());	}
-//		MinSG::ThesisPeter::LightNodeManager* operator*()				{	return static_cast<MinSG::ThesisPeter::LightNodeManager*>(ref().get());	}
 };
 
 }

@@ -24,18 +24,24 @@ namespace ThesisPeter {
 //! (static)
 EScript::Type * E_LightNodeManager::getTypeObject() {
 	// E_LightNodeManager ---|> [Object]
-	static EScript::Type* typeObject = new EScript::Type(Object::getTypeObject());
-	return typeObject;
+//	static EScript::Type* typeObject = new EScript::Type(Object::getTypeObject());
+	static EScript::ERef<EScript::Type> typeObject = new EScript::Type(Object::getTypeObject());
+	return typeObject.get();
 }
 
 //! initMembers
 void E_LightNodeManager::init(EScript::Namespace & lib) {
 	EScript::Type * typeObject = getTypeObject();
+	initPrintableName(typeObject, getClassName());
 	declareConstant(&lib, getClassName(), typeObject);
+//	addFactory<MinSG::ThesisPeter::LightNodeManager, E_LightNodeManager>();
 
-	//! [ESMF] self LightNodeManager.addAttribute(Mesh);
-	ES_MFUN(typeObject, LightNodeManager, "addAttribute", 1, 1,
-				 (thisObj->addAttribute(parameter[0].to<Rendering::Mesh*>(rt)), thisEObj))
+	//! [ESMF] new MinSG.ThesisPeter.LightNodeManager()
+	ES_CTOR(typeObject, 0, 0, new E_LightNodeManager)
+
+	//! [ESMF] self LightNodeManager.createLightNodes(Node);
+	ES_MFUN(typeObject, LightNodeManager, "createLightNodes", 1, 1,
+				 (thisObj->createLightNodes(parameter[0].to<MinSG::Node*>(rt)), thisEObj))
 }
 
 //E_LightNodeManager::E_LightNodeManager(MinSG::ThesisPeter::LightNodeManager* renderer){
