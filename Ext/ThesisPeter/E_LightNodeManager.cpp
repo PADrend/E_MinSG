@@ -15,6 +15,8 @@
 
 #include <EScript/Basics.h>
 #include <EScript/StdObjects.h>
+#include <E_Rendering/E_RenderingContext.h>
+#include <E_MinSG/Core/E_FrameContext.h>
 
 using namespace MinSG::ThesisPeter;
 
@@ -39,9 +41,31 @@ void E_LightNodeManager::init(EScript::Namespace & lib) {
 	//! [ESMF] new MinSG.ThesisPeter.LightNodeManager()
 	ES_CTOR(typeObject, 0, 0, new E_LightNodeManager)
 
-	//! [ESMF] self LightNodeManager.createLightNodes(Node);
-	ES_MFUN(typeObject, LightNodeManager, "createLightNodes", 1, 1,
-				 (thisObj->createLightNodes(parameter[0].to<MinSG::Node*>(rt)), thisEObj))
+	//! [ESMF] self LightNodeManager.setSceneRootNode(Node);
+	ES_MFUN(typeObject, LightNodeManager, "setSceneRootNode", 1, 1,
+				 (thisObj->setSceneRootNode(parameter[0].to<MinSG::Node*>(rt)), thisEObj))
+
+	//! [ESMF] self LightNodeManager.setRenderingContext(RenderingContext);
+	ES_MFUN(typeObject, LightNodeManager, "setRenderingContext", 1, 1,
+				 (thisObj->setRenderingContext(parameter[0].to<Rendering::RenderingContext&>(rt)), thisEObj))
+
+    //! [ESMF] self LightNodeManager.setFrameContext(FrameContext);
+    ES_MFUN(typeObject, LightNodeManager, "setFrameContext", 1,1,
+				 (thisObj->setFrameContext(parameter[0].to<MinSG::FrameContext&>(rt)), thisEObj))
+
+	//! [ESMF] self LightNodeManager.createLightNodes();
+	ES_MFUN(typeObject, LightNodeManager, "createLightNodes", 0, 0,
+				 (thisObj->createLightNodes(), thisEObj))
+
+	//! [ESMF] self LightNodeManager.cleanUp();
+	ES_MFUN(typeObject, LightNodeManager, "cleanUp", 0, 0,
+				 (thisObj->cleanUp(), thisEObj))
+
+	//! [ESMF] self LightNodeManager.activateLighting(SceneRootNode, LightRootNode, RenderingContext, FrameContext);
+	ES_MFUN(typeObject, LightNodeManager, "activateLighting", 4, 4,
+				 (thisObj->activateLighting(parameter[0].to<MinSG::Node*>(rt), parameter[1].to<MinSG::Node*>(rt),
+												parameter[2].to<Rendering::RenderingContext&>(rt), parameter[3].to<MinSG::FrameContext&>(rt)), thisEObj))
+
 }
 
 //E_LightNodeManager::E_LightNodeManager(MinSG::ThesisPeter::LightNodeManager* renderer){
