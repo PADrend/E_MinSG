@@ -41,6 +41,10 @@ void E_LightNodeManager::init(EScript::Namespace & lib) {
 	//! [ESMF] new MinSG.ThesisPeter.LightNodeManager()
 	ES_CTOR(typeObject, 0, 0, new E_LightNodeManager)
 
+	//! [ESMF] self LightNodeManager.test(Node);
+	ES_MFUN(typeObject, LightNodeManager, "test", 2, 2,
+				 (thisObj->test(parameter[0].to<MinSG::FrameContext&>(rt), parameter[1].to<MinSG::Node*>(rt)), thisEObj))
+
 	//! [ESMF] self LightNodeManager.setSceneRootNode(Node);
 	ES_MFUN(typeObject, LightNodeManager, "setSceneRootNode", 1, 1,
 				 (thisObj->setSceneRootNode(parameter[0].to<MinSG::Node*>(rt)), thisEObj))
@@ -56,6 +60,10 @@ void E_LightNodeManager::init(EScript::Namespace & lib) {
 	//! [ESMF] self LightNodeManager.createLightNodes();
 	ES_MFUN(typeObject, LightNodeManager, "createLightNodes", 0, 0,
 				 (thisObj->createLightNodes(), thisEObj))
+
+	//! [ESMF] self LightNodeManager.cleanUpDebug();
+	ES_MFUN(typeObject, LightNodeManager, "cleanUpDebug", 0, 0,
+				 (thisObj->cleanUpDebug(), thisEObj))
 
 	//! [ESMF] self LightNodeManager.cleanUp();
 	ES_MFUN(typeObject, LightNodeManager, "cleanUp", 0, 0,
