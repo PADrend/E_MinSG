@@ -323,7 +323,7 @@ void init_ext(EScript::Namespace * /*globals*/,EScript::Namespace * lib) {
 
 		static std::unique_ptr<std::pair<EScript::Runtime&,EScript::ObjRef>> exportHandler;
 
-		const auto exporterFn = [&](ExporterContext &,NodeDescription & desc,State *state) {
+		const auto exporterFn = [&](ExporterContext &,DescriptionMap & desc,State *state) {
 			desc.setString(Consts::ATTR_STATE_TYPE, STATE_TYPE_SCRIPTED_STATE);
 //			std::cout << "Exporting ScriptedState..."<<std::endl;
 
@@ -355,7 +355,7 @@ void init_ext(EScript::Namespace * /*globals*/,EScript::Namespace * lib) {
 
 
 		static std::unique_ptr<std::pair<EScript::Runtime&,EScript::ObjRef>> importHandler;
-		ImporterTools::registerStateImporter([](ImportContext &,const std::string& stateType,const NodeDescription & desc,Node *parent) -> bool {
+		ImporterTools::registerStateImporter([](ImportContext &,const std::string& stateType,const DescriptionMap & desc,Node *parent) -> bool {
 			if(stateType != STATE_TYPE_SCRIPTED_STATE || !importHandler ) // check parent != nullptr is done by SceneManager
 				return false;
 //			std::cout << "Importing ScriptedState..."<<std::endl;
@@ -664,7 +664,7 @@ void init_ext(EScript::Namespace * /*globals*/,EScript::Namespace * lib) {
 		EScript::Array * array = EScript::Array::create();
 		for(const auto & cell : cells) {
 			E_Node * en = EScript::create(cell);
-			if (en != nullptr) {
+			if(en) {
 				array->pushBack(en);
 			}
 		}

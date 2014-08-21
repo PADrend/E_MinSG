@@ -9,6 +9,7 @@
 #ifdef MINSG_EXT_VOXEL_WORLD
 
 #include "E_VoxelWorld.h"
+#include "E_MaterialLib.h"
 #include "E_VoxelStorage.h"
 
 #include <E_Geometry/E_Box.h>
@@ -31,6 +32,7 @@ void init(EScript::Namespace & lib) {
 	declareConstant(&lib,"VoxelWorld",ns);
 
 	E_VoxelStorage::init(*ns);
+	E_MaterialLib::init(*ns);
 	
 	using namespace MinSG;
 	using namespace MinSG::VoxelWorld;

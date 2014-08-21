@@ -42,7 +42,7 @@ void E_Region::init(EScript::Namespace & lib) {
 	ES_CTOR(getTypeObject(), 1, 1,
 		EScript::create(new Region(parameter[0].to<const Geometry::Box&>(rt), nullptr)));
 
-	ES_MFUN(getTypeObject(), Region, "setColor", 1, 1, (thisObj->setColor(parameter[0].to<Util::Color4f>(rt)), EScript::create(nullptr)));
+	ES_MFUN(getTypeObject(), Region, "setColor", 1, 1, (thisObj->setColor(parameter[0].to<Util::Color4ub>(rt)), EScript::create(nullptr)));
 
 	ES_MFUN(getTypeObject(), const Region, "display", 2, 2, (thisObj->display( parameter[0].to<MinSG::FrameContext&>(rt),parameter[1].to<float>(rt) ), EScript::create(nullptr)));
 
