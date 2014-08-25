@@ -48,84 +48,67 @@ void E_LightNode::init(EScript::Namespace & lib) {
 	})
 
     //! [ESMF] self AbstractLightNode.switchOn(FrameContext)
-    ES_MFUN(typeObject,LightNode, "switchOn", 1,1,
-            (thisObj->switchOn(parameter[0].to<MinSG::FrameContext&>(rt)),thisEObj))
+    ES_MFUN(typeObject,LightNode, "switchOn", 1,1, 	(thisObj->switchOn(parameter[0].to<MinSG::FrameContext&>(rt)),thisEObj))
 
     //! [ESMF] self AbstractLightNode.switchOff(FrameContext)
-    ES_MFUN(typeObject,LightNode, "switchOff", 1,1,
-            (thisObj->switchOff(parameter[0].to<MinSG::FrameContext&>(rt)),thisEObj))
+    ES_MFUN(typeObject,LightNode, "switchOff", 1,1,	(thisObj->switchOff(parameter[0].to<MinSG::FrameContext&>(rt)),thisEObj))
 
 	//! [ESMF] Util.Color4f LightNode.getAmbientLightColor()
-	ES_MFUN(typeObject,const LightNode,"getAmbientLightColor",0,0,
-			EScript::create(thisObj->getAmbientLightColor()))
+	ES_MFUN(typeObject,const LightNode,"getAmbientLightColor",0,0,		EScript::create(thisObj->getAmbientLightColor()))
 
 	//! [ESMF] Number LightNode.getConstantAttenuation()
-	ES_MFUN(typeObject,const LightNode,"getConstantAttenuation", 0, 0,
-			thisObj->getConstantAttenuation())
+	ES_MFUN(typeObject,const LightNode,"getConstantAttenuation", 0, 0,	thisObj->getConstantAttenuation())
 
 	//!	[ESMF] Number MinSG.LightNode.getCutoff()
-	ES_MFUN(typeObject,const LightNode,"getCutoff", 0, 0,
-			thisObj->getCutoff())
+	ES_MFUN(typeObject,const LightNode,"getCutoff", 0, 0,				thisObj->getCutoff())
 
 	//! [ESMF] Util.Color4f LightNode.getDiffuseLightColor()
-	ES_MFUN(typeObject,const LightNode,"getDiffuseLightColor",0,0,
-			EScript::create(thisObj->getDiffuseLightColor()))
+	ES_MFUN(typeObject,const LightNode,"getDiffuseLightColor",0,0,		EScript::create(thisObj->getDiffuseLightColor()))
 
 	//!	[ESMF] Number MinSG.LightNode.getExponent()
-	ES_MFUN(typeObject,const LightNode,"getExponent", 0, 0,
-			thisObj->getExponent())
+	ES_MFUN(typeObject,const LightNode,"getExponent", 0, 0,				thisObj->getExponent())
 
 	//! [ESMF] Number AbstractLightNode.getLightType()
-	ES_MFUN(typeObject,const LightNode, "getLightType", 0, 0,
-			thisObj->getType())
+	ES_MFUN(typeObject,const LightNode, "getLightType", 0, 0,			thisObj->getType())
 
 	//! [ESMF] Number LightNode.getLinearAttenuation()
-	ES_MFUN(typeObject,const LightNode,"getLinearAttenuation", 0, 0,
-			thisObj->getLinearAttenuation())
+	ES_MFUN(typeObject,const LightNode,"getLinearAttenuation", 0, 0,	thisObj->getLinearAttenuation())
 
 	//! [ESMF] Number LightNode.getQuadraticAttenuation()
-	ES_MFUN(typeObject,const LightNode,"getQuadraticAttenuation", 0, 0,
-			thisObj->getQuadraticAttenuation())
+	ES_MFUN(typeObject,const LightNode,"getQuadraticAttenuation", 0, 0,	thisObj->getQuadraticAttenuation())
 
 	//! [ESMF] Util.Color4f LightNode.getSpecularLightColor()
-	ES_MFUN(typeObject,const LightNode,"getSpecularLightColor",0,0,
-			EScript::create(thisObj->getSpecularLightColor()))
+	ES_MFUN(typeObject,const LightNode,"getSpecularLightColor",0,0,		EScript::create(thisObj->getSpecularLightColor()))
+
+	//! [ESMF] Bool LightNode.isSwitchedOn()
+	ES_MFUN(typeObject,const LightNode,"isSwitchedOn",0,0,				thisObj->isSwitchedOn())
 
 	//! [ESMF] self LightNode.setAmbientLightColor(Util.Color4)
-	ES_MFUN(typeObject,LightNode,"setAmbientLightColor",1,1,
-			(thisObj->setAmbientLightColor(parameter[0].to<Util::Color4f>(rt)),thisEObj))
+	ES_MFUN(typeObject,LightNode,"setAmbientLightColor",1,1,			(thisObj->setAmbientLightColor(parameter[0].to<Util::Color4f>(rt)),thisEObj))
 
 	//! [ESMF] self LightNode.setConstantAttenuation(Number value)
-	ES_MFUN(typeObject,LightNode,"setConstantAttenuation", 1, 1,
-			(thisObj->setConstantAttenuation(parameter[0].toFloat()),thisEObj))
+	ES_MFUN(typeObject,LightNode,"setConstantAttenuation", 1, 1,		(thisObj->setConstantAttenuation(parameter[0].toFloat()),thisEObj))
 
 	//! [ESMF] self AbstractLightNode.setCutoff( float co )
-	ES_MFUN(typeObject,LightNode,"setCutoff",1,1,
-			(thisObj->setCutoff(parameter[0].toFloat()),thisEObj))
+	ES_MFUN(typeObject,LightNode,"setCutoff",1,1,						(thisObj->setCutoff(parameter[0].toFloat()),thisEObj))
 
 	//! [ESMF] self LightNode.setDiffuseLightColor(Util.Color4)
-	ES_MFUN(typeObject,LightNode,"setDiffuseLightColor",1,1,
-			(thisObj->setDiffuseLightColor(parameter[0].to<Util::Color4f>(rt)),thisEObj))
+	ES_MFUN(typeObject,LightNode,"setDiffuseLightColor",1,1,			(thisObj->setDiffuseLightColor(parameter[0].to<Util::Color4f>(rt)),thisEObj))
 
 	//! [ESMF] self AbstractLightNode.setExponent( float ex )
-	ES_MFUN(typeObject,LightNode,"setExponent",1,1,
-			(thisObj->setExponent(parameter[0].toFloat()),thisEObj))
+	ES_MFUN(typeObject,LightNode,"setExponent",1,1,						(thisObj->setExponent(parameter[0].toFloat()),thisEObj))
 
 	//! [ESMF] self AbstractLightNode.setLightType(Number type)
-	ES_MFUN(typeObject,LightNode, "setLightType", 1, 1,
-			(thisObj->setLightType(static_cast<Rendering::LightParameters::lightType_t>(parameter[0].toInt())),thisEObj))
+	ES_MFUN(typeObject,LightNode, "setLightType", 1, 1,					(thisObj->setLightType(static_cast<Rendering::LightParameters::lightType_t>(parameter[0].toInt())),thisEObj))
 
 	//! [ESMF] self LightNode.setLinearAttenuation(Number value)
-	ES_MFUN(typeObject,LightNode,"setLinearAttenuation", 1, 1,
-			(thisObj->setLinearAttenuation(parameter[0].toFloat()),thisEObj))
+	ES_MFUN(typeObject,LightNode,"setLinearAttenuation", 1, 1,			(thisObj->setLinearAttenuation(parameter[0].toFloat()),thisEObj))
 
 	//! [ESMF] self LightNode.setQuadraticAttenuation(Number value)
-	ES_MFUN(typeObject,LightNode,"setQuadraticAttenuation",1,1,
-			(thisObj->setQuadraticAttenuation(parameter[0].toFloat()),thisEObj))
+	ES_MFUN(typeObject,LightNode,"setQuadraticAttenuation",1,1,			(thisObj->setQuadraticAttenuation(parameter[0].toFloat()),thisEObj))
 
 	//! [ESMF] self LightNode.setSpecularLightColor(Util.Color4)
-	ES_MFUN(typeObject,LightNode,"setSpecularLightColor",1,1,
-			(thisObj->setSpecularLightColor(parameter[0].to<Util::Color4f>(rt)),thisEObj))
+	ES_MFUN(typeObject,LightNode,"setSpecularLightColor",1,1,			(thisObj->setSpecularLightColor(parameter[0].to<Util::Color4f>(rt)),thisEObj))
 
 }
 
