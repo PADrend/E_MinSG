@@ -275,10 +275,10 @@ void E_Node::init(EScript::Namespace & lib) {
 	ES_MFUN(typeObject,Node,"setSRT",1,1,(thisObj->setSRT(parameter[0].to<const Geometry::SRT&>(rt)),thisEObj))
 	
 	//! [ESMF] SRT MinSG.Node.getWorldSRT()
-	ES_MFUN(typeObject,const Node,"getWorldSRT",0,0,Transformations::getWorldSRT(thisObj))
+	ES_MFUN(typeObject,const Node,"getWorldSRT",0,0,Transformations::getWorldSRT(*thisObj))
 	
 	//! [ESMF] slef MinSG.Node.setWorldSRT(SRT)
-	ES_MFUN(typeObject,Node,"setWorldSRT",1,1,(thisObj->setSRT( Transformations::worldSRTToRelSRT(thisObj,parameter[0].to<const Geometry::SRT&>(rt))),thisEObj))
+	ES_MFUN(typeObject,Node,"setWorldSRT",1,1,(thisObj->setSRT( Transformations::worldSRTToRelSRT(*thisObj,parameter[0].to<const Geometry::SRT&>(rt))),thisEObj))
 
 
 	// -----------------------------------
@@ -474,85 +474,85 @@ void E_Node::init(EScript::Namespace & lib) {
 	
 	//! [ESMF] Vec3 MinSG.Node.localDirToWorldDir(Vec3)
 	ES_MFUN(typeObject,Node,"localDirToWorldDir",1,1,
-				Transformations::localDirToWorldDir(thisObj,parameter[0].to<Geometry::Vec3>(rt)))
+				Transformations::localDirToWorldDir(*thisObj,parameter[0].to<Geometry::Vec3>(rt)))
 	
 	//! [ESMF] Vec3 MinSG.Node.localDirToRelDir(Vec3)
 	ES_MFUN(typeObject,Node,"localDirToRelDir",1,1,
-				Transformations::localDirToRelDir(thisObj,parameter[0].to<Geometry::Vec3>(rt)))
+				Transformations::localDirToRelDir(*thisObj,parameter[0].to<Geometry::Vec3>(rt)))
 	
 	//! [ESMF] Vec3 MinSG.Node.localPosToWorldPos(Vec3)
 	ES_MFUN(typeObject,Node,"localPosToWorldPos",1,1,
-				Transformations::localPosToWorldPos(thisObj,parameter[0].to<Geometry::Vec3>(rt)))
+				Transformations::localPosToWorldPos(*thisObj,parameter[0].to<Geometry::Vec3>(rt)))
 	
 	//! [ESMF] Vec3 MinSG.Node.localPosToRelPos(Vec3)
 	ES_MFUN(typeObject,Node,"localPosToRelPos",1,1,
-				Transformations::localPosToRelPos(thisObj,parameter[0].to<Geometry::Vec3>(rt)))
+				Transformations::localPosToRelPos(*thisObj,parameter[0].to<Geometry::Vec3>(rt)))
 	
 	//! [ESMF] Vec3 MinSG.Node.relDirToWorldDir(Vec3)
 	ES_MFUN(typeObject,Node,"relDirToWorldDir",1,1,
-				Transformations::relDirToWorldDir(thisObj,parameter[0].to<Geometry::Vec3>(rt)))
+				Transformations::relDirToWorldDir(*thisObj,parameter[0].to<Geometry::Vec3>(rt)))
 	
 	//! [ESMF] Vec3 MinSG.Node.relDirToLocalDir(Vec3)
 	ES_MFUN(typeObject,Node,"relDirToLocalDir",1,1,
-				Transformations::relDirToLocalDir(thisObj,parameter[0].to<Geometry::Vec3>(rt)))
+				Transformations::relDirToLocalDir(*thisObj,parameter[0].to<Geometry::Vec3>(rt)))
 	
 	//! [ESMF] Vec3 MinSG.Node.relPosToWorldPos(Vec3)
 	ES_MFUN(typeObject,Node,"relPosToWorldPos",1,1,
-				Transformations::relPosToWorldPos(thisObj,parameter[0].to<Geometry::Vec3>(rt)))
+				Transformations::relPosToWorldPos(*thisObj,parameter[0].to<Geometry::Vec3>(rt)))
 	
 	//! [ESMF] Vec3 MinSG.Node.relPosToLocalPos(Vec3)
 	ES_MFUN(typeObject,Node,"relPosToLocalPos",1,1,
-				Transformations::relPosToLocalPos(thisObj,parameter[0].to<Geometry::Vec3>(rt)))
+				Transformations::relPosToLocalPos(*thisObj,parameter[0].to<Geometry::Vec3>(rt)))
 	
 	//! [ESMF] Vec3 MinSG.Node.worldDirToLocalDir(Vec3)
 	ES_MFUN(typeObject,Node,"worldDirToLocalDir",1,1,
-				Transformations::worldDirToLocalDir(thisObj,parameter[0].to<Geometry::Vec3>(rt)))
+				Transformations::worldDirToLocalDir(*thisObj,parameter[0].to<Geometry::Vec3>(rt)))
 	
 	//! [ESMF] Vec3 MinSG.Node.worldDirToRelDir(Vec3)
 	ES_MFUN(typeObject,Node,"worldDirToRelDir",1,1,
-				Transformations::worldDirToRelDir(thisObj,parameter[0].to<Geometry::Vec3>(rt)))
+				Transformations::worldDirToRelDir(*thisObj,parameter[0].to<Geometry::Vec3>(rt)))
 	
 	//! [ESMF] Vec3 MinSG.Node.worldPosToLocalPos(Vec3)
 	ES_MFUN(typeObject,Node,"worldPosToLocalPos",1,1,
-				Transformations::worldPosToLocalPos(thisObj,parameter[0].to<Geometry::Vec3>(rt)))
+				Transformations::worldPosToLocalPos(*thisObj,parameter[0].to<Geometry::Vec3>(rt)))
 	
 	//! [ESMF] Vec3 MinSG.Node.worldPosToRelPos(Vec3)
 	ES_MFUN(typeObject,Node,"worldPosToRelPos",1,1,
-				Transformations::worldPosToRelPos(thisObj,parameter[0].to<Geometry::Vec3>(rt)))
+				Transformations::worldPosToRelPos(*thisObj,parameter[0].to<Geometry::Vec3>(rt)))
 
 	//! [ESMF] self MinSG.Node.rotateAroundLocalAxis_deg(Number,Line3)
 	ES_MFUN(typeObject,Node,"rotateAroundLocalAxis_deg",2,2,
-				(Transformations::rotateAroundLocalAxis(thisObj,
+				(Transformations::rotateAroundLocalAxis(*thisObj,
 															Geometry::Angle::deg(parameter[0].toFloat()),
 															parameter[1].to<const Geometry::Line3&>(rt)),thisEObj))
 
 	//! [ESMF] self MinSG.Node.rotateAroundLocalAxis_rad(Number,Line3)
 	ES_MFUN(typeObject,Node,"rotateAroundLocalAxis_rad",2,2,
-				(Transformations::rotateAroundLocalAxis(thisObj,
+				(Transformations::rotateAroundLocalAxis(*thisObj,
 															Geometry::Angle::rad(parameter[0].toFloat()),
 															parameter[1].to<const Geometry::Line3&>(rt)),thisEObj))
 
 	//! [ESMF] self MinSG.Node.rotateAroundRelAxis_deg(Number,Line3)
 	ES_MFUN(typeObject,Node,"rotateAroundRelAxis_deg",2,2,
-				(Transformations::rotateAroundRelAxis(thisObj,
+				(Transformations::rotateAroundRelAxis(*thisObj,
 															Geometry::Angle::deg(parameter[0].toFloat()),
 															parameter[1].to<const Geometry::Line3&>(rt)),thisEObj))
 
 	//! [ESMF] self MinSG.Node.rotateAroundRelAxis_rad(Number,Line3)
 	ES_MFUN(typeObject,Node,"rotateAroundRelAxis_rad",2,2,
-				(Transformations::rotateAroundRelAxis(thisObj,
+				(Transformations::rotateAroundRelAxis(*thisObj,
 															Geometry::Angle::rad(parameter[0].toFloat()),
 															parameter[1].to<const Geometry::Line3&>(rt)),thisEObj))
 
 	//! [ESMF] self MinSG.Node.rotateAroundWorldAxis_deg(Number,Line3)
 	ES_MFUN(typeObject,Node,"rotateAroundWorldAxis_deg",2,2,
-				(Transformations::rotateAroundWorldAxis(thisObj,
+				(Transformations::rotateAroundWorldAxis(*thisObj,
 															Geometry::Angle::deg(parameter[0].toFloat()),
 															parameter[1].to<const Geometry::Line3&>(rt)),thisEObj))
 															
 	//! [ESMF] self MinSG.Node.rotateAroundWorldAxis_rad(Number,Line3)
 	ES_MFUN(typeObject,Node,"rotateAroundWorldAxis_rad",2,2,
-				(Transformations::rotateAroundWorldAxis(thisObj,
+				(Transformations::rotateAroundWorldAxis(*thisObj,
 															Geometry::Angle::rad(parameter[0].toFloat()),
 															parameter[1].to<const Geometry::Line3&>(rt)),thisEObj))
 
