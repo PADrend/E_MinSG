@@ -407,17 +407,8 @@ void E_Node::init(EScript::Namespace & lib) {
 	//! [ESMF] self MinSG.Node.setRelPosition(Vec3)
 	ES_MFUN(typeObject,Node,"setRelPosition",1,1,(thisObj->setRelOrigin(parameter[0].to<Geometry::Vec3>(rt)),thisEObj))
 
-	//! [ESMF] self MinSG.Node.lookAtAbs(Vec3 worldPosition)
-	ES_MFUNCTION(typeObject,Node,"lookAtAbs",1,1,{
-		thisObj->lookAtAbs(parameter[0].to<Geometry::Vec3>(rt));
-		return thisEObj;
-	})
-
 	//! [ESMF] self MinSG.Node.rotateToWorldDir(Vec3 dir)
-	ES_MFUNCTION(typeObject,Node,"rotateToWorldDir",1,1,{
-		thisObj->rotateToWorldDir(parameter[0].to<Geometry::Vec3>(rt));
-		return thisEObj;
-	})
+	ES_MFUN(typeObject,Node,"rotateToWorldDir",1,1, (Transformations::rotateToWorldDir(*thisObj,parameter[0].to<Geometry::Vec3>(rt)),thisEObj))
 
 	//! [ESMF] self MinSG.Node.setScale(number)
 	ES_MFUN(typeObject,Node,"setScale",1,1,(thisObj->setScale(parameter[0].toDouble()),thisEObj))
