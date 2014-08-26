@@ -386,13 +386,13 @@ void E_Node::init(EScript::Namespace & lib) {
 	//! [ESMF] Vec3 MinSG.Node.getWorldOrigin()
 	ES_MFUN(typeObject,const Node,"getWorldOrigin",0,0,thisObj->getWorldOrigin())
 
-	//! [ESMF] Vec3 MinSG.Node.getWorldPosition()
+	//! [ESMF] Vec3 MinSG.Node.getWorldPosition() \deprecated
 	ES_MFUN(typeObject,const Node,"getWorldPosition",0,0,thisObj->getWorldOrigin())
 
 	//! [ESMF] self MinSG.Node.setWorldOrigin(Vec3)
 	ES_MFUN(typeObject,Node,"setWorldOrigin",1,1,(thisObj->setWorldOrigin(parameter[0].to<Geometry::Vec3>(rt)),thisEObj))
 
-	//! [ESMF] self MinSG.Node.setWorldPosition(Vec3)
+	//! [ESMF] self MinSG.Node.setWorldPosition(Vec3) \deprecated
 	ES_MFUN(typeObject,Node,"setWorldPosition",1,1,(thisObj->setWorldOrigin(parameter[0].to<Geometry::Vec3>(rt)),thisEObj))
 
 	//! [ESMF] Vec3 MinSG.Node.getRelOrigin()
