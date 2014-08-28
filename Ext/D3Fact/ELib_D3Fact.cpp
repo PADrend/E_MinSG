@@ -132,7 +132,7 @@ static void updateNodePositions(Runtime & runtime, std::vector<uint8_t> & body, 
 		off += 13 * sizeof(float);
 
 		node->setAttribute(noSRTUpdates, Util::GenericAttribute::createBool(true));
-		node->setSRT(srt);
+		node->setRelTransformation(srt);
 		node->unsetAttribute(noSRTUpdates);
 	}
 }

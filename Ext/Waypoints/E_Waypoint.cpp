@@ -38,12 +38,6 @@ void E_Waypoint::init(EScript::Namespace & lib) {
 	//! [ESMF] PathNode Waypoint.getPath()
 	ES_MFUN(typeObject,Waypoint,"getPath",0,0,EScript::create(thisObj->getPath()))
 
-	//! [ESMF] SRT Waypoint.getSRT() 
-	ES_MFUN(typeObject,Waypoint,"getSRT",0,0,EScript::create(thisObj->getSRT()))
-
-	//! [ESMF] self Waypoint.setSRT(SRT) 
-	ES_MFUN(typeObject,Waypoint,"setSRT",1,1,(thisObj->setSRT( parameter[0].to<const Geometry::SRT&>(rt) ), thisEObj))
-
 	//! [ESMF] Number Waypoint.getTime() 
 	ES_MFUN(typeObject,Waypoint,"getTime",0,0,thisObj->getTime())
 
