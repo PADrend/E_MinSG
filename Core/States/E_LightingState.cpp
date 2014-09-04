@@ -40,12 +40,17 @@ void E_LightingState::init(EScript::Namespace & lib) {
 		return EScript::create(light);
 	})
 
+	//! [ESMF] MinSG.LightNode MinSG.LightingState.getEnableLight()
+	ES_MFUN(typeObject, const LightingState, "getEnableLight", 0, 0, thisObj->getEnableLight())
+
 	//! [ESMF] MinSG.LightNode MinSG.LightingState.getLight()
 	ES_MFUN(typeObject, const LightingState, "getLight", 0, 0,EScript::create(thisObj->getLight()))
 
+	//! [ESMF] thisEObj MinSG.LightingState.setEnableLight(Bool)
+	ES_MFUN(typeObject, LightingState, "setEnableLight", 1, 1, (thisObj->setEnableLight( parameter[0].toBool()),thisEObj))
+			
 	//! [ESMF] thisEObj MinSG.LightingState.setLight(MinSG.LightNode)
-	ES_MFUN(typeObject, LightingState, "setLight", 1, 1,(
-					thisObj->setLight((**EScript::assertType<E_LightNode>(rt, parameter[0]))),thisEObj))
+	ES_MFUN(typeObject, LightingState, "setLight", 1, 1, (thisObj->setLight( parameter[0].to<LightNode*>(rt)),thisEObj))
 }
 
 
