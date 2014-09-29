@@ -29,8 +29,7 @@
 
 // [ext:BlueSurfels]
 #ifdef MINSG_EXT_BLUE_SURFELS
-#include "BlueSurfels/E_SurfelGenerator.h"
-#include "BlueSurfels/E_SurfelRenderer.h"
+#include "BlueSurfels/E_LibBlueSurfels.h"
 #endif // MINSG_EXT_BLUE_SURFELS
 
 // [ext:ColorCubes]
@@ -290,8 +289,7 @@ void init_ext(EScript::Namespace * /*globals*/,EScript::Namespace * lib) {
 
 	// [ext:BlueSurfels]
 	#ifdef MINSG_EXT_BLUE_SURFELS
-	BlueSurfels::E_SurfelGenerator::init(*lib);
-	BlueSurfels::E_SurfelRenderer::init(*lib);
+	BlueSurfels::init(*lib);
 	#endif // MINSG_EXT_BLUE_SURFELS
 
 	// [ext:FancyStuff]

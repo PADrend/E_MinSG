@@ -58,6 +58,7 @@ add_library(E_MinSG
 	Ext/Behaviours/E_SoundReceivingBehaviour.cpp
 	Ext/Behaviours/E_SimplePhysics2.cpp
 	Ext/Behaviours/E_TimedBehaviourDecorator.cpp
+	Ext/BlueSurfels/E_LibBlueSurfels.cpp
 	Ext/BlueSurfels/E_SurfelGenerator.cpp
 	Ext/BlueSurfels/E_SurfelRenderer.cpp
 	Ext/ColorCubes/E_ColorCube.cpp
