@@ -29,11 +29,9 @@ EScript::Type * E_SurfelGenerator::getTypeObject() {
 
 //! (static) init members 
 void E_SurfelGenerator::init(EScript::Namespace & lib) {
-	EScript::Namespace * nsBlueSurfels = new EScript::Namespace;
-	declareConstant(&lib,"BlueSurfels",nsBlueSurfels);
-	
+
 	EScript::Type * typeObject = E_SurfelGenerator::getTypeObject();
-	declareConstant(nsBlueSurfels,getClassName(),typeObject);
+	declareConstant(&lib,getClassName(),typeObject);
 
 	using namespace MinSG::BlueSurfels;
 	
