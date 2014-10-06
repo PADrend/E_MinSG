@@ -26,8 +26,14 @@ void BlueSurfels::init(EScript::Namespace & lib) {
 	BlueSurfels::E_SurfelGenerator::init(*nsBlueSurfels);
 	BlueSurfels::E_SurfelRenderer::init(lib); // namespace MinSG
 
-	ES_FUN(nsBlueSurfels,"getProgressiveMinimalVertexDistances",1,1,
-			EScript::Array::create(MinSG::BlueSurfels::getProgressiveMinimalVertexDistances(*parameter[0].to<Rendering::Mesh*>(rt))))
+	//! [Number*] MinSG.BlueSurfels.getProgressiveMinimalMinimalVertexDistances(Rendering.Mesh)
+	ES_FUN(nsBlueSurfels,"getProgressiveMinimalMinimalVertexDistances",1,1,
+			EScript::Array::create(MinSG::BlueSurfels::getProgressiveMinimalMinimalVertexDistances(*parameter[0].to<Rendering::Mesh*>(rt))))
+
+	//! [Number*] MinSG.BlueSurfels.getMinimalVertexDistances(Rendering.Mesh,int)
+	ES_FUN(nsBlueSurfels,"getMinimalVertexDistances",2,2,
+			EScript::Array::create(MinSG::BlueSurfels::getMinimalVertexDistances(*parameter[0].to<Rendering::Mesh*>(rt),parameter[1].to<uint32_t>(rt))))
+
 
 }
 
