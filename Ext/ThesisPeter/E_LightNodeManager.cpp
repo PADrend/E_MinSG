@@ -95,6 +95,10 @@ void E_LightNodeManager::init(EScript::Namespace & lib) {
 	ES_MFUN(typeObject, LightNodeManager, "addDynamicObject", 1, 1,
 				 (thisObj->addDynamicObject(parameter[0].to<MinSG::Node*>(rt)), thisEObj))
 
+	//! [ESMF] self LightNodeManager.addDynamicLight(Node);
+	ES_MFUN(typeObject, LightNodeManager, "addDynamicLight", 1, 1,
+				 (thisObj->addDynamicLight(parameter[0].to<MinSG::Node*>(rt)), thisEObj))
+
 }
 
 //E_LightNodeManager::E_LightNodeManager(MinSG::ThesisPeter::LightNodeManager* renderer){
