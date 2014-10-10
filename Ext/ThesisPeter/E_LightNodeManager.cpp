@@ -69,10 +69,31 @@ void E_LightNodeManager::init(EScript::Namespace & lib) {
 	ES_MFUN(typeObject, LightNodeManager, "cleanUp", 0, 0,
 				 (thisObj->cleanUp(), thisEObj))
 
-	//! [ESMF] self LightNodeManager.activateLighting(SceneRootNode, LightRootNode, RenderingContext, FrameContext);
-	ES_MFUN(typeObject, LightNodeManager, "activateLighting", 4, 4,
+	//! [ESMF] self LightNodeManager.activateLighting(SceneRootNode, LightRootNode, RenderingContext, FrameContext, CameraNode);
+	ES_MFUN(typeObject, LightNodeManager, "activateLighting", 5, 5,
 				 (thisObj->activateLighting(parameter[0].to<MinSG::Node*>(rt), parameter[1].to<MinSG::Node*>(rt),
-												parameter[2].to<Rendering::RenderingContext&>(rt), parameter[3].to<MinSG::FrameContext&>(rt)), thisEObj))
+												parameter[2].to<Rendering::RenderingContext&>(rt), parameter[3].to<MinSG::FrameContext&>(rt),
+												parameter[4].to<MinSG::Node*>(rt)), thisEObj))
+
+	//! [ESMF] self LightNodeManager.setShowEdges(showEdges);
+	ES_MFUN(typeObject, LightNodeManager, "setShowEdges", 1, 1,
+				 (thisObj->setShowEdges(parameter[0].to<bool>(rt)), thisEObj))
+
+	//! [ESMF] self LightNodeManager.setShowOctree(showOctree);
+	ES_MFUN(typeObject, LightNodeManager, "setShowOctree", 1, 1,
+				 (thisObj->setShowOctree(parameter[0].to<bool>(rt)), thisEObj))
+
+	//! [ESMF] self LightNodeManager.onRender();
+	ES_MFUN(typeObject, LightNodeManager, "onRender", 0, 0,
+				 (thisObj->onRender(), thisEObj))
+
+	//! [ESMF] self LightNodeManager.startTesting();
+	ES_MFUN(typeObject, LightNodeManager, "startTesting", 0, 0,
+				 (thisObj->startTesting(), thisEObj))
+
+	//! [ESMF] self LightNodeManager.addDynamicObject(Node);
+	ES_MFUN(typeObject, LightNodeManager, "addDynamicObject", 1, 1,
+				 (thisObj->addDynamicObject(parameter[0].to<MinSG::Node*>(rt)), thisEObj))
 
 }
 
