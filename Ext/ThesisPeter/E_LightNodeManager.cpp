@@ -91,6 +91,14 @@ void E_LightNodeManager::init(EScript::Namespace & lib) {
 	ES_MFUN(typeObject, LightNodeManager, "startTesting", 0, 0,
 				 (thisObj->startTesting(), thisEObj))
 
+	//! [ESMF] self LightNodeManager.stopTesting();
+	ES_MFUN(typeObject, LightNodeManager, "stopTesting", 0, 0,
+				 (thisObj->stopTesting(), thisEObj))
+
+	//! [ESMF] self LightNodeManager.resumeTesting();
+	ES_MFUN(typeObject, LightNodeManager, "resumeTesting", 0, 0,
+				 (thisObj->resumeTesting(), thisEObj))
+
 	//! [ESMF] self LightNodeManager.addDynamicObject(Node);
 	ES_MFUN(typeObject, LightNodeManager, "addDynamicObject", 1, 1,
 				 (thisObj->addDynamicObject(parameter[0].to<MinSG::Node*>(rt)), thisEObj))
