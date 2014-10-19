@@ -44,8 +44,7 @@
 #include "Core/States/E_TextureState.h"
 #include "Core/States/E_TransparencyRenderer.h"
 
-#include "SceneManagement/E_ImportContext.h"
-#include "SceneManagement/E_SceneManager.h"
+#include "SceneManagement/E_SceneManagement.h"
 #include "Helper/E_GraphVizOutput.h"
 #include "Helper/E_StdNodeVisitors.h"
 
@@ -118,8 +117,7 @@ void init(EScript::Namespace * globals) {
 	E_TransparencyRenderer::init(*lib);
 	// ----------
 	// ---- SceneManagement
-	E_SceneManager::init(*lib);
-	E_ImportContext::init(*lib);
+	E_SceneManagement::init(*lib);
 
 	// ----------
 	// ---- Helper

@@ -177,6 +177,7 @@ add_library(E_MinSG
 	Helper/E_StdNodeVisitors.cpp
 	SceneManagement/E_ImportContext.cpp
 	SceneManagement/E_SceneManager.cpp
+	SceneManagement/E_SceneManagement.cpp
 )
 
 # Dependency to EScript
