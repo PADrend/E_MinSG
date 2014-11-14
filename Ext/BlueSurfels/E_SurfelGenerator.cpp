@@ -63,9 +63,6 @@ void E_SurfelGenerator::init(EScript::Namespace & lib) {
 			m->setValue( EScript::create(entry.first), EScript::create(entry.second) );
 		return m;
 	})
-		
-	//! [ESMF] Number SurfelGenerator.getReusalRate()
-	ES_MFUN(typeObject,const SurfelGenerator,"getReusalRate",0,0,			thisObj->getReusalRate())
 
 	//! [ESMF] Number SurfelGenerator.getMaxAbsSurfels()
 	ES_MFUN(typeObject,const SurfelGenerator,"getMaxAbsSurfels",0,0,		thisObj->getMaxAbsSurfels())
@@ -73,9 +70,6 @@ void E_SurfelGenerator::init(EScript::Namespace & lib) {
 	//! [ESMF] self SurfelGenerator.setMaxAbsSurfels(Number)
 	ES_MFUN(typeObject,SurfelGenerator,"setMaxAbsSurfels",1,1,				(thisObj->setMaxAbsSurfels(parameter[0].toUInt()),thisEObj))
 				
-	//! [ESMF] self SurfelGenerator.setReusalRate(Number)
-	ES_MFUN(typeObject,SurfelGenerator,"setReusalRate",1,1,					(thisObj->setReusalRate(parameter[0].toFloat()),thisEObj))
-
 	//! [ESMF] self SurfelGenerator.setBenchmarkingEnabled(Bool)
 	ES_MFUN(typeObject,SurfelGenerator,"setBenchmarkingEnabled",1,1,		(thisObj->setBenchmarkingEnabled(parameter[0].toBool()),thisEObj))
 
