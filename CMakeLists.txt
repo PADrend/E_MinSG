@@ -106,6 +106,7 @@ add_library(E_MinSG
 	Ext/Nodes/E_FakeInstanceNode.cpp
 	Ext/Nodes/E_GenericMetaNode.cpp
 	Ext/OcclusionCulling/E_CHCppRenderer.cpp
+	Ext/OcclusionCulling/E_CHCRenderer.cpp
 	Ext/OcclusionCulling/E_HOMRenderer.cpp
 	Ext/OcclusionCulling/E_NaiveOccRenderer.cpp
 	Ext/OcclusionCulling/E_OccludeeRenderer.cpp
