@@ -107,6 +107,10 @@ void E_LightNodeManager::init(EScript::Namespace & lib) {
 	ES_MFUN(typeObject, LightNodeManager, "addDynamicLight", 1, 1,
 				 (thisObj->addDynamicLight(parameter[0].to<MinSG::Node*>(rt)), thisEObj))
 
+	//! [ESMF] self LightNodeManager.setLightStrengthFactor(Node);
+	ES_MFUN(typeObject, LightNodeManager, "setLightStrengthFactor", 1, 1,
+				 (thisObj->setLightStrengthFactor(parameter[0].to<float>(rt)), thisEObj))
+
 }
 
 //E_LightNodeManager::E_LightNodeManager(MinSG::ThesisPeter::LightNodeManager* renderer){
