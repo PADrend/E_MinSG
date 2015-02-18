@@ -46,9 +46,6 @@ void E_PhysicWorld::init(EScript::Namespace & lib) {
 	declareConstant(ns,"SHAPE_TYPE_CONVEX_HULL",EScript::create(PhysicWorld::SHAPE_TYPE_CONVEX_HULL));
 	declareConstant(ns,"SHAPE_TYPE_STATIC_TRIANGLE_MESH",EScript::create(PhysicWorld::SHAPE_TYPE_STATIC_TRIANGLE_MESH));
 
-	//! [ESF] Bool MinSG.Physics.hasPhysicsProperties(Node)
-//	ES_FUN(ns, "hasPhysicsProperties", 1, 1,	(PhysicWorld::hasPhysicsProperties(parameter[0].to<MinSG::Node*>(rt))))
-
 	// ---------------------------
 
 	//!	[ESMF] PhysicWorld MinSG.Physics.createBulletWorld()
@@ -70,26 +67,8 @@ void E_PhysicWorld::init(EScript::Namespace & lib) {
 	//! [ESMF] thisEObj PhysicWorld.createGroundPlane(Geometry::Plane)
 	ES_MFUN(typeObject, PhysicWorld, "createGroundPlane", 1, 1,		(thisObj->createGroundPlane(parameter[0].to<const Geometry::Plane&>(rt)),thisEObj))
 
-//	//! [ESMF] String PhysicWorld.getConstraintPivot(Node)
-//	ES_MFUN(typeObject, PhysicWorld, "getConstraintPivot", 1, 1,	(thisObj->getConstraintPivot(parameter[0].to<MinSG::Node*>(rt))))
-//
-//	//! [ESMF] Number PhysicWorld.getFriction(Node)
-//	ES_MFUN(typeObject, PhysicWorld, "getFriction", 1, 1,			(thisObj->getFriction(parameter[0].to<MinSG::Node*>(rt))))
-//
 	//! [ESMF] Geometry.Vec3 PhysicWorld.getGravity()
 	ES_MFUN(typeObject, PhysicWorld, "getGravity", 0, 0,			EScript::create((thisObj->getGravity())))
-//
-//	//! [ESMF] Number PhysicWorld.getLocalSurfaceVelocity(Node)
-//	ES_MFUN(typeObject, PhysicWorld, "getLocalSurfaceVelocity", 1, 1,	(thisObj->getLocalSurfaceVelocity(parameter[0].to<MinSG::Node*>(rt))))
-//
-//	//! [ESMF] Number PhysicWorld.getMass(Node)
-//	ES_MFUN(typeObject, PhysicWorld, "getMass", 1, 1,				(thisObj->getMass(parameter[0].to<MinSG::Node*>(rt))))
-//
-//	//! [ESMF] Number PhysicWorld.getRollingFriction(Node)
-//	ES_MFUN(typeObject, PhysicWorld, "getRollingFriction", 1, 1,	(thisObj->getRollingFriction(parameter[0].to<MinSG::Node*>(rt))))
-//
-//	//! [ESMF] Number PhysicWorld.getShapeDescription(Node)
-//	ES_MFUN(typeObject, PhysicWorld, "getShapeDescription", 1, 1,	(E_Util::E_Utils::convertGenericAttributeToEScriptObject((thisObj->getShapeDescription(parameter[0].to<MinSG::Node*>(rt))))))
 
 	 //! [ESMF] thisEObj PhysicWorld.initNodeObserver(Node)
 	ES_MFUN(typeObject, PhysicWorld, "initNodeObserver", 1, 1,		(thisObj->initNodeObserver(parameter[0].to<MinSG::Node*>(rt)),thisEObj))
@@ -111,9 +90,6 @@ void E_PhysicWorld::init(EScript::Namespace & lib) {
 
    //! [ESMF] thisEObj PhysicWorld.stepSimulation(float)
 	ES_MFUN(typeObject, PhysicWorld, "stepSimulation", 1, 1,		(thisObj->stepSimulation(parameter[0].toFloat()),thisEObj))
-
-	//! [ESMF] thisEObj PhysicWorld.updateConstraintPivot(Node, string)
-	ES_MFUN(typeObject, PhysicWorld, "updateConstraintPivot", 2, 2,(thisObj->updateConstraintPivot(parameter[0].to<MinSG::Node*>(rt), parameter[1].toString()),thisEObj))
 
 	//! [ESMF] thisEObj PhysicWorld.updateFriction(Node, float)
 	ES_MFUN(typeObject, PhysicWorld, "updateFriction", 2, 2,		(thisObj->updateFriction(parameter[0].to<MinSG::Node*>(rt), parameter[1].toFloat() ),thisEObj))
