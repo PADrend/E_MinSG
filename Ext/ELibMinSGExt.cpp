@@ -132,7 +132,9 @@
 
 // [ext:OcclusionCulling]
 #include "OcclusionCulling/E_CHCppRenderer.h"
+#include "OcclusionCulling/E_CHCRenderer.h"
 #include "OcclusionCulling/E_HOMRenderer.h"
+#include "OcclusionCulling/E_NaiveOccRenderer.h"
 #include "OcclusionCulling/E_OccludeeRenderer.h"
 #include "OcclusionCulling/E_OccRenderer.h"
 
@@ -426,7 +428,9 @@ void init_ext(EScript::Namespace * /*globals*/,EScript::Namespace * lib) {
 
 	// [ext:OcclusionCulling]
 	E_CHCppRenderer::init(*lib);
+	E_CHCRenderer::init(*lib);
 	E_HOMRenderer::init(*lib);
+	E_NaiveOccRenderer::init(*lib);
 	E_OccludeeRenderer::init(*lib);
 	E_OccRenderer::init(*lib);
 

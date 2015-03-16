@@ -60,6 +60,7 @@ add_library(E_MinSG
 	Ext/Behaviours/E_TimedBehaviourDecorator.cpp
 	Ext/BlueSurfels/E_LibBlueSurfels.cpp
 	Ext/BlueSurfels/E_SurfelGenerator.cpp
+	Ext/BlueSurfels/E_StreamedSurfelGenerator.cpp
 	Ext/BlueSurfels/E_SurfelRenderer.cpp
 	Ext/ColorCubes/E_ColorCube.cpp
 	Ext/ColorCubes/E_ColorCubeRenderer.cpp
@@ -105,7 +106,9 @@ add_library(E_MinSG
 	Ext/Nodes/E_FakeInstanceNode.cpp
 	Ext/Nodes/E_GenericMetaNode.cpp
 	Ext/OcclusionCulling/E_CHCppRenderer.cpp
+	Ext/OcclusionCulling/E_CHCRenderer.cpp
 	Ext/OcclusionCulling/E_HOMRenderer.cpp
+	Ext/OcclusionCulling/E_NaiveOccRenderer.cpp
 	Ext/OcclusionCulling/E_OccludeeRenderer.cpp
 	Ext/OcclusionCulling/E_OccRenderer.cpp
 	Ext/OutOfCore/E_OutOfCore.cpp
@@ -178,6 +181,7 @@ add_library(E_MinSG
 	Helper/E_StdNodeVisitors.cpp
 	SceneManagement/E_ImportContext.cpp
 	SceneManagement/E_SceneManager.cpp
+	SceneManagement/E_SceneManagement.cpp
 )
 
 # Dependency to EScript

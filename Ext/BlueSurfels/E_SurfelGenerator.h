@@ -1,6 +1,6 @@
 /*
 	This file is part of the MinSG library extension BlueSurfels.
-	Copyright (C) 2012-2013 Claudius Jähn <claudius@uni-paderborn.de>
+	Copyright (C) 2012-2013 Claudius Jï¿½hn <claudius@uni-paderborn.de>
 	Copyright (C) 2012 Ralf Petring <ralf@petring.net>
 	
 	This library is subject to the terms of the Mozilla Public License, v. 2.0.
