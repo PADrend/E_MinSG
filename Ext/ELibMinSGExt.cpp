@@ -501,7 +501,6 @@ void init_ext(EScript::Namespace * /*globals*/,EScript::Namespace * lib) {
 		EScript::Namespace * ns = new EScript::Namespace();
 		declareConstant(lib, "ThesisPeter", ns);
 		ThesisPeter::E_LightNodeManager::init(*ns);
-//		ThesisPeter::E_LightNodeManager::init(*lib);
 	}
 #endif /* MINSG_EXT_THESISPETER */
 

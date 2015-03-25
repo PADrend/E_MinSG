@@ -16,17 +16,6 @@
 #include <EScript/Objects/ReferenceObject.h>
 #include <Util/References.h>
 
-//namespace EScript {
-//	class Namespace;
-//	class Runtime;
-//	class Type;
-//}
-//namespace MinSG {
-//namespace ThesisPeter {
-//	class LightNodeManager;
-//}
-//}
-
 namespace E_MinSG {
 namespace ThesisPeter {
 

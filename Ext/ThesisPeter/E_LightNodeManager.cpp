@@ -113,10 +113,6 @@ void E_LightNodeManager::init(EScript::Namespace & lib) {
 
 }
 
-//E_LightNodeManager::E_LightNodeManager(MinSG::ThesisPeter::LightNodeManager* renderer){
-//
-//}
-
 E_LightNodeManager::~E_LightNodeManager() {
 
 }
