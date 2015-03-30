@@ -1,7 +1,7 @@
 /*
 	This file is part of the E_MinSG library extension Physics.
 	Copyright (C) 2013 Benjamin Eikel <benjamin@eikel.org>
-	Copyright (C) 2013 Claudius Jähn <claudius@uni-paderborn.de>
+	Copyright (C) 2013,2015 Claudius Jähn <claudius@uni-paderborn.de>
 	Copyright (C) 2013 Mouns Almarrani
 
 	This library is subject to the terms of the Mozilla Public License, v. 2.0.
@@ -12,17 +12,43 @@
 
 #include "E_PhysicWorld.h"
 #include "../../Core/Nodes/E_Node.h"
+#include <E_Geometry/E_Box.h>
 #include <E_Geometry/E_Plane.h>
 #include <E_Geometry/E_Vec3.h>
 #include <MinSG/Ext/Physics/PhysicWorld.h>
+#include <MinSG/Ext/Physics/CollisionShape.h>
 #include <E_Rendering/E_RenderingContext.h>
 #include <Util/References.h>
 #include <E_Util/E_Utils.h>
+
+
+namespace E_MinSG {
+namespace Physics{
+class E_CollisionShape : public EScript::ReferenceObject<Util::Reference<MinSG::Physics::CollisionShape>> {
+		ES_PROVIDES_TYPE_NAME(CollisionShape)
+	public:
+		static EScript::Type * getTypeObject() {
+			// E_CollisionShape ---|> Object
+			static EScript::ERef<EScript::Type> typeObject = new EScript::Type(EScript::Object::getTypeObject());
+			return typeObject.get();
+		}
+        template<typename...args> explicit E_CollisionShape(args&&... params) :
+			ReferenceObject_t(E_CollisionShape::getTypeObject(),std::forward<args>(params)...) {}
+
+		virtual ~E_CollisionShape() {}
+};
+}
+}
+ES_CONV_EOBJ_TO_OBJ(E_MinSG::Physics::E_CollisionShape,   					MinSG::Physics::CollisionShape*,		(**eObj).get())
+ES_CONV_OBJ_TO_EOBJ(MinSG::Physics::CollisionShape*,      					E_MinSG::Physics::E_CollisionShape,	obj ? new E_MinSG::Physics::E_CollisionShape(obj) : nullptr)
+ES_CONV_OBJ_TO_EOBJ(Util::Reference<MinSG::Physics::CollisionShape>,      	E_MinSG::Physics::E_CollisionShape,	obj ? new E_MinSG::Physics::E_CollisionShape(obj) : nullptr)
+
 #include <EScript/Basics.h>
 #include <EScript/StdObjects.h>
 
 namespace E_MinSG {
 namespace Physics{
+
 	//! (static)
 EScript::Type * E_PhysicWorld::getTypeObject() {
 	// E_PhysicWorld ---|> Object
@@ -38,22 +64,18 @@ void E_PhysicWorld::init(EScript::Namespace & lib) {
 	EScript::Type * typeObject = E_PhysicWorld::getTypeObject();
 	declareConstant(ns,getClassName(),typeObject);
 
-	using namespace MinSG::Physics;
+	declareConstant(ns,E_CollisionShape::getClassName(),E_CollisionShape::getTypeObject());
 
-	declareConstant(ns,"SHAPE_TYPE",EScript::create(PhysicWorld::SHAPE_TYPE.toString()));
-	declareConstant(ns,"SHAPE_TYPE_BOX",EScript::create(PhysicWorld::SHAPE_TYPE_BOX));
-	declareConstant(ns,"SHAPE_TYPE_SPHERE",EScript::create(PhysicWorld::SHAPE_TYPE_SPHERE));
-	declareConstant(ns,"SHAPE_TYPE_CONVEX_HULL",EScript::create(PhysicWorld::SHAPE_TYPE_CONVEX_HULL));
-	declareConstant(ns,"SHAPE_TYPE_STATIC_TRIANGLE_MESH",EScript::create(PhysicWorld::SHAPE_TYPE_STATIC_TRIANGLE_MESH));
+	using namespace MinSG::Physics;
 
 	// ---------------------------
 
 	//!	[ESMF] PhysicWorld MinSG.Physics.createBulletWorld()
 	ES_FUN(ns,"createBulletWorld",0,0,								EScript::create(PhysicWorld::createBulletWorld()))
 
-	//! [ESMF] thisEObj PhysicWorld.addNodeToPhyiscWorld(Node)
+	//! [ESMF] thisEObj PhysicWorld.addNodeToPhyiscWorld(Node, CollisionShaoe)
 	ES_MFUN(typeObject, PhysicWorld, "addNodeToPhyiscWorld", 2, 2,	(thisObj->addNodeToPhyiscWorld(parameter[0].to<MinSG::Node*>(rt),
-                                                                            dynamic_cast< Util::GenericAttributeMap*>( E_Util::E_Utils::convertEScriptObjectToGenericAttribute( parameter[1].to<EScript::Map*>(rt) ))),thisEObj))
+																		parameter[1].to<MinSG::Physics::CollisionShape*>(rt)),thisEObj))
 
     //! [ESMF] thisEObj PhysicWorld.applyHingeConstraint(Node, Node, Geometry::Vec3, Geometry::Vec3)
 	ES_MFUN(typeObject, PhysicWorld, "applyHingeConstraint", 4, 4, (thisObj->applyHingeConstraint(parameter[0].to<MinSG::Node*>(rt), parameter[1].to<MinSG::Node*>(rt), parameter[2].to<Geometry::Vec3>(rt), parameter[3].to<Geometry::Vec3>(rt)),thisEObj))
@@ -66,6 +88,9 @@ void E_PhysicWorld::init(EScript::Namespace & lib) {
 
 	//! [ESMF] thisEObj PhysicWorld.createGroundPlane(Geometry::Plane)
 	ES_MFUN(typeObject, PhysicWorld, "createGroundPlane", 1, 1,		(thisObj->createGroundPlane(parameter[0].to<const Geometry::Plane&>(rt)),thisEObj))
+
+	//! [ESMF] CollisionShape PhysicWorld.createShape_AABB(Geometry::Box)
+	ES_MFUN(typeObject, PhysicWorld, "createShape_AABB", 1, 1,		thisObj->createShape_AABB(parameter[0].to<const Geometry::Box&>(rt)))
 
 	//! [ESMF] Geometry.Vec3 PhysicWorld.getGravity()
 	ES_MFUN(typeObject, PhysicWorld, "getGravity", 0, 0,			EScript::create((thisObj->getGravity())))
@@ -103,11 +128,9 @@ void E_PhysicWorld::init(EScript::Namespace & lib) {
 	//! [ESMF] thisEObj PhysicWorld.updateRollingFriction(Node, float)
 	ES_MFUN(typeObject, PhysicWorld, "updateRollingFriction", 2, 2,	(thisObj->updateRollingFriction(parameter[0].to<MinSG::Node*>(rt), parameter[1].toFloat() ),thisEObj))
 
-	//! [ESMF] thisEObj PhysicWorld.updateShape(Node, Map)
+	//! [ESMF] thisEObj PhysicWorld.updateShape(Node, CollisionShape)
 	ES_MFUN(typeObject, PhysicWorld, "updateShape", 2, 2,			(thisObj->updateShape(parameter[0].to<MinSG::Node*>(rt),
-								  dynamic_cast< Util::GenericAttributeMap*>( E_Util::E_Utils::convertEScriptObjectToGenericAttribute( parameter[1].to<EScript::Map*>(rt) ))),thisEObj))
-
-
+								  parameter[1].to<MinSG::Physics::CollisionShape*>(rt)) ,thisEObj))
 
 }
 
