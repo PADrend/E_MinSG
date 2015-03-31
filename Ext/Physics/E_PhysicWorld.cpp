@@ -14,6 +14,8 @@
 #include "../../Core/Nodes/E_Node.h"
 #include <E_Geometry/E_Box.h>
 #include <E_Geometry/E_Plane.h>
+#include <E_Geometry/E_Sphere.h>
+#include <E_Geometry/E_SRT.h>
 #include <E_Geometry/E_Vec3.h>
 #include <MinSG/Ext/Physics/PhysicWorld.h>
 #include <MinSG/Ext/Physics/CollisionShape.h>
@@ -90,6 +92,22 @@ void E_PhysicWorld::init(EScript::Namespace & lib) {
 
 	//! [ESMF] CollisionShape PhysicWorld.createShape_AABB(Geometry::Box)
 	ES_MFUN(typeObject, PhysicWorld, "createShape_AABB", 1, 1,		thisObj->createShape_AABB(parameter[0].to<const Geometry::Box&>(rt)))
+
+	typedef std::vector<std::pair<Util::Reference<CollisionShape>,Geometry::SRT>> shapeArr_t;
+	//! [ESMF] CollisionShape PhysicWorld.createShape_Composed( [ [Shape,SRT] ])
+	ES_MFUNCTION(typeObject, PhysicWorld, "createShape_Composed", 1, 1,{
+		shapeArr_t shapes;
+		for(auto& entry : *parameter[0].to<EScript::Array*>(rt) ){
+			EScript::Array& entryArr = *entry.to<EScript::Array*>(rt);
+			shapes.emplace_back( std::make_pair(
+						entryArr.at(0).to<MinSG::Physics::CollisionShape*>(rt),
+						entryArr.at(1).to<Geometry::SRT>(rt)));
+		}
+		return EScript::create(thisObj->createShape_Composed(shapes));
+	})
+
+	//! [ESMF] CollisionShape PhysicWorld.createShape_Sphere(Geometry::Sphere)
+	ES_MFUN(typeObject, PhysicWorld, "createShape_Sphere", 1, 1,	thisObj->createShape_Sphere(parameter[0].to<const Geometry::Sphere&>(rt)))
 
 	//! [ESMF] Geometry.Vec3 PhysicWorld.getGravity()
 	ES_MFUN(typeObject, PhysicWorld, "getGravity", 0, 0,			EScript::create((thisObj->getGravity())))
