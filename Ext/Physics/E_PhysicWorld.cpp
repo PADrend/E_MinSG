@@ -115,20 +115,20 @@ void E_PhysicWorld::init(EScript::Namespace & lib) {
    //! [ESMF] thisEObj PhysicWorld.stepSimulation(float)
 	ES_MFUN(typeObject, PhysicWorld, "stepSimulation", 1, 1,		(thisObj->stepSimulation(parameter[0].toFloat()),thisEObj))
 
-	//! [ESMF] thisEObj PhysicWorld.updateFriction(Node, float)
-	ES_MFUN(typeObject, PhysicWorld, "updateFriction", 2, 2,		(thisObj->updateFriction(parameter[0].to<MinSG::Node*>(rt), parameter[1].toFloat() ),thisEObj))
+	//! [ESMF] thisEObj PhysicWorld.setFriction(Node, float)
+	ES_MFUN(typeObject, PhysicWorld, "setFriction", 2, 2,			(thisObj->setFriction(*parameter[0].to<MinSG::Node*>(rt), parameter[1].toFloat() ),thisEObj))
 
 	//! [ESMF] thisEObj PhysicWorld.updateLocalSurfaceVelocity(Node, Vec3)
 	ES_MFUN(typeObject, PhysicWorld, "updateLocalSurfaceVelocity", 2, 2,(thisObj->updateLocalSurfaceVelocity(parameter[0].to<MinSG::Node*>(rt), parameter[1].to<Geometry::Vec3>(rt)),thisEObj))
 
-	//! [ESMF] thisEObj PhysicWorld.updateMass(Node, float)
-	ES_MFUN(typeObject, PhysicWorld, "updateMass", 2, 2,			(thisObj->updateMass(parameter[0].to<MinSG::Node*>(rt), parameter[1].toFloat() ),thisEObj))
+	//! [ESMF] thisEObj PhysicWorld.setMass(Node, float)
+	ES_MFUN(typeObject, PhysicWorld, "setMass", 2, 2,				(thisObj->setMass(*parameter[0].to<MinSG::Node*>(rt), parameter[1].toFloat() ),thisEObj))
 
-	//! [ESMF] thisEObj PhysicWorld.updateRollingFriction(Node, float)
-	ES_MFUN(typeObject, PhysicWorld, "updateRollingFriction", 2, 2,	(thisObj->updateRollingFriction(parameter[0].to<MinSG::Node*>(rt), parameter[1].toFloat() ),thisEObj))
+	//! [ESMF] thisEObj PhysicWorld.setRollingFriction(Node, float)
+	ES_MFUN(typeObject, PhysicWorld, "setRollingFriction", 2, 2,	(thisObj->setRollingFriction(*parameter[0].to<MinSG::Node*>(rt), parameter[1].toFloat() ),thisEObj))
 
-	//! [ESMF] thisEObj PhysicWorld.updateShape(Node, CollisionShape)
-	ES_MFUN(typeObject, PhysicWorld, "updateShape", 2, 2,			(thisObj->updateShape(parameter[0].to<MinSG::Node*>(rt),
+	//! [ESMF] thisEObj PhysicWorld.setShape(Node, CollisionShape)
+	ES_MFUN(typeObject, PhysicWorld, "setShape", 2, 2,				(thisObj->setShape(*parameter[0].to<MinSG::Node*>(rt),
 								  parameter[1].to<MinSG::Physics::CollisionShape*>(rt)) ,thisEObj))
 
 }
