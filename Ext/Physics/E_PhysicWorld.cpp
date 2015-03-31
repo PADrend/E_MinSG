@@ -1,7 +1,7 @@
 /*
 	This file is part of the E_MinSG library extension Physics.
 	Copyright (C) 2013 Benjamin Eikel <benjamin@eikel.org>
-	Copyright (C) 2013,2015 Claudius Jähn <claudius@uni-paderborn.de>
+	Copyright (C) 2013-2015 Claudius Jähn <claudius@uni-paderborn.de>
 	Copyright (C) 2013 Mouns Almarrani
 
 	This library is subject to the terms of the Mozilla Public License, v. 2.0.
@@ -34,7 +34,7 @@ class E_CollisionShape : public EScript::ReferenceObject<Util::Reference<MinSG::
 			static EScript::ERef<EScript::Type> typeObject = new EScript::Type(EScript::Object::getTypeObject());
 			return typeObject.get();
 		}
-        template<typename...args> explicit E_CollisionShape(args&&... params) :
+		template<typename...args> explicit E_CollisionShape(args&&... params) :
 			ReferenceObject_t(E_CollisionShape::getTypeObject(),std::forward<args>(params)...) {}
 
 		virtual ~E_CollisionShape() {}
@@ -78,7 +78,7 @@ void E_PhysicWorld::init(EScript::Namespace & lib) {
 	//! [ESMF] thisEObj PhysicWorld.applyProperties(Node)
 	ES_MFUN(typeObject, PhysicWorld, "applyProperties", 1, 1,	(thisObj->applyProperties(*parameter[0].to<MinSG::Node*>(rt)),thisEObj))
 
-    //! [ESMF] thisEObj PhysicWorld.applyHingeConstraint(Node, Node, Geometry::Vec3, Geometry::Vec3)
+	//! [ESMF] thisEObj PhysicWorld.applyHingeConstraint(Node, Node, Geometry::Vec3, Geometry::Vec3)
 	ES_MFUN(typeObject, PhysicWorld, "applyHingeConstraint", 4, 4, (thisObj->applyHingeConstraint(parameter[0].to<MinSG::Node*>(rt), parameter[1].to<MinSG::Node*>(rt), parameter[2].to<Geometry::Vec3>(rt), parameter[3].to<Geometry::Vec3>(rt)),thisEObj))
 
 	//! [ESMF] thisEObj PhysicWorld.applyP2PConstraint(Node, Node, Geometry::Vec3)
@@ -115,6 +115,9 @@ void E_PhysicWorld::init(EScript::Namespace & lib) {
 	 //! [ESMF] thisEObj PhysicWorld.initNodeObserver(Node)
 	ES_MFUN(typeObject, PhysicWorld, "initNodeObserver", 1, 1,		(thisObj->initNodeObserver(parameter[0].to<MinSG::Node*>(rt)),thisEObj))
 
+	//! [ESMF] thisEObj PhysicWorld.markAsKinematicObject(Node, bool)
+	ES_MFUN(typeObject, PhysicWorld, "markAsKinematicObject", 2, 2,	(thisObj->markAsKinematicObject(*parameter[0].to<MinSG::Node*>(rt), parameter[1].toBool() ),thisEObj))
+		
 	//! [ESMF] thisEObj PhysicWorld.removeConstraints(Node)
 	ES_MFUN(typeObject, PhysicWorld, "removeConstraints", 1, 1,	(thisObj->removeConstraints(parameter[0].to<MinSG::Node*>(rt)),thisEObj))
 
