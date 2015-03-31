@@ -73,9 +73,8 @@ void E_PhysicWorld::init(EScript::Namespace & lib) {
 	//!	[ESMF] PhysicWorld MinSG.Physics.createBulletWorld()
 	ES_FUN(ns,"createBulletWorld",0,0,								EScript::create(PhysicWorld::createBulletWorld()))
 
-	//! [ESMF] thisEObj PhysicWorld.addNodeToPhyiscWorld(Node, CollisionShaoe)
-	ES_MFUN(typeObject, PhysicWorld, "addNodeToPhyiscWorld", 2, 2,	(thisObj->addNodeToPhyiscWorld(parameter[0].to<MinSG::Node*>(rt),
-																		parameter[1].to<MinSG::Physics::CollisionShape*>(rt)),thisEObj))
+	//! [ESMF] thisEObj PhysicWorld.applyProperties(Node)
+	ES_MFUN(typeObject, PhysicWorld, "applyProperties", 1, 1,	(thisObj->applyProperties(*parameter[0].to<MinSG::Node*>(rt)),thisEObj))
 
     //! [ESMF] thisEObj PhysicWorld.applyHingeConstraint(Node, Node, Geometry::Vec3, Geometry::Vec3)
 	ES_MFUN(typeObject, PhysicWorld, "applyHingeConstraint", 4, 4, (thisObj->applyHingeConstraint(parameter[0].to<MinSG::Node*>(rt), parameter[1].to<MinSG::Node*>(rt), parameter[2].to<Geometry::Vec3>(rt), parameter[3].to<Geometry::Vec3>(rt)),thisEObj))
