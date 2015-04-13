@@ -141,6 +141,12 @@ void E_PhysicWorld::init(EScript::Namespace & lib) {
 	//! [ESMF] thisEObj PhysicWorld.setFriction(Node, float)
 	ES_MFUN(typeObject, PhysicWorld, "setFriction", 2, 2,			(thisObj->setFriction(*parameter[0].to<MinSG::Node*>(rt), parameter[1].toFloat() ),thisEObj))
 
+	//! [ESMF] thisEObj PhysicWorld.setAngularDamping(Node, float)
+	ES_MFUN(typeObject, PhysicWorld, "setAngularDamping", 2, 2,			(thisObj->setAngularDamping(*parameter[0].to<MinSG::Node*>(rt), parameter[1].toFloat() ),thisEObj))
+
+	//! [ESMF] thisEObj PhysicWorld.setLinearDamping(Node, float)
+	ES_MFUN(typeObject, PhysicWorld, "setLinearDamping", 2, 2,			(thisObj->setLinearDamping(*parameter[0].to<MinSG::Node*>(rt), parameter[1].toFloat() ),thisEObj))
+
 	//! [ESMF] thisEObj PhysicWorld.updateLocalSurfaceVelocity(Node, Vec3)
 	ES_MFUN(typeObject, PhysicWorld, "updateLocalSurfaceVelocity", 2, 2,(thisObj->updateLocalSurfaceVelocity(parameter[0].to<MinSG::Node*>(rt), parameter[1].to<Geometry::Vec3>(rt)),thisEObj))
 
