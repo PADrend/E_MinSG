@@ -75,14 +75,16 @@ void E_PhysicWorld::init(EScript::Namespace & lib) {
 	//!	[ESMF] PhysicWorld MinSG.Physics.createBulletWorld()
 	ES_FUN(ns,"createBulletWorld",0,0,								EScript::create(PhysicWorld::createBulletWorld()))
 
-	//! [ESMF] thisEObj PhysicWorld.applyProperties(Node)
-	ES_MFUN(typeObject, PhysicWorld, "applyProperties", 1, 1,	(thisObj->applyProperties(*parameter[0].to<MinSG::Node*>(rt)),thisEObj))
+	//! [ESMF] thisEObj PhysicWorld.addConstraint_hinge(Node, Geometry::Vec3, Geometry::Vec3, Node, Geometry::Vec3, Geometry::Vec3)
+	ES_MFUN(typeObject, PhysicWorld, "addConstraint_hinge", 6, 6, 
+			(thisObj->addConstraint_hinge(	*parameter[0].to<MinSG::Node*>(rt), parameter[1].to<Geometry::Vec3>(rt), parameter[2].to<Geometry::Vec3>(rt),
+											*parameter[3].to<MinSG::Node*>(rt), parameter[4].to<Geometry::Vec3>(rt), parameter[5].to<Geometry::Vec3>(rt)
+									),thisEObj))
 
-	//! [ESMF] thisEObj PhysicWorld.applyHingeConstraint(Node, Node, Geometry::Vec3, Geometry::Vec3)
-	ES_MFUN(typeObject, PhysicWorld, "applyHingeConstraint", 4, 4, (thisObj->applyHingeConstraint(parameter[0].to<MinSG::Node*>(rt), parameter[1].to<MinSG::Node*>(rt), parameter[2].to<Geometry::Vec3>(rt), parameter[3].to<Geometry::Vec3>(rt)),thisEObj))
-
-	//! [ESMF] thisEObj PhysicWorld.applyP2PConstraint(Node, Node, Geometry::Vec3)
-	ES_MFUN(typeObject, PhysicWorld, "applyP2PConstraint", 3, 3, (thisObj->applyP2PConstraint(parameter[0].to<MinSG::Node*>(rt), parameter[1].to<MinSG::Node*>(rt), parameter[2].to<Geometry::Vec3>(rt)),thisEObj))
+	//! [ESMF] thisEObj PhysicWorld.addConstraint_p2p(Node,Geometry::Vec3, Node, Geometry::Vec3)
+	ES_MFUN(typeObject, PhysicWorld, "addConstraint_p2p", 4, 4, 
+			(thisObj->addConstraint_p2p(	*parameter[0].to<MinSG::Node*>(rt),parameter[1].to<Geometry::Vec3>(rt),
+											*parameter[2].to<MinSG::Node*>(rt),parameter[3].to<Geometry::Vec3>(rt)),thisEObj))
 
 	//! [ESMF] thisEObj PhysicWorld.cleanupWorld()
 	ES_MFUN(typeObject, PhysicWorld, "cleanupWorld", 0, 0,			(thisObj->cleanupWorld(),thisEObj))
@@ -119,10 +121,10 @@ void E_PhysicWorld::init(EScript::Namespace & lib) {
 	ES_MFUN(typeObject, PhysicWorld, "markAsKinematicObject", 2, 2,	(thisObj->markAsKinematicObject(*parameter[0].to<MinSG::Node*>(rt), parameter[1].toBool() ),thisEObj))
 		
 	//! [ESMF] thisEObj PhysicWorld.removeConstraints(Node)
-	ES_MFUN(typeObject, PhysicWorld, "removeConstraints", 1, 1,	(thisObj->removeConstraints(parameter[0].to<MinSG::Node*>(rt)),thisEObj))
+	ES_MFUN(typeObject, PhysicWorld, "removeConstraints", 1, 1,	(thisObj->removeConstraints(*parameter[0].to<MinSG::Node*>(rt)),thisEObj))
 
 	//! [ESMF] thisEObj PhysicWorld.removeConstraintBetweenNodes(Node, Node)
-	ES_MFUN(typeObject, PhysicWorld, "removeConstraintBetweenNodes", 2, 2,	(thisObj->removeConstraintBetweenNodes(parameter[0].to<MinSG::Node*>(rt), parameter[1].to<MinSG::Node*>(rt)),thisEObj))
+	ES_MFUN(typeObject, PhysicWorld, "removeConstraintBetweenNodes", 2, 2,	(thisObj->removeConstraintBetweenNodes(*parameter[0].to<MinSG::Node*>(rt), *parameter[1].to<MinSG::Node*>(rt)),thisEObj))
 
 	//! [ESMF] thisEObj PhysicWorld.removeNode(Node)
 	ES_MFUN(typeObject, PhysicWorld, "removeNode", 1, 1,			(thisObj->removeNode(parameter[0].to<MinSG::Node*>(rt)),thisEObj))
@@ -141,6 +143,12 @@ void E_PhysicWorld::init(EScript::Namespace & lib) {
 
 	//! [ESMF] thisEObj PhysicWorld.updateLocalSurfaceVelocity(Node, Vec3)
 	ES_MFUN(typeObject, PhysicWorld, "updateLocalSurfaceVelocity", 2, 2,(thisObj->updateLocalSurfaceVelocity(parameter[0].to<MinSG::Node*>(rt), parameter[1].to<Geometry::Vec3>(rt)),thisEObj))
+
+	//! [ESMF] thisEObj PhysicWorld.setLinearVelocity(Node, Vec3)
+	ES_MFUN(typeObject, PhysicWorld, "setLinearVelocity", 2, 2,			(thisObj->setLinearVelocity(*parameter[0].to<MinSG::Node*>(rt), parameter[1].to<Geometry::Vec3>(rt) ),thisEObj))
+
+	//! [ESMF] thisEObj PhysicWorld.setAngularVelocity(Node, Vec3)
+	ES_MFUN(typeObject, PhysicWorld, "setAngularVelocity", 2, 2,		(thisObj->setAngularVelocity(*parameter[0].to<MinSG::Node*>(rt), parameter[1].to<Geometry::Vec3>(rt) ),thisEObj))
 
 	//! [ESMF] thisEObj PhysicWorld.setMass(Node, float)
 	ES_MFUN(typeObject, PhysicWorld, "setMass", 2, 2,				(thisObj->setMass(*parameter[0].to<MinSG::Node*>(rt), parameter[1].toFloat() ),thisEObj))
