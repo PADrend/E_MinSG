@@ -93,6 +93,7 @@ add_library(E_MinSG
 	Ext/ImageCompare/E_SSIMComparator.cpp
 	Ext/ImpostorFactory/E_ImpostorFactory.cpp
 	Ext/KeyFrameAnimation/E_KeyFrameAnimationNode.cpp
+	Ext/MixedExtVisibility/E_LibMixedExtVisibilityRendering.cpp
 	Ext/MultiAlgoRendering/E_AlgoSelector.cpp
 	Ext/MultiAlgoRendering/ELib_MAR.cpp
 	Ext/MultiAlgoRendering/E_MultiAlgoGroupNode.cpp

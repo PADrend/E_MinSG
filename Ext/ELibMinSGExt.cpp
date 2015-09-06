@@ -43,6 +43,11 @@
 #include "D3Fact/ELib_D3Fact.h"
 #endif // MINSG_EXT_D3FACT
 
+// [ext:MixedExtVisibility]
+#ifdef MINSG_EXT_MIXED_EXTERN_VISIBILITY
+#include "MixedExtVisibility/E_LibMixedExtVisibilityRendering.h"
+#endif // MINSG_EXT_MIXED_EXTERN_VISIBILITY
+
 // [ext:SVS]
 #ifdef MINSG_EXT_SVS
 #include "SVS/E_BudgetRenderer.h"
@@ -298,6 +303,10 @@ void init_ext(EScript::Namespace * /*globals*/,EScript::Namespace * lib) {
 	#ifdef MINSG_EXT_BLUE_SURFELS
 	BlueSurfels::init(*lib);
 	#endif // MINSG_EXT_BLUE_SURFELS
+
+	#ifdef MINSG_EXT_MIXED_EXTERN_VISIBILITY
+	MixedExtVisibility::init(*lib);
+	#endif // MINSG_EXT_MIXED_EXTERN_VISIBILITY
 
 	// [ext:FancyStuff]
 	E_BudgetAnnotationState::init(*lib);
