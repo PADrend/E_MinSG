@@ -1,6 +1,6 @@
 /*
 	This file is part of the MinSG library extension BlueSurfels.
-	Copyright (C) 2012-2013 Claudius Jähn <claudius@uni-paderborn.de>
+	Copyright (C) 2012-2013 Claudius Jï¿½hn <claudius@uni-paderborn.de>
 	Copyright (C) 2013 Ralf Petring <ralf@petring.net>
 	
 	This library is subject to the terms of the Mozilla Public License, v. 2.0.
@@ -14,6 +14,7 @@
 #include <EScript/StdObjects.h>
 #include <E_Util/Graphics/E_PixelAccessor.h>
 #include <E_Rendering/Mesh/E_Mesh.h>
+#include <E_Rendering/Mesh/E_VertexDescription.h>
 #include <Util/Graphics/PixelAccessor.h>
 
 namespace E_MinSG{
@@ -72,7 +73,9 @@ void E_SurfelGenerator::init(EScript::Namespace & lib) {
 				
 	//! [ESMF] self SurfelGenerator.setBenchmarkingEnabled(Bool)
 	ES_MFUN(typeObject,SurfelGenerator,"setBenchmarkingEnabled",1,1,		(thisObj->setBenchmarkingEnabled(parameter[0].toBool()),thisEObj))
-
+					
+	//! [ESMF] self SurfelGenerator.setVertexDescription(VertexDescription)
+	ES_MFUN(typeObject,SurfelGenerator,"setVertexDescription",1,1,	(thisObj->setVertexDescription(parameter[0].to<const Rendering::VertexDescription&>(rt)),thisEObj))
 
 }
 }
