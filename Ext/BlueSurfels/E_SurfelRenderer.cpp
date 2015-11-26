@@ -44,6 +44,9 @@ void E_SurfelRenderer::init(EScript::Namespace & lib) {
 	//! [ESMF] Number surfelRenderer.getSizeFactor()
 	ES_MFUN(typeObject,const SurfelRenderer,"getSizeFactor",0,0,thisObj->getSizeFactor())
 
+	//! [ESMF] Number surfelRenderer.getMaxSurfelSize()
+	ES_MFUN(typeObject,const SurfelRenderer,"getMaxSurfelSize",0,0,thisObj->getMaxSurfelSize())
+
 	//! [ESMF] self surfelRenderer.setCountFactor( Number )
 	ES_MFUN(typeObject,SurfelRenderer,"setCountFactor",1,1, (thisObj->setCountFactor(parameter[0].to<float>(rt)),thisEObj) )
 
@@ -55,6 +58,9 @@ void E_SurfelRenderer::init(EScript::Namespace & lib) {
 
 	//! [ESMF] self surfelRenderer.setSizeFactor( Number )
 	ES_MFUN(typeObject,SurfelRenderer,"setSizeFactor",1,1, (thisObj->setSizeFactor(parameter[0].to<float>(rt)),thisEObj) )
+	
+	//! [ESMF] self surfelRenderer.setMaxSurfelSize( Number )
+	ES_MFUN(typeObject,SurfelRenderer,"setMaxSurfelSize",1,1, (thisObj->setMaxSurfelSize(parameter[0].to<float>(rt)),thisEObj) )
 }
 //---
 
