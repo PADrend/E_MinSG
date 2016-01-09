@@ -165,6 +165,11 @@
     #include "Physics/E_PhysicWorld.h"
 #endif /* MINSG_EXT_PHYSICS */
 
+// [ext:PipelineStatistics]
+#ifdef MINSG_EXT_PIPELINESTATISTICS
+#include "PipelineStatistics/E_Collector.h"
+#endif /* MINSG_EXT_PIPELINESTATISTICS */
+
 // [ext:RAPT]
 #ifdef MINSG_EXT_RAPT
 #include "RAPT/E_RAPT.h"
@@ -585,6 +590,15 @@ void init_ext(EScript::Namespace * /*globals*/,EScript::Namespace * lib) {
     #ifdef MINSG_EXT_PHYSICS
         Physics::E_PhysicWorld::init(*lib);
     #endif // MINSG_EXT_PHYSICS
+
+#ifdef MINSG_EXT_PIPELINESTATISTICS
+	{
+		EScript::Namespace * ns = new EScript::Namespace();
+		declareConstant(lib, "PipelineStatistics", ns);
+		PipelineStatistics::E_Collector::init(*ns);
+	}
+#endif /* MINSG_EXT_PIPELINESTATISTICS */
+
     // [ext:RAPT]
 #ifdef MINSG_EXT_RAPT
     initRAPT(lib);
