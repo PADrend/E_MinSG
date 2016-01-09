@@ -122,6 +122,7 @@ add_library(E_MinSG
 	Ext/ParticleSystem/E_ParticleStates.cpp
 	Ext/ParticleSystem/E_ParticleSystemNode.cpp
 	Ext/Physics/E_PhysicWorld.cpp
+	Ext/PipelineStatistics/E_Collector.cpp
 	Ext/RTree/E_RTree.cpp
 	Ext/SamplingAnalysis/E_SamplingAnalysis.cpp
 	Ext/SkeletalAnimation/E_SkeletalAnimationBehaviour.cpp
