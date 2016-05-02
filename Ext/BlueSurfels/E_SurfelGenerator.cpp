@@ -56,7 +56,7 @@ void E_SurfelGenerator::init(EScript::Namespace & lib) {
 		result->setAttribute(relativeCoveringAttr, EScript::Number::create(surfelResult.second));
 		return result;
 	})
-	
+
 	//! [ESMF] Map SurfelGenerator.getBenchmarkResults()
 	ES_MFUNCTION(typeObject,const SurfelGenerator,"getBenchmarkResults",0,0,{
 		EScript::Map* m = new EScript::Map;
@@ -67,6 +67,10 @@ void E_SurfelGenerator::init(EScript::Namespace & lib) {
 
 	//! [ESMF] Number SurfelGenerator.getMaxAbsSurfels()
 	ES_MFUN(typeObject,const SurfelGenerator,"getMaxAbsSurfels",0,0,		thisObj->getMaxAbsSurfels())
+
+	//! [ESMF] Number SurfelGenerator.getMedianOfNthClosestNeighbours(Rendering::Mesh& mesh, size_t prefixLength, size_t nThNeighbour)
+	ES_MFUN(typeObject,const SurfelGenerator,"getMedianOfNthClosestNeighbours",3,3,		
+			thisObj->getMedianOfNthClosestNeighbours(*parameter[0].to<Rendering::Mesh*>(rt),parameter[1].to<size_t>(rt),parameter[2].to<size_t>(rt)))
 				
 	//! [ESMF] self SurfelGenerator.setMaxAbsSurfels(Number)
 	ES_MFUN(typeObject,SurfelGenerator,"setMaxAbsSurfels",1,1,				(thisObj->setMaxAbsSurfels(parameter[0].toUInt()),thisEObj))
