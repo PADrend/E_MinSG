@@ -71,6 +71,11 @@
 #include "ThesisPeter/E_LightNodeManager.h"
 #endif /* MINSG_EXT_THESISPETER */
 
+// [ext:ThesisStanislaw]
+#ifdef MINSG_EXT_THESISSTANISLAW
+#include "ThesisStanislaw/E_PolygonIndexing.h"
+#endif /* MINSG_EXT_THESISSTANISLAW */
+
 // [ext:Triangulation]
 #ifdef MINSG_EXT_TRIANGULATION
 #include "Triangulation/E_Delaunay2d.h"
@@ -517,6 +522,14 @@ void init_ext(EScript::Namespace * /*globals*/,EScript::Namespace * lib) {
 		ThesisPeter::E_LightNodeManager::init(*ns);
 	}
 #endif /* MINSG_EXT_THESISPETER */
+
+#ifdef MINSG_EXT_THESISSTANISLAW
+	{
+		EScript::Namespace * ns = new EScript::Namespace();
+		declareConstant(lib, "ThesisStanislaw", ns);
+		ThesisStanislaw::E_PolygonIndexingState::init(*ns);
+	}
+#endif // MINSG_EXT_THESISSTANISLAW
 
 	// [ext:TreeSync]
 #ifdef MINSG_EXT_TREE_SYNC
