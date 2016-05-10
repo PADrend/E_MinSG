@@ -29,8 +29,8 @@ void E_PolygonIndexingState::init(EScript::Namespace & lib) {
   //! [ESMF] new MinSG.PolygonIndexingState()
   ES_CTOR(typeObject,0,0,EScript::create(new MinSG::ThesisStanislaw::PolygonIndexingState))
 
-  //! [ESMF] self ColorCubeRenderer.setHighlightEnabled(bool)
-  //ES_MFUN(typeObject,ColorCubeRenderer,"setHighlightEnabled",1,1, (thisObj->setHighlightEnabled(parameter[0].toBool()),thisEObj))
+  //! [ESMF] self PolygonIndexingState.setDebugOutput(bool)
+  ES_MFUN(typeObject,MinSG::ThesisStanislaw::PolygonIndexingState,"setDebugOutput",1,1, (thisObj->setDebugOutput(parameter[0].toBool()),thisEObj))
 
   //! [ESMF] Bool ColorCubeRenderer.isHighlightEnabled()
   //ES_MFUN(typeObject,ColorCubeRenderer,"isHighlightEnabled",0,0,	thisObj->isHighlightEnabled())
