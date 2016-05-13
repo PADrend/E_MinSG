@@ -74,6 +74,7 @@
 // [ext:ThesisStanislaw]
 #ifdef MINSG_EXT_THESISSTANISLAW
 #include "ThesisStanislaw/E_PolygonIndexing.h"
+#include "ThesisStanislaw/E_LightPatchRenderer.h"
 #endif /* MINSG_EXT_THESISSTANISLAW */
 
 // [ext:Triangulation]
@@ -528,6 +529,7 @@ void init_ext(EScript::Namespace * /*globals*/,EScript::Namespace * lib) {
 		EScript::Namespace * ns = new EScript::Namespace();
 		declareConstant(lib, "ThesisStanislaw", ns);
 		ThesisStanislaw::E_PolygonIndexingState::init(*ns);
+		ThesisStanislaw::E_LightPatchRenderer::init(*ns);
 	}
 #endif // MINSG_EXT_THESISSTANISLAW
 

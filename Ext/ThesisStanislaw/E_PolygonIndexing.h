@@ -28,7 +28,7 @@ class E_PolygonIndexingState : public E_NodeRendererState {
 	public:
 		template<class, class, class> friend class Util::PolymorphicWrapperCreator;
 
-		static EScript::Type* typeObject;
+		static EScript::Type* getTypeObject();
 		static void init(EScript::Namespace & lib);
 
 		virtual ~E_PolygonIndexingState();

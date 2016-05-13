@@ -14,15 +14,18 @@ using namespace MinSG;
 namespace E_MinSG {
 namespace ThesisStanislaw{
   
-Type* E_PolygonIndexingState::typeObject=nullptr;
-
+EScript::Type * E_PolygonIndexingState::getTypeObject() {
+	// E_PolygonIndexingState ---|> E_NodeRendererState ---|> Object
+	static EScript::ERef<EScript::Type> typeObject = new EScript::Type(E_NodeRendererState::getTypeObject());
+	return typeObject.get();
+}
 
 /**
  * initMembers
  */
 void E_PolygonIndexingState::init(EScript::Namespace & lib) {
   // E_PolygonIndexingState ---|> E_NodeRendererState ---|> E_State ---|> Object
-  typeObject = E_PolygonIndexingState::getTypeObject();
+  EScript::Type * typeObject = E_PolygonIndexingState::getTypeObject();
   declareConstant(&lib,getClassName(),typeObject);
   addFactory<MinSG::ThesisStanislaw::PolygonIndexingState,E_PolygonIndexingState>();
   
@@ -32,13 +35,10 @@ void E_PolygonIndexingState::init(EScript::Namespace & lib) {
   //! [ESMF] self PolygonIndexingState.setDebugOutput(bool)
   ES_MFUN(typeObject,MinSG::ThesisStanislaw::PolygonIndexingState,"setDebugOutput",1,1, (thisObj->setDebugOutput(parameter[0].toBool()),thisEObj))
 
-  //! [ESMF] Bool ColorCubeRenderer.isHighlightEnabled()
-  //ES_MFUN(typeObject,ColorCubeRenderer,"isHighlightEnabled",0,0,	thisObj->isHighlightEnabled())
-
 }
 //---
 
-E_PolygonIndexingState::E_PolygonIndexingState(MinSG::ThesisStanislaw::PolygonIndexingState * _obj, EScript::Type * type):E_NodeRendererState(_obj,type?type:typeObject){
+E_PolygonIndexingState::E_PolygonIndexingState(MinSG::ThesisStanislaw::PolygonIndexingState * _obj, EScript::Type * type):E_NodeRendererState(_obj,type?type:getTypeObject()){
 }
 
 E_PolygonIndexingState::~E_PolygonIndexingState() = default;
