@@ -33,10 +33,15 @@ void E_LightPatchRenderer::init(EScript::Namespace & lib) {
   ES_CTOR(typeObject,0,0,EScript::create(new MinSG::ThesisStanislaw::LightPatchRenderer))
   
   //! [ESMF] self LightPatchRenderer.setApproximatedScene(Node*)
-  //ES_MFUN(typeObject,MinSG::ThesisStanislaw::LightPatchRenderer,"setApproximatedScene",1,1, (thisObj->setApproximatedScene( parameter[0].to<MinSG::Node*>(rt) ),thisEObj))
+  //ES_MFUN(typeObject,MinSG::ThesisStanislaw::LightPatchRenderer,"setApproximatedScene",1,1, (thisObj->setApproximatedScene(parameter[0].to<MinSG::Node*>(rt)),thisEObj))
   
   //! [ESMF] self LightPatchRenderer.setSamplingResolution(Number, Number)
   ES_MFUN(typeObject,MinSG::ThesisStanislaw::LightPatchRenderer,"setSamplingResolution",2,2, (thisObj->setSamplingResolution( parameter[0].to<uint32_t>(rt), parameter[1].to<uint32_t>(rt) ),thisObj))
+  
+  //ES_MFUNCTION(typeObject, MinSG::ThesisStanislaw::LightPatchRenderer, "setSpotLights", 1, 1, {
+  //  Array * array = assertType<EScript::Array>(rt, parameter[0]);
+  //  thisObj->setSpotLights(*array);
+  //})
 
   addFactory<MinSG::ThesisStanislaw::LightPatchRenderer,E_LightPatchRenderer>();
 }

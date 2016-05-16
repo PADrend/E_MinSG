@@ -82,7 +82,7 @@ void E_LightNode::init(EScript::Namespace & lib) {
 
 	//! [ESMF] Bool LightNode.isSwitchedOn()
 	ES_MFUN(typeObject,const LightNode,"isSwitchedOn",0,0,				thisObj->isSwitchedOn())
-
+ 
 	//! [ESMF] self LightNode.setAmbientLightColor(Util.Color4)
 	ES_MFUN(typeObject,LightNode,"setAmbientLightColor",1,1,			(thisObj->setAmbientLightColor(parameter[0].to<Util::Color4f>(rt)),thisEObj))
 
