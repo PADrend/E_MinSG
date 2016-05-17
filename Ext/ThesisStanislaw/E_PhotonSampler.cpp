@@ -8,6 +8,9 @@
 #include <MinSG/Core/FrameContext.h>
 #include <EScript/EScript.h>
 
+#include <E_MinSG/Core/Nodes/E_Node.h>
+#include <E_MinSG/Core/Nodes/E_CameraNode.h>
+
 using namespace EScript;
 using namespace MinSG;
 
@@ -35,10 +38,10 @@ void E_PhotonSampler::init(EScript::Namespace & lib) {
   ES_CTOR(typeObject,0,0,EScript::create(new MinSG::ThesisStanislaw::PhotonSampler))
   
   //! [ESMF] self PhotonSampler.setApproximatedScene(Node*)
-  //ES_MFUN(typeObject,MinSG::ThesisStanislaw::PhotonSampler,"setApproximatedScene",1,1, (thisObj->setApproximatedScene(parameter[0].to<MinSG::Node*>(rt)),thisEObj))
+  ES_MFUN(typeObject,MinSG::ThesisStanislaw::PhotonSampler,"setApproximatedScene",1,1, (thisObj->setApproximatedScene(parameter[0].to<MinSG::Node*>(rt)),thisEObj))
   
   //! [ESMF] self PhotonSampler.setCamera(CameraNode*)
-  //ES_MFUN(typeObject,MinSG::ThesisStanislaw::PhotonSampler,"setCamera",1,1, (thisObj->setCamera(parameter[0].to<MinSG::CameraNode*>(rt)),thisEObj))
+  ES_MFUN(typeObject,MinSG::ThesisStanislaw::PhotonSampler,"setCamera",1,1, (thisObj->setCamera(parameter[0].to<MinSG::CameraNode*>(rt)),thisEObj))
   
   //! [ESMF] self PhotonSampler.setPhotonNumber(Number)
   ES_MFUN(typeObject,MinSG::ThesisStanislaw::PhotonSampler,"setPhotonNumber",1,1, (thisObj->setPhotonNumber( parameter[0].to<uint32_t>(rt) ),thisObj))
