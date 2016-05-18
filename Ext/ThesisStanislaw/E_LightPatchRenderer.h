@@ -45,6 +45,5 @@ class E_LightPatchRenderer : public E_NodeRendererState {
 
 ES_CONV_EOBJ_TO_OBJ(E_MinSG::ThesisStanislaw::E_LightPatchRenderer, MinSG::ThesisStanislaw::LightPatchRenderer*, **eObj)
 
-
 #endif // E_LIGHTPATCHRENDERER_H_INCLUDED
 #endif // MINSG_EXT_THESISSTANISLAW
