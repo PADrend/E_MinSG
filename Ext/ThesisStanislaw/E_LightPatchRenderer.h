@@ -4,7 +4,7 @@
 #define MINSG_EXT_E_THESISSTANISLAW_LIGHTPATCHRENDERER_H
 
 #include <MinSG/Ext/ThesisStanislaw/LightPatchRenderer.h>
-#include "../../Core/States/E_NodeRendererState.h"
+#include "../../Core/States/E_State.h"
 
 namespace EScript {
 class Namespace;
@@ -21,9 +21,9 @@ class LightPatchRenderer;
 namespace E_MinSG {
 namespace ThesisStanislaw{
 /***
- **   E_LightPatchRenderer ---|> E_NodeRendererState ---|> E_State ---|> Object
+ **   E_LightPatchRenderer ---|> E_State ---|> Object
  **/
-class E_LightPatchRenderer : public E_NodeRendererState {
+class E_LightPatchRenderer : public E_State {
 		ES_PROVIDES_TYPE_NAME(LightPatchRenderer)
 	public:
 		template<class, class, class> friend class Util::PolymorphicWrapperCreator;

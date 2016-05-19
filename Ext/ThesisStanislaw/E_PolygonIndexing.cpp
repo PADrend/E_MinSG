@@ -15,8 +15,8 @@ namespace E_MinSG {
 namespace ThesisStanislaw{
   
 EScript::Type * E_PolygonIndexingState::getTypeObject() {
-	// E_PolygonIndexingState ---|> E_NodeRendererState ---|> Object
-	static EScript::ERef<EScript::Type> typeObject = new EScript::Type(E_NodeRendererState::getTypeObject());
+	// E_PolygonIndexingState ---|> E_State ---|> Object
+	static EScript::ERef<EScript::Type> typeObject = new EScript::Type(E_State::getTypeObject());
 	return typeObject.get();
 }
 
@@ -24,7 +24,7 @@ EScript::Type * E_PolygonIndexingState::getTypeObject() {
  * initMembers
  */
 void E_PolygonIndexingState::init(EScript::Namespace & lib) {
-  // E_PolygonIndexingState ---|> E_NodeRendererState ---|> E_State ---|> Object
+  // E_PolygonIndexingState ---|> E_State ---|> Object
   EScript::Type * typeObject = E_PolygonIndexingState::getTypeObject();
   declareConstant(&lib,getClassName(),typeObject);
   addFactory<MinSG::ThesisStanislaw::PolygonIndexingState,E_PolygonIndexingState>();
@@ -38,7 +38,7 @@ void E_PolygonIndexingState::init(EScript::Namespace & lib) {
 }
 //---
 
-E_PolygonIndexingState::E_PolygonIndexingState(MinSG::ThesisStanislaw::PolygonIndexingState * _obj, EScript::Type * type):E_NodeRendererState(_obj,type?type:getTypeObject()){
+E_PolygonIndexingState::E_PolygonIndexingState(MinSG::ThesisStanislaw::PolygonIndexingState * _obj, EScript::Type * type):E_State(_obj,type?type:getTypeObject()){
 }
 
 E_PolygonIndexingState::~E_PolygonIndexingState() = default;

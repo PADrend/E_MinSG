@@ -4,7 +4,7 @@
 #define MINSG_EXT_E_THESISSTANISLAW_POLYGONINDEXING_H
 
 #include <MinSG/Ext/ThesisStanislaw/PolygonIndexing.h>
-#include "../../Core/States/E_NodeRendererState.h"
+#include "../../Core/States/E_State.h"
 
 namespace EScript {
 class Namespace;
@@ -21,9 +21,9 @@ class PolygonIndexingState;
 namespace E_MinSG {
 namespace ThesisStanislaw{
 /***
- **   E_PolygonIndexingState ---|> E_NodeRendererState ---|> E_State ---|> Object
+ **   E_PolygonIndexingState ---|> E_State ---|> Object
  **/
-class E_PolygonIndexingState : public E_NodeRendererState {
+class E_PolygonIndexingState : public E_State {
 		ES_PROVIDES_TYPE_NAME(PolygonIndexingState)
 	public:
 		template<class, class, class> friend class Util::PolymorphicWrapperCreator;

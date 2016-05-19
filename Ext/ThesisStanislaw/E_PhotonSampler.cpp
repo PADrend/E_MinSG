@@ -18,8 +18,8 @@ namespace E_MinSG {
 namespace ThesisStanislaw{
   
 EScript::Type * E_PhotonSampler::getTypeObject() {
-	// E_LightPatchRenderer ---|> E_NodeRendererState ---|> Object
-	static EScript::ERef<EScript::Type> typeObject = new EScript::Type(E_NodeRendererState::getTypeObject());
+	// E_LightPatchRenderer ---|> E_State ---|> Object
+	static EScript::ERef<EScript::Type> typeObject = new EScript::Type(E_State::getTypeObject());
 	return typeObject.get();
 }
 
@@ -28,7 +28,7 @@ EScript::Type * E_PhotonSampler::getTypeObject() {
  * initMembers
  */
 void E_PhotonSampler::init(EScript::Namespace & lib) {
-  // E_LightPatchRenderer ---|> E_NodeRendererState ---|> E_State ---|> Object
+  // E_LightPatchRenderer ---|> E_State ---|> Object
   EScript::Type * typeObject = E_PhotonSampler::getTypeObject();
   declareConstant(&lib,getClassName(),typeObject);
   
@@ -56,7 +56,7 @@ void E_PhotonSampler::init(EScript::Namespace & lib) {
 }
 //---
 
-E_PhotonSampler::E_PhotonSampler(MinSG::ThesisStanislaw::PhotonSampler * _obj, EScript::Type * type):E_NodeRendererState(_obj,type?type:getTypeObject()){
+E_PhotonSampler::E_PhotonSampler(MinSG::ThesisStanislaw::PhotonSampler * _obj, EScript::Type * type):E_State(_obj,type?type:getTypeObject()){
 }
 
 E_PhotonSampler::~E_PhotonSampler() = default;

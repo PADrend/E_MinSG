@@ -4,7 +4,7 @@
 #define MINSG_EXT_E_THESISSTANISLAW_PHOTONSAMPLER_H
 
 #include <MinSG/Ext/ThesisStanislaw/PhotonSampler.h>
-#include "../../Core/States/E_NodeRendererState.h"
+#include "../../Core/States/E_State.h"
 
 namespace EScript {
 class Namespace;
@@ -21,9 +21,9 @@ class PhotonSampler;
 namespace E_MinSG {
 namespace ThesisStanislaw{
 /***
- **   E_PhotonSampler ---|> E_NodeRendererState ---|> E_State ---|> Object
+ **   E_PhotonSampler ---|> E_State ---|> Object
  **/
-class E_PhotonSampler : public E_NodeRendererState {
+class E_PhotonSampler : public E_State {
 		ES_PROVIDES_TYPE_NAME(PhotonSampler)
 	public:
 		template<class, class, class> friend class Util::PolymorphicWrapperCreator;

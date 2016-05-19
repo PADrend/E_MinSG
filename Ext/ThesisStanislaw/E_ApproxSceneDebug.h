@@ -4,7 +4,7 @@
 #define MINSG_EXT_E_THESISSTANISLAW_APPROXSCENEDEBUG_H
 
 #include <MinSG/Ext/ThesisStanislaw/ApproxSceneDebug.h>
-#include "../../Core/States/E_NodeRendererState.h"
+#include "../../Core/States/E_State.h"
 
 namespace EScript {
 class Namespace;
@@ -21,9 +21,9 @@ class ApproxSceneDebug;
 namespace E_MinSG {
 namespace ThesisStanislaw{
 /***
- **   E_ApproxSceneDebug ---|> E_NodeRendererState ---|> E_State ---|> Object
+ **   E_ApproxSceneDebug ---|> E_State ---|> Object
  **/
-class E_ApproxSceneDebug : public E_NodeRendererState {
+class E_ApproxSceneDebug : public E_State {
 		ES_PROVIDES_TYPE_NAME(ApproxSceneDebug)
 	public:
 		template<class, class, class> friend class Util::PolymorphicWrapperCreator;

@@ -18,7 +18,7 @@ namespace ThesisStanislaw{
   
 EScript::Type * E_LightPatchRenderer::getTypeObject() {
 	// E_LightPatchRenderer ---|> E_NodeRendererState ---|> Object
-	static EScript::ERef<EScript::Type> typeObject = new EScript::Type(E_NodeRendererState::getTypeObject());
+	static EScript::ERef<EScript::Type> typeObject = new EScript::Type(E_State::getTypeObject());
 	return typeObject.get();
 }
 
@@ -27,7 +27,7 @@ EScript::Type * E_LightPatchRenderer::getTypeObject() {
  * initMembers
  */
 void E_LightPatchRenderer::init(EScript::Namespace & lib) {
-  // E_LightPatchRenderer ---|> E_NodeRendererState ---|> E_State ---|> Object
+  // E_LightPatchRenderer ---|> E_State ---|> Object
   EScript::Type * typeObject = E_LightPatchRenderer::getTypeObject();
   declareConstant(&lib,getClassName(),typeObject);
   
@@ -55,7 +55,7 @@ void E_LightPatchRenderer::init(EScript::Namespace & lib) {
 }
 //---
 
-E_LightPatchRenderer::E_LightPatchRenderer(MinSG::ThesisStanislaw::LightPatchRenderer * _obj, EScript::Type * type):E_NodeRendererState(_obj,type?type:getTypeObject()){
+E_LightPatchRenderer::E_LightPatchRenderer(MinSG::ThesisStanislaw::LightPatchRenderer * _obj, EScript::Type * type):E_State(_obj,type?type:getTypeObject()){
 }
 
 E_LightPatchRenderer::~E_LightPatchRenderer() = default;
