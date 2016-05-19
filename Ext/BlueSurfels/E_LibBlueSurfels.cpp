@@ -17,6 +17,7 @@
 #include "E_SurfelGenerator.h"
 #include "E_StreamedSurfelGenerator.h"
 #include "E_SurfelRenderer.h"
+#include "E_SurfelRenderer2.h"
 
 namespace E_MinSG{
 
@@ -27,6 +28,7 @@ void BlueSurfels::init(EScript::Namespace & lib) {
 	BlueSurfels::E_SurfelGenerator::init(*nsBlueSurfels);
 	BlueSurfels::E_StreamedSurfelGenerator::init(*nsBlueSurfels);
 	BlueSurfels::E_SurfelRenderer::init(lib); // namespace MinSG
+	BlueSurfels::E_SurfelRenderer2::init(lib); // namespace MinSG
 
 	//! [Number*] MinSG.BlueSurfels.getProgressiveMinimalMinimalVertexDistances(Rendering.Mesh)
 	ES_FUN(nsBlueSurfels,"getProgressiveMinimalMinimalVertexDistances",1,1,
