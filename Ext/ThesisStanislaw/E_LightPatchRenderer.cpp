@@ -9,6 +9,7 @@
 #include <EScript/EScript.h>
 
 #include <E_MinSG/Core/Nodes/E_Node.h> 
+#include <E_MinSG/Core/Nodes/E_CameraNode.h>
 
 using namespace EScript;
 using namespace MinSG;
@@ -50,6 +51,9 @@ void E_LightPatchRenderer::init(EScript::Namespace & lib) {
     }
     thisObj->setSpotLights(nodes);
   })
+  
+    //! [ESMF] self PhotonSampler.setCamera(CameraNode*)
+  ES_MFUN(typeObject,MinSG::ThesisStanislaw::LightPatchRenderer,"setCamera",1,1, (thisObj->setCamera(parameter[0].to<MinSG::CameraNode*>(rt)),thisEObj))
 
   addFactory<MinSG::ThesisStanislaw::LightPatchRenderer,E_LightPatchRenderer>();
 }

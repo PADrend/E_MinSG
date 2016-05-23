@@ -33,7 +33,7 @@ void E_PolygonIndexingState::init(EScript::Namespace & lib) {
   ES_CTOR(typeObject,0,0,EScript::create(new MinSG::ThesisStanislaw::PolygonIndexingState))
 
   //! [ESMF] self PolygonIndexingState.setDebugOutput(bool)
-  ES_MFUN(typeObject,MinSG::ThesisStanislaw::PolygonIndexingState,"setDebugOutput",1,1, (thisObj->setDebugOutput(parameter[0].toBool()),thisEObj))
+  ES_MFUN(typeObject,MinSG::ThesisStanislaw::PolygonIndexingState,"setDebugOutput",1,1, (thisObj->setDebugOutput(parameter[0].toBool()),thisObj))
 
 }
 //---
