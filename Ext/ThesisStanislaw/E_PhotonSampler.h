@@ -4,6 +4,7 @@
 #define MINSG_EXT_E_THESISSTANISLAW_PHOTONSAMPLER_H
 
 #include <MinSG/Ext/ThesisStanislaw/PhotonSampler.h>
+
 #include "../../Core/States/E_State.h"
 
 namespace EScript {

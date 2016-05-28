@@ -3,7 +3,6 @@
 #include <E_MinSG/Ext/ThesisStanislaw/E_PhotonSampler.h>
 
 #include <MinSG/Core/NodeRenderer.h>
-#include <MinSG/Ext/ThesisStanislaw/PhotonSampler.h> 
 
 #include <MinSG/Core/FrameContext.h>
 #include <EScript/EScript.h>

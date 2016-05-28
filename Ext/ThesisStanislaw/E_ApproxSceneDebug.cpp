@@ -40,8 +40,8 @@ void E_ApproxSceneDebug::init(EScript::Namespace & lib) {
   //! [ESMF] self ApproxSceneDebug.setApproximatedScene(Node*)
   ES_MFUN(typeObject,MinSG::ThesisStanislaw::ApproxSceneDebug,"setApproximatedScene",1,1, (thisObj->setApproximatedScene(parameter[0].to<MinSG::Node*>(rt)),thisEObj))
   
-  //! [ESMF] self ApproxSceneDebug.setCamera(CameraNode*)
-  ES_MFUN(typeObject,MinSG::ThesisStanislaw::ApproxSceneDebug,"setLightPatchRenderer",1,1, (thisObj->setLightPatchRenderer(dynamic_cast<MinSG::ThesisStanislaw::LightPatchRenderer*>(parameter[0].to<MinSG::State*>(rt))),thisEObj))
+  //! [ESMF] self ApproxSceneDebug.setLightPatchRenderer(LightPatchRenderer*)
+  ES_MFUN(typeObject,MinSG::ThesisStanislaw::ApproxSceneDebug,"setLightPatchRenderer",1,1, (thisObj->setLightPatchRenderer(dynamic_cast<MinSG::ThesisStanislaw::LightPatchRenderer*>(parameter[0].to<MinSG::State*>(rt))),thisObj))
 
   addFactory<MinSG::ThesisStanislaw::ApproxSceneDebug,E_ApproxSceneDebug>();
 }
