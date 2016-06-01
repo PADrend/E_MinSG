@@ -6,9 +6,6 @@
 #include <MinSG/Ext/ThesisStanislaw/PhotonSampler.h>
 #include <MinSG/Ext/ThesisStanislaw/LightPatchRenderer.h>
 
-#include <MinSG/Core/NodeRenderer.h>
-
-#include <MinSG/Core/FrameContext.h>
 #include <EScript/EScript.h>
 
 #include <E_MinSG/Core/Nodes/E_Node.h>

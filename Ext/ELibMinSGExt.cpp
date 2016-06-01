@@ -76,9 +76,9 @@
 #include "ThesisStanislaw/E_PolygonIndexing.h"
 #include "ThesisStanislaw/E_LightPatchRenderer.h"
 #include "ThesisStanislaw/E_PhotonSampler.h"
-#include "ThesisStanislaw/E_PhotonRenderer.h"
 #include "ThesisStanislaw/E_PhongGI.h"
 #include "ThesisStanislaw/E_ApproxSceneDebug.h"
+#include "ThesisStanislaw/E_PhotonRenderer.h"
 #endif /* MINSG_EXT_THESISSTANISLAW */
 
 // [ext:Triangulation]
@@ -535,9 +535,9 @@ void init_ext(EScript::Namespace * /*globals*/,EScript::Namespace * lib) {
 		ThesisStanislaw::E_PolygonIndexingState::init(*ns);
 		ThesisStanislaw::E_LightPatchRenderer::init(*ns);
 		ThesisStanislaw::E_PhotonSampler::init(*ns);
-		ThesisStanislaw::E_PhotonRenderer::init(*ns);
 		ThesisStanislaw::E_PhongGI::init(*ns);
 		ThesisStanislaw::E_ApproxSceneDebug::init(*ns);
+		ThesisStanislaw::E_PhotonRenderer::init(*ns);
 	}
 #endif // MINSG_EXT_THESISSTANISLAW
 
