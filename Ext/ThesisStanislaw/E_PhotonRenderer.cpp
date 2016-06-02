@@ -47,6 +47,17 @@ void E_PhotonRenderer::init(EScript::Namespace & lib) {
   //! [ESMF] self PhotonRenderer.setSamplingResolution(Number, Number)
   ES_MFUN(typeObject,MinSG::ThesisStanislaw::PhotonRenderer,"setSamplingResolution",2,2, (thisObj->setSamplingResolution( parameter[0].to<uint32_t>(rt), parameter[1].to<uint32_t>(rt) ),thisObj))
   
+  //! [ESMF] self PhotonRenderer.setSpotLights(Array)
+  ES_MFUNCTION(typeObject, MinSG::ThesisStanislaw::PhotonRenderer, "setSpotLights", 1, 1, {
+    Array * array = assertType<EScript::Array>(rt, parameter[0]);
+    std::vector<MinSG::LightNode *> nodes;
+    for(auto & element : *array){
+      auto node = dynamic_cast<MinSG::LightNode*>(element.to<MinSG::Node*>(rt));
+      if(node) nodes.push_back(node);
+    }
+    thisObj->setSpotLights(nodes);
+  })
+  
   addFactory<MinSG::ThesisStanislaw::PhotonRenderer,E_PhotonRenderer>();
 }
 //---
