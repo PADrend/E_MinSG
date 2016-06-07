@@ -4,6 +4,7 @@
 
 #include <MinSG/Core/NodeRenderer.h>
 #include <MinSG/Ext/ThesisStanislaw/LightPatchRenderer.h> 
+#include <E_Rendering/Texture/E_Texture.h>
 
 #include <MinSG/Core/FrameContext.h>
 #include <EScript/EScript.h>
@@ -54,7 +55,29 @@ void E_LightPatchRenderer::init(EScript::Namespace & lib) {
   
     //! [ESMF] self PhotonSampler.setCamera(CameraNode*)
   ES_MFUN(typeObject,MinSG::ThesisStanislaw::LightPatchRenderer,"setCamera",1,1, (thisObj->setCamera(parameter[0].to<MinSG::CameraNode*>(rt)),thisEObj))
-
+  
+  //! [ESMF] Texture|Void MinSG.TextureState.getTexture()
+  ES_MFUNCTION(typeObject, MinSG::ThesisStanislaw::LightPatchRenderer, "getPolygonIDTexture", 0,  0, {
+      auto t = thisObj->getPolygonIDTexture();
+      if(t.isNotNull())
+        return new E_Rendering::E_Texture(t.get());
+      else return EScript::create(nullptr);
+  })
+  //! [ESMF] Texture|Void MinSG.TextureState.getTexture()
+  ES_MFUNCTION(typeObject, MinSG::ThesisStanislaw::LightPatchRenderer, "getLightPatchTBO", 0,  0, {
+      auto t = thisObj->getLightPatchTBO();
+      if(t.isNotNull())
+        return new E_Rendering::E_Texture(t.get());
+      else return EScript::create(nullptr);
+  })
+  //! [ESMF] Texture|Void MinSG.TextureState.getTexture()
+  ES_MFUNCTION(typeObject, MinSG::ThesisStanislaw::LightPatchRenderer, "getNormalTexture", 0,  0, {
+      auto t = thisObj->getNormalTexture();
+      if(t.isNotNull())
+        return new E_Rendering::E_Texture(t.get());
+      else return EScript::create(nullptr);
+  })
+  
   addFactory<MinSG::ThesisStanislaw::LightPatchRenderer,E_LightPatchRenderer>();
 }
 //---

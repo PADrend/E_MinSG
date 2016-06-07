@@ -9,6 +9,7 @@
 
 #include <E_MinSG/Core/Nodes/E_Node.h>
 #include <E_MinSG/Core/Nodes/E_CameraNode.h>
+#include <E_Rendering/Texture/E_Texture.h>
 
 using namespace EScript;
 using namespace MinSG;
@@ -50,7 +51,29 @@ void E_PhotonSampler::init(EScript::Namespace & lib) {
   
   //! [ESMF] self PhotonSampler.resample()
   ES_MFUN(typeObject,MinSG::ThesisStanislaw::PhotonSampler,"resample",0,0, (thisObj->resample(),thisObj))
-
+  
+	//! [ESMF] Texture|Void MinSG.TextureState.getTexture()
+	ES_MFUNCTION(typeObject, MinSG::ThesisStanislaw::PhotonSampler, "getPosTexture", 0,  0, {
+			auto t = thisObj->getPosTexture();
+			if(t.isNotNull())
+				return new E_Rendering::E_Texture(t.get());
+			else return EScript::create(nullptr);
+	})
+	//! [ESMF] Texture|Void MinSG.TextureState.getTexture()
+	ES_MFUNCTION(typeObject, MinSG::ThesisStanislaw::PhotonSampler, "getNormalTexture", 0,  0, {
+			auto t = thisObj->getNormalTexture();
+			if(t.isNotNull())
+				return new E_Rendering::E_Texture(t.get());
+			else return EScript::create(nullptr);
+	})
+	//! [ESMF] Texture|Void MinSG.TextureState.getTexture()
+	ES_MFUNCTION(typeObject, MinSG::ThesisStanislaw::PhotonSampler, "getSamplingTexture", 0,  0, {
+			auto t = thisObj->getSamplingTexture();
+			if(t.isNotNull())
+				return new E_Rendering::E_Texture(t.get());
+			else return EScript::create(nullptr);
+	})
+  
   addFactory<MinSG::ThesisStanislaw::PhotonSampler,E_PhotonSampler>();
 }
 //---

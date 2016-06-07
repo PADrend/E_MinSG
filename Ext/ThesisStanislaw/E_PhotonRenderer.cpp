@@ -5,6 +5,7 @@
 #include <MinSG/Ext/ThesisStanislaw/PhotonRenderer.h>
 #include <MinSG/Ext/ThesisStanislaw/PhotonSampler.h>
 #include <MinSG/Ext/ThesisStanislaw/LightPatchRenderer.h>
+#include <E_Rendering/Texture/E_Texture.h>
 
 #include <EScript/EScript.h>
 
@@ -58,6 +59,20 @@ void E_PhotonRenderer::init(EScript::Namespace & lib) {
     thisObj->setSpotLights(nodes);
   })
   
+	//! [ESMF] Texture|Void MinSG.TextureState.getTexture()
+	ES_MFUNCTION(typeObject, MinSG::ThesisStanislaw::PhotonRenderer, "getLightTexture", 0,  0, {
+			auto t = thisObj->getLightTexture();
+			if(t.isNotNull())
+				return new E_Rendering::E_Texture(t.get());
+			else return EScript::create(nullptr);
+	})
+	//! [ESMF] Texture|Void MinSG.TextureState.getTexture()
+	ES_MFUNCTION(typeObject, MinSG::ThesisStanislaw::PhotonRenderer, "getNormalTexture", 0,  0, {
+			auto t = thisObj->getNormalTexture();
+			if(t.isNotNull())
+				return new E_Rendering::E_Texture(t.get());
+			else return EScript::create(nullptr);
+	})
   addFactory<MinSG::ThesisStanislaw::PhotonRenderer,E_PhotonRenderer>();
 }
 //---
