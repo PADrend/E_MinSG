@@ -41,9 +41,6 @@ void E_PhongGI::init(EScript::Namespace & lib) {
   //! [ESMF] self PhongGI.setPhotonSampler(PhotonSampler*)
   ES_MFUN(typeObject,MinSG::ThesisStanislaw::PhongGI,"setPhotonSampler",1,1, (thisObj->setPhotonSampler(dynamic_cast<MinSG::ThesisStanislaw::PhotonSampler*>(parameter[0].to<MinSG::State*>(rt))),thisObj))
   
-  //! [ESMF] self PhongGI.setPhotonRenderer(PhotonRenderer*)
-  ES_MFUN(typeObject,MinSG::ThesisStanislaw::PhongGI,"setPhotonRenderer",1,1, (thisObj->setPhotonRenderer(dynamic_cast<MinSG::ThesisStanislaw::PhotonRenderer*>(parameter[0].to<MinSG::State*>(rt))),thisObj))
-  
   addFactory<MinSG::ThesisStanislaw::PhongGI,E_PhongGI>();
 }
 //---
