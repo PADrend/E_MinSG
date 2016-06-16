@@ -73,6 +73,13 @@ void E_PhotonSampler::init(EScript::Namespace & lib) {
 				return new E_Rendering::E_Texture(t.get());
 			else return EScript::create(nullptr);
 	})
+	//! [ESMF] Texture|Void MinSG.TextureState.getTexture()
+	ES_MFUNCTION(typeObject, MinSG::ThesisStanislaw::PhotonSampler, "getMatrixTexture", 0,  0, {
+			auto t = thisObj->getMatrixTexture();
+			if(t.isNotNull())
+				return new E_Rendering::E_Texture(t.get());
+			else return EScript::create(nullptr);
+	})
   
   addFactory<MinSG::ThesisStanislaw::PhotonSampler,E_PhotonSampler>();
 }
