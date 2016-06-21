@@ -25,9 +25,22 @@ void E_OccludeeRenderer::init(EScript::Namespace & lib) {
 	declareConstant(&lib, getClassName(), getTypeObject());
 	addFactory<MinSG::OccludeeRenderer,E_OccludeeRenderer>();
 
+	using namespace MinSG;
+
 	//! [ESF] OccludeeRenderer new OccludeeRenderer()
 	ES_CTOR(getTypeObject(), 0, 0, new E_OccludeeRenderer(new MinSG::OccludeeRenderer))
+	
+	//! [ESMF] bool MinSG.getUseWireframe()	
+	ES_MFUN(getTypeObject(),OccludeeRenderer,"getUseWireframe",0,0,thisObj->getUseWireframe())
 
+	//! [ESMF] self MinSG.setUseWireframe(bool)	
+	ES_MFUN(getTypeObject(),OccludeeRenderer,"setUseWireframe",1,1,(thisObj->setUseWireframe(parameter[0].toBool()),thisEObj))
+	
+	//! [ESMF] bool MinSG.getShowOriginal()	
+	ES_MFUN(getTypeObject(),OccludeeRenderer,"getShowOriginal",0,0,thisObj->getShowOriginal())
+
+	//! [ESMF] self MinSG.setShowOriginal(bool)	
+	ES_MFUN(getTypeObject(),OccludeeRenderer,"setShowOriginal",1,1,(thisObj->setShowOriginal(parameter[0].toBool()),thisEObj))
 }
 
 }

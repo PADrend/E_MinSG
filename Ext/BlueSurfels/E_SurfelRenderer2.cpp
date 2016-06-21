@@ -43,6 +43,9 @@ void E_SurfelRenderer2::init(EScript::Namespace & lib) {
 
 	//! [ESMF] Bool surfelRenderer.getDebugHideSurfels()
 	ES_MFUN(typeObject,const SurfelRenderer2,"getDebugHideSurfels",0,0,thisObj->getDebugHideSurfels())
+	
+	//! [ESMF] Bool surfelRenderer.isDebugCameraEnabled()
+	ES_MFUN(typeObject,const SurfelRenderer2,"isDebugCameraEnabled",0,0,thisObj->isDebugCameraEnabled())
 
 	//! [ESMF] self surfelRenderer.setCountFactor( Number )
 	ES_MFUN(typeObject,SurfelRenderer2,"setCountFactor",1,1, (thisObj->setCountFactor(parameter[0].to<float>(rt)),thisEObj) )
@@ -55,6 +58,9 @@ void E_SurfelRenderer2::init(EScript::Namespace & lib) {
 	
 	//! [ESMF] self surfelRenderer.setDebugHideSufels( Bool )
 	ES_MFUN(typeObject,SurfelRenderer2,"setDebugHideSufels",1,1, (thisObj->setDebugHideSufels(parameter[0].toBool()),thisEObj) )
+	
+	//! [ESMF] self surfelRenderer.setDebugCameraEnabled( Bool )
+	ES_MFUN(typeObject,SurfelRenderer2,"setDebugCameraEnabled",1,1, (thisObj->setDebugCameraEnabled(parameter[0].toBool()),thisEObj) )
 }
 //---
 
