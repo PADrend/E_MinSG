@@ -50,7 +50,7 @@ void E_PhotonSampler::init(EScript::Namespace & lib) {
   ES_MFUN(typeObject,MinSG::ThesisStanislaw::PhotonSampler,"setSamplingStrategy",1,1, (thisObj->setSamplingStrategy( static_cast<uint8_t>(parameter[0].to<uint32_t>(rt)) ),thisObj))
   
   //! [ESMF] self PhotonSampler.resample()
-  ES_MFUN(typeObject,MinSG::ThesisStanislaw::PhotonSampler,"resample",0,0, (thisObj->resample(),thisObj))
+//  ES_MFUN(typeObject,MinSG::ThesisStanislaw::PhotonSampler,"resample",0,0, (thisObj->resample(),thisObj))
   
 	//! [ESMF] Texture|Void MinSG.TextureState.getTexture()
 	ES_MFUNCTION(typeObject, MinSG::ThesisStanislaw::PhotonSampler, "getPosTexture", 0,  0, {

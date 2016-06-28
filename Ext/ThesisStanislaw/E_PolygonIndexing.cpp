@@ -34,6 +34,9 @@ void E_PolygonIndexingState::init(EScript::Namespace & lib) {
 
   //! [ESMF] self PolygonIndexingState.setDebugOutput(bool)
   ES_MFUN(typeObject,MinSG::ThesisStanislaw::PolygonIndexingState,"setDebugOutput",1,1, (thisObj->setDebugOutput(parameter[0].toBool()),thisObj))
+  
+  //! [ESMF] self PolygonIndexingState.reupdatePolygonIDs()
+  ES_MFUN(typeObject,MinSG::ThesisStanislaw::PolygonIndexingState,"reupdatePolygonIDs",0,0, (thisObj->reupdatePolygonIDs(),thisObj))
 
 }
 //---
