@@ -33,6 +33,7 @@ void E_PhotonSampler::init(EScript::Namespace & lib) {
   declareConstant(&lib,getClassName(),typeObject);
   
   declareConstant(typeObject, "POISSON", EScript::Number::create(static_cast<uint8_t>(MinSG::ThesisStanislaw::PhotonSampler::Sampling::POISSON)));
+  declareConstant(typeObject, "UNIFORM", EScript::Number::create(static_cast<uint8_t>(MinSG::ThesisStanislaw::PhotonSampler::Sampling::UNIFORM)));
   
   //! [ESMF] new MinSG.PhotonSampler()
   ES_CTOR(typeObject,0,0,EScript::create(new MinSG::ThesisStanislaw::PhotonSampler))
