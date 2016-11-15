@@ -9,16 +9,18 @@
 
 #ifdef MINSG_EXT_THESISSTANISLAW
 
-#include <E_MinSG/Ext/ThesisStanislaw/E_PhotonRenderer.h>
+#include "E_PhotonRenderer.h"
 
-#include <MinSG/Ext/ThesisStanislaw/PhotonRenderer.h>
-#include <MinSG/Ext/ThesisStanislaw/PhotonSampler.h>
-#include <MinSG/Ext/ThesisStanislaw/LightPatchRenderer.h>
+#include <E_MinSG/Ext/ThesisStanislaw/E_PhotonSampler.h>
+#include <E_MinSG/Ext/ThesisStanislaw/E_LightPatchRenderer.h>
+
+#include <E_MinSG/Core/Nodes/E_Node.h> 
+#include <E_MinSG/Core/E_FrameContext.h>
+#include <E_MinSG/Core/E_RenderParam.h>
+
 #include <E_Rendering/Texture/E_Texture.h>
 
 #include <EScript/EScript.h>
-
-#include <E_MinSG/Core/Nodes/E_Node.h>
 
 using namespace EScript;
 using namespace MinSG;
@@ -27,8 +29,8 @@ namespace E_MinSG {
 namespace ThesisStanislaw{
   
 EScript::Type * E_PhotonRenderer::getTypeObject() {
-	// E_LightPatchRenderer ---|> E_State ---|> Object
-	static EScript::ERef<EScript::Type> typeObject = new EScript::Type(E_State::getTypeObject());
+	// E_PhotonRenderer ---|>  Object
+	static EScript::ERef<EScript::Type> typeObject = new EScript::Type(EScript::Object::getTypeObject());
 	return typeObject.get();
 }
 
@@ -41,55 +43,45 @@ void E_PhotonRenderer::init(EScript::Namespace & lib) {
   EScript::Type * typeObject = E_PhotonRenderer::getTypeObject();
   declareConstant(&lib,getClassName(),typeObject);
   
+  using namespace MinSG::ThesisStanislaw;  
   
   //! [ESMF] new MinSG.PhotonRenderer()
-  ES_CTOR(typeObject,0,0,EScript::create(new MinSG::ThesisStanislaw::PhotonRenderer))
+  ES_CTOR(typeObject,0,0,new E_PhotonRenderer)
+  
+  //! [ESMF] self PhotonRenderer.setShader(String, String)
+  ES_MFUN(typeObject,PhotonRenderer,"setShader",2,2, (thisObj->setShader( parameter[0].toString(), parameter[1].toString() ),thisEObj))
   
   //! [ESMF] self PhotonRenderer.setApproximatedScene(Node*)
-  ES_MFUN(typeObject,MinSG::ThesisStanislaw::PhotonRenderer,"setApproximatedScene",1,1, (thisObj->setApproximatedScene(parameter[0].to<MinSG::Node*>(rt)),thisObj))
+  ES_MFUN(typeObject,PhotonRenderer,"setApproximatedScene",1,1, (thisObj->setApproximatedScene(parameter[0].to<MinSG::Node*>(rt)),thisEObj))
   
   //! [ESMF] self PhotonRenderer.setLightPatchRenderer(LightPatchRenderer*)
-  ES_MFUN(typeObject,MinSG::ThesisStanislaw::PhotonRenderer,"setLightPatchRenderer",1,1, (thisObj->setLightPatchRenderer(dynamic_cast<MinSG::ThesisStanislaw::LightPatchRenderer*>(parameter[0].to<MinSG::State*>(rt))),thisObj))
+  ES_MFUN(typeObject,PhotonRenderer,"setLightPatchRenderer",1,1, (thisObj->setLightPatchRenderer(parameter[0].to<LightPatchRenderer*>(rt)),thisEObj))
   
   //! [ESMF] self PhotonRenderer.setPhotonSampler(PhotonSampler*)
-  ES_MFUN(typeObject,MinSG::ThesisStanislaw::PhotonRenderer,"setPhotonSampler",1,1, (thisObj->setPhotonSampler(dynamic_cast<MinSG::ThesisStanislaw::PhotonSampler*>(parameter[0].to<MinSG::State*>(rt))),thisObj))
+  ES_MFUN(typeObject,PhotonRenderer,"setPhotonSampler",1,1, (thisObj->setPhotonSampler(parameter[0].to<PhotonSampler*>(rt)),thisEObj))
   
   //! [ESMF] self PhotonRenderer.setSamplingResolution(Number, Number)
-  ES_MFUN(typeObject,MinSG::ThesisStanislaw::PhotonRenderer,"setSamplingResolution",2,2, (thisObj->setSamplingResolution( parameter[0].to<uint32_t>(rt), parameter[1].to<uint32_t>(rt) ),thisObj))
-  
-  //! [ESMF] self PhotonRenderer.setSpotLights(Array)
-  ES_MFUNCTION(typeObject, MinSG::ThesisStanislaw::PhotonRenderer, "setSpotLights", 1, 1, {
-    Array * array = assertType<EScript::Array>(rt, parameter[0]);
-    std::vector<MinSG::LightNode *> nodes;
-    for(auto & element : *array){
-      auto node = dynamic_cast<MinSG::LightNode*>(element.to<MinSG::Node*>(rt));
-      if(node) nodes.push_back(node);
-    }
-    thisObj->setSpotLights(nodes);
-  })
-  
+  ES_MFUN(typeObject,PhotonRenderer,"setSamplingResolution",2,2, (thisObj->setSamplingResolution( parameter[0].to<uint32_t>(rt), parameter[1].to<uint32_t>(rt) ),thisEObj))
+    
+  //! [ESMF] self PhotonRenderer.gatherLight(FrameContext, flags)
+  ES_MFUN(typeObject, PhotonRenderer, "gatherLight",1, 2, (thisObj->gatherLight(parameter[0].to<MinSG::FrameContext&>(rt), parameter[1].toUInt(0)), thisEObj))
+      
 	//! [ESMF] Texture|Void MinSG.TextureState.getTexture()
-	ES_MFUNCTION(typeObject, MinSG::ThesisStanislaw::PhotonRenderer, "getLightTexture", 0,  0, {
+	ES_MFUNCTION(typeObject, PhotonRenderer, "getLightTexture", 0,  0, {
 			auto t = thisObj->getLightTexture();
 			if(t.isNotNull())
 				return new E_Rendering::E_Texture(t.get());
 			else return EScript::create(nullptr);
 	})
 	//! [ESMF] Texture|Void MinSG.TextureState.getTexture()
-	ES_MFUNCTION(typeObject, MinSG::ThesisStanislaw::PhotonRenderer, "getNormalTexture", 0,  0, {
+	ES_MFUNCTION(typeObject, PhotonRenderer, "getNormalTexture", 0,  0, {
 			auto t = thisObj->getNormalTexture();
 			if(t.isNotNull())
 				return new E_Rendering::E_Texture(t.get());
 			else return EScript::create(nullptr);
 	})
-  addFactory<MinSG::ThesisStanislaw::PhotonRenderer,E_PhotonRenderer>();
 }
 //---
-
-E_PhotonRenderer::E_PhotonRenderer(MinSG::ThesisStanislaw::PhotonRenderer * _obj, EScript::Type * type):E_State(_obj,type?type:getTypeObject()){
-}
-
-E_PhotonRenderer::~E_PhotonRenderer() = default;
 
 }
 }

@@ -158,12 +158,10 @@ add_library(E_MinSG
 	Ext/ThesisJonas/E_Preprocessor.cpp
 	Ext/ThesisJonas/E_Renderer.cpp
 	Ext/ThesisPeter/E_LightNodeManager.cpp
-	Ext/ThesisStanislaw/E_ApproxSceneDebug.cpp
 	Ext/ThesisStanislaw/E_LightPatchRenderer.cpp
-	Ext/ThesisStanislaw/E_PhongGI.cpp
 	Ext/ThesisStanislaw/E_PhotonRenderer.cpp
 	Ext/ThesisStanislaw/E_PhotonSampler.cpp
-	Ext/ThesisStanislaw/E_PolygonIndexing.cpp
+	Ext/ThesisStanislaw/E_LibThesisStanislaw.cpp
 	Ext/Tools/E_DebugCamera.cpp
 	Ext/Tools/E_StatChart.cpp
 	Ext/TreeBuilder/E_TreeBuilder.cpp
