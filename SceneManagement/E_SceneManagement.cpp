@@ -54,7 +54,7 @@ void init(EScript::Namespace & lib){
 
 	//! [ESMF] ImportContext MinSG.SceneManagement.createImportContext( SceneManager, options = 0)
 	ES_FUN(ns,"createImportContext",1,2,
-		new E_ImportContext(createImportContext(parameter[0].to<SceneManager&>(rt), static_cast<importOption_t>(parameter[1].toInt(1)))))
+		new E_ImportContext(createImportContext(parameter[0].to<SceneManager&>(rt), static_cast<importOption_t>(parameter[1].toInt(0)))))
 		
 			
 	//! [ESMF] GroupNode sceneManager.loadCOLLADA( importContext,filename || SceneManager, filename, [importOptions])
