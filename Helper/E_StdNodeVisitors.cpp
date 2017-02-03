@@ -32,6 +32,7 @@
 #include <E_Geometry/E_Vec3.h>
 #include <E_Geometry/E_Box.h>
 #include <E_Geometry/E_Frustum.h>
+#include <E_Geometry/E_Ray3.h>
 
 using namespace EScript;
 using namespace MinSG;
@@ -88,6 +89,20 @@ void init_stdNodeVisitors(EScript::Namespace * lib) {
 	ES_FUNCTION(lib, "collectGeoNodesIntersectingBox", 2, 2, {
 		const auto nodes = collectGeoNodesIntersectingBox((parameter[0].to<MinSG::Node*>(rt)),
 														  parameter[1].to<const Geometry::Box&>(rt));
+		return getENodeArray(nodes.begin(), nodes.end());
+	})
+	
+	//! [ESF] Array collectGeoNodesIntersectingBox(root,(pos,dir|ray))
+	ES_FUNCTION(lib, "collectGeoNodesIntersectingRay", 2, 3, {
+		Geometry::Ray3 ray;
+		if(parameter.count() == 2) {
+			ray = parameter[1].to<const Geometry::Ray3&>(rt);
+		} else {
+			ray.setOrigin(parameter[1].to<const Geometry::Vec3&>(rt));
+			ray.setDirection(parameter[2].to<const Geometry::Vec3&>(rt));
+		}
+		const auto nodes = collectGeoNodesIntersectingRay((parameter[0].to<MinSG::Node*>(rt)),
+														  ray.getOrigin(), ray.getDirection());
 		return getENodeArray(nodes.begin(), nodes.end());
 	})
 	
