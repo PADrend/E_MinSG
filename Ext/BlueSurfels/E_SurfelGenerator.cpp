@@ -51,9 +51,13 @@ void E_SurfelGenerator::init(EScript::Namespace & lib) {
 												parameter[3].to<Util::PixelAccessor&>(rt));
 		static const EScript::StringId meshAttr("mesh");
 		static const EScript::StringId relativeCoveringAttr("relativeCovering");
+		static const EScript::StringId minDist("minDist");
+		static const EScript::StringId medianDist("medianDist");
 		EScript::ExtObject * result = new EScript::ExtObject;
-		result->setAttribute(meshAttr, EScript::create(surfelResult.first.get()));
-		result->setAttribute(relativeCoveringAttr, EScript::Number::create(surfelResult.second));
+		result->setAttribute(meshAttr, EScript::create(surfelResult.mesh));
+		result->setAttribute(relativeCoveringAttr, EScript::Number::create(0));
+		result->setAttribute(minDist, EScript::Number::create(surfelResult.minDist));
+		result->setAttribute(medianDist, EScript::Number::create(surfelResult.medianDist));
 		return result;
 	})
 
@@ -80,6 +84,44 @@ void E_SurfelGenerator::init(EScript::Namespace & lib) {
 					
 	//! [ESMF] self SurfelGenerator.setVertexDescription(VertexDescription)
 	ES_MFUN(typeObject,SurfelGenerator,"setVertexDescription",1,1,	(thisObj->setVertexDescription(parameter[0].to<const Rendering::VertexDescription&>(rt)),thisEObj))
+	
+	//! [ESMF] Map SurfelGenerator.setParameters(...)
+	ES_MFUNCTION(typeObject,SurfelGenerator,"setParameters",1,6,{
+		auto* m = parameter[0].toType<EScript::Map>();
+		if(parameter.count() == 1 && m) {
+			SurfelGenerator::Parameters params;
+			params.maxAbsSurfels = m->getValue("maxAbsSurfels") ? m->getValue("maxAbsSurfels")->toUInt() : 10000;
+			params.medianDistCount = m->getValue("medianDistCount") ? m->getValue("medianDistCount")->toUInt() : 1000;
+			params.samplesPerRound = m->getValue("samplesPerRound") ? m->getValue("samplesPerRound")->toUInt() : 160;
+			params.pureRandomStrategy = m->getValue("pureRandomStrategy") ? m->getValue("pureRandomStrategy")->toBool() : false;
+			params.guessSurfelSize = m->getValue("guessSurfelSize") ? m->getValue("guessSurfelSize")->toBool() : false;
+			params.benchmarkingEnabled = m->getValue("benchmarkingEnabled") ? m->getValue("benchmarkingEnabled")->toBool() : false;
+			thisObj->setParameters(params);
+		} else {
+			thisObj->setParameters({
+				parameter[0].toUInt(10000),
+				parameter[1].toUInt(1000),
+				parameter[2].toUInt(160),
+				parameter[3].toBool(false),
+				parameter[4].toBool(false),
+				parameter[5].toBool(false)
+			});
+		}
+		return thisEObj;
+	})
+		
+	//! [ESMF] Map SurfelGenerator.getParameters()
+	ES_MFUNCTION(typeObject,const SurfelGenerator,"getParameters",0,0,{
+		const auto p = thisObj->getParameters();		
+		EScript::Map* m = new EScript::Map;
+		m->setValue( EScript::create("maxAbsSurfels"), EScript::Number::create(p.maxAbsSurfels) );
+		m->setValue( EScript::create("medianDistCount"), EScript::Number::create(p.medianDistCount) );
+		m->setValue( EScript::create("samplesPerRound"), EScript::Number::create(p.samplesPerRound) );
+		m->setValue( EScript::create("pureRandomStrategy"), EScript::Number::create(p.pureRandomStrategy) );
+		m->setValue( EScript::create("guessSurfelSize"), EScript::Number::create(p.guessSurfelSize) );
+		m->setValue( EScript::create("benchmarkingEnabled"), EScript::Number::create(p.benchmarkingEnabled) );
+		return m;
+	})
 
 }
 }
