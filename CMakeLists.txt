@@ -62,7 +62,8 @@ add_library(E_MinSG
 	Ext/BlueSurfels/E_SurfelGenerator.cpp
 	Ext/BlueSurfels/E_StreamedSurfelGenerator.cpp
 	Ext/BlueSurfels/E_SurfelRenderer.cpp
-	Ext/BlueSurfels/E_SurfelRenderer2.cpp
+	Ext/BlueSurfels/E_SurfelRenderer_FixedSize.cpp
+	Ext/BlueSurfels/E_SurfelRenderer_Budget.cpp
 	Ext/ColorCubes/E_ColorCube.cpp
 	Ext/ColorCubes/E_ColorCubeRenderer.cpp
 	Ext/D3Fact/E_ClientUnit.cpp

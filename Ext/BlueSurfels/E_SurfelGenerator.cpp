@@ -1,7 +1,8 @@
 /*
 	This file is part of the MinSG library extension BlueSurfels.
-	Copyright (C) 2012-2013 Claudius J�hn <claudius@uni-paderborn.de>
+	Copyright (C) 2012-2013 Claudius Jähn <claudius@uni-paderborn.de>
 	Copyright (C) 2013 Ralf Petring <ralf@petring.net>
+	Copyright (C) 2016-2017 Sascha Brandt <myeti@mail.uni-paderborn.de>
 	
 	This library is subject to the terms of the Mozilla Public License, v. 2.0.
 	You should have received a copy of the MPL along with this library; see the 
@@ -71,11 +72,7 @@ void E_SurfelGenerator::init(EScript::Namespace & lib) {
 
 	//! [ESMF] Number SurfelGenerator.getMaxAbsSurfels()
 	ES_MFUN(typeObject,const SurfelGenerator,"getMaxAbsSurfels",0,0,		thisObj->getMaxAbsSurfels())
-
-	//! [ESMF] Number SurfelGenerator.getMedianOfNthClosestNeighbours(Rendering::Mesh& mesh, size_t prefixLength, size_t nThNeighbour)
-	ES_MFUN(typeObject,const SurfelGenerator,"getMedianOfNthClosestNeighbours",3,3,		
-			thisObj->getMedianOfNthClosestNeighbours(*parameter[0].to<Rendering::Mesh*>(rt),parameter[1].to<size_t>(rt),parameter[2].to<size_t>(rt)))
-				
+	
 	//! [ESMF] self SurfelGenerator.setMaxAbsSurfels(Number)
 	ES_MFUN(typeObject,SurfelGenerator,"setMaxAbsSurfels",1,1,				(thisObj->setMaxAbsSurfels(parameter[0].toUInt()),thisEObj))
 				
@@ -122,7 +119,23 @@ void E_SurfelGenerator::init(EScript::Namespace & lib) {
 		m->setValue( EScript::create("benchmarkingEnabled"), EScript::Number::create(p.benchmarkingEnabled) );
 		return m;
 	})
-
+	
+	//! [ESMF] ExtObject SurfelGenerator.createSurfelsFromMesh(Rendering.Mesh)
+	ES_MFUNCTION(typeObject,SurfelGenerator,"createSurfelsFromMesh",1,1,{
+		const auto surfelResult = thisObj->createSurfelsFromMesh(*parameter[0].to<Rendering::Mesh*>(rt));
+		static const EScript::StringId meshAttr("mesh");
+		static const EScript::StringId relativeCoveringAttr("relativeCovering");
+		static const EScript::StringId minDist("minDist");
+		static const EScript::StringId medianDist("medianDist");
+		EScript::ExtObject * result = new EScript::ExtObject;
+		result->setAttribute(meshAttr, EScript::create(surfelResult.mesh));
+		result->setAttribute(relativeCoveringAttr, EScript::Number::create(0));
+		result->setAttribute(minDist, EScript::Number::create(surfelResult.minDist));
+		result->setAttribute(medianDist, EScript::Number::create(surfelResult.medianDist));
+		return result;
+	})
+	
+	
 }
 }
 

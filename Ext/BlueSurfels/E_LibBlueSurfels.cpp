@@ -17,7 +17,8 @@
 #include "E_SurfelGenerator.h"
 #include "E_StreamedSurfelGenerator.h"
 #include "E_SurfelRenderer.h"
-#include "E_SurfelRenderer2.h"
+#include "E_SurfelRenderer_FixedSize.h"
+#include "E_SurfelRenderer_Budget.h"
 
 namespace E_MinSG{
 
@@ -28,7 +29,8 @@ void BlueSurfels::init(EScript::Namespace & lib) {
 	BlueSurfels::E_SurfelGenerator::init(*nsBlueSurfels);
 	BlueSurfels::E_StreamedSurfelGenerator::init(*nsBlueSurfels);
 	BlueSurfels::E_SurfelRenderer::init(lib); // namespace MinSG
-	BlueSurfels::E_SurfelRenderer2::init(lib); // namespace MinSG
+	BlueSurfels::E_SurfelRendererFixedSize::init(lib); // namespace MinSG
+	BlueSurfels::E_SurfelRendererBudget::init(lib); // namespace MinSG
 
 	//! [Number*] MinSG.BlueSurfels.getProgressiveMinimalMinimalVertexDistances(Rendering.Mesh)
 	ES_FUN(nsBlueSurfels,"getProgressiveMinimalMinimalVertexDistances",1,1,
@@ -37,7 +39,11 @@ void BlueSurfels::init(EScript::Namespace & lib) {
 	//! [Number*] MinSG.BlueSurfels.getMinimalVertexDistances(Rendering.Mesh,int)
 	ES_FUN(nsBlueSurfels,"getMinimalVertexDistances",2,2,
 			EScript::Array::create(MinSG::BlueSurfels::getMinimalVertexDistances(*parameter[0].to<Rendering::Mesh*>(rt),parameter[1].to<uint32_t>(rt))))
-
+	
+	//! [ESMF] Number MinSG.BlueSurfels.getMedianOfNthClosestNeighbours(Rendering::Mesh& mesh, size_t prefixLength, size_t nThNeighbour)
+	ES_FUN(nsBlueSurfels,"getMedianOfNthClosestNeighbours",3,3,		
+			MinSG::BlueSurfels::getMedianOfNthClosestNeighbours(*parameter[0].to<Rendering::Mesh*>(rt),parameter[1].to<size_t>(rt),parameter[2].to<size_t>(rt)))
+				
 
 }
 
