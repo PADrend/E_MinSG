@@ -10,6 +10,7 @@
 #ifdef MINSG_EXT_BLUE_SURFELS
 
 #include "E_SurfelRenderer_FixedSize.h"
+#include "../../Core/E_FrameContext.h"
 #include "../../ELibMinSG.h"
 #include "../ELibMinSGExt.h"
 #include <EScript/EScript.h>
@@ -47,6 +48,9 @@ void E_SurfelRendererFixedSize::init(EScript::Namespace & lib) {
 	
 	//! [ESMF] Bool surfelRenderer.isDebugCameraEnabled()
 	ES_MFUN(typeObject,const SurfelRendererFixedSize,"isDebugCameraEnabled",0,0,thisObj->isDebugCameraEnabled())
+	
+	//! [ESMF] Bool surfelRenderer.getDeferredSurfels()
+	ES_MFUN(typeObject,const SurfelRendererFixedSize,"getDeferredSurfels",0,0,thisObj->getDeferredSurfels())
 
 	//! [ESMF] self surfelRenderer.setCountFactor( Number )
 	ES_MFUN(typeObject,SurfelRendererFixedSize,"setCountFactor",1,1, (thisObj->setCountFactor(parameter[0].to<float>(rt)),thisEObj) )
@@ -62,6 +66,13 @@ void E_SurfelRendererFixedSize::init(EScript::Namespace & lib) {
 	
 	//! [ESMF] self surfelRenderer.setDebugCameraEnabled( Bool )
 	ES_MFUN(typeObject,SurfelRendererFixedSize,"setDebugCameraEnabled",1,1, (thisObj->setDebugCameraEnabled(parameter[0].toBool()),thisEObj) )
+	
+	//! [ESMF] self surfelRenderer.setDeferredSurfels( Bool )
+	ES_MFUN(typeObject,SurfelRendererFixedSize,"setDeferredSurfels",1,1, (thisObj->setDeferredSurfels(parameter[0].toBool()),thisEObj) )
+
+	//! [ESMF] self surfelRenderer.drawSurfels( FrameContext )
+	ES_MFUN(typeObject,SurfelRendererFixedSize,"drawSurfels",1,1, (thisObj->drawSurfels(parameter[0].to<MinSG::FrameContext&>(rt)),thisEObj) )
+	
 }
 //---
 
