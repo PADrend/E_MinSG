@@ -48,6 +48,12 @@ void E_SurfelRendererBudget::init(EScript::Namespace & lib) {
 	//! [ESMF] Bool surfelRenderer.getDeferredSurfels()
 	ES_MFUN(typeObject,const SurfelRendererBudget,"getDeferredSurfels",0,0,thisObj->getDeferredSurfels())
 	
+	//! [ESMF] Bool surfelRenderer.getDebugAssignment()
+	ES_MFUN(typeObject,const SurfelRendererBudget,"getDebugAssignment",0,0,thisObj->getDebugAssignment())
+	
+	//! [ESMF] Bool surfelRenderer.getMaxIncrement()
+	ES_MFUN(typeObject,const SurfelRendererBudget,"getMaxIncrement",0,0,thisObj->getMaxIncrement())
+	
 	//! [ESMF] self surfelRenderer.setMaxSurfelSize( Number )
 	ES_MFUN(typeObject,SurfelRendererBudget,"setMaxSurfelSize",1,1, (thisObj->setMaxSurfelSize(parameter[0].toFloat()),thisEObj) )
 	
@@ -63,8 +69,20 @@ void E_SurfelRendererBudget::init(EScript::Namespace & lib) {
 	//! [ESMF] self surfelRenderer.setDeferredSurfels( Bool )
 	ES_MFUN(typeObject,SurfelRendererBudget,"setDeferredSurfels",1,1, (thisObj->setDeferredSurfels(parameter[0].toBool()),thisEObj) )
 	
+	//! [ESMF] self surfelRenderer.setDebugAssignment( Bool )
+	ES_MFUN(typeObject,SurfelRendererBudget,"setDebugAssignment",1,1, (thisObj->setDebugAssignment(parameter[0].toBool()),thisEObj) )
+	
+	//! [ESMF] self surfelRenderer.setMaxIncrement( Number )
+	ES_MFUN(typeObject,SurfelRendererBudget,"setMaxIncrement",1,1, (thisObj->setMaxIncrement(parameter[0].toDouble()),thisEObj) )
+	
 	//! [ESMF] self surfelRenderer.drawSurfels( FrameContext, [Number, Number] )
 	ES_MFUN(typeObject,SurfelRendererBudget,"drawSurfels",1,3, (thisObj->drawSurfels(parameter[0].to<MinSG::FrameContext&>(rt), parameter[1].toFloat(0), parameter[2].toFloat(1024)),thisEObj) )
+		
+	//! [ESMF] self surfelRenderer.assignmentStep( )
+	ES_MFUN(typeObject,SurfelRendererBudget,"assignmentStep",0,0, (thisObj->assignmentStep(),thisEObj) )
+		
+	//! [ESMF] self surfelRenderer.clearAssignment( )
+	ES_MFUN(typeObject,SurfelRendererBudget,"clearAssignment",0,0, (thisObj->clearAssignment(),thisEObj) )
 }
 //---
 
