@@ -37,38 +37,50 @@ void E_SurfelRendererFixedSize::init(EScript::Namespace & lib) {
 	//! [ESMF] Number surfelRenderer.getCountFactor()
 	ES_MFUN(typeObject,const SurfelRendererFixedSize,"getCountFactor",0,0,thisObj->getCountFactor())
 
+	//! [ESMF] self surfelRenderer.setCountFactor( Number )
+	ES_MFUN(typeObject,SurfelRendererFixedSize,"setCountFactor",1,1, (thisObj->setCountFactor(parameter[0].to<float>(rt)),thisEObj) )
+
 	//! [ESMF] Number surfelRenderer.getSizeFactor()
 	ES_MFUN(typeObject,const SurfelRendererFixedSize,"getSizeFactor",0,0,thisObj->getSizeFactor())
 
+	//! [ESMF] self surfelRenderer.setSizeFactor( Number )
+	ES_MFUN(typeObject,SurfelRendererFixedSize,"setSizeFactor",1,1, (thisObj->setSizeFactor(parameter[0].to<float>(rt)),thisEObj) )
+
 	//! [ESMF] Number surfelRenderer.getMaxSurfelSize()
 	ES_MFUN(typeObject,const SurfelRendererFixedSize,"getMaxSurfelSize",0,0,thisObj->getMaxSurfelSize())
+	
+	//! [ESMF] self surfelRenderer.setMaxSurfelSize( Number )
+	ES_MFUN(typeObject,SurfelRendererFixedSize,"setMaxSurfelSize",1,1, (thisObj->setMaxSurfelSize(parameter[0].to<float>(rt)),thisEObj) )
 
 	//! [ESMF] Bool surfelRenderer.getDebugHideSurfels()
 	ES_MFUN(typeObject,const SurfelRendererFixedSize,"getDebugHideSurfels",0,0,thisObj->getDebugHideSurfels())
 	
-	//! [ESMF] Bool surfelRenderer.isDebugCameraEnabled()
-	ES_MFUN(typeObject,const SurfelRendererFixedSize,"isDebugCameraEnabled",0,0,thisObj->isDebugCameraEnabled())
-	
-	//! [ESMF] Bool surfelRenderer.getDeferredSurfels()
-	ES_MFUN(typeObject,const SurfelRendererFixedSize,"getDeferredSurfels",0,0,thisObj->getDeferredSurfels())
-
-	//! [ESMF] self surfelRenderer.setCountFactor( Number )
-	ES_MFUN(typeObject,SurfelRendererFixedSize,"setCountFactor",1,1, (thisObj->setCountFactor(parameter[0].to<float>(rt)),thisEObj) )
-
-	//! [ESMF] self surfelRenderer.setSizeFactor( Number )
-	ES_MFUN(typeObject,SurfelRendererFixedSize,"setSizeFactor",1,1, (thisObj->setSizeFactor(parameter[0].to<float>(rt)),thisEObj) )
-	
-	//! [ESMF] self surfelRenderer.setMaxSurfelSize( Number )
-	ES_MFUN(typeObject,SurfelRendererFixedSize,"setMaxSurfelSize",1,1, (thisObj->setMaxSurfelSize(parameter[0].to<float>(rt)),thisEObj) )
-	
 	//! [ESMF] self surfelRenderer.setDebugHideSurfels( Bool )
 	ES_MFUN(typeObject,SurfelRendererFixedSize,"setDebugHideSurfels",1,1, (thisObj->setDebugHideSurfels(parameter[0].toBool()),thisEObj) )
+	
+	//! [ESMF] Bool surfelRenderer.isDebugCameraEnabled()
+	ES_MFUN(typeObject,const SurfelRendererFixedSize,"isDebugCameraEnabled",0,0,thisObj->isDebugCameraEnabled())
 	
 	//! [ESMF] self surfelRenderer.setDebugCameraEnabled( Bool )
 	ES_MFUN(typeObject,SurfelRendererFixedSize,"setDebugCameraEnabled",1,1, (thisObj->setDebugCameraEnabled(parameter[0].toBool()),thisEObj) )
 	
+	//! [ESMF] Bool surfelRenderer.getDeferredSurfels()
+	ES_MFUN(typeObject,const SurfelRendererFixedSize,"getDeferredSurfels",0,0,thisObj->getDeferredSurfels())
+	
 	//! [ESMF] self surfelRenderer.setDeferredSurfels( Bool )
 	ES_MFUN(typeObject,SurfelRendererFixedSize,"setDeferredSurfels",1,1, (thisObj->setDeferredSurfels(parameter[0].toBool()),thisEObj) )
+	
+	//! [ESMF] Bool surfelRenderer.isAdaptive()
+	ES_MFUN(typeObject,const SurfelRendererFixedSize,"isAdaptive",0,0,thisObj->isAdaptive())
+	
+	//! [ESMF] self surfelRenderer.setDeferredSurfels( Bool )
+	ES_MFUN(typeObject,SurfelRendererFixedSize,"setAdaptive",1,1, (thisObj->setAdaptive(parameter[0].toBool()),thisEObj) )
+	
+	//! [ESMF] Bool surfelRenderer.getMaxFrameTime()
+	ES_MFUN(typeObject,const SurfelRendererFixedSize,"getMaxFrameTime",0,0,thisObj->getMaxFrameTime())
+	
+	//! [ESMF] self surfelRenderer.setMaxFrameTime( Number )
+	ES_MFUN(typeObject,SurfelRendererFixedSize,"setMaxFrameTime",1,1, (thisObj->setMaxFrameTime(parameter[0].toFloat()),thisEObj) )
 
 	//! [ESMF] self surfelRenderer.drawSurfels( FrameContext, [Number, Number] )
 	ES_MFUN(typeObject,SurfelRendererFixedSize,"drawSurfels",1,3, (thisObj->drawSurfels(parameter[0].to<MinSG::FrameContext&>(rt), parameter[1].toFloat(0), parameter[2].toFloat(1024)),thisEObj) )
