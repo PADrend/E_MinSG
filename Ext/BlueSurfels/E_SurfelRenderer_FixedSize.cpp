@@ -46,6 +46,12 @@ void E_SurfelRendererFixedSize::init(EScript::Namespace & lib) {
 	//! [ESMF] self surfelRenderer.setSizeFactor( Number )
 	ES_MFUN(typeObject,SurfelRendererFixedSize,"setSizeFactor",1,1, (thisObj->setSizeFactor(parameter[0].to<float>(rt)),thisEObj) )
 
+	//! [ESMF] Number surfelRenderer.getSurfelSize()
+	ES_MFUN(typeObject,const SurfelRendererFixedSize,"getSurfelSize",0,0,thisObj->getSurfelSize())
+
+	//! [ESMF] self surfelRenderer.setSurfelSize( Number )
+	ES_MFUN(typeObject,SurfelRendererFixedSize,"setSurfelSize",1,1, (thisObj->setSurfelSize(parameter[0].to<float>(rt)),thisEObj) )
+
 	//! [ESMF] Number surfelRenderer.getMaxSurfelSize()
 	ES_MFUN(typeObject,const SurfelRendererFixedSize,"getMaxSurfelSize",0,0,thisObj->getMaxSurfelSize())
 	
@@ -85,6 +91,34 @@ void E_SurfelRendererFixedSize::init(EScript::Namespace & lib) {
 	//! [ESMF] self surfelRenderer.drawSurfels( FrameContext, [Number, Number] )
 	ES_MFUN(typeObject,SurfelRendererFixedSize,"drawSurfels",1,3, (thisObj->drawSurfels(parameter[0].to<MinSG::FrameContext&>(rt), parameter[1].toFloat(0), parameter[2].toFloat(1024)),thisEObj) )
 	
+	//! [ESMF] Bool surfelRenderer.isFoveated()
+	ES_MFUN(typeObject,const SurfelRendererFixedSize,"isFoveated",0,0,thisObj->isFoveated())
+	
+	//! [ESMF] self surfelRenderer.setFoveated( Bool )
+	ES_MFUN(typeObject,SurfelRendererFixedSize,"setFoveated",1,1, (thisObj->setFoveated(parameter[0].toBool()),thisEObj) )
+	
+	//! [ESMF] Bool surfelRenderer.getFoveatZones()
+	ES_MFUNCTION(typeObject,const SurfelRendererFixedSize,"getFoveatZones",0,0,{
+		auto zones = thisObj->getFoveatZones();
+		auto a = EScript::Array::create();
+		for(const auto& zone : zones) {
+			a->pushBack(EScript::Number::create(zone.first));
+			a->pushBack(EScript::Number::create(zone.second));
+		}
+		return a;
+	})
+	
+	//! [ESMF] self surfelRenderer.setFoveatZones( Array )
+	ES_MFUNCTION(typeObject,SurfelRendererFixedSize,"setFoveatZones",1,1, {
+		auto a = parameter[0].to<EScript::Array*>(rt);
+		auto zones = thisObj->getFoveatZones();
+		zones.clear();
+		for(uint32_t i=1; i<a->count(); i+=2) {
+			zones.push_back({a->get(i-1)->toFloat(), a->get(i)->toFloat()});
+		}
+		thisObj->setFoveatZones(zones);
+		return thisEObj;
+	})
 }
 //---
 
