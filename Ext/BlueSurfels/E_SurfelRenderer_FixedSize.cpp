@@ -97,6 +97,13 @@ void E_SurfelRendererFixedSize::init(EScript::Namespace & lib) {
 	//! [ESMF] self surfelRenderer.setFoveated( Bool )
 	ES_MFUN(typeObject,SurfelRendererFixedSize,"setFoveated",1,1, (thisObj->setFoveated(parameter[0].toBool()),thisEObj) )
 	
+	//! [ESMF] Bool surfelRenderer.getDebugFoveated()
+	ES_MFUN(typeObject,const SurfelRendererFixedSize,"getDebugFoveated",0,0,thisObj->getDebugFoveated())
+	
+	//! [ESMF] self surfelRenderer.setDebugFoveated( Bool )
+	ES_MFUN(typeObject,SurfelRendererFixedSize,"setDebugFoveated",1,1, (thisObj->setDebugFoveated(parameter[0].toBool()),thisEObj) )
+	
+	
 	//! [ESMF] Bool surfelRenderer.getFoveatZones()
 	ES_MFUNCTION(typeObject,const SurfelRendererFixedSize,"getFoveatZones",0,0,{
 		auto zones = thisObj->getFoveatZones();
