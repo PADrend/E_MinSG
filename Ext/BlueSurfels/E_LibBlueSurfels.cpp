@@ -10,18 +10,20 @@
 #ifdef MINSG_EXT_BLUE_SURFELS
 
 #include "E_LibBlueSurfels.h"
-#include <EScript/Basics.h>
-#include <EScript/StdObjects.h>
-#include <MinSG/Ext/BlueSurfels/SurfelAnalysis.h>
-#include <E_Rendering/Mesh/E_Mesh.h>
-#include <E_MinSG/Core/E_FrameContext.h>
-#include <E_MinSG/Core/Nodes/E_Node.h>
 
 #include "E_SurfelGenerator.h"
 #include "E_StreamedSurfelGenerator.h"
 #include "E_SurfelRenderer.h"
 #include "E_SurfelRenderer_FixedSize.h"
 #include "E_SurfelRenderer_Budget.h"
+
+#include "../../Core/E_FrameContext.h"
+#include "../../Core/Nodes/E_Node.h"
+
+#include <EScript/Basics.h>
+#include <EScript/StdObjects.h>
+#include <MinSG/Ext/BlueSurfels/SurfelAnalysis.h>
+#include <E_Rendering/Mesh/E_Mesh.h>
 
 namespace E_MinSG{
 
