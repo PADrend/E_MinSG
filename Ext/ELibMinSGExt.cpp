@@ -165,6 +165,11 @@
 #include "ParticleSystem/E_ParticleAnimator.h"
 #endif // MINSG_EXT_PARTICLE
 
+// [ext:PathTracing]
+#ifdef MINSG_EXT_PATHTRACING
+#include "PathTracing/E_PathTracer.h"
+#endif  // MINSG_EXT_PATHTRACING
+
 // [ext:Physics]
 #ifdef MINSG_EXT_PHYSICS
     #include "Physics/E_PhysicWorld.h"
@@ -598,6 +603,11 @@ void init_ext(EScript::Namespace * /*globals*/,EScript::Namespace * lib) {
 	E_ParticleReflectionAffector::init(*lib);
 	E_ParticleAnimator::init(*lib);
 #endif // MINSG_EXT_PARTICLE
+
+// [ext:PathTracing]
+#ifdef MINSG_EXT_PATHTRACING
+	E_PathTracer::init(*lib);
+#endif  // MINSG_EXT_PATHTRACING
 
     // [ext:Physics]
     #ifdef MINSG_EXT_PHYSICS

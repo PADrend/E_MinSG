@@ -123,6 +123,7 @@ add_library(E_MinSG
 	Ext/ParticleSystem/E_ParticleReflectionAffector.cpp
 	Ext/ParticleSystem/E_ParticleStates.cpp
 	Ext/ParticleSystem/E_ParticleSystemNode.cpp
+	Ext/PathTracing/E_PathTracer.cpp
 	Ext/Physics/E_PhysicWorld.cpp
 	Ext/PipelineStatistics/E_Collector.cpp
 	Ext/RTree/E_RTree.cpp

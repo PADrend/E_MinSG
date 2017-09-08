@@ -109,6 +109,9 @@ void E_State::init(EScript::Namespace & lib) {
 		}
 		return E_Util::E_Utils::convertGenericAttributeToEScriptObject(attribute);
 	})
+	
+	//!	[ESMF] Map MinSG.State.getStateAttributes()
+	ES_MFUN(typeObject,const State,"getStateAttributes",0,0,E_Util::E_Utils::convertGenericAttributeToEScriptObject(thisObj->getAttributes()))
 
 	//!	[ESMF] Bool MinSG.State.isActive()	
 	ES_MFUN(typeObject, const State, "isActive", 0,  0,thisObj->isActive())

@@ -121,8 +121,8 @@ void E_SurfelGenerator::init(EScript::Namespace & lib) {
 	})
 	
 	//! [ESMF] ExtObject SurfelGenerator.createSurfelsFromMesh(Rendering.Mesh)
-	ES_MFUNCTION(typeObject,SurfelGenerator,"createSurfelsFromMesh",1,1,{
-		const auto surfelResult = thisObj->createSurfelsFromMesh(*parameter[0].to<Rendering::Mesh*>(rt));
+	ES_MFUNCTION(typeObject,SurfelGenerator,"createSurfelsFromMesh",1,2,{
+		const auto surfelResult = thisObj->createSurfelsFromMesh(*parameter[0].to<Rendering::Mesh*>(rt), parameter[1].toInt(-1));
 		static const EScript::StringId meshAttr("mesh");
 		static const EScript::StringId relativeCoveringAttr("relativeCovering");
 		static const EScript::StringId minDist("minDist");
