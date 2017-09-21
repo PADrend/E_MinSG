@@ -13,6 +13,7 @@
 
 #include <EScript/Objects/ExtReferenceObject.h>
 #include <MinSG/Ext/PathTracing/PathTracer.h>
+#include <MinSG/Ext/PathTracing/Light.h>
 
 
 namespace EScript {
@@ -27,22 +28,24 @@ namespace E_MinSG{
 		E_PathTracer ---|> EScript::ExtReferenceObject<MinSG::PathTracer>
 			|
 			--------------> MinSG::PathTracer		*/
-class E_PathTracer : public EScript::ExtReferenceObject<MinSG::PathTracing::PathTracer, EScript::Policies::SameEObjects_ComparePolicy> {
+class E_PathTracer : public EScript::ExtReferenceObject<std::unique_ptr<MinSG::PathTracing::PathTracer>, EScript::Policies::SameEObjects_ComparePolicy> {
 		ES_PROVIDES_TYPE_NAME(PathTracer)
 	public:
 		static EScript::Type * getTypeObject();
 		static void init(EScript::Namespace & lib);
 
-		E_PathTracer(EScript::Type * type=nullptr) : 
-				ExtReferenceObject(MinSG::PathTracing::PathTracer(), type ? type : E_PathTracer::getTypeObject()) {}
+		E_PathTracer(MinSG::PathTracing::PathTracer* pathtracer, EScript::Type * type=nullptr) : 
+				ExtReferenceObject(type ? type : E_PathTracer::getTypeObject(), pathtracer) {}
 				
 		virtual ~E_PathTracer() {}
-
+		
+		const MinSG::PathTracing::PathTracer * operator*()const	{	return ref().get();	}
+		MinSG::PathTracing::PathTracer * operator*()				{	return ref().get();	}
 };
 }
 
 
-ES_CONV_EOBJ_TO_OBJ(E_MinSG::E_PathTracer,	MinSG::PathTracing::PathTracer*, &(**eObj))
+ES_CONV_EOBJ_TO_OBJ(E_MinSG::E_PathTracer,	MinSG::PathTracing::PathTracer*, **eObj)
 
 #endif // E_MINSG_E_PATHTRACER_H_
 #endif // MINSG_EXT_PATHTRACING
