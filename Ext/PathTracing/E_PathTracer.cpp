@@ -118,6 +118,11 @@ void E_PathTracer::init(EScript::Namespace & lib) {
 	//! [ESMF] self PathTracer.setThreadCount(Number count)
 	ES_MFUN(typeObject,PathTracer,"setThreadCount",1,1,
 				(thisObj->setThreadCount(parameter[0].toUInt()),thisEObj))
+
+	// void setTileSize(uint32_t size)
+	//! [ESMF] self PathTracer.setTileSize(Number size)
+	ES_MFUN(typeObject,PathTracer,"setTileSize",1,1,
+				(thisObj->setTileSize(parameter[0].toUInt()),thisEObj))
 }
 
 }
