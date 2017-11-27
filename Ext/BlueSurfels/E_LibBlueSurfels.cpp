@@ -12,7 +12,6 @@
 #include "E_LibBlueSurfels.h"
 
 #include "E_SurfelGenerator.h"
-#include "E_StreamedSurfelGenerator.h"
 #include "E_SurfelRenderer.h"
 #include "E_SurfelRenderer_FixedSize.h"
 #include "E_SurfelRenderer_Budget.h"
@@ -32,7 +31,6 @@ void BlueSurfels::init(EScript::Namespace & lib) {
 	declareConstant(&lib,"BlueSurfels",nsBlueSurfels);
 	
 	BlueSurfels::E_SurfelGenerator::init(*nsBlueSurfels);
-	BlueSurfels::E_StreamedSurfelGenerator::init(*nsBlueSurfels);
 	BlueSurfels::E_SurfelRenderer::init(lib); // namespace MinSG
 	BlueSurfels::E_SurfelRendererFixedSize::init(lib); // namespace MinSG
 	BlueSurfels::E_SurfelRendererBudget::init(lib); // namespace MinSG

@@ -60,7 +60,6 @@ add_library(E_MinSG
 	Ext/Behaviours/E_TimedBehaviourDecorator.cpp
 	Ext/BlueSurfels/E_LibBlueSurfels.cpp
 	Ext/BlueSurfels/E_SurfelGenerator.cpp
-	Ext/BlueSurfels/E_StreamedSurfelGenerator.cpp
 	Ext/BlueSurfels/E_SurfelRenderer.cpp
 	Ext/BlueSurfels/E_SurfelRenderer_FixedSize.cpp
 	Ext/BlueSurfels/E_SurfelRenderer_Budget.cpp

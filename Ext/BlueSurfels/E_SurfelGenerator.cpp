@@ -44,19 +44,16 @@ void E_SurfelGenerator::init(EScript::Namespace & lib) {
 	ES_MFUN(typeObject,SurfelGenerator,"clearBenchmarkResults",0,0,			(thisObj->clearBenchmarkResults(),thisEObj))
 	
 	//! [ESMF] ExtObject SurfelGenerator.createSurfels(PixelAccessor,PixelAccessor,PixelAccessor,PixelAccessor)
-	ES_MFUNCTION(typeObject,SurfelGenerator,"createSurfels",4,4,{
+	ES_MFUNCTION(typeObject,SurfelGenerator,"createSurfels",3,3,{
 		const auto surfelResult = thisObj->createSurfels(
 												parameter[0].to<Util::PixelAccessor&>(rt),
 												parameter[1].to<Util::PixelAccessor&>(rt),
-												parameter[2].to<Util::PixelAccessor&>(rt),
-												parameter[3].to<Util::PixelAccessor&>(rt));
+												parameter[2].to<Util::PixelAccessor&>(rt));
 		static const EScript::StringId meshAttr("mesh");
-		static const EScript::StringId relativeCoveringAttr("relativeCovering");
 		static const EScript::StringId minDist("minDist");
 		static const EScript::StringId medianDist("medianDist");
 		EScript::ExtObject * result = new EScript::ExtObject;
 		result->setAttribute(meshAttr, EScript::create(surfelResult.mesh));
-		result->setAttribute(relativeCoveringAttr, EScript::Number::create(0));
 		result->setAttribute(minDist, EScript::Number::create(surfelResult.minDist));
 		result->setAttribute(medianDist, EScript::Number::create(surfelResult.medianDist));
 		return result;
@@ -93,6 +90,7 @@ void E_SurfelGenerator::init(EScript::Namespace & lib) {
 			params.pureRandomStrategy = m->getValue("pureRandomStrategy") ? m->getValue("pureRandomStrategy")->toBool() : false;
 			params.guessSurfelSize = m->getValue("guessSurfelSize") ? m->getValue("guessSurfelSize")->toBool() : false;
 			params.benchmarkingEnabled = m->getValue("benchmarkingEnabled") ? m->getValue("benchmarkingEnabled")->toBool() : false;
+			params.seed = m->getValue("seed") ? m->getValue("seed")->toUInt() : 0;
 			thisObj->setParameters(params);
 		} else {
 			thisObj->setParameters({
@@ -101,7 +99,8 @@ void E_SurfelGenerator::init(EScript::Namespace & lib) {
 				parameter[2].toUInt(160),
 				parameter[3].toBool(false),
 				parameter[4].toBool(false),
-				parameter[5].toBool(false)
+				parameter[5].toBool(false),
+				parameter[6].toUInt(0)
 			});
 		}
 		return thisEObj;
@@ -114,22 +113,21 @@ void E_SurfelGenerator::init(EScript::Namespace & lib) {
 		m->setValue( EScript::create("maxAbsSurfels"), EScript::Number::create(p.maxAbsSurfels) );
 		m->setValue( EScript::create("medianDistCount"), EScript::Number::create(p.medianDistCount) );
 		m->setValue( EScript::create("samplesPerRound"), EScript::Number::create(p.samplesPerRound) );
-		m->setValue( EScript::create("pureRandomStrategy"), EScript::Number::create(p.pureRandomStrategy) );
-		m->setValue( EScript::create("guessSurfelSize"), EScript::Number::create(p.guessSurfelSize) );
-		m->setValue( EScript::create("benchmarkingEnabled"), EScript::Number::create(p.benchmarkingEnabled) );
+		m->setValue( EScript::create("pureRandomStrategy"), EScript::Bool::create(p.pureRandomStrategy) );
+		m->setValue( EScript::create("guessSurfelSize"), EScript::Bool::create(p.guessSurfelSize) );
+		m->setValue( EScript::create("benchmarkingEnabled"), EScript::Bool::create(p.benchmarkingEnabled) );
+		m->setValue( EScript::create("seed"), EScript::Number::create(p.seed) );
 		return m;
 	})
 	
 	//! [ESMF] ExtObject SurfelGenerator.createSurfelsFromMesh(Rendering.Mesh)
-	ES_MFUNCTION(typeObject,SurfelGenerator,"createSurfelsFromMesh",1,2,{
-		const auto surfelResult = thisObj->createSurfelsFromMesh(*parameter[0].to<Rendering::Mesh*>(rt), parameter[1].toInt(-1));
+	ES_MFUNCTION(typeObject,SurfelGenerator,"createSurfelsFromMesh",1,1,{
+		const auto surfelResult = thisObj->createSurfelsFromMesh(*parameter[0].to<Rendering::Mesh*>(rt));
 		static const EScript::StringId meshAttr("mesh");
-		static const EScript::StringId relativeCoveringAttr("relativeCovering");
 		static const EScript::StringId minDist("minDist");
 		static const EScript::StringId medianDist("medianDist");
 		EScript::ExtObject * result = new EScript::ExtObject;
 		result->setAttribute(meshAttr, EScript::create(surfelResult.mesh));
-		result->setAttribute(relativeCoveringAttr, EScript::Number::create(0));
 		result->setAttribute(minDist, EScript::Number::create(surfelResult.minDist));
 		result->setAttribute(medianDist, EScript::Number::create(surfelResult.medianDist));
 		return result;
