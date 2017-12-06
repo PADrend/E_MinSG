@@ -39,6 +39,15 @@ void E_ShadowState::init(EScript::Namespace & lib) {
 
 	//! [ESMF] self ShadowState.setLight(LightNode)
 	ES_MFUN(typeObject,ShadowState, "setLight", 1, 1, (thisObj->setLight( parameter[0].to<LightNode*>(rt) ), thisEObj))
+	
+	//! [ESMF] Bool ShadowState.isStatic()
+	ES_MFUN(typeObject,ShadowState, "isStatic", 0, 0, EScript::create(thisObj->isStatic()))
+
+	//! [ESMF] self ShadowState.setStatic(Bool)
+	ES_MFUN(typeObject,ShadowState, "setStatic", 1, 1, (thisObj->setStatic( parameter[0].toBool() ), thisEObj))
+	
+	//! [ESMF] self ShadowState.update()
+	ES_MFUN(typeObject,ShadowState, "update", 0, 0, (thisObj->update(), thisEObj))
 
 }
 
