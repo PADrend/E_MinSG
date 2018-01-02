@@ -93,7 +93,7 @@ void E_AbstractCameraNode::init(EScript::Namespace & lib) {
 
 	//! [ESMF] Number|false cam.isBoxInFrustum(Box)
 	ES_MFUN(typeObject,const AbstractCameraNode, "testBoxFrustumIntersection", 1, 1,
-			Number::create(thisObj->testBoxFrustumIntersection(parameter[0].to<const Geometry::Box&>(rt))))
+			Number::create(static_cast<int>(thisObj->testBoxFrustumIntersection(parameter[0].to<const Geometry::Box&>(rt)))))
 }
 
 }
