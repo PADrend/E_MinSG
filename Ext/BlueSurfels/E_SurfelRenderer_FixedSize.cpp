@@ -87,6 +87,12 @@ void E_SurfelRendererFixedSize::init(EScript::Namespace & lib) {
 	
 	//! [ESMF] self surfelRenderer.setMaxFrameTime( Number )
 	ES_MFUN(typeObject,SurfelRendererFixedSize,"setMaxFrameTime",1,1, (thisObj->setMaxFrameTime(parameter[0].toFloat()),thisEObj) )
+	
+	//! [ESMF] Bool surfelRenderer.getBlendFactor()
+	ES_MFUN(typeObject,const SurfelRendererFixedSize,"getBlendFactor",0,0,thisObj->getBlendFactor())
+	
+	//! [ESMF] self surfelRenderer.setBlendFactor( Number )
+	ES_MFUN(typeObject,SurfelRendererFixedSize,"setBlendFactor",1,1, (thisObj->setBlendFactor(parameter[0].toFloat()),thisEObj) )
 
 	//! [ESMF] self surfelRenderer.drawSurfels( FrameContext, [Number, Number] )
 	ES_MFUN(typeObject,SurfelRendererFixedSize,"drawSurfels",1,3, (thisObj->drawSurfels(parameter[0].to<MinSG::FrameContext&>(rt), parameter[1].toFloat(0), parameter[2].toFloat(1024)),thisEObj) )
