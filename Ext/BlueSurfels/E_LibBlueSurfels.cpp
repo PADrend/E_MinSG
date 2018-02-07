@@ -18,6 +18,7 @@
 
 #include "../../Core/E_FrameContext.h"
 #include "../../Core/Nodes/E_Node.h"
+#include "../../Core/Nodes/E_AbstractCameraNode.h"
 
 #include <EScript/Basics.h>
 #include <EScript/StdObjects.h>
@@ -57,7 +58,7 @@ void BlueSurfels::init(EScript::Namespace & lib) {
 			
 	//! [ESMF] Number MinSG.BlueSurfels.getMeterPerPixel(MinSG::FrameContext & context, MinSG::Node * node)
 	ES_FUN(nsBlueSurfels,"getMeterPerPixel",2,2,		
-		MinSG::BlueSurfels::getMeterPerPixel(*parameter[0].to<MinSG::FrameContext*>(rt),parameter[1].to<MinSG::Node*>(rt)))
+		MinSG::BlueSurfels::getMeterPerPixel(parameter[0].to<MinSG::AbstractCameraNode*>(rt),parameter[1].to<MinSG::Node*>(rt)))
 		
 	//! [ESMF] Number MinSG.BlueSurfels.radiusToSize(float radius, float mpp)
 	ES_FUN(nsBlueSurfels,"radiusToSize",2,2,		
