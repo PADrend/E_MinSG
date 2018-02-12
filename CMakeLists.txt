@@ -42,6 +42,7 @@ add_library(E_MinSG
 	Core/States/E_LightingState.cpp
 	Core/States/E_MaterialState.cpp
 	Core/States/E_NodeRendererState.cpp
+	Core/States/E_PointParameterState.cpp
 	Core/States/E_PolygonModeState.cpp
 	Core/States/E_ShaderState.cpp
 	Core/States/E_ShaderUniformState.cpp

@@ -37,6 +37,7 @@
 #include "Core/States/E_LightingState.h"
 #include "Core/States/E_MaterialState.h"
 #include "Core/States/E_NodeRendererState.h"
+#include "Core/States/E_PointParameterState.h"
 #include "Core/States/E_PolygonModeState.h"
 #include "Core/States/E_ShaderState.h"
 #include "Core/States/E_ShaderUniformState.h"
@@ -109,6 +110,7 @@ void init(EScript::Namespace * globals) {
 	E_CullFaceState::init(*lib);
 	E_GroupState::init(*lib);
 	E_AlphaTestState::init(*lib);
+	E_PointParameterState::init(*lib);
 	E_PolygonModeState::init(*lib);
 	E_MaterialState::init(*lib);
 	E_NodeRendererState::init(*lib);
