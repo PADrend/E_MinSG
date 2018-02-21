@@ -13,6 +13,7 @@
 #include "../../Core/E_Statistics.h"
 #include "../ELibMinSGExt.h"
 #include <E_Util/Graphics/E_Bitmap.h>
+#include <E_Util/Graphics/E_Color.h>
 #include <Util/Graphics/Bitmap.h>
 #include <EScript/EScript.h>
 
@@ -68,6 +69,15 @@ void E_StatChart::init(EScript::Namespace & lib) {
 
 	//! [ESMF] self MinSG.StatChart.setRange(row,range)
 	ES_MFUN(typeObject, StatChart,"setRange",2,2,			(thisObj->setRange(parameter[0].toInt(),parameter[1].toFloat()),thisEObj))
+
+	//! [ESMF] Color4f MinSG.StatChart.getColor(row)
+	ES_MFUNCTION(typeObject, const StatChart,"getColor",1,1, {
+		auto color = thisObj->getColor(parameter[0].toInt());
+		return EScript::create(color);
+	})
+
+	//! [ESMF] self MinSG.StatChart.setColor(row,range)
+	ES_MFUN(typeObject, StatChart,"setColor",2,2,			(thisObj->setColor(parameter[0].toInt(),*parameter[1].to<Util::Color4ub*>(rt)),thisEObj))
 }
 
 //---
