@@ -11,10 +11,18 @@
 
 #include "E_LibBlueSurfels.h"
 
-#include "E_SurfelGenerator.h"
 #include "E_SurfelRenderer.h"
-#include "E_SurfelRenderer_FixedSize.h"
-#include "E_SurfelRenderer_Budget.h"
+
+#include "Strategies/E_AbstractSurfelStrategy.h"
+#include "Strategies/E_AdaptiveStrategy.h"
+#include "Strategies/E_CommonStrategies.h"
+#include "Strategies/E_FoveatedStrategy.h"
+#include "Strategies/E_ShaderStrategy.h"
+
+#include "Samplers/E_AbstractSurfelSampler.h"
+#include "Samplers/E_GreedyCluster.h"
+#include "Samplers/E_ProgressiveSampler.h"
+#include "Samplers/E_RandomSampler.h"
 
 #include "../../Core/E_FrameContext.h"
 #include "../../Core/Nodes/E_Node.h"
@@ -31,11 +39,18 @@ void BlueSurfels::init(EScript::Namespace & lib) {
 	EScript::Namespace * nsBlueSurfels = new EScript::Namespace;
 	declareConstant(&lib,"BlueSurfels",nsBlueSurfels);
 	
-	BlueSurfels::E_SurfelGenerator::init(*nsBlueSurfels);
 	BlueSurfels::E_SurfelRenderer::init(lib); // namespace MinSG
-	BlueSurfels::E_SurfelRendererFixedSize::init(lib); // namespace MinSG
-	BlueSurfels::E_SurfelRendererBudget::init(lib); // namespace MinSG
-
+	BlueSurfels::E_AbstractSurfelStrategy::init(*nsBlueSurfels);
+	BlueSurfels::E_AdaptiveStrategy::init(*nsBlueSurfels);
+	BlueSurfels::E_CommonStrategies::init(*nsBlueSurfels);
+	BlueSurfels::E_FoveatedStrategy::init(*nsBlueSurfels);
+	BlueSurfels::E_ShaderStrategy::init(*nsBlueSurfels);
+	
+	BlueSurfels::E_AbstractSurfelSampler::init(*nsBlueSurfels);
+	BlueSurfels::E_GreedyCluster::init(*nsBlueSurfels);
+	BlueSurfels::E_ProgressiveSampler::init(*nsBlueSurfels);
+	BlueSurfels::E_RandomSampler::init(*nsBlueSurfels);
+	
 	//! [Number*] MinSG.BlueSurfels.getProgressiveMinimalMinimalVertexDistances(Rendering.Mesh)
 	ES_FUN(nsBlueSurfels,"getProgressiveMinimalMinimalVertexDistances",1,1,
 			EScript::Array::create(MinSG::BlueSurfels::getProgressiveMinimalMinimalVertexDistances(*parameter[0].to<Rendering::Mesh*>(rt))))

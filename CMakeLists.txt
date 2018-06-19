@@ -59,11 +59,17 @@ add_library(E_MinSG
 	Ext/Behaviours/E_SoundReceivingBehaviour.cpp
 	Ext/Behaviours/E_SimplePhysics2.cpp
 	Ext/Behaviours/E_TimedBehaviourDecorator.cpp
-	Ext/BlueSurfels/E_LibBlueSurfels.cpp
-	Ext/BlueSurfels/E_SurfelGenerator.cpp
+	Ext/BlueSurfels/Samplers/E_AbstractSurfelSampler.cpp
+	Ext/BlueSurfels/Samplers/E_GreedyCluster.cpp
+	Ext/BlueSurfels/Samplers/E_ProgressiveSampler.cpp
+	Ext/BlueSurfels/Samplers/E_RandomSampler.cpp
+	Ext/BlueSurfels/Strategies/E_AbstractSurfelStrategy.cpp
+	Ext/BlueSurfels/Strategies/E_AdaptiveStrategy.cpp
+	Ext/BlueSurfels/Strategies/E_CommonStrategies.cpp
+	Ext/BlueSurfels/Strategies/E_FoveatedStrategy.cpp
+	Ext/BlueSurfels/Strategies/E_ShaderStrategy.cpp
 	Ext/BlueSurfels/E_SurfelRenderer.cpp
-	Ext/BlueSurfels/E_SurfelRenderer_FixedSize.cpp
-	Ext/BlueSurfels/E_SurfelRenderer_Budget.cpp
+	Ext/BlueSurfels/E_LibBlueSurfels.cpp
 	Ext/ColorCubes/E_ColorCube.cpp
 	Ext/ColorCubes/E_ColorCubeRenderer.cpp
 	Ext/D3Fact/E_ClientUnit.cpp
