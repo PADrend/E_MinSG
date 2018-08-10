@@ -63,6 +63,7 @@ add_library(E_MinSG
 	Ext/BlueSurfels/Samplers/E_GreedyCluster.cpp
 	Ext/BlueSurfels/Samplers/E_ProgressiveSampler.cpp
 	Ext/BlueSurfels/Samplers/E_RandomSampler.cpp
+	Ext/BlueSurfels/Samplers/E_ScriptedSampler.cpp
 	Ext/BlueSurfels/Strategies/E_AbstractSurfelStrategy.cpp
 	Ext/BlueSurfels/Strategies/E_AdaptiveStrategy.cpp
 	Ext/BlueSurfels/Strategies/E_CommonStrategies.cpp

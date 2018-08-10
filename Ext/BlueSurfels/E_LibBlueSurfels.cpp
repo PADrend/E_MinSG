@@ -23,6 +23,7 @@
 #include "Samplers/E_GreedyCluster.h"
 #include "Samplers/E_ProgressiveSampler.h"
 #include "Samplers/E_RandomSampler.h"
+#include "Samplers/E_ScriptedSampler.h"
 
 #include "../../Core/E_FrameContext.h"
 #include "../../Core/Nodes/E_Node.h"
@@ -50,6 +51,7 @@ void BlueSurfels::init(EScript::Namespace & lib) {
 	BlueSurfels::E_GreedyCluster::init(*nsBlueSurfels);
 	BlueSurfels::E_ProgressiveSampler::init(*nsBlueSurfels);
 	BlueSurfels::E_RandomSampler::init(*nsBlueSurfels);
+	BlueSurfels::E_ScriptedSampler::init(*nsBlueSurfels);
 	
 	//! [Number*] MinSG.BlueSurfels.getProgressiveMinimalMinimalVertexDistances(Rendering.Mesh)
 	ES_FUN(nsBlueSurfels,"getProgressiveMinimalMinimalVertexDistances",1,1,
