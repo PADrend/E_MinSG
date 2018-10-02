@@ -34,6 +34,8 @@ void E_GreedyCluster::init(EScript::Namespace & lib) {
 
 	//! [ESMF] new GreedyCluster
 	ES_CTOR(typeObject, 0, 0, new GreedyCluster)
+	
+	ES_MGETSET(GreedyCluster, float, MinRadius)
 }
 
 } /* BlueSurfels */
