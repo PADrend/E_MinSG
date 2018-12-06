@@ -77,16 +77,16 @@ void BlueSurfels::init(EScript::Namespace & lib) {
 	ES_FUN(nsBlueSurfels,"computeSurfelPacking",1,1,
 			MinSG::BlueSurfels::computeSurfelPacking(parameter[0].to<Rendering::Mesh*>(rt)))
 			
-	//! [ESMF] Number MinSG.BlueSurfels.getMeterPerPixel(MinSG::FrameContext & context, MinSG::Node * node)
-	ES_FUN(nsBlueSurfels,"getMeterPerPixel",2,2,		
-		MinSG::BlueSurfels::getMeterPerPixel(parameter[0].to<MinSG::AbstractCameraNode*>(rt),parameter[1].to<MinSG::Node*>(rt)))
+	//! [ESMF] Number MinSG.BlueSurfels.computeRelPixelSize(MinSG::FrameContext & context, MinSG::Node * node)
+	ES_FUN(nsBlueSurfels,"computeRelPixelSize",2,2,
+		MinSG::BlueSurfels::computeRelPixelSize(parameter[0].to<MinSG::AbstractCameraNode*>(rt),parameter[1].to<MinSG::Node*>(rt)))
 		
-	//! [ESMF] Number MinSG.BlueSurfels.radiusToSize(float radius, float mpp)
-	ES_FUN(nsBlueSurfels,"radiusToSize",2,2,		
+	//! [ESMF] Number MinSG.BlueSurfels.radiusToSize(float radius, float relPixelSize)
+	ES_FUN(nsBlueSurfels,"radiusToSize",2,2,
 			MinSG::BlueSurfels::radiusToSize(parameter[0].toFloat(),parameter[1].toFloat()))
 			
-	//! [ESMF] Number MinSG.BlueSurfels.sizeToRadius(float size, float mpp)
-	ES_FUN(nsBlueSurfels,"sizeToRadius",2,2,		
+	//! [ESMF] Number MinSG.BlueSurfels.sizeToRadius(float size, float relPixelSize)
+	ES_FUN(nsBlueSurfels,"sizeToRadius",2,2,
 			MinSG::BlueSurfels::sizeToRadius(parameter[0].toFloat(),parameter[1].toFloat()))
 }
 
