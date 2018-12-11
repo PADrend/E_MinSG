@@ -69,7 +69,7 @@ void BlueSurfels::init(EScript::Namespace & lib) {
 
 
 	//! [ESF] Bitmap Experiments.differentialDomainAnalysis(Mesh, Number diff_max, [Number resolution, [Number count, [Bool geodetic]]])
-	ES_FUN(&lib, "differentialDomainAnalysis", 2, 5, 
+	ES_FUN(nsBlueSurfels, "differentialDomainAnalysis", 2, 5, 
 		EScript::create(MinSG::BlueSurfels::differentialDomainAnalysis(
 			parameter[0].to<Rendering::Mesh*>(rt), parameter[1].toFloat(), 
 			parameter[2].toUInt(256), parameter[3].toUInt(0), parameter[4].toBool(true))))
