@@ -25,6 +25,8 @@
 #include "Samplers/E_RandomSampler.h"
 #include "Samplers/E_ScriptedSampler.h"
 
+#include <E_Util/Graphics/E_Bitmap.h>
+
 #include "../../Core/E_FrameContext.h"
 #include "../../Core/Nodes/E_Node.h"
 #include "../../Core/Nodes/E_AbstractCameraNode.h"
@@ -64,7 +66,14 @@ void BlueSurfels::init(EScript::Namespace & lib) {
 	//! [ESMF] Number MinSG.BlueSurfels.getMedianOfNthClosestNeighbours(Rendering::Mesh& mesh, size_t prefixLength, size_t nThNeighbour)
 	ES_FUN(nsBlueSurfels,"getMedianOfNthClosestNeighbours",3,3,		
 			MinSG::BlueSurfels::getMedianOfNthClosestNeighbours(*parameter[0].to<Rendering::Mesh*>(rt),parameter[1].to<size_t>(rt),parameter[2].to<size_t>(rt)))
-				
+
+
+	//! [ESF] Bitmap Experiments.differentialDomainAnalysis(Mesh, Number diff_max, [Number resolution, [Number count, [Bool geodetic]]])
+	ES_FUN(&lib, "differentialDomainAnalysis", 2, 5, 
+		EScript::create(MinSG::BlueSurfels::differentialDomainAnalysis(
+			parameter[0].to<Rendering::Mesh*>(rt), parameter[1].toFloat(), 
+			parameter[2].toUInt(256), parameter[3].toUInt(0), parameter[4].toBool(true))))
+	
 	//! [ESMF] Number MinSG.BlueSurfels.getPrefixForRadius(float radius, float packing)
 	ES_FUN(nsBlueSurfels,"getPrefixForRadius",2,2,		
 			MinSG::BlueSurfels::getPrefixForRadius(parameter[0].toFloat(),parameter[1].toFloat()))
