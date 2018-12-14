@@ -59,6 +59,22 @@ void E_FactorStrategy::init(EScript::Namespace & lib) {
   ES_MGETSET(FactorStrategy, float, SizeFactor)
 }
 
+//! ReferencePointStrategy
+void E_ReferencePointStrategy::init(EScript::Namespace & lib) {
+	EScript::Type * typeObject = getTypeObject();
+	initPrintableName(typeObject,getClassName());
+	declareConstant(&lib,getClassName(),typeObject);
+	addFactory<ReferencePointStrategy,E_ReferencePointStrategy>();
+
+	//! [ESMF] new FixedCountStrategy
+	ES_CTOR(typeObject, 0, 0, new ReferencePointStrategy)
+  
+  ES_MFUN(typeObject, const ReferencePointStrategy, "getReferencePoint", 0, 0, 
+		EScript::Number::create(thisObj->getReferencePoint()))  
+  ES_MFUN(typeObject, ReferencePointStrategy, "setReferencePoint", 1, 1, 
+		(thisObj->setReferencePoint(static_cast<ReferencePoint>(parameter[0].toUInt())), thisEObj))
+}
+
 //! BlendStrategy
 void E_BlendStrategy::init(EScript::Namespace & lib) {
 	EScript::Type * typeObject = getTypeObject();
@@ -92,6 +108,7 @@ void init(EScript::Namespace & lib) {
 	E_FixedCountStrategy::init(lib);
 	E_FactorStrategy::init(lib);
 	E_BlendStrategy::init(lib);
+	E_ReferencePointStrategy::init(lib);
 	E_DebugStrategy::init(lib);
 }
 } /* E_CommonStrategies */

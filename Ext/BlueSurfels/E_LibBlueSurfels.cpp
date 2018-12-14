@@ -37,6 +37,7 @@
 #include <E_Rendering/Mesh/E_Mesh.h>
 
 namespace E_MinSG{
+using namespace MinSG::BlueSurfels;
 
 void BlueSurfels::init(EScript::Namespace & lib) {
 	EScript::Namespace * nsBlueSurfels = new EScript::Namespace;
@@ -54,6 +55,11 @@ void BlueSurfels::init(EScript::Namespace & lib) {
 	BlueSurfels::E_ProgressiveSampler::init(*nsBlueSurfels);
 	BlueSurfels::E_RandomSampler::init(*nsBlueSurfels);
 	BlueSurfels::E_ScriptedSampler::init(*nsBlueSurfels);
+	
+	declareConstant(nsBlueSurfels,"CENTER_BB",ReferencePoint::CENTER_BB);
+	declareConstant(nsBlueSurfels,"CLOSEST_BB",ReferencePoint::CLOSEST_BB);
+	declareConstant(nsBlueSurfels,"CLOSEST_SURFEL",ReferencePoint::CLOSEST_SURFEL);
+	declareConstant(nsBlueSurfels,"FARTHEST_BB",ReferencePoint::FARTHEST_BB);
 	
 	//! [Number*] MinSG.BlueSurfels.getProgressiveMinimalMinimalVertexDistances(Rendering.Mesh)
 	ES_FUN(nsBlueSurfels,"getProgressiveMinimalMinimalVertexDistances",1,1,
@@ -87,8 +93,11 @@ void BlueSurfels::init(EScript::Namespace & lib) {
 			MinSG::BlueSurfels::computeSurfelPacking(parameter[0].to<Rendering::Mesh*>(rt)))
 			
 	//! [ESMF] Number MinSG.BlueSurfels.computeRelPixelSize(MinSG::FrameContext & context, MinSG::Node * node)
-	ES_FUN(nsBlueSurfels,"computeRelPixelSize",2,2,
-		MinSG::BlueSurfels::computeRelPixelSize(parameter[0].to<MinSG::AbstractCameraNode*>(rt),parameter[1].to<MinSG::Node*>(rt)))
+	ES_FUN(nsBlueSurfels,"computeRelPixelSize",2,3,
+		MinSG::BlueSurfels::computeRelPixelSize(
+			parameter[0].to<MinSG::AbstractCameraNode*>(rt),
+			parameter[1].to<MinSG::Node*>(rt),
+			static_cast<ReferencePoint>(parameter[2].toUInt(ReferencePoint::CLOSEST_SURFEL))))
 		
 	//! [ESMF] Number MinSG.BlueSurfels.radiusToSize(float radius, float relPixelSize)
 	ES_FUN(nsBlueSurfels,"radiusToSize",2,2,

@@ -62,6 +62,21 @@ class E_FactorStrategy : public E_AbstractSurfelStrategy {
 		const MinSG::BlueSurfels::FactorStrategy * operator*() const { return static_cast<const MinSG::BlueSurfels::FactorStrategy*>(ref().get()); }
 		MinSG::BlueSurfels::FactorStrategy * operator*() { return static_cast<MinSG::BlueSurfels::FactorStrategy*>(ref().get()); }
 };
+  
+class E_ReferencePointStrategy : public E_AbstractSurfelStrategy {
+	ES_PROVIDES_TYPE_NAME(ReferencePointStrategy)
+	public:
+		template<class, class, class> friend class Util::PolymorphicWrapperCreator;
+		static EScript::Type * getTypeObject() {
+			static EScript::ERef<EScript::Type> typeObject = new EScript::Type(E_AbstractSurfelStrategy::getTypeObject());
+			return typeObject.get();
+		}
+		static void init(EScript::Namespace & lib);
+		E_ReferencePointStrategy(MinSG::BlueSurfels::ReferencePointStrategy* obj, EScript::Type* type=nullptr) : E_AbstractSurfelStrategy(obj, type ? type : getTypeObject()) {}
+		virtual ~E_ReferencePointStrategy() = default;
+		const MinSG::BlueSurfels::ReferencePointStrategy * operator*() const { return static_cast<const MinSG::BlueSurfels::ReferencePointStrategy*>(ref().get()); }
+		MinSG::BlueSurfels::ReferencePointStrategy * operator*() { return static_cast<MinSG::BlueSurfels::ReferencePointStrategy*>(ref().get()); }
+};
 
 class E_BlendStrategy : public E_AbstractSurfelStrategy {
 	ES_PROVIDES_TYPE_NAME(BlendStrategy)
@@ -104,6 +119,7 @@ ES_CONV_EOBJ_TO_OBJ(E_MinSG::BlueSurfels::E_FixedSizeStrategy, MinSG::BlueSurfel
 ES_CONV_EOBJ_TO_OBJ(E_MinSG::BlueSurfels::E_FixedCountStrategy, MinSG::BlueSurfels::FixedCountStrategy*, **eObj)
 ES_CONV_EOBJ_TO_OBJ(E_MinSG::BlueSurfels::E_FactorStrategy, MinSG::BlueSurfels::FactorStrategy*, **eObj)
 ES_CONV_EOBJ_TO_OBJ(E_MinSG::BlueSurfels::E_BlendStrategy, MinSG::BlueSurfels::BlendStrategy*, **eObj)
+ES_CONV_EOBJ_TO_OBJ(E_MinSG::BlueSurfels::E_ReferencePointStrategy, MinSG::BlueSurfels::ReferencePointStrategy*, **eObj)
 ES_CONV_EOBJ_TO_OBJ(E_MinSG::BlueSurfels::E_DebugStrategy, MinSG::BlueSurfels::DebugStrategy*, **eObj)
 
 #endif /* end of include guard: E_BLUE_SURFELS_STRATEGIES_COMMON_H_ */
