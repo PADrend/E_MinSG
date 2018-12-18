@@ -259,8 +259,8 @@ if(TARGET Sound AND TARGET E_Sound)
 endif()
 
 # Set version of library
-set_target_properties(E_MinSG PROPERTIES VERSION ${E_MINSG_VERSION}
-                                         SOVERSION ${E_MINSG_VERSION_MAJOR})
+set_target_properties(E_MinSG PROPERTIES VERSION ${E_MinSG_VERSION}
+                                         SOVERSION ${E_MinSG_VERSION_MAJOR})
 
 # Install the header files
 #file(GLOB E_MINSG_HEADERS "${CMAKE_CURRENT_SOURCE_DIR}/*.h")
@@ -297,7 +297,7 @@ configure_package_config_file(E_MinSGConfig.cmake.in ${CMAKE_CURRENT_BINARY_DIR}
                               NO_SET_AND_CHECK_MACRO
                               NO_CHECK_REQUIRED_COMPONENTS_MACRO)
 write_basic_package_version_file(${CMAKE_CURRENT_BINARY_DIR}/E_MinSGConfigVersion.cmake
-                                 VERSION ${E_MINSG_VERSION}
+                                 VERSION ${E_MinSG_VERSION}
                                  COMPATIBILITY SameMajorVersion)
 
 # Install the configuration files
@@ -307,13 +307,13 @@ install(FILES ${CMAKE_CURRENT_BINARY_DIR}/E_MinSGConfig.cmake ${CMAKE_CURRENT_BI
 # Packaging
 include(InstallRequiredSystemLibraries)
 
-set(CPACK_PACKAGE_NAME "libminsg${E_MINSG_VERSION_MAJOR}-escript")
+set(CPACK_PACKAGE_NAME "libminsg${E_MinSG_VERSION_MAJOR}-escript")
 set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "E_MinSG library")
 set(CPACK_PACKAGE_VENDOR "Benjamin Eikel; Claudius Jaehn; Ralf Petring")
 set(CPACK_PACKAGE_CONTACT "Benjamin Eikel <benjamin@eikel.org>")
-set(CPACK_PACKAGE_VERSION_MAJOR ${E_MINSG_VERSION_MAJOR})
-set(CPACK_PACKAGE_VERSION_MINOR ${E_MINSG_VERSION_MINOR})
-set(CPACK_PACKAGE_VERSION_PATCH ${E_MINSG_VERSION_PATCH})
+set(CPACK_PACKAGE_VERSION_MAJOR ${E_MinSG_VERSION_MAJOR})
+set(CPACK_PACKAGE_VERSION_MINOR ${E_MinSG_VERSION_MINOR})
+set(CPACK_PACKAGE_VERSION_PATCH ${E_MinSG_VERSION_PATCH})
 set(CPACK_PACKAGE_FILE_NAME "libE_MinSG")
 set(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_CURRENT_SOURCE_DIR}/LICENSE")
 set(CPACK_STRIP_FILES ON)
