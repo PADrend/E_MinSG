@@ -14,9 +14,9 @@
 #include "../ELibMinSG.h"
 
 namespace E_MinSG {
-
-void init_ext(EScript::Namespace * globals,EScript::Namespace * lib);
-
+namespace Ext {
+void init(EScript::Namespace * lib);
+}
 }
 
 #endif // ELIB_MINSG_EXT_H

@@ -39,9 +39,10 @@ using namespace MinSG;
 using namespace E_Geometry;
 
 namespace E_MinSG {
+namespace Helper {
 
 //! init classes and Members
-void init_stdNodeVisitors(EScript::Namespace * lib) {
+void init(EScript::Namespace * lib) {
 
 	//! [ESF] Array collectClosedNodes(root)
 	ES_FUNCTION(lib, "collectClosedNodes", 1, 1, {
@@ -237,6 +238,7 @@ void init_stdNodeVisitors(EScript::Namespace * lib) {
 	ES_FUN(lib, "moveStatesIntoLeaves", 1, 1, (
 				MinSG::moveStatesIntoLeaves((parameter[0].to<MinSG::Node*>(rt))),
 				EScript::create(nullptr)))
+}
 }
 
 }

@@ -15,7 +15,9 @@ namespace EScript {
 class Namespace;
 }
 namespace E_MinSG {
-void init_stdNodeVisitors(EScript::Namespace * o);
+namespace Helper {
+void init(EScript::Namespace * o);
+}
 }
 
 #endif // E_STDNODEVISITORS_H

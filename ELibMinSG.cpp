@@ -215,11 +215,11 @@ void init(EScript::Namespace * globals) {
 	declareConstant(lib,"MESH_AUTO_SCALE",Number::create(MinSG::MESH_AUTO_SCALE));
 
 	// Helper
-	init_stdNodeVisitors(lib);
+	Helper::init(lib);
 	GraphVizOutput::init(lib);
 
 	// init extensions
-	init_ext(globals,lib);
+	Ext::init(lib);
 }
 
 }

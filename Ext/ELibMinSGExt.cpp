@@ -291,11 +291,12 @@ using namespace E_Rendering;
 using namespace E_Geometry;
 
 namespace E_MinSG {
+namespace Ext {
 
 /*
  * init classes and Members
  */
-void init_ext(EScript::Namespace * /*globals*/,EScript::Namespace * lib) {
+void init(EScript::Namespace * lib) {
 	// [ext:AdaptiveGlobalVisibilitySampling]
 #ifdef MINSG_EXT_ADAPTIVEGLOBALVISIBILITYSAMPLING
 	{
@@ -736,7 +737,7 @@ void init_ext(EScript::Namespace * /*globals*/,EScript::Namespace * lib) {
 #endif // MINSG_EXT_WAYPOINTS
 
 
-
+}
 }
 
 }
