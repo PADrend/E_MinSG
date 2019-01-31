@@ -43,6 +43,7 @@ void BlueSurfels::init(EScript::Namespace & lib) {
 	EScript::Namespace * nsBlueSurfels = new EScript::Namespace;
 	declareConstant(&lib,"BlueSurfels",nsBlueSurfels);
 	
+	//! @ingroup ext
 	BlueSurfels::E_SurfelRenderer::init(lib); // namespace MinSG
 	BlueSurfels::E_AbstractSurfelStrategy::init(*nsBlueSurfels);
 	BlueSurfels::E_AdaptiveStrategy::init(*nsBlueSurfels);
