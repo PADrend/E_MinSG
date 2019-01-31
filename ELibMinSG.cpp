@@ -88,21 +88,26 @@ void init(EScript::Namespace * globals) {
 	// ----------
 	// ---- Core
 	E_RenderParam::init(*lib);
+	E_FrameContext::init(*lib);
+	E_Statistics::init(*lib);
+	/** @defgroup nodes Nodes
+	 * @{
+	 */
 	E_Node::init(*lib);
 	E_GroupNode::init(*lib);
 	E_ListNode::init(*lib);
 	E_GeometryNode::init(*lib);
-	E_FrameContext::init(*lib);
-	E_Behavior::init(*lib);
-	E_AbstractBehaviour::init(*lib);
 	E_AbstractCameraNode::init(*lib);
-	E_BehaviourManager::init(*lib);
-	E_BehaviorStatus::init(*lib);
 	E_CameraNode::init(*lib);
 	E_CameraNodeOrtho::init(*lib);
-	E_State::init(*lib);
-	E_LightingState::init(*lib);
 	E_LightNode::init(*lib);
+	//! @}
+	
+	/** @defgroup states States
+	 * @{
+	 */
+ 	E_State::init(*lib);
+ 	E_LightingState::init(*lib);
 	E_ShaderState::init(*lib);
 	E_ShaderUniformState::init(*lib);
 	E_TextureState::init(*lib);
@@ -114,16 +119,28 @@ void init(EScript::Namespace * globals) {
 	E_PolygonModeState::init(*lib);
 	E_MaterialState::init(*lib);
 	E_NodeRendererState::init(*lib);
-	E_ScriptedBehavior::init(*lib);
-	E_Statistics::init(*lib);
 	E_TransparencyRenderer::init(*lib);
+	//! @}
+	
+	/** @defgroup behaviour Behaviours
+	 * @{
+	 */
+	E_Behavior::init(*lib);
+	E_AbstractBehaviour::init(*lib);
+	E_BehaviourManager::init(*lib);
+	E_BehaviorStatus::init(*lib);
+	E_ScriptedBehavior::init(*lib);
+	//! @}
 	// ----------
 	// ---- SceneManagement
 	E_SceneManagement::init(*lib);
 
 	// ----------
 	// ---- Helper
-
+	
+	/** @defgroup helper Helper
+	 * @{
+	 */
 	//! [ESF] void MinSG.changeParentKeepTransformation(Node child, GroupNode newParent)
 	ES_FUNCTION(lib,"changeParentKeepTransformation",2,2, {
 		auto ep = parameter[1].toType<E_GroupNode>();
@@ -217,9 +234,14 @@ void init(EScript::Namespace * globals) {
 	// Helper
 	Helper::init(lib);
 	GraphVizOutput::init(lib);
+	//! @}
 
 	// init extensions
+	/** @defgroup ext Extensions
+	 * @{
+	 */
 	Ext::init(lib);
+	//! @}
 }
 
 }

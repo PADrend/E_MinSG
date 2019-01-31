@@ -172,7 +172,7 @@
 
 // [ext:Physics]
 #ifdef MINSG_EXT_PHYSICS
-    #include "Physics/E_PhysicWorld.h"
+		#include "Physics/E_PhysicWorld.h"
 #endif /* MINSG_EXT_PHYSICS */
 
 // [ext:PipelineStatistics]
@@ -307,6 +307,8 @@ void init(EScript::Namespace * lib) {
 #endif /* MINSG_EXT_ADAPTIVEGLOBALVISIBILITYSAMPLING */
 
 	// [ext:Behaviours]
+	//! @addtogroup behaviour
+	//! @{
 	E_KeyFrameAnimationBehaviour::init(*lib);
 	E_ScriptedNodeBehaviour::init(*lib);
 	E_ScriptedStateBehaviour::init(*lib);
@@ -314,6 +316,7 @@ void init(EScript::Namespace * lib) {
 	E_BehaviourGroup::init(*lib);
 	E_AbstractBehaviourDecorator::init(*lib);
 	E_TimedBehaviourDecorator::init(*lib);
+	//! @}
 
 	// [ext:BlueSurfels]
 	#ifdef MINSG_EXT_BLUE_SURFELS
@@ -325,10 +328,16 @@ void init(EScript::Namespace * lib) {
 	#endif // MINSG_EXT_MIXED_EXTERN_VISIBILITY
 
 	// [ext:FancyStuff]
-	E_BudgetAnnotationState::init(*lib);
+	//! @addtogroup nodes
+	//! @{
 	E_BillboardNode::init(*lib);
 	E_FakeInstanceNode::init(*lib);
 	E_GenericMetaNode::init(*lib);
+	//! @}
+	
+	//! @addtogroup states
+	//! @{
+	E_BudgetAnnotationState::init(*lib);
 	E_StrangeExampleRenderer::init(*lib);
 	E_EnvironmentState::init(*lib);
 	E_ImpostorFactory::init(lib);
@@ -336,6 +345,7 @@ void init(EScript::Namespace * lib) {
 	E_ProjSizeFilterState::init(*lib);
 	E_RandomColorRenderer::init(*lib);
 	E_ShadowState::init(*lib);
+
 
 	// -----------------------------------------------------------
 	// scripted states
@@ -401,9 +411,13 @@ void init(EScript::Namespace * lib) {
 			return nullptr;
 		})
 	}
+	//! @}
 	// -----------------------------------------------------------
 
-
+	
+	//! @addtogroup helper
+	//! @{
+	
 	/*! [ESF] Vec3 calculateSunPosition(timeOfDay[,julianDay=0,[timeZone=0[,longitude=0[,latitude=0]]]])
 	 East = x,  up = y, South = z
 	 All times in decimal form (6.25 = 6:15 AM)
@@ -444,10 +458,14 @@ void init(EScript::Namespace * lib) {
 
 	//! [ESF] Node createSkybox(filename)
 	ES_FUN(lib,"createSkybox",1,1,EScript::create(SkyboxState::createSkybox(parameter[0].toString())))
+	//! @}
 
 	// [ext:KeyFrameAnimation]
+	//! @ingroup nodes
 	E_KeyFrameAnimationNode::init(*lib);
-
+	
+	//! @addtogroup states
+	//! @{
 	// [ext:LODRenderer]
 	E_LODRenderer::init(*lib);
 
@@ -458,7 +476,10 @@ void init(EScript::Namespace * lib) {
 	E_NaiveOccRenderer::init(*lib);
 	E_OccludeeRenderer::init(*lib);
 	E_OccRenderer::init(*lib);
-
+	//! @}
+	
+	//! @addtogroup helper
+	//! @{
 	// [ext:Tools]
 	E_StatChart::init(*lib);
 	E_DebugCamera::init(*lib);
@@ -469,6 +490,7 @@ void init(EScript::Namespace * lib) {
 	// [ext:ValuatedRegion]
 	E_ValuatedRegionNode::init(*lib);
 	E_DirectionalInterpolator::init(*lib);
+	//! @}
 
 	// ---- temp
 	//! [ESF] AbstractBehaviour __createSimplePhysics(Node[,vec3])
@@ -610,10 +632,10 @@ void init(EScript::Namespace * lib) {
 	E_PathTracer::init(*lib);
 #endif  // MINSG_EXT_PATHTRACING
 
-    // [ext:Physics]
-    #ifdef MINSG_EXT_PHYSICS
-        Physics::E_PhysicWorld::init(*lib);
-    #endif // MINSG_EXT_PHYSICS
+		// [ext:Physics]
+		#ifdef MINSG_EXT_PHYSICS
+				Physics::E_PhysicWorld::init(*lib);
+		#endif // MINSG_EXT_PHYSICS
 
 #ifdef MINSG_EXT_PIPELINESTATISTICS
 	{
@@ -623,12 +645,12 @@ void init(EScript::Namespace * lib) {
 	}
 #endif /* MINSG_EXT_PIPELINESTATISTICS */
 
-    // [ext:RAPT]
+		// [ext:RAPT]
 #ifdef MINSG_EXT_RAPT
-    initRAPT(lib);
-    E_RAPTGeometryNode::init(*lib);
-    E_RAPTAnimationBehaviour::init(*lib);
-    E_RAPTShaderState::init(*lib);
+		initRAPT(lib);
+		E_RAPTGeometryNode::init(*lib);
+		E_RAPTAnimationBehaviour::init(*lib);
+		E_RAPTShaderState::init(*lib);
 #endif // MINSG_EXT_RAPT
 
 
@@ -647,14 +669,14 @@ void init(EScript::Namespace * lib) {
 	E_SkeletalNode::init(*lib);
 	E_SkeletalAnimationBehaviour::init(*lib);
 	E_SkeletalHardwareRendererState::init(*lib);
-    E_SkeletalSoftwareRendererState::init(*lib);
+		E_SkeletalSoftwareRendererState::init(*lib);
 	E_JointNode::init(*lib);
 	E_ArmatureNode::init(*lib);
-    E_SkeletalAbstractPose::init(*lib);
-    E_SkeletalMatrixPose::init(*lib);
-    E_SkeletalSRTPose::init(*lib);
-    E_RigidJoint::init(*lib);
-    initSkeletalAnimationUtils(lib);
+		E_SkeletalAbstractPose::init(*lib);
+		E_SkeletalMatrixPose::init(*lib);
+		E_SkeletalSRTPose::init(*lib);
+		E_RigidJoint::init(*lib);
+		initSkeletalAnimationUtils(lib);
 #endif // MINSG_EXT_SKELETAL_ANIMATION
 
 	// [ext:Sound]
