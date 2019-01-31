@@ -66,8 +66,9 @@ void E_AbstractBehaviour::init(EScript::Namespace & lib) {
 
 	addFactory<MinSG::AbstractBehaviour,E_AbstractBehaviour>();
 
-
+	// @ingroup behaviour
 	E_AbstractNodeBehaviour::init(lib);
+	// @ingroup behaviour
 	E_AbstractStateBehaviour::init(lib);
 }
 

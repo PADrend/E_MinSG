@@ -297,14 +297,6 @@ namespace Ext {
  * init classes and Members
  */
 void init(EScript::Namespace * lib) {
-	// [ext:AdaptiveGlobalVisibilitySampling]
-#ifdef MINSG_EXT_ADAPTIVEGLOBALVISIBILITYSAMPLING
-	{
-		EScript::Namespace * ns = new EScript::Namespace();
-		declareConstant(lib, "AGVS", ns);
-		AGVS::E_AdaptiveGlobalVisibilitySampling::init(*ns);
-	}
-#endif /* MINSG_EXT_ADAPTIVEGLOBALVISIBILITYSAMPLING */
 
 	// [ext:Behaviours]
 	//! @addtogroup behaviour
@@ -317,16 +309,6 @@ void init(EScript::Namespace * lib) {
 	E_AbstractBehaviourDecorator::init(*lib);
 	E_TimedBehaviourDecorator::init(*lib);
 	//! @}
-
-	// [ext:BlueSurfels]
-	#ifdef MINSG_EXT_BLUE_SURFELS
-	BlueSurfels::init(*lib);
-	#endif // MINSG_EXT_BLUE_SURFELS
-
-	#ifdef MINSG_EXT_MIXED_EXTERN_VISIBILITY
-	MixedExtVisibility::init(*lib);
-	#endif // MINSG_EXT_MIXED_EXTERN_VISIBILITY
-
 	// [ext:FancyStuff]
 	//! @addtogroup nodes
 	//! @{
@@ -504,6 +486,26 @@ void init(EScript::Namespace * lib) {
 
 	// -----------------------------------------------------------------
 	//	Guarded extensions (ordered by their guard!!!!!!!!!!!!)
+	/** @defgroup ext Extensions
+	 * @{
+	 
+	 */	// [ext:AdaptiveGlobalVisibilitySampling]
+ #ifdef MINSG_EXT_ADAPTIVEGLOBALVISIBILITYSAMPLING
+	 	{
+	 		EScript::Namespace * ns = new EScript::Namespace();
+	 		declareConstant(lib, "AGVS", ns);
+	 		AGVS::E_AdaptiveGlobalVisibilitySampling::init(*ns);
+	 	}
+ #endif /* MINSG_EXT_ADAPTIVEGLOBALVISIBILITYSAMPLING */
+
+	 // [ext:BlueSurfels]
+ #ifdef MINSG_EXT_BLUE_SURFELS
+	 BlueSurfels::init(*lib);
+ #endif // MINSG_EXT_BLUE_SURFELS
+
+ #ifdef MINSG_EXT_MIXED_EXTERN_VISIBILITY
+	 MixedExtVisibility::init(*lib);
+ #endif // MINSG_EXT_MIXED_EXTERN_VISIBILITY
 
 	// [ext:ColorCube]
 #ifdef MINSG_EXT_COLORCUBES
@@ -758,6 +760,7 @@ void init(EScript::Namespace * lib) {
 	E_Waypoint::init(*lib);
 #endif // MINSG_EXT_WAYPOINTS
 
+	//! @}
 
 }
 }

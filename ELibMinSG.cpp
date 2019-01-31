@@ -237,11 +237,7 @@ void init(EScript::Namespace * globals) {
 	//! @}
 
 	// init extensions
-	/** @defgroup ext Extensions
-	 * @{
-	 */
 	Ext::init(lib);
-	//! @}
 }
 
 }
