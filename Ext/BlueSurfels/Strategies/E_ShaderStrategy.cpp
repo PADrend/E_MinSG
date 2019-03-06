@@ -41,6 +41,7 @@ void E_ShaderStrategy::init(EScript::Namespace & lib) {
   ES_MGETSET(ShaderStrategy, std::string, ShaderFS)
   ES_MGETSET(ShaderStrategy, std::string, ShaderGS)
   ES_MGETSET(ShaderStrategy, bool, SurfelCulling)
+  ES_MGETSET(ShaderStrategy, bool, SurfelDynSize)
 	
 	ES_MFUN(typeObject, ShaderStrategy, "addSearchPath", 1, 1, (thisObj->getFileLocator().addSearchPath(parameter[0].toString()), thisEObj))
 }
