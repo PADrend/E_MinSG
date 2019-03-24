@@ -81,6 +81,19 @@ void BlueSurfels::init(EScript::Namespace & lib) {
 			parameter[0].to<Rendering::Mesh*>(rt), parameter[1].toFloat(), 
 			parameter[2].toUInt(256), parameter[3].toUInt(0), parameter[4].toBool(true))))
 	
+	//! [Number*] MinSG.BlueSurfels.getRadialMeanVariance(Util.Bitmap dda)
+	ES_FUNCTION(nsBlueSurfels,"getRadialMeanVariance",1,1, {
+		auto* a = EScript::Array::create();
+		for(auto& rad : MinSG::BlueSurfels::getRadialMeanVariance(parameter[0].to<Util::Reference<Util::Bitmap>>(rt))) {
+			auto obj = new EScript::ExtObject;
+			obj->setAttribute("mean", EScript::Number::create(rad.mean));
+			obj->setAttribute("variance", EScript::Number::create(rad.variance));
+			obj->setAttribute("count", EScript::Number::create(rad.count));
+			a->pushBack(obj);
+		}
+		return a;
+	})
+	
 	//! [ESMF] Number MinSG.BlueSurfels.getPrefixForRadius(float radius, float packing)
 	ES_FUN(nsBlueSurfels,"getPrefixForRadius",2,2,		
 			MinSG::BlueSurfels::getPrefixForRadius(parameter[0].toFloat(),parameter[1].toFloat()))
