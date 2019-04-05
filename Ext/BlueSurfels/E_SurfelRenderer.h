@@ -16,7 +16,7 @@
 
 #include <Geometry/Matrix4x4.h>
 
-#include <E_MinSG/Core/States/E_NodeRendererState.h>
+#include "../../Core/States/E_NodeRendererState.h"
 
 #include <memory>
 #include <functional>
