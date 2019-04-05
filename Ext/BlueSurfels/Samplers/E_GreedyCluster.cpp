@@ -37,7 +37,7 @@ void E_GreedyCluster::init(EScript::Namespace & lib) {
 	
 	ES_MGETSET(GreedyCluster, float, MinRadius)
 	
-	ES_MFUN(typeObject, const GreedyCluster, "getSampleTimes", 0, 0, EScript::Array::create(thisObj->getSampleTimes()))
+	ES_MFUN(typeObject, const GreedyCluster, "getSampleTimes", 0, 0, EScript::Map::create(thisObj->getSampleTimes()))
 }
 
 } /* BlueSurfels */
