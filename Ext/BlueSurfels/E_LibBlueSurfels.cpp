@@ -75,11 +75,11 @@ void BlueSurfels::init(EScript::Namespace & lib) {
 			MinSG::BlueSurfels::getMedianOfNthClosestNeighbours(*parameter[0].to<Rendering::Mesh*>(rt),parameter[1].to<size_t>(rt),parameter[2].to<size_t>(rt)))
 
 
-	//! [ESF] Bitmap Experiments.differentialDomainAnalysis(Mesh, Number diff_max, [Number resolution, [Number count, [Bool geodetic]]])
-	ES_FUN(nsBlueSurfels, "differentialDomainAnalysis", 2, 5, 
+	//! [ESF] Bitmap Experiments.differentialDomainAnalysis(Mesh, Number diff_max, [Number resolution, [Number count, [Bool geodetic, [Bool adaptive]]]])
+	ES_FUN(nsBlueSurfels, "differentialDomainAnalysis", 2, 6, 
 		EScript::create(MinSG::BlueSurfels::differentialDomainAnalysis(
 			parameter[0].to<Rendering::Mesh*>(rt), parameter[1].toFloat(), 
-			parameter[2].toUInt(256), parameter[3].toUInt(0), parameter[4].toBool(true))))
+			parameter[2].toUInt(256), parameter[3].toUInt(0), parameter[4].toBool(true), parameter[5].toBool(false))))
 	
 	//! [Number*] MinSG.BlueSurfels.getRadialMeanVariance(Util.Bitmap dda)
 	ES_FUNCTION(nsBlueSurfels,"getRadialMeanVariance",1,1, {
