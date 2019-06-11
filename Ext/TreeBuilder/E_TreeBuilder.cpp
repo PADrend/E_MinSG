@@ -32,7 +32,7 @@ void E_TreeBuilder::init(EScript::Namespace & globals) {
 	Namespace * lib=new Namespace();
 	/** Provides functions for reorganizing the data structure of scene graphs.
 	* Example:
-	* ```js
+	* @code{.escript}
 	* MinSG.TreeBuilder.rebuildAsOcTree(scene, {
 	* 	MinSG.TreeBuilder.MAX_TREE_DEPTH: 10,
 	* 	MinSG.TreeBuilder.MAX_CHILD_COUNT: 8,
@@ -41,7 +41,7 @@ void E_TreeBuilder::init(EScript::Namespace & globals) {
 	* 	MinSG.TreeBuilder.USE_GEOMETRY_BB: false,
 	* 	MinSG.TreeBuilder.EXACT_CUBES: true,
 	* });
-	* ```
+	* @endcode
 	*/
 	declareConstant(&globals,"TreeBuilder",lib);
 
