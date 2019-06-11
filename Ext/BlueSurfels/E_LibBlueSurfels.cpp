@@ -66,9 +66,9 @@ void BlueSurfels::init(EScript::Namespace & lib) {
 	ES_FUN(nsBlueSurfels,"getProgressiveMinimalMinimalVertexDistances",1,1,
 			EScript::Array::create(MinSG::BlueSurfels::getProgressiveMinimalMinimalVertexDistances(*parameter[0].to<Rendering::Mesh*>(rt))))
 
-	//! [Number*] MinSG.BlueSurfels.getMinimalVertexDistances(Rendering.Mesh,int)
-	ES_FUN(nsBlueSurfels,"getMinimalVertexDistances",2,2,
-			EScript::Array::create(MinSG::BlueSurfels::getMinimalVertexDistances(*parameter[0].to<Rendering::Mesh*>(rt),parameter[1].to<uint32_t>(rt))))
+	//! [Number*] MinSG.BlueSurfels.getMinimalVertexDistances(Rendering.Mesh,Number,[Bool])
+	ES_FUN(nsBlueSurfels,"getMinimalVertexDistances",2,3,
+			EScript::Array::create(MinSG::BlueSurfels::getMinimalVertexDistances(*parameter[0].to<Rendering::Mesh*>(rt),parameter[1].to<uint32_t>(rt), parameter[2].toBool(false))))
 	
 	//! [ESMF] Number MinSG.BlueSurfels.getMedianOfNthClosestNeighbours(Rendering::Mesh& mesh, size_t prefixLength, size_t nThNeighbour)
 	ES_FUN(nsBlueSurfels,"getMedianOfNthClosestNeighbours",3,3,		
