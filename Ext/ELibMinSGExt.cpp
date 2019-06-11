@@ -278,10 +278,27 @@
 #include "../SceneManagement/E_SceneManager.h"
 #include <MinSG/Helper/StdNodeVisitors.h>
 
-#include <E_Geometry/E_Vec3.h>
+#include <E_Geometry/E_Box.h>
+#include <E_Geometry/E_Frustum.h>
+#include <E_Geometry/E_Line3.h>
+#include <E_Geometry/E_Matrix3x3.h>
 #include <E_Geometry/E_Matrix4x4.h>
+#include <E_Geometry/E_Plane.h>
+#include <E_Geometry/E_PointOctree.h>
+#include <E_Geometry/E_Quaternion.h>
+#include <E_Geometry/E_Ray3.h>
+#include <E_Geometry/E_Rect.h>
+#include <E_Geometry/E_Segment3.h>
+#include <E_Geometry/E_Sphere.h>
+#include <E_Geometry/E_SRT.h>
+#include <E_Geometry/E_Tetrahedron.h>
+#include <E_Geometry/E_Triangle.h>
+#include <E_Geometry/E_Vec2.h>
+#include <E_Geometry/E_Vec3.h>
+#include <E_Geometry/E_Vec4.h>
 #include <E_Rendering/Texture/E_Texture.h>
 #include <E_Rendering/Mesh/E_Mesh.h>
+#include <E_Util/E_Utils.h>
 
 #include <Util/IO/FileName.h>
 #include <Util/Macros.h>
@@ -292,6 +309,27 @@ using namespace E_Geometry;
 
 namespace E_MinSG {
 namespace Ext {
+
+	
+// -----------------------------------------
+// Geometry Converter
+
+template<class ObjType,class E_ObjType>
+class GeometryAttrConverter : public E_Util::E_Utils::AbstractGenericAttributeConverter {
+	public:
+		typedef typename Util::WrapperAttribute<ObjType> attr_t;
+
+	virtual ~GeometryAttrConverter(){}
+	E_ObjType * convertToEScript(const Util::GenericAttribute * const attribute) override {
+		const attr_t * objContainer = dynamic_cast<const attr_t *> (attribute);
+		return objContainer == nullptr ? nullptr : new E_ObjType(objContainer->get());
+	}
+
+	Util::GenericAttribute * convertFromEScript(const EScript::ObjPtr & object) override {
+		const E_ObjType * vv = object.toType<const E_ObjType> ();
+		return vv == nullptr ? nullptr : new attr_t(**vv);
+	}			
+};
 
 /*
  * init classes and Members
@@ -762,6 +800,28 @@ void init(EScript::Namespace * lib) {
 
 	//! @}
 
+	// -----------------------------------------
+	// Geometry Converters
+	
+	E_Util::E_Utils::registerConverter(new GeometryAttrConverter<Geometry::Box,E_Geometry::E_Box>);
+	E_Util::E_Utils::registerConverter(new GeometryAttrConverter<Geometry::Frustum,E_Geometry::E_Frustum>);
+	E_Util::E_Utils::registerConverter(new GeometryAttrConverter<Geometry::Line3,E_Geometry::E_Line3>);
+	E_Util::E_Utils::registerConverter(new GeometryAttrConverter<Geometry::Matrix3x3,E_Geometry::E_Matrix3x3>);
+	E_Util::E_Utils::registerConverter(new GeometryAttrConverter<Geometry::Matrix4x4,E_Geometry::E_Matrix4x4>);
+	E_Util::E_Utils::registerConverter(new GeometryAttrConverter<Geometry::Plane,E_Geometry::E_Plane>);
+	E_Util::E_Utils::registerConverter(new GeometryAttrConverter<E_Geometry::PointOctree_EObj,E_Geometry::E_PointOctree>);
+	E_Util::E_Utils::registerConverter(new GeometryAttrConverter<Geometry::Quaternion,E_Geometry::E_Quaternion>);
+	E_Util::E_Utils::registerConverter(new GeometryAttrConverter<Geometry::Ray3,E_Geometry::E_Ray3>);
+	E_Util::E_Utils::registerConverter(new GeometryAttrConverter<Geometry::Rect,E_Geometry::E_Rect>);
+	E_Util::E_Utils::registerConverter(new GeometryAttrConverter<Geometry::Segment3,E_Geometry::E_Segment3>);
+	E_Util::E_Utils::registerConverter(new GeometryAttrConverter<Geometry::Sphere_f,E_Geometry::E_Sphere>);
+	E_Util::E_Utils::registerConverter(new GeometryAttrConverter<Geometry::SRT,E_Geometry::E_SRT>);
+	E_Util::E_Utils::registerConverter(new GeometryAttrConverter<Geometry::Tetrahedron<float>,E_Geometry::E_Tetrahedron>);
+	E_Util::E_Utils::registerConverter(new GeometryAttrConverter<Geometry::Triangle<Geometry::Vec3f>,E_Geometry::E_Triangle>);
+	E_Util::E_Utils::registerConverter(new GeometryAttrConverter<Geometry::Vec2,E_Geometry::E_Vec2>);
+	E_Util::E_Utils::registerConverter(new GeometryAttrConverter<Geometry::Vec3,E_Geometry::E_Vec3>);
+	E_Util::E_Utils::registerConverter(new GeometryAttrConverter<Geometry::Vec4,E_Geometry::E_Vec4>);
+	
 }
 }
 
