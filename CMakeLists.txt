@@ -18,7 +18,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 include(GNUInstallDirs)
 set(CMAKE_INSTALL_CMAKECONFIGDIR ${CMAKE_INSTALL_LIBDIR}/cmake/E_MinSG)
 
-add_library(E_MinSG
+add_library(E_MinSG SHARED
 	Core/Behaviours/E_AbstractBehaviour.cpp
 	Core/Behaviours/E_Behavior.cpp
 	Core/Behaviours/E_BehaviorStatus.cpp
@@ -261,7 +261,9 @@ endif()
 
 # Set version of library
 set_target_properties(E_MinSG PROPERTIES VERSION ${E_MinSG_VERSION}
-                                         SOVERSION ${E_MinSG_VERSION_MAJOR})
+																				 SOVERSION ${E_MinSG_VERSION_MAJOR}
+																				 POSITION_INDEPENDENT_CODE ON
+																				 LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}")
 
 # Install the header files
 #file(GLOB E_MINSG_HEADERS "${CMAKE_CURRENT_SOURCE_DIR}/*.h")
@@ -283,9 +285,9 @@ install(TARGETS E_MinSG EXPORT LibraryExport
 
 # Set include directories for users of this library
 target_include_directories(E_MinSG
-                           INTERFACE
-                           "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/..>"
-                           "$<INSTALL_INTERFACE:$<INSTALL_PREFIX>/${CMAKE_INSTALL_INCLUDEDIR}>")
+													 INTERFACE
+													 "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/..>"
+													 "$<INSTALL_INTERFACE:$<INSTALL_PREFIX>/${CMAKE_INSTALL_INCLUDEDIR}>")
 
 # Library export
 install(EXPORT LibraryExport DESTINATION ${CMAKE_INSTALL_CMAKECONFIGDIR} FILE E_MinSGTargets.cmake COMPONENT developmentlibraries)
@@ -293,17 +295,17 @@ install(EXPORT LibraryExport DESTINATION ${CMAKE_INSTALL_CMAKECONFIGDIR} FILE E_
 # Create the configuration files
 include(CMakePackageConfigHelpers)
 configure_package_config_file(E_MinSGConfig.cmake.in ${CMAKE_CURRENT_BINARY_DIR}/E_MinSGConfig.cmake
-                              INSTALL_DESTINATION ${CMAKE_INSTALL_CMAKECONFIGDIR}
-                              PATH_VARS CMAKE_INSTALL_CMAKECONFIGDIR
-                              NO_SET_AND_CHECK_MACRO
-                              NO_CHECK_REQUIRED_COMPONENTS_MACRO)
+															INSTALL_DESTINATION ${CMAKE_INSTALL_CMAKECONFIGDIR}
+															PATH_VARS CMAKE_INSTALL_CMAKECONFIGDIR
+															NO_SET_AND_CHECK_MACRO
+															NO_CHECK_REQUIRED_COMPONENTS_MACRO)
 write_basic_package_version_file(${CMAKE_CURRENT_BINARY_DIR}/E_MinSGConfigVersion.cmake
-                                 VERSION ${E_MinSG_VERSION}
-                                 COMPATIBILITY SameMajorVersion)
+																 VERSION ${E_MinSG_VERSION}
+																 COMPATIBILITY SameMajorVersion)
 
 # Install the configuration files
 install(FILES ${CMAKE_CURRENT_BINARY_DIR}/E_MinSGConfig.cmake ${CMAKE_CURRENT_BINARY_DIR}/E_MinSGConfigVersion.cmake
-        DESTINATION ${CMAKE_INSTALL_CMAKECONFIGDIR} COMPONENT developmentlibraries)
+				DESTINATION ${CMAKE_INSTALL_CMAKECONFIGDIR} COMPONENT developmentlibraries)
 
 # Packaging
 include(InstallRequiredSystemLibraries)
