@@ -100,6 +100,7 @@ void E_DebugStrategy::init(EScript::Namespace & lib) {
   
   ES_MGETSET(DebugStrategy, bool, HideSurfels)
   ES_MGETSET(DebugStrategy, bool, FixSurfels)
+  ES_MGETSET(DebugStrategy, bool, DebugColor)
 }
 
 namespace E_CommonStrategies {
