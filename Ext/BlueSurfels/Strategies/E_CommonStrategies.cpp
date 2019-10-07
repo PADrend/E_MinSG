@@ -12,6 +12,8 @@
 
 #include <E_Util/E_Utils.h>
 
+#include <E_Rendering/Texture/E_Texture.h>
+
 #include <EScript/EScript.h>
 
 
@@ -100,7 +102,12 @@ void E_DebugStrategy::init(EScript::Namespace & lib) {
   
   ES_MGETSET(DebugStrategy, bool, HideSurfels)
   ES_MGETSET(DebugStrategy, bool, FixSurfels)
-  ES_MGETSET(DebugStrategy, bool, DebugColor)
+  ES_MGETSET(DebugStrategy, float, DebugColorScreen)
+	
+  ES_MFUN(typeObject, const DebugStrategy, "getHeatmap", 0, 0, 
+		EScript::create(thisObj->getHeatmap()))  
+  ES_MFUN(typeObject, DebugStrategy, "setHeatmap", 1, 1, 
+		(thisObj->setHeatmap(parameter[0].to<Rendering::Texture*>(rt)), thisEObj))
 }
 
 namespace E_CommonStrategies {
