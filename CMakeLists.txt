@@ -73,16 +73,6 @@ add_library(E_MinSG SHARED
 	Ext/BlueSurfels/E_LibBlueSurfels.cpp
 	Ext/ColorCubes/E_ColorCube.cpp
 	Ext/ColorCubes/E_ColorCubeRenderer.cpp
-	Ext/D3Fact/E_ClientUnit.cpp
-	Ext/D3Fact/E_ConsoleStream.cpp
-	Ext/D3Fact/ELib_D3Fact.cpp
-	Ext/D3Fact/E_Message.cpp
-	Ext/D3Fact/E_MessageDispatcher.cpp
-	Ext/D3Fact/E_MessageHandler.cpp
-	Ext/D3Fact/E_ObjectRegistry.cpp
-	Ext/D3Fact/E_ScriptedMessageHandler.cpp
-	Ext/D3Fact/E_Session.cpp
-	Ext/D3Fact/E_SyncHandler.cpp
 	Ext/ELibMinSGExt.cpp
 	Ext/Evaluator/E_AdaptCullEvaluator.cpp
 	Ext/Evaluator/E_AreaEvaluator.cpp
@@ -164,13 +154,6 @@ add_library(E_MinSG SHARED
 	Ext/SVS/E_SamplePoint.cpp
 	Ext/SVS/E_SphereVisualizationRenderer.cpp
 	Ext/SVS/E_VisibilitySphere.cpp
-	Ext/ThesisJonas/E_Preprocessor.cpp
-	Ext/ThesisJonas/E_Renderer.cpp
-	Ext/ThesisPeter/E_LightNodeManager.cpp
-	Ext/ThesisStanislaw/E_LightPatchRenderer.cpp
-	Ext/ThesisStanislaw/E_PhotonRenderer.cpp
-	Ext/ThesisStanislaw/E_PhotonSampler.cpp
-	Ext/ThesisStanislaw/E_LibThesisStanislaw.cpp
 	Ext/Tools/E_DebugCamera.cpp
 	Ext/Tools/E_StatChart.cpp
 	Ext/TreeBuilder/E_TreeBuilder.cpp

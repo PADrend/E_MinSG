@@ -38,11 +38,6 @@
 #include "ColorCubes/E_ColorCubeRenderer.h"
 #endif // MINSG_EXT_COLORCUBES
 
-// [ext:D3Fact]
-#ifdef MINSG_EXT_D3FACT
-#include "D3Fact/ELib_D3Fact.h"
-#endif // MINSG_EXT_D3FACT
-
 // [ext:MixedExtVisibility]
 #ifdef MINSG_EXT_MIXED_EXTERN_VISIBILITY
 #include "MixedExtVisibility/E_LibMixedExtVisibilityRendering.h"
@@ -59,22 +54,6 @@
 #include "SVS/E_SphereVisualizationRenderer.h"
 #include "SVS/E_VisibilitySphere.h"
 #endif /* MINSG_EXT_SVS */
-
-// [ext:ThesisJonas]
-#ifdef MINSG_EXT_THESISJONAS
-#include "ThesisJonas/E_Renderer.h"
-#include "ThesisJonas/E_Preprocessor.h"
-#endif /* MINSG_EXT_THESISJONAS */
-
-// [ext:ThesisPeter]
-#ifdef MINSG_EXT_THESISPETER
-#include "ThesisPeter/E_LightNodeManager.h"
-#endif /* MINSG_EXT_THESISPETER */
-
-// [ext:ThesisStanislaw]
-#ifdef MINSG_EXT_THESISSTANISLAW
-#include "ThesisStanislaw/E_LibThesisStanislaw.h"
-#endif /* MINSG_EXT_THESISSTANISLAW */
 
 // [ext:Triangulation]
 #ifdef MINSG_EXT_TRIANGULATION
@@ -551,11 +530,6 @@ void init(EScript::Namespace * lib) {
 	E_ColorCubeRenderer::init(*lib);
 #endif // MINSG_EXT_COLORCUBES
 
-	// [ext:D3Fact]
-#ifdef MINSG_EXT_D3FACT
-	E_D3Fact::init(lib);
-#endif  // MINSG_EXT_D3FACT
-
 	// [ext:SVS]
 #ifdef MINSG_EXT_SVS
 	{
@@ -571,33 +545,6 @@ void init(EScript::Namespace * lib) {
 		SVS::E_VisibilitySphere::init(*ns);
 	}
 #endif /* MINSG_EXT_SVS */
-
-	// [ext:ThesisJonas]
-#ifdef MINSG_EXT_THESISJONAS
-	{
-		EScript::Namespace * ns = new EScript::Namespace();
-		declareConstant(lib, "ThesisJonas", ns);
-		ThesisJonas::E_Renderer::init(*ns);
-		ThesisJonas::E_Preprocessor::init(*ns);
-	}
-#endif /* MINSG_EXT_THESISJONAS */
-
-	// [ext:ThesisPeter]
-#ifdef MINSG_EXT_THESISPETER
-	{
-		EScript::Namespace * ns = new EScript::Namespace();
-		declareConstant(lib, "ThesisPeter", ns);
-		ThesisPeter::E_LightNodeManager::init(*ns);
-	}
-#endif /* MINSG_EXT_THESISPETER */
-
-#ifdef MINSG_EXT_THESISSTANISLAW
-	{
-		EScript::Namespace * ns = new EScript::Namespace();
-		declareConstant(lib, "ThesisStanislaw", ns);
-		ThesisStanislaw::init(*ns);
-	}
-#endif // MINSG_EXT_THESISSTANISLAW
 
 	// [ext:TreeSync]
 #ifdef MINSG_EXT_TREE_SYNC
