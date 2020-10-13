@@ -28,8 +28,8 @@ class E_BehaviorStatus : public EScript::ExtReferenceObject< Util::Reference<Min
 
 	public:
 		// ---
-		static EScript::Type* getTypeObject();
-		static void init(EScript::Namespace & lib);
+		EMINSGAPI static EScript::Type* getTypeObject();
+		EMINSGAPI static void init(EScript::Namespace & lib);
 
 		E_BehaviorStatus(MinSG::BehaviorStatus * behavior) : ExtReferenceObject_t(behavior,getTypeObject()) {}
 		virtual ~E_BehaviorStatus()	{}

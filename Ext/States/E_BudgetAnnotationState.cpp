@@ -57,6 +57,7 @@ void E_BudgetAnnotationState::init(EScript::Namespace & lib) {
 				 EScript::Number::create(thisObj->getDistributionType()))
 
 	//! [ESMF] self BudgetAnnotationState.setDistributionType(Number)
+#ifdef MINSG_EXT_THESISJONAS
 	ES_MFUNCTION(typeObject,BudgetAnnotationState, "setDistributionType", 1, 1, {
 		switch(parameter[0].to<uint32_t>(rt)) {
 			case MinSG::BudgetAnnotationState::DISTRIBUTE_EVEN:
@@ -68,11 +69,9 @@ void E_BudgetAnnotationState::init(EScript::Namespace & lib) {
 			case MinSG::BudgetAnnotationState::DISTRIBUTE_PROJECTED_SIZE_AND_PRIMITIVE_COUNT:
 				thisObj->setDistributionType(MinSG::BudgetAnnotationState::DISTRIBUTE_PROJECTED_SIZE_AND_PRIMITIVE_COUNT);
 				break;
-#ifdef MINSG_EXT_THESISJONAS
 			case MinSG::BudgetAnnotationState::DISTRIBUTE_PROJECTED_SIZE_AND_PRIMITIVE_COUNT_ITERATIVE:
 				thisObj->setDistributionType(MinSG::BudgetAnnotationState::DISTRIBUTE_PROJECTED_SIZE_AND_PRIMITIVE_COUNT_ITERATIVE);
 				break;
-#endif
 			case MinSG::BudgetAnnotationState::DISTRIBUTE_DELETE:
 			default:
 				thisObj->setDistributionType(MinSG::BudgetAnnotationState::DISTRIBUTE_DELETE);
@@ -80,6 +79,26 @@ void E_BudgetAnnotationState::init(EScript::Namespace & lib) {
 		}
 		return thisEObj;
 	})
+#else
+	ES_MFUNCTION(typeObject,BudgetAnnotationState, "setDistributionType", 1, 1, {
+		switch(parameter[0].to<uint32_t>(rt)) {
+			case MinSG::BudgetAnnotationState::DISTRIBUTE_EVEN:
+				thisObj->setDistributionType(MinSG::BudgetAnnotationState::DISTRIBUTE_EVEN);
+				break;
+			case MinSG::BudgetAnnotationState::DISTRIBUTE_PROJECTED_SIZE:
+				thisObj->setDistributionType(MinSG::BudgetAnnotationState::DISTRIBUTE_PROJECTED_SIZE);
+				break;
+			case MinSG::BudgetAnnotationState::DISTRIBUTE_PROJECTED_SIZE_AND_PRIMITIVE_COUNT:
+				thisObj->setDistributionType(MinSG::BudgetAnnotationState::DISTRIBUTE_PROJECTED_SIZE_AND_PRIMITIVE_COUNT);
+				break;
+			case MinSG::BudgetAnnotationState::DISTRIBUTE_DELETE:
+			default:
+				thisObj->setDistributionType(MinSG::BudgetAnnotationState::DISTRIBUTE_DELETE);
+				break;
+		}
+		return thisEObj;
+	})
+#endif
 }
 
 E_BudgetAnnotationState::E_BudgetAnnotationState(MinSG::BudgetAnnotationState * state) :

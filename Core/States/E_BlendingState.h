@@ -24,8 +24,8 @@ class E_BlendingState : public E_State{
 	public:
 		template<class, class, class> friend class Util::PolymorphicWrapperCreator;
 
-		static EScript::Type* typeObject;
-		static void init(EScript::Namespace & lib);
+		EMINSGAPI static EScript::Type* typeObject;
+		EMINSGAPI static void init(EScript::Namespace & lib);
 
 		virtual ~E_BlendingState(){}
 	
@@ -33,7 +33,7 @@ class E_BlendingState : public E_State{
 		MinSG::BlendingState * operator*()				{	return static_cast<MinSG::BlendingState*>(ref().get());	}
 
 	protected:
-		E_BlendingState(MinSG::BlendingState * c,EScript::Type * type=nullptr);
+		EMINSGAPI E_BlendingState(MinSG::BlendingState * c,EScript::Type * type=nullptr);
 };
 }
 

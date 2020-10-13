@@ -14,7 +14,7 @@ class Namespace;
 namespace E_MinSG {
 namespace E_SceneManagement {
 
-void init(EScript::Namespace & lib);
+EMINSGAPI void init(EScript::Namespace & lib);
 
 }
 }

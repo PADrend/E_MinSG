@@ -28,8 +28,8 @@ namespace E_MinSG{
 class E_RenderParam : public EScript::ReferenceObject<MinSG::RenderParam,EScript::Policies::SameEObjects_ComparePolicy> {
 		ES_PROVIDES_TYPE_NAME(RenderParam)
 	public:
-		static EScript::Type * getTypeObject();
-		static void init(EScript::Namespace & lib);
+		EMINSGAPI static EScript::Type * getTypeObject();
+		EMINSGAPI static void init(EScript::Namespace & lib);
 
 		E_RenderParam() :
 				ReferenceObject_t(MinSG::RenderParam(), E_RenderParam::getTypeObject()) {}

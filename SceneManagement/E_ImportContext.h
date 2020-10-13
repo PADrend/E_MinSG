@@ -26,8 +26,8 @@ class E_ImportContext : public EScript::ReferenceObject<MinSG::SceneManagement::
 														EScript::Policies::SameEObjects_ComparePolicy> {
 		ES_PROVIDES_TYPE_NAME(ImportContext)
 	public:
-		static EScript::Type * getTypeObject();
-		static void init(EScript::Namespace & lib);
+		EMINSGAPI static EScript::Type * getTypeObject();
+		EMINSGAPI static void init(EScript::Namespace & lib);
 
 		E_ImportContext(MinSG::SceneManagement::ImportContext && context) : ReferenceObject_t(getTypeObject(), context) {}
 		virtual ~E_ImportContext()	{}

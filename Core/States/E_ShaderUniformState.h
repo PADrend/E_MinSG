@@ -24,8 +24,8 @@ class E_ShaderUniformState : public E_State{
 	public:
 		template<class, class, class> friend class Util::PolymorphicWrapperCreator;
 
-		static EScript::Type* getTypeObject();
-		static void init(EScript::Namespace & lib);
+		EMINSGAPI static EScript::Type* getTypeObject();
+		EMINSGAPI static void init(EScript::Namespace & lib);
 
 		virtual ~E_ShaderUniformState(){}
 	
@@ -33,7 +33,7 @@ class E_ShaderUniformState : public E_State{
 		MinSG::ShaderUniformState * operator*()				{	return static_cast<MinSG::ShaderUniformState*>(ref().get());	}
 
 	protected:
-		E_ShaderUniformState(MinSG::ShaderUniformState * c,EScript::Type* type=nullptr);
+		EMINSGAPI E_ShaderUniformState(MinSG::ShaderUniformState * c,EScript::Type* type=nullptr);
 };
 }
 

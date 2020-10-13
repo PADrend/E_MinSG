@@ -25,7 +25,7 @@ namespace E_MinSG {
 class E_State : public EScript::ExtReferenceObject< Util::Reference<MinSG::State>,EScript::Policies::EqualContent_ComparePolicy,E_Util::Policies::StoreAttrsInAttributeProvider>{
 	ES_PROVIDES_TYPE_NAME(State)
 
-		static E_Util::E_ObjectFactory<MinSG::State, E_State> factorySystem;
+		EMINSGAPI static E_Util::E_ObjectFactory<MinSG::State, E_State> factorySystem;
 	protected:
 		template<class StateType, class E_StateType>
 		static void addFactory() {
@@ -42,19 +42,19 @@ class E_State : public EScript::ExtReferenceObject< Util::Reference<MinSG::State
 
 		// --------------
 
-		static EScript::Type * getTypeObject();
-		static void init(EScript::Namespace & lib);
+		EMINSGAPI static EScript::Type * getTypeObject();
+		EMINSGAPI static void init(EScript::Namespace & lib);
 
-		virtual ~E_State();
+		EMINSGAPI virtual ~E_State();
 		
 		const MinSG::State * operator*()const	{	return static_cast<const MinSG::State*>(ref().get());	}
 		MinSG::State * operator*()				{	return static_cast<MinSG::State*>(ref().get());	}
 
 		/// --- |> EScript::Object
-		E_State * clone() const override;
-		std::string toString() const override;
+		EMINSGAPI E_State * clone() const override;
+		EMINSGAPI std::string toString() const override;
 	protected:
-		E_State(MinSG::State * s, EScript::Type * type=nullptr);
+		EMINSGAPI E_State(MinSG::State * s, EScript::Type * type=nullptr);
 };
 }
 

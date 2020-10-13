@@ -24,8 +24,8 @@ class E_TextureState : public E_State{
 	public:
 		template<class, class, class> friend class Util::PolymorphicWrapperCreator;
 
-		static EScript::Type* getTypeObject();
-		static void init(EScript::Namespace & lib);
+		EMINSGAPI static EScript::Type* getTypeObject();
+		EMINSGAPI static void init(EScript::Namespace & lib);
 
 		virtual ~E_TextureState(){}
 	
@@ -33,7 +33,7 @@ class E_TextureState : public E_State{
 		MinSG::TextureState * operator*()				{	return static_cast<MinSG::TextureState*>(ref().get());	}
 
 	protected:
-		E_TextureState(MinSG::TextureState * c,EScript::Type * type=nullptr);
+		EMINSGAPI E_TextureState(MinSG::TextureState * c,EScript::Type * type=nullptr);
 
 };
 }

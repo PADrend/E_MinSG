@@ -29,10 +29,10 @@ class ScriptedBehavior : public MinSG::Behavior {
 	private:
 
 		//! ---|> Behavior
-		void doPrepareBehaviorStatus(MinSG::BehaviorStatus &) override;
-		void doBeforeInitialExecute(MinSG::BehaviorStatus &) override;
-		behaviourResult_t doExecute2(MinSG::BehaviorStatus &) override;
-		void doFinalize(MinSG::BehaviorStatus &) override;
+		EMINSGAPI void doPrepareBehaviorStatus(MinSG::BehaviorStatus &) override;
+		EMINSGAPI void doBeforeInitialExecute(MinSG::BehaviorStatus &) override;
+		EMINSGAPI behaviourResult_t doExecute2(MinSG::BehaviorStatus &) override;
+		EMINSGAPI void doFinalize(MinSG::BehaviorStatus &) override;
 
 		EScript::Runtime & runtime;
 		EScript::ERef<EScript::Type> eType;
@@ -46,8 +46,8 @@ class E_ScriptedBehavior : public E_Behavior {
 		template<class, class, class> friend class Util::PolymorphicWrapperCreator;
 
 		// ---
-		static EScript::Type * getTypeObject();
-		static void init(EScript::Namespace & lib);
+		EMINSGAPI static EScript::Type * getTypeObject();
+		EMINSGAPI static void init(EScript::Namespace & lib);
 
 		virtual ~E_ScriptedBehavior() = default;
 

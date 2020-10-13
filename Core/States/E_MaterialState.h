@@ -23,8 +23,8 @@ class E_MaterialState : public E_State{
 	public:
 		template<class, class, class> friend class Util::PolymorphicWrapperCreator;
 
-		static EScript::Type* typeObject;
-		static void init(EScript::Namespace & lib);
+		EMINSGAPI static EScript::Type* typeObject;
+		EMINSGAPI static void init(EScript::Namespace & lib);
 
 		virtual ~E_MaterialState(){}
 	
@@ -32,7 +32,7 @@ class E_MaterialState : public E_State{
 		MinSG::MaterialState * operator*()				{	return static_cast<MinSG::MaterialState*>(ref().get());	}
 
 	protected:
-		E_MaterialState(MinSG::MaterialState * c,EScript::Type * type=nullptr);
+		EMINSGAPI E_MaterialState(MinSG::MaterialState * c,EScript::Type * type=nullptr);
 };
 }
 

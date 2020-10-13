@@ -26,7 +26,7 @@ namespace E_MinSG {
 class E_Node : public EScript::ExtReferenceObject< Util::Reference<MinSG::Node>,EScript::Policies::EqualContent_ComparePolicy,E_Util::Policies::StoreAttrsInAttributeProvider>{
 		ES_PROVIDES_TYPE_NAME(Node)
 
-		static E_Util::E_ObjectFactory<MinSG::Node, E_Node> factorySystem;
+		EMINSGAPI static E_Util::E_ObjectFactory<MinSG::Node, E_Node> factorySystem;
 	protected:
 		template<class NodeType, class E_NodeType>
 		static void addFactory() {
@@ -41,20 +41,20 @@ class E_Node : public EScript::ExtReferenceObject< Util::Reference<MinSG::Node>,
 		}
 		template<class, class, class> friend class Util::PolymorphicWrapperCreator;
 
-		static EScript::Type * getTypeObject();
-		static void init(EScript::Namespace & lib);
+		EMINSGAPI static EScript::Type * getTypeObject();
+		EMINSGAPI static void init(EScript::Namespace & lib);
 
-		virtual ~E_Node();
+		EMINSGAPI virtual ~E_Node();
 		
 		const MinSG::Node * operator*()const	{	return static_cast<const MinSG::Node*>(ref().get());	}
 		MinSG::Node * operator*()				{	return static_cast<MinSG::Node*>(ref().get());	}
 
 		/// ---|> [EScript::Object]
-		E_Node * clone()const override;
-		std::string toString()const override;
+		EMINSGAPI E_Node * clone()const override;
+		EMINSGAPI std::string toString()const override;
 
 	protected:
-		E_Node(MinSG::Node * node,EScript::Type * type=nullptr);
+		EMINSGAPI E_Node(MinSG::Node * node,EScript::Type * type=nullptr);
 };
 }
 

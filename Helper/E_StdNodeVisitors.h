@@ -16,7 +16,7 @@ class Namespace;
 }
 namespace E_MinSG {
 namespace Helper {
-void init(EScript::Namespace * o);
+EMINSGAPI void init(EScript::Namespace * o);
 }
 }
 

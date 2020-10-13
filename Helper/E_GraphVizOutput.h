@@ -15,7 +15,7 @@ class Namespace;
 }
 namespace E_MinSG {
 namespace GraphVizOutput {
-void init(EScript::Namespace * lib);
+EMINSGAPI void init(EScript::Namespace * lib);
 }
 }
 

@@ -25,8 +25,8 @@ class E_AbstractBehaviour : public E_Behavior{
 	public:
 
 		// ---
-		static EScript::Type* getTypeObject();
-		static void init(EScript::Namespace & lib);
+		EMINSGAPI static EScript::Type* getTypeObject();
+		EMINSGAPI static void init(EScript::Namespace & lib);
 
 		E_AbstractBehaviour(MinSG::AbstractBehaviour * behaviour, EScript::Type* type=nullptr) : E_Behavior(behaviour,type?type:getTypeObject()) {}
 		virtual ~E_AbstractBehaviour()	{}
@@ -43,8 +43,8 @@ class E_AbstractNodeBehaviour : public E_AbstractBehaviour{
 		template<class, class, class> friend class Util::PolymorphicWrapperCreator;
 
 		// ---
-		static EScript::Type* getTypeObject();
-		static void init(EScript::Namespace & lib); //!< called by E_AbstractBehaviour::init(...)
+		EMINSGAPI static EScript::Type* getTypeObject();
+		EMINSGAPI static void init(EScript::Namespace & lib); //!< called by E_AbstractBehaviour::init(...)
 
 		virtual ~E_AbstractNodeBehaviour()	{}
 
@@ -62,8 +62,8 @@ class E_AbstractStateBehaviour : public E_AbstractBehaviour{
 		template<class, class, class> friend class Util::PolymorphicWrapperCreator;
 
 		// ---
-		static EScript::Type* getTypeObject();
-		static void init(EScript::Namespace & lib); //!< called by E_AbstractBehaviour::init(...)
+		EMINSGAPI static EScript::Type* getTypeObject();
+		EMINSGAPI static void init(EScript::Namespace & lib); //!< called by E_AbstractBehaviour::init(...)
 
 		virtual ~E_AbstractStateBehaviour()	{}
 

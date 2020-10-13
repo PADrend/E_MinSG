@@ -24,8 +24,8 @@ class E_CullFaceState : public E_State{
 	public:
 		template<class, class, class> friend class Util::PolymorphicWrapperCreator;
 
-		static EScript::Type* typeObject;
-		static void init(EScript::Namespace & lib);
+		EMINSGAPI static EScript::Type* typeObject;
+		EMINSGAPI static void init(EScript::Namespace & lib);
 
 		virtual ~E_CullFaceState(){}
 	
@@ -33,7 +33,7 @@ class E_CullFaceState : public E_State{
 		MinSG::CullFaceState * operator*()				{	return static_cast<MinSG::CullFaceState*>(ref().get());	}
 
 	protected:
-		E_CullFaceState(MinSG::CullFaceState * c,EScript::Type * type=nullptr);
+		EMINSGAPI E_CullFaceState(MinSG::CullFaceState * c,EScript::Type * type=nullptr);
 };
 }
 

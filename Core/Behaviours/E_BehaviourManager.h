@@ -23,8 +23,8 @@ class E_BehaviourManager : public EScript::ReferenceObject<Util::Reference<MinSG
 	ES_PROVIDES_TYPE_NAME(BehaviourManager)
 
 	public:
-		static EScript::Type* getTypeObject();
-		static void init(EScript::Namespace & lib);
+		EMINSGAPI static EScript::Type* getTypeObject();
+		EMINSGAPI static void init(EScript::Namespace & lib);
 
 		E_BehaviourManager(MinSG::BehaviourManager * manager) : ReferenceObject_t(manager,getTypeObject()){}
 		virtual ~E_BehaviourManager(){}

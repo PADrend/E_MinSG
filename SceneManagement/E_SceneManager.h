@@ -13,13 +13,9 @@
 
 #include <EScript/Objects/ExtReferenceObject.h>
 #include <E_Util/E_Utils.h>
+#include <MinSG/SceneManagement/SceneManager.h>
 #include <memory>
 
-namespace MinSG {
-namespace SceneManagement {
-class SceneManager;
-}
-}
 namespace E_MinSG {
 
  /***
@@ -36,11 +32,11 @@ class E_SceneManager : public EScript::ExtReferenceObject<
 	ES_PROVIDES_TYPE_NAME(SceneManager)
 
 	public:
-		static EScript::Type* getTypeObject();
-		static void init(EScript::Namespace & lib);
+		EMINSGAPI static EScript::Type* getTypeObject();
+		EMINSGAPI static void init(EScript::Namespace & lib);
 
-		E_SceneManager(EScript::Type * type = nullptr);
-		virtual ~E_SceneManager();
+		EMINSGAPI E_SceneManager(EScript::Type * type = nullptr);
+		EMINSGAPI virtual ~E_SceneManager();
 		
 		const MinSG::SceneManagement::SceneManager * operator*()const	{	return static_cast<const MinSG::SceneManagement::SceneManager*>(ref().get());	}
 		MinSG::SceneManagement::SceneManager * operator*()				{	return static_cast<MinSG::SceneManagement::SceneManager*>(ref().get());	}

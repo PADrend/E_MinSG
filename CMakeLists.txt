@@ -183,6 +183,15 @@ add_library(E_MinSG SHARED
 	SceneManagement/E_SceneManagement.cpp
 )
 
+if(MSVC)
+	target_compile_definitions(E_MinSG PRIVATE NOMINMAX)
+	target_compile_definitions(E_MinSG PRIVATE "EMINSGAPI=__declspec(dllexport)")
+	target_compile_definitions(E_MinSG INTERFACE "EMINSGAPI=__declspec(dllimport)")
+else()
+	target_compile_definitions(E_MinSG PRIVATE "EMINSGAPI=")
+	target_compile_definitions(E_MinSG INTERFACE "EMINSGAPI=")
+endif()
+
 # Dependency to EScript
 if(NOT TARGET EScript)
 	find_package(EScript 0.6.7 REQUIRED NO_MODULE)

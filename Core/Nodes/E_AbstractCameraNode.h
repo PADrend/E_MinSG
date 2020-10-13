@@ -25,8 +25,8 @@ class E_AbstractCameraNode : public E_Node{
 		template<class, class, class> friend class Util::PolymorphicWrapperCreator;
 
 		// ---
-		static EScript::Type * getTypeObject();
-		static void init(EScript::Namespace & lib);
+		EMINSGAPI static EScript::Type * getTypeObject();
+		EMINSGAPI static void init(EScript::Namespace & lib);
 
 		virtual ~E_AbstractCameraNode(){}
 

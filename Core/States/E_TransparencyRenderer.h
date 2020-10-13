@@ -23,8 +23,8 @@ class E_TransparencyRenderer : public E_NodeRendererState{
 	public:
 		template<class, class, class> friend class Util::PolymorphicWrapperCreator;
 
-		static EScript::Type* getTypeObject();
-		static void init(EScript::Namespace & lib);
+		EMINSGAPI static EScript::Type* getTypeObject();
+		EMINSGAPI static void init(EScript::Namespace & lib);
 
 		virtual ~E_TransparencyRenderer(){}
 	
@@ -32,7 +32,7 @@ class E_TransparencyRenderer : public E_NodeRendererState{
 		MinSG::TransparencyRenderer * operator*()				{	return static_cast<MinSG::TransparencyRenderer*>(ref().get());	}
 
 	protected:
-		E_TransparencyRenderer(MinSG::TransparencyRenderer * obj, EScript::Type * type=nullptr);
+		EMINSGAPI E_TransparencyRenderer(MinSG::TransparencyRenderer * obj, EScript::Type * type=nullptr);
 };
 }
 

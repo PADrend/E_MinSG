@@ -19,7 +19,7 @@ class Namespace;
 }
 namespace E_MinSG {
 
-void init(EScript::Namespace * globals);
+EMINSGAPI void init(EScript::Namespace * globals);
 
 /*! Create an EScript Array of ENodes from a sequence container
 	(array,list,vector, ..., NOT map or set) of Nodes.	*/

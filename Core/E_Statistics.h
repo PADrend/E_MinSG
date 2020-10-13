@@ -24,11 +24,11 @@ namespace E_MinSG {
 class E_Statistics : public EScript::ExtObject {
 		ES_PROVIDES_TYPE_NAME(Statistics)
 	public:
-		static EScript::Type * getTypeObject();
-		static void init(EScript::Namespace & lib);
+		EMINSGAPI static EScript::Type * getTypeObject();
+		EMINSGAPI static void init(EScript::Namespace & lib);
 
-		E_Statistics(MinSG::Statistics & stats, EScript::Type * type = nullptr);
-		virtual ~E_Statistics();
+		EMINSGAPI E_Statistics(MinSG::Statistics & stats, EScript::Type * type = nullptr);
+		EMINSGAPI virtual ~E_Statistics();
 
 		const MinSG::Statistics & operator*()const	{	return myStats;	}
 		MinSG::Statistics & operator*()				{	return myStats;	}

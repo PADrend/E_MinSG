@@ -23,11 +23,11 @@ namespace E_MinSG{
 class E_FrameContext : public EScript::ReferenceObject<Util::Reference<MinSG::FrameContext>>{
 	ES_PROVIDES_TYPE_NAME(FrameContext)
 	public:
-		static EScript::Type* getTypeObject();
-		static void init(EScript::Namespace & lib);
+		EMINSGAPI static EScript::Type* getTypeObject();
+		EMINSGAPI static void init(EScript::Namespace & lib);
 
-		E_FrameContext(MinSG::FrameContext * fctxt);
-		virtual ~E_FrameContext();
+		EMINSGAPI E_FrameContext(MinSG::FrameContext * fctxt);
+		EMINSGAPI virtual ~E_FrameContext();
 
 };
 }

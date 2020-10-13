@@ -31,7 +31,7 @@ class E_Behavior : public EScript::ExtReferenceObject< Util::Reference<MinSG::Be
 	//!	@name Behaviour -> E_Behaviour
 	//	@{
 	private:
-		static E_Util::E_ObjectFactory<MinSG::Behavior, E_Behavior> factorySystem;
+		EMINSGAPI static E_Util::E_ObjectFactory<MinSG::Behavior, E_Behavior> factorySystem;
 	protected:
 		template<class BehaviorType, class E_BehaviorType>
 		static void addFactory() {
@@ -46,8 +46,8 @@ class E_Behavior : public EScript::ExtReferenceObject< Util::Reference<MinSG::Be
 	//	@}
 
 		// ---
-		static EScript::Type* getTypeObject();
-		static void init(EScript::Namespace & lib);
+		EMINSGAPI static EScript::Type* getTypeObject();
+		EMINSGAPI static void init(EScript::Namespace & lib);
 
 		E_Behavior(MinSG::Behavior * behavior, EScript::Type* type=nullptr) : ExtReferenceObject_t(behavior,type?type:getTypeObject()) {}
 		virtual ~E_Behavior()	{}
