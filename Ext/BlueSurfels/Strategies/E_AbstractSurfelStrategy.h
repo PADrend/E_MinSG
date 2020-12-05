@@ -23,7 +23,7 @@ namespace BlueSurfels {
 	
 class E_AbstractSurfelStrategy : public EScript::ReferenceObject<Util::Reference<MinSG::BlueSurfels::AbstractSurfelStrategy>> {
 		ES_PROVIDES_TYPE_NAME(AbstractSurfelStrategy)  
-		static E_Util::E_ObjectFactory<MinSG::BlueSurfels::AbstractSurfelStrategy, E_AbstractSurfelStrategy> factorySystem;
+		EMINSGAPI static E_Util::E_ObjectFactory<MinSG::BlueSurfels::AbstractSurfelStrategy, E_AbstractSurfelStrategy> factorySystem;
 	protected:
 		template<class Type, class E_Type>
 		static void addFactory() {
@@ -35,7 +35,7 @@ class E_AbstractSurfelStrategy : public EScript::ReferenceObject<Util::Reference
 		}
 		template<class, class, class> friend class Util::PolymorphicWrapperCreator;
 	public:  
-		static EScript::Type * getTypeObject();
+		EMINSGAPI static EScript::Type * getTypeObject();
 		static void init(EScript::Namespace & lib);
 	  
 	  const MinSG::BlueSurfels::AbstractSurfelStrategy * operator*() const { return static_cast<const MinSG::BlueSurfels::AbstractSurfelStrategy*>(ref().get()); }
