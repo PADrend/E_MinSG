@@ -30,6 +30,8 @@
 //
 //#include <Util/IO/FileName.h>
 
+#include <MinSG/Ext/LoaderGLTF/LoaderGLTF.h>
+
 using namespace MinSG;
 using namespace MinSG::SceneManagement;
 
@@ -129,6 +131,19 @@ void init(EScript::Namespace & lib){
 		return stream.str();
 	})
 	
+	//! [ESMF] Array|false sceneManager.loadGLTF( importContext,filename || SceneManager,filename, [importOptions])
+	ES_FUNCTION(ns,"loadGLTF",2,3,{
+		std::vector<Util::Reference<Node>> nodes;
+		if(parameter[0].toType<E_ImportContext>()){
+			assertParamCount(rt,parameter,2,2);
+			nodes = LoaderGLTF::loadGLTFScene(parameter[0].to<ImportContext&>(rt), Util::FileName(parameter[1].toString()));
+		}else{
+			nodes = LoaderGLTF::loadGLTFScene(parameter[0].to<SceneManager&>(rt), Util::FileName(parameter[1].toString()),static_cast<importOption_t>(parameter[2].toInt(0)));
+		}
+		if(nodes.empty())
+			return false;
+		return EScript::Array::create(nodes);
+	})
 
 }
 }
