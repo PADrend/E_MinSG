@@ -55,7 +55,7 @@ namespace E_MinSG {
         
         ES_FUNCTION(lib, "normalizeSkeletalWeights", 1, 2, {
             E_GeometryNode *geoNode = EScript::assertType<E_GeometryNode>(rt, parameter[0]);
-            SkeletalAnimationUtils::normalizeWeights(&(**geoNode)->getMesh()->openVertexData(), parameter[1].toFloat(0.01));
+            SkeletalAnimationUtils::normalizeWeights(&(**geoNode)->getMesh()->openVertexData(), parameter[1].toFloat(0.01f));
             
             return nullptr;
         })

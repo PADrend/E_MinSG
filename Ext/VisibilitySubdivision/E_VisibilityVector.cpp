@@ -102,7 +102,7 @@ void E_VisibilityVector::init(EScript::Namespace & lib) {
 		EScript::Array * resultArray = EScript::Array::create();
 		resultArray->pushBack(EScript::Number::create(costsDiff));
 		resultArray->pushBack(EScript::Number::create(benefitsDiff));
-		resultArray->pushBack(EScript::Number::create(sameCount));
+		resultArray->pushBack(EScript::Number::create(static_cast<double>(sameCount)));
 		return resultArray;
 	})
 
@@ -125,7 +125,7 @@ void E_VisibilityVector::init(EScript::Namespace & lib) {
 	ES_MFUN(typeObject, const VisibilityVector, "getTotalBenefits", 0, 0, EScript::Number::create(thisObj->getTotalBenefits()))
 
 	//! [ESMF] Number VisibilityVector.getVisibleNodeCount()
-	ES_MFUN(typeObject, const VisibilityVector, "getVisibleNodeCount", 0, 0, EScript::Number::create(thisObj->getVisibleNodeCount()))
+	ES_MFUN(typeObject, const VisibilityVector, "getVisibleNodeCount", 0, 0, EScript::Number::create(static_cast<double>(thisObj->getVisibleNodeCount())))
 
 	//! [ESMF] Array VisibilityVector.getNodes()
 	ES_MFUNCTION(typeObject, const VisibilityVector, "getNodes", 0, 0, {
@@ -141,7 +141,7 @@ void E_VisibilityVector::init(EScript::Namespace & lib) {
 	})
 
 	//! [ESMF] Number VisibilityVector.getMemoryUsage()
-	ES_MFUN(typeObject, const VisibilityVector, "getMemoryUsage", 0, 0, EScript::Number::create(thisObj->getMemoryUsage()))
+	ES_MFUN(typeObject, const VisibilityVector, "getMemoryUsage", 0, 0, EScript::Number::create(static_cast<double>(thisObj->getMemoryUsage())))
 
 	//! [ESMF] String VisibilityVector.serialize(SceneManager)
 	ES_MFUNCTION(typeObject, const VisibilityVector, "serialize", 1, 1, {

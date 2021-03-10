@@ -130,7 +130,7 @@ void E_FrameContext::init(EScript::Namespace & lib) {
 		EScript::Map * channelMap = EScript::Map::create();
 		for(const auto & keyValuePair : channels) {
 			channelMap->setValue(EScript::String::create(keyValuePair.first.toString()), 
-								 EScript::Number::create(keyValuePair.second.getElements().size()));
+								 EScript::Number::create(static_cast<double>(keyValuePair.second.getElements().size())));
 		}
 		return channelMap;
 	})

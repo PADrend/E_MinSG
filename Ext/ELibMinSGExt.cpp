@@ -430,26 +430,26 @@ void init(EScript::Namespace * lib) {
 		int julianDay=parameter[1].toInt(0);
 
 		const float longitude=parameter[3].toFloat(0);
-		const float latitude_rad=parameter[4].toFloat(0)*M_PI/180.0; //radians(latitude)
+		const float latitude_rad=static_cast<float>(parameter[4].toFloat(0)*M_PI/180.0); //radians(latitude)
 		const float standardMeridian = parameter[2].toFloat(0) * 15.f;  // sm is actually timezone number (east to west, zero based...)
 
-		const float solarTime = timeOfDay +
+		const float solarTime = static_cast<float>(timeOfDay +
 				(0.170f*sin(4*M_PI*(julianDay - 80.f)/373.0f) -
 				0.129f*sin(2*M_PI*(julianDay - 8.f)/355.0f)) +
-				(standardMeridian - longitude)/15.f;
+				(standardMeridian - longitude)/15.f);
 
-		const float solarDeclination = (0.4093f*sin(2.0f*M_PI*(julianDay - 81.f)/368.0f));
+		const float solarDeclination = static_cast<float>(0.4093f*sin(2.0f*M_PI*(julianDay - 81.f)/368.0f));
 
-		const float solarAltitude= asin(sin(latitude_rad) * sin(solarDeclination) -
-				cos(latitude_rad) * cos(solarDeclination) * cos(M_PI*solarTime/12.f));
+		const float solarAltitude= static_cast<float>(asin(sin(latitude_rad) * sin(solarDeclination) -
+				cos(latitude_rad) * cos(solarDeclination) * cos(M_PI*solarTime/12.f)));
 
-		const float opp = -cos(solarDeclination) * sin(M_PI*solarTime/12.f);
-		const float adj = -(cos(latitude_rad) * sin(solarDeclination) +
-				sin(latitude_rad) * cos(solarDeclination) *  cos(M_PI*solarTime/12.f));
+		const float opp = static_cast<float>(-cos(solarDeclination) * sin(M_PI*solarTime/12.f));
+		const float adj = static_cast<float>(-(cos(latitude_rad) * sin(solarDeclination) +
+				sin(latitude_rad) * cos(solarDeclination) *  cos(M_PI*solarTime/12.f)));
 		const float solarAzimuth=atan2(opp,adj);
 
 		const float phiS = -solarAzimuth;
-		const float thetaS = M_PI / 2.0 - solarAltitude;
+		const float thetaS = static_cast<float>( M_PI / 2.0 - solarAltitude);
 
 	//    return new E_Geometry::E_Vec3( Vec3(cos(phiS)*sin(thetaS), sin(phiS)*sin(thetaS), cos(thetaS))); // South = x,  East = y, up = z
 		return new E_Geometry::E_Vec3( Geometry::Vec3(sin(phiS)*sin(thetaS), cos(thetaS), cos(phiS)*sin(thetaS))); // East = x,  up = y, South = z

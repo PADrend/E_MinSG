@@ -437,13 +437,13 @@ void E_Node::init(EScript::Namespace & lib) {
 	ES_MFUN(typeObject,Node,"rotateToWorldDir",1,1, (Transformations::rotateToWorldDir(*thisObj,parameter[0].to<Geometry::Vec3>(rt)),thisEObj))
 
 	//! [ESMF] self MinSG.Node.setScale(number) \deprecated
-	ES_MFUN(typeObject,Node,"setScale",1,1,(thisObj->setRelScaling(parameter[0].toDouble()),thisEObj))
+	ES_MFUN(typeObject,Node,"setScale",1,1,(thisObj->setRelScaling(parameter[0].toFloat()),thisEObj))
 
 	//! [ESMF] self MinSG.Node.setRelScaling(number)
-	ES_MFUN(typeObject,Node,"setRelScaling",1,1,(thisObj->setRelScaling(parameter[0].toDouble()),thisEObj))
+	ES_MFUN(typeObject,Node,"setRelScaling",1,1,(thisObj->setRelScaling(parameter[0].toFloat()),thisEObj))
 
 	//! [ESMF] self MinSG.Node.scale(number)
-	ES_MFUN(typeObject,Node,"scale",1,1,(thisObj->scale(parameter[0].toDouble()),thisEObj))
+	ES_MFUN(typeObject,Node,"scale",1,1,(thisObj->scale(parameter[0].toFloat()),thisEObj))
 
 	//! [ESMF] number MinSG.Node.getScale()	\deprecated
 	ES_MFUN(typeObject,const Node,"getScale",0,0,thisObj->getRelScaling())

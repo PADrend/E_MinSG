@@ -43,7 +43,7 @@ void E_CameraNodeOrtho::init(EScript::Namespace & lib) {
 	//! [ESMF] new MinSG.CameraNodeOrtho([near=1,[far=10000]])
 	ES_CONSTRUCTOR(typeObject,0,2,{
 		CameraNodeOrtho * c=new CameraNodeOrtho;
-		c->setNearFar(parameter[0].toDouble(1.0),parameter[1].toDouble(10000.0) );
+		c->setNearFar(parameter[0].toFloat(1.0f),parameter[1].toFloat(10000.0f) );
 		return EScript::create(c);
 	})
 

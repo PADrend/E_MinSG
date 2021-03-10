@@ -44,9 +44,9 @@ void E_CameraNode::init(EScript::Namespace & lib) {
 	//! [ESMF] new MinSG.CameraNode([angle,[ratio,[near,[far]]]])
 	ES_CONSTRUCTOR(typeObject,0,4,{
 		CameraNode * c=new CameraNode();
-		c->applyVerticalAngle( parameter[0].toDouble(60.0) );
-		c->setViewport(Geometry::Rect_i(0,0,1.0,parameter[1].toDouble(1.0)) );
-		c->setNearFar(parameter[2].toDouble(1.0),parameter[3].toDouble(10000.0) );
+		c->applyVerticalAngle( parameter[0].toFloat(60.0f) );
+		c->setViewport(Geometry::Rect_i(0,0,1,parameter[1].toUInt(1)) );
+		c->setNearFar(parameter[2].toFloat(1.0f),parameter[3].toFloat(10000.0f) );
 		return EScript::create(c);
 	})
 

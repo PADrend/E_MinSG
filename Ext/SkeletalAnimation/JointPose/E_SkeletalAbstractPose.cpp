@@ -60,7 +60,7 @@ void E_SkeletalAbstractPose::init(EScript::Namespace & lib)
             interpolationType = parameter[2].toInt();
         
         if(parameter.size() < 4)
-            thisObj->addValue(mat, parameter[1].to<float>(rt), interpolationType, thisObj->getTimeline().size());
+            thisObj->addValue(mat, parameter[1].to<float>(rt), interpolationType, static_cast<uint32_t>(thisObj->getTimeline().size()));
         else
             thisObj->addValue(mat, parameter[1].to<float>(rt), interpolationType, parameter[3].to<uint32_t>(rt));
         

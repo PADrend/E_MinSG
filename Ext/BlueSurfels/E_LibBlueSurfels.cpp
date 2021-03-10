@@ -70,9 +70,9 @@ void BlueSurfels::init(EScript::Namespace & lib) {
 	ES_FUN(nsBlueSurfels,"getMinimalVertexDistances",2,3,
 			EScript::Array::create(MinSG::BlueSurfels::getMinimalVertexDistances(*parameter[0].to<Rendering::Mesh*>(rt),parameter[1].to<uint32_t>(rt), parameter[2].toBool(false))))
 	
-	//! [ESMF] Number MinSG.BlueSurfels.getMedianOfNthClosestNeighbours(Rendering::Mesh& mesh, size_t prefixLength, size_t nThNeighbour)
+	//! [ESMF] Number MinSG.BlueSurfels.getMedianOfNthClosestNeighbours(Rendering::Mesh& mesh, uint32_t prefixLength, uint32_t nThNeighbour)
 	ES_FUN(nsBlueSurfels,"getMedianOfNthClosestNeighbours",3,3,		
-			MinSG::BlueSurfels::getMedianOfNthClosestNeighbours(*parameter[0].to<Rendering::Mesh*>(rt),parameter[1].to<size_t>(rt),parameter[2].to<size_t>(rt)))
+			MinSG::BlueSurfels::getMedianOfNthClosestNeighbours(*parameter[0].to<Rendering::Mesh*>(rt),parameter[1].to<uint32_t>(rt),parameter[2].to<uint32_t>(rt)))
 
 
 	//! [ESF] Bitmap Experiments.differentialDomainAnalysis(Mesh, Number diff_max, [Number resolution, [Number count, [Bool geodetic, [Bool adaptive]]]])

@@ -51,7 +51,7 @@ void E_HOMRenderer::init(EScript::Namespace & lib) {
 	//! [ESMF] Number HOMRenderer.getMinOccluderSize()
 	ES_MFUN(typeObject,HOMRenderer, "getMinOccluderSize", 0, 0, thisObj->getMinOccluderSize())
 	//! [ESMF] Void HOMRenderer.setMinOccluderSize(Number)
-	ES_MFUN(typeObject,HOMRenderer, "setMinOccluderSize", 1, 1, (thisObj->setMinOccluderSize(parameter[0].toDouble()), thisEObj))
+	ES_MFUN(typeObject,HOMRenderer, "setMinOccluderSize", 1, 1, (thisObj->setMinOccluderSize(parameter[0].toFloat()), thisEObj))
 
 	//! [ESMF] Number HOMRenderer.getMaxOccluderComplexity()
 	ES_MFUN(typeObject,HOMRenderer, "getMaxOccluderComplexity", 0, 0, thisObj->getMaxOccluderComplexity())
@@ -61,7 +61,7 @@ void E_HOMRenderer::init(EScript::Namespace & lib) {
 	//! [ESMF] Number HOMRenderer.getMaxOccluderDepth()
 	ES_MFUN(typeObject,HOMRenderer, "getMaxOccluderDepth", 0, 0, thisObj->getMaxOccluderDepth())
 	//! [ESMF] Void HOMRenderer.setMaxOccluderDepth(Number)
-	ES_MFUN(typeObject,HOMRenderer, "setMaxOccluderDepth", 1, 1, (thisObj->setMaxOccluderDepth(parameter[0].toDouble()), thisEObj))
+	ES_MFUN(typeObject,HOMRenderer, "setMaxOccluderDepth", 1, 1, (thisObj->setMaxOccluderDepth(parameter[0].toFloat()), thisEObj))
 
 	//! [ESMF] Number HOMRenderer.getTriangleLimit()
 	ES_MFUN(typeObject,HOMRenderer, "getTriangleLimit", 0, 0, static_cast<double>(thisObj->getTriangleLimit()))

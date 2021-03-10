@@ -75,7 +75,7 @@ void init(EScript::Namespace & lib) {
 
 		levelStats->setAttribute("usedMemory", EScript::Number::create(static_cast<double>(level->getUsedMemory()) / mebibyte));
 		levelStats->setAttribute("overallMemory", EScript::Number::create(static_cast<double>(level->getOverallMemory()) / mebibyte));
-		levelStats->setAttribute("objects", EScript::Number::create(level->getNumObjects()));
+		levelStats->setAttribute("objects", EScript::Number::create(static_cast<double>(level->getNumObjects())));
 		levelStats->setAttribute("lastWorkDuration", EScript::Number::create(level->getLastWorkDuration()));
 
 		return levelStats;

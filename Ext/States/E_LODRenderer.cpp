@@ -35,7 +35,7 @@ void E_LODRenderer::init(EScript::Namespace & lib) {
 	
 	ES_MFUN(typeObject, LODRenderer, "setMinComplexity", 1, 1, (thisObj->setMinComplexity(parameter[0].to<uint32_t>(rt)), thisEObj))
 	ES_MFUN(typeObject, LODRenderer, "setMaxComplexity", 1, 1, (thisObj->setMaxComplexity(parameter[0].to<uint32_t>(rt)), thisEObj))
-	ES_MFUN(typeObject, LODRenderer, "setRelComplexity", 1, 1, (thisObj->setRelComplexity(parameter[0].to<uint32_t>(rt)), thisEObj))
+	ES_MFUN(typeObject, LODRenderer, "setRelComplexity", 1, 1, (thisObj->setRelComplexity(parameter[0].to<float>(rt)), thisEObj))
 	
 	ES_MFUN(typeObject, LODRenderer, "generateLODsRecursiv", 1, 1, (thisObj->generateLODsRecursiv(parameter[0].to<MinSG::Node*>(rt)), thisEObj)) 
 	

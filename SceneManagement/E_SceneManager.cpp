@@ -83,14 +83,16 @@ void E_SceneManager::init(EScript::Namespace & lib) {
 	//! [ESMF] Array sceneManager.getNamesOfRegisteredStates()
 	ES_MFUNCTION(typeObject,SceneManager,"getNamesOfRegisteredStates",0,0,{
 		std::vector<std::string> names;
-		thisObj->getNamesOfRegisteredStates(names);
+		for(const auto & id : thisObj->getStateIds() )
+			names.emplace_back(id.toString());
 		return EScript::Array::create(names);
 	})
 
 	//! [ESMF] Array sceneManager.getNamesOfRegisteredNodes()
 	ES_MFUNCTION(typeObject,SceneManager,"getNamesOfRegisteredNodes",0,0,{
 		std::vector<std::string> names;
-		thisObj->getNamesOfRegisteredNodes(names);
+		for(const auto & id : thisObj->getNodeIds() )
+			names.emplace_back(id.toString());
 		return EScript::Array::create(names);
 	})
 		//! [ESMF] node sceneManager.getRegisteredNode(String id)

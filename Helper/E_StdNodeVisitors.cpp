@@ -157,7 +157,7 @@ void init(EScript::Namespace * lib) {
 	ES_FUNCTION(lib, "collectVisibleNodes", 2, 5, {
 		const auto visNodes = collectVisibleNodes((parameter[0].to<MinSG::Node*>(rt)),
 												parameter[1].to<MinSG::FrameContext&>(rt),
-												parameter[2].toBool() ? parameter[2].toFloat() : -1.0,
+												parameter[2].toBool() ? parameter[2].toFloat() : -1.0f,
 												parameter[3].toBool(false),
 												static_cast<renderingLayerMask_t>(parameter[4].toUInt(1)));
 		return getENodeArray(visNodes.begin(),visNodes.end());

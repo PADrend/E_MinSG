@@ -72,7 +72,7 @@ void E_PathTracer::init(EScript::Namespace & lib) {
 	// void download(Util::Reference<Util::PixelAccessor> image)
 	//! [ESMF] self PathTracer.download(image)
 	ES_MFUN(typeObject,PathTracer,"download",1,2,
-				(thisObj->download(parameter[0].to<Util::PixelAccessor&>(rt), parameter[1].toFloat(2.2)),thisEObj))
+				(thisObj->download(parameter[0].to<Util::PixelAccessor&>(rt), parameter[1].toFloat(2.2f)),thisEObj))
 											
 	// void setScene(GroupNode* scene)
 	//! [ESMF] self PathTracer.setScene(GroupNode scene)
