@@ -106,6 +106,10 @@ void BlueSurfels::init(EScript::Namespace & lib) {
 	ES_FUN(nsBlueSurfels,"computeSurfelPacking",1,1,
 			MinSG::BlueSurfels::computeSurfelPacking(parameter[0].to<Rendering::Mesh*>(rt)))
 			
+	//! [ESMF] Number MinSG.BlueSurfels.getSurfelPacking(MinSG.Node, Rendering.Mesh)
+	ES_FUN(nsBlueSurfels,"getSurfelPacking",2,2,
+			MinSG::BlueSurfels::getSurfelPacking(parameter[0].to<MinSG::Node*>(rt), parameter[1].to<Rendering::Mesh*>(rt)))
+			
 	//! [ESMF] Number MinSG.BlueSurfels.computeRelPixelSize(MinSG::FrameContext & context, MinSG::Node * node)
 	ES_FUN(nsBlueSurfels,"computeRelPixelSize",2,3,
 		MinSG::BlueSurfels::computeRelPixelSize(
