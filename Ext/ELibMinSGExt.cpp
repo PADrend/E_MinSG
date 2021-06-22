@@ -80,7 +80,9 @@
 #include "States/E_BudgetAnnotationState.h"
 #include "States/E_StrangeExampleRenderer.h"
 #include "States/E_EnvironmentState.h"
+#include "States/E_IBLEnvironmentState.h"
 #include "States/E_MirrorState.h"
+#include "States/E_PbrMaterialState.h"
 #include "States/E_ProjSizeFilterState.h"
 #include "States/E_RandomColorRenderer.h"
 #include "States/E_ShadowState.h"
@@ -339,8 +341,10 @@ void init(EScript::Namespace * lib) {
 	E_BudgetAnnotationState::init(*lib);
 	E_StrangeExampleRenderer::init(*lib);
 	E_EnvironmentState::init(*lib);
+	E_IBLEnvironmentState::init(*lib);
 	E_ImpostorFactory::init(lib);
 	E_MirrorState::init(*lib);
+	E_PbrMaterialState::init(*lib);
 	E_ProjSizeFilterState::init(*lib);
 	E_RandomColorRenderer::init(*lib);
 	E_ShadowState::init(*lib);

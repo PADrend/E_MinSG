@@ -138,8 +138,10 @@ add_library(E_MinSG SHARED
 	Ext/SkeletalAnimation/Util/E_SkeletalAnimationUtils.cpp
 	Ext/States/E_BudgetAnnotationState.cpp
 	Ext/States/E_EnvironmentState.cpp
+	Ext/States/E_IBLEnvironmentState.cpp
 	Ext/States/E_LODRenderer.cpp
 	Ext/States/E_MirrorState.cpp
+	Ext/States/E_PbrMaterialState.cpp
 	Ext/States/E_ProjSizeFilterState.cpp
 	Ext/States/E_RandomColorRenderer.cpp
 	Ext/States/E_ScriptedNodeRendererState.cpp
