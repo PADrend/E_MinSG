@@ -93,6 +93,14 @@ void init(EScript::Namespace * lib) {
 		return getENodeArray(nodes.begin(), nodes.end());
 	})
 	
+	//! [ESF] Array collectGeoNodesIntersectingSphere(root,center,radius)
+	ES_FUNCTION(lib, "collectGeoNodesIntersectingSphere", 3, 3, {
+		const auto nodes = collectGeoNodesIntersectingSphere((parameter[0].to<MinSG::Node*>(rt)),
+														  parameter[1].to<const Geometry::Vec3&>(rt),
+														  parameter[2].to<float>(rt));
+		return getENodeArray(nodes.begin(), nodes.end());
+	})
+	
 	//! [ESF] Array collectGeoNodesIntersectingBox(root,(pos,dir|ray))
 	ES_FUNCTION(lib, "collectGeoNodesIntersectingRay", 2, 3, {
 		Geometry::Ray3 ray;
