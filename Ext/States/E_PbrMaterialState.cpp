@@ -37,60 +37,49 @@ void E_PbrMaterialState::init(EScript::Namespace & lib) {
 
 	//! [ESMF] new MinSG.PbrMaterialState()   
 	ES_CTOR(typeObject,0,0,EScript::create( new PbrMaterialState))
+	
+	//! [ESMF] Number MinSG.PbrMaterialState.getBaseColorFactor()
+	ES_MFUN(typeObject, const PbrMaterialState, "getBaseColorFactor", 0, 0, new E_Util::E_Color4f(thisObj->getBaseColorFactor()))
+
+	//! [ESMF] thisEObj MinSG.PbrMaterialState.setBaseColorFactor(Number)
+	ES_MFUN(typeObject, PbrMaterialState, "setBaseColorFactor", 1, 1, (thisObj->setBaseColorFactor(*parameter[0].to<Util::Color4f*>(rt)), thisEObj))
 
 	//! [ESMF] Texture|Void MinSG.PbrMaterialState.getBaseColorTexture()
-	ES_MFUN(typeObject, const PbrMaterialState, "getBaseColorTexture", 0, 0, thisObj->getBaseColorTexture())
+	ES_MFUN(typeObject, const PbrMaterialState, "getBaseColorTexture", 0, 0, new E_Rendering::E_Texture(thisObj->getBaseColorTexture()))
 
 	//! [ESMF] thisEObj MinSG.PbrMaterialState.setBaseColorTexture(Texture)
 	ES_MFUN(typeObject, PbrMaterialState, "setBaseColorTexture", 1, 1, (thisObj->setBaseColorTexture(!parameter[0].toBool() ? nullptr : parameter[0].to<Rendering::Texture*>(rt)), thisEObj))
 
 	//! [ESMF] Texture|Void MinSG.PbrMaterialState.getMetallicRoughnessTexture()
-	ES_MFUN(typeObject, const PbrMaterialState, "getMetallicRoughnessTexture", 0, 0, thisObj->getMetallicRoughnessTexture())
+	ES_MFUN(typeObject, const PbrMaterialState, "getMetallicRoughnessTexture", 0, 0, new E_Rendering::E_Texture(thisObj->getMetallicRoughnessTexture()))
 
 	//! [ESMF] thisEObj MinSG.PbrMaterialState.setMetallicRoughnessTexture(Texture)
 	ES_MFUN(typeObject, PbrMaterialState, "setMetallicRoughnessTexture", 1, 1, (thisObj->setMetallicRoughnessTexture(!parameter[0].toBool() ? nullptr : parameter[0].to<Rendering::Texture*>(rt)), thisEObj))
 	
 	//! [ESMF] Texture|Void MinSG.PbrMaterialState.getNormalTexture()
-	ES_MFUN(typeObject, const PbrMaterialState, "getNormalTexture", 0, 0, thisObj->getNormalTexture())
+	ES_MFUN(typeObject, const PbrMaterialState, "getNormalTexture", 0, 0, new E_Rendering::E_Texture(thisObj->getNormalTexture()))
 
 	//! [ESMF] thisEObj MinSG.PbrMaterialState.setNormalTexture(Texture)
 	ES_MFUN(typeObject, PbrMaterialState, "setNormalTexture", 1, 1, (thisObj->setNormalTexture(!parameter[0].toBool() ? nullptr : parameter[0].to<Rendering::Texture*>(rt)), thisEObj))
 	
 	//! [ESMF] Texture|Void MinSG.PbrMaterialState.getOcclusionTexture()
-	ES_MFUN(typeObject, const PbrMaterialState, "getOcclusionTexture", 0, 0, thisObj->getOcclusionTexture())
+	ES_MFUN(typeObject, const PbrMaterialState, "getOcclusionTexture", 0, 0, new E_Rendering::E_Texture(thisObj->getOcclusionTexture()))
 
 	//! [ESMF] thisEObj MinSG.PbrMaterialState.setOcclusionTexture(Texture)
 	ES_MFUN(typeObject, PbrMaterialState, "setOcclusionTexture", 1, 1, (thisObj->setOcclusionTexture(!parameter[0].toBool() ? nullptr : parameter[0].to<Rendering::Texture*>(rt)), thisEObj))
 	
+	//! [ESMF] Number MinSG.PbrMaterialState.getEmissiveFactor()
+	ES_MFUN(typeObject, const PbrMaterialState, "getEmissiveFactor", 0, 0, new E_Geometry::E_Vec3(thisObj->getEmissiveFactor()))
+
+	//! [ESMF] thisEObj MinSG.PbrMaterialState.setEmissiveFactor(Number)
+	ES_MFUN(typeObject, PbrMaterialState, "setEmissiveFactor", 1, 1, (thisObj->setEmissiveFactor(parameter[0].to<const Geometry::Vec3&>(rt)), thisEObj))
+	
 	//! [ESMF] Texture|Void MinSG.PbrMaterialState.getEmissiveTexture()
-	ES_MFUN(typeObject, const PbrMaterialState, "getEmissiveTexture", 0, 0, thisObj->getEmissiveTexture())
+	ES_MFUN(typeObject, const PbrMaterialState, "getEmissiveTexture", 0, 0, new E_Rendering::E_Texture(thisObj->getEmissiveTexture()))
 
 	//! [ESMF] thisEObj MinSG.PbrMaterialState.setEmissiveTexture(Texture)
 	ES_MFUN(typeObject, PbrMaterialState, "setEmissiveTexture", 1, 1, (thisObj->setEmissiveTexture(!parameter[0].toBool() ? nullptr : parameter[0].to<Rendering::Texture*>(rt)), thisEObj))
 
-
-	ES_MGETSET(PbrMaterialState, Util::Color4f, BaseColorFactor)
-	ES_MGETSET(PbrMaterialState, uint32_t, BaseColorTexCoord)
-	ES_MGETSET(PbrMaterialState, uint32_t, BaseColorTexUnit)
-	ES_MGETSET(PbrMaterialState, float, MetallicFactor)
-	ES_MGETSET(PbrMaterialState, float, RoughnessFactor)
-	ES_MGETSET(PbrMaterialState, uint32_t, MetallicRoughnessTexCoord)
-	ES_MGETSET(PbrMaterialState, uint32_t, MetallicRoughnessTexUnit)
-	ES_MGETSET(PbrMaterialState, float, NormalScale)
-	ES_MGETSET(PbrMaterialState, uint32_t, NormalTexCoord)
-	ES_MGETSET(PbrMaterialState, uint32_t, NormalTexUnit)
-	ES_MGETSET(PbrMaterialState, float, OcclusionStrength)
-	ES_MGETSET(PbrMaterialState, uint32_t, OcclusionTexCoord)
-	ES_MGETSET(PbrMaterialState, uint32_t, OcclusionTexUnit)
-	ES_MGETSET(PbrMaterialState, Geometry::Vec3, EmissiveFactor)
-	ES_MGETSET(PbrMaterialState, uint32_t, EmissiveTexCoord)
-	ES_MGETSET(PbrMaterialState, uint32_t, EmissiveTexUnit)
-	ES_MGETSET(PbrMaterialState, float, AlphaCutoff)
-	ES_MGETSET(PbrMaterialState, bool, DoubleSided)
-	ES_MGETSET(PbrMaterialState, bool, UseSkinning)
-	ES_MGETSET(PbrMaterialState, bool, UseIBL)
-	ES_MGETSET(PbrMaterialState, bool, ReceiveShadow)
-	
 	//! [ESMF] Number MinSG.PbrMaterialState.getAlphaMode()
 	ES_MFUN(typeObject, const PbrMaterialState, "getAlphaMode", 0, 0, static_cast<uint32_t>(thisObj->getAlphaMode()))
 
@@ -119,6 +108,25 @@ void E_PbrMaterialState::init(EScript::Namespace & lib) {
 		return thisEObj;
 	})
 
+	ES_MGETSET(PbrMaterialState, uint32_t, BaseColorTexCoord)
+	ES_MGETSET(PbrMaterialState, uint32_t, BaseColorTexUnit)
+	ES_MGETSET(PbrMaterialState, float, MetallicFactor)
+	ES_MGETSET(PbrMaterialState, float, RoughnessFactor)
+	ES_MGETSET(PbrMaterialState, uint32_t, MetallicRoughnessTexCoord)
+	ES_MGETSET(PbrMaterialState, uint32_t, MetallicRoughnessTexUnit)
+	ES_MGETSET(PbrMaterialState, float, NormalScale)
+	ES_MGETSET(PbrMaterialState, uint32_t, NormalTexCoord)
+	ES_MGETSET(PbrMaterialState, uint32_t, NormalTexUnit)
+	ES_MGETSET(PbrMaterialState, float, OcclusionStrength)
+	ES_MGETSET(PbrMaterialState, uint32_t, OcclusionTexCoord)
+	ES_MGETSET(PbrMaterialState, uint32_t, OcclusionTexUnit)
+	ES_MGETSET(PbrMaterialState, uint32_t, EmissiveTexCoord)
+	ES_MGETSET(PbrMaterialState, uint32_t, EmissiveTexUnit)
+	ES_MGETSET(PbrMaterialState, float, AlphaCutoff)
+	ES_MGETSET(PbrMaterialState, bool, DoubleSided)
+	ES_MGETSET(PbrMaterialState, bool, UseSkinning)
+	ES_MGETSET(PbrMaterialState, bool, UseIBL)
+	ES_MGETSET(PbrMaterialState, bool, ReceiveShadow)
 }
 //---
 

@@ -59,7 +59,7 @@ void E_IBLEnvironmentState::init(EScript::Namespace & lib) {
 	ES_MFUN(typeObject, IBLEnvironmentState, "loadEnvironmentMapFromHDR", 1, 1, (thisObj->loadEnvironmentMapFromHDR(Util::FileName(parameter[0].toString())), thisEObj))
 
 	//! [ESMF] String MinSG.IBLEnvironmentState.getHdrFile()
-	ES_MFUN(typeObject, const IBLEnvironmentState, "getHdrFile", 0, 0, thisObj->getHdrFile())
+	ES_MFUN(typeObject, const IBLEnvironmentState, "getHdrFile", 0, 0, new E_Util::E_FileName(thisObj->getHdrFile()))
 
 	//! [ESMF] String MinSG.IBLEnvironmentState.getLOD()
 	ES_MFUN(typeObject, const IBLEnvironmentState, "getLOD", 0, 0, thisObj->getLOD())
