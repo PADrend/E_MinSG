@@ -45,25 +45,25 @@ void E_PbrMaterialState::init(EScript::Namespace & lib) {
 	ES_MFUN(typeObject, PbrMaterialState, "setBaseColorFactor", 1, 1, (thisObj->setBaseColorFactor(*parameter[0].to<Util::Color4f*>(rt)), thisEObj))
 
 	//! [ESMF] Texture|Void MinSG.PbrMaterialState.getBaseColorTexture()
-	ES_MFUN(typeObject, const PbrMaterialState, "getBaseColorTexture", 0, 0, new E_Rendering::E_Texture(thisObj->getBaseColorTexture()))
+	ES_MFUN(typeObject, const PbrMaterialState, "getBaseColorTexture", 0, 0, thisObj->getBaseColorTexture() ? new E_Rendering::E_Texture(thisObj->getBaseColorTexture()) : nullptr)
 
 	//! [ESMF] thisEObj MinSG.PbrMaterialState.setBaseColorTexture(Texture)
 	ES_MFUN(typeObject, PbrMaterialState, "setBaseColorTexture", 1, 1, (thisObj->setBaseColorTexture(!parameter[0].toBool() ? nullptr : parameter[0].to<Rendering::Texture*>(rt)), thisEObj))
 
 	//! [ESMF] Texture|Void MinSG.PbrMaterialState.getMetallicRoughnessTexture()
-	ES_MFUN(typeObject, const PbrMaterialState, "getMetallicRoughnessTexture", 0, 0, new E_Rendering::E_Texture(thisObj->getMetallicRoughnessTexture()))
+	ES_MFUN(typeObject, const PbrMaterialState, "getMetallicRoughnessTexture", 0, 0, thisObj->getMetallicRoughnessTexture() ? new E_Rendering::E_Texture(thisObj->getMetallicRoughnessTexture()) : nullptr)
 
 	//! [ESMF] thisEObj MinSG.PbrMaterialState.setMetallicRoughnessTexture(Texture)
 	ES_MFUN(typeObject, PbrMaterialState, "setMetallicRoughnessTexture", 1, 1, (thisObj->setMetallicRoughnessTexture(!parameter[0].toBool() ? nullptr : parameter[0].to<Rendering::Texture*>(rt)), thisEObj))
 	
 	//! [ESMF] Texture|Void MinSG.PbrMaterialState.getNormalTexture()
-	ES_MFUN(typeObject, const PbrMaterialState, "getNormalTexture", 0, 0, new E_Rendering::E_Texture(thisObj->getNormalTexture()))
+	ES_MFUN(typeObject, const PbrMaterialState, "getNormalTexture", 0, 0, thisObj->getNormalTexture() ? new E_Rendering::E_Texture(thisObj->getNormalTexture()) : nullptr)
 
 	//! [ESMF] thisEObj MinSG.PbrMaterialState.setNormalTexture(Texture)
 	ES_MFUN(typeObject, PbrMaterialState, "setNormalTexture", 1, 1, (thisObj->setNormalTexture(!parameter[0].toBool() ? nullptr : parameter[0].to<Rendering::Texture*>(rt)), thisEObj))
 	
 	//! [ESMF] Texture|Void MinSG.PbrMaterialState.getOcclusionTexture()
-	ES_MFUN(typeObject, const PbrMaterialState, "getOcclusionTexture", 0, 0, new E_Rendering::E_Texture(thisObj->getOcclusionTexture()))
+	ES_MFUN(typeObject, const PbrMaterialState, "getOcclusionTexture", 0, 0, thisObj->getOcclusionTexture() ? new E_Rendering::E_Texture(thisObj->getOcclusionTexture()) : nullptr)
 
 	//! [ESMF] thisEObj MinSG.PbrMaterialState.setOcclusionTexture(Texture)
 	ES_MFUN(typeObject, PbrMaterialState, "setOcclusionTexture", 1, 1, (thisObj->setOcclusionTexture(!parameter[0].toBool() ? nullptr : parameter[0].to<Rendering::Texture*>(rt)), thisEObj))
@@ -75,7 +75,7 @@ void E_PbrMaterialState::init(EScript::Namespace & lib) {
 	ES_MFUN(typeObject, PbrMaterialState, "setEmissiveFactor", 1, 1, (thisObj->setEmissiveFactor(parameter[0].to<const Geometry::Vec3&>(rt)), thisEObj))
 	
 	//! [ESMF] Texture|Void MinSG.PbrMaterialState.getEmissiveTexture()
-	ES_MFUN(typeObject, const PbrMaterialState, "getEmissiveTexture", 0, 0, new E_Rendering::E_Texture(thisObj->getEmissiveTexture()))
+	ES_MFUN(typeObject, const PbrMaterialState, "getEmissiveTexture", 0, 0, thisObj->getEmissiveTexture() ? new E_Rendering::E_Texture(thisObj->getEmissiveTexture()) : nullptr)
 
 	//! [ESMF] thisEObj MinSG.PbrMaterialState.setEmissiveTexture(Texture)
 	ES_MFUN(typeObject, PbrMaterialState, "setEmissiveTexture", 1, 1, (thisObj->setEmissiveTexture(!parameter[0].toBool() ? nullptr : parameter[0].to<Rendering::Texture*>(rt)), thisEObj))
@@ -91,22 +91,6 @@ void E_PbrMaterialState::init(EScript::Namespace & lib) {
 
 	//! [ESMF] thisEObj MinSG.PbrMaterialState.setShadingModel(Number)
 	ES_MFUN(typeObject, PbrMaterialState, "setShadingModel", 1, 1, (thisObj->setShadingModel(static_cast<PbrShadingModel>(parameter[0].toUInt())), thisEObj))
-
-	//! [ESMF] thisEObj MinSG.PbrMaterialState.setSearchPaths(FileLocator | Array)
-	ES_MFUNCTION(typeObject, PbrMaterialState, "setSearchPaths", 1, 1, {
-		auto* a = parameter[0].toType<EScript::Array>();
-		if(a) {
-			std::vector<std::string> paths;
-			for(const auto& o : *a) {
-				paths.emplace_back(o.toString());
-			}
-			thisObj->setSearchPaths(paths);
-		} else {
-			auto& locator = parameter[0].to<Util::FileLocator&>(rt);
-			thisObj->setSearchPaths(locator.getSearchPaths());
-		}
-		return thisEObj;
-	})
 
 	ES_MGETSET(PbrMaterialState, uint32_t, BaseColorTexCoord)
 	ES_MGETSET(PbrMaterialState, uint32_t, BaseColorTexUnit)
