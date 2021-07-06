@@ -92,6 +92,22 @@ void E_PbrMaterialState::init(EScript::Namespace & lib) {
 	//! [ESMF] thisEObj MinSG.PbrMaterialState.setShadingModel(Number)
 	ES_MFUN(typeObject, PbrMaterialState, "setShadingModel", 1, 1, (thisObj->setShadingModel(static_cast<PbrShadingModel>(parameter[0].toUInt())), thisEObj))
 
+	//! [ESMF] thisEObj MinSG.PbrMaterialState.setSearchPaths(FileLocator | Array)
+	ES_MFUNCTION(typeObject, PbrMaterialState, "setSearchPaths", 1, 1, {
+		auto* a = parameter[0].toType<EScript::Array>();
+		if(a) {
+			std::vector<std::string> paths;
+			for(const auto& o : *a) {
+				paths.emplace_back(o.toString());
+			}
+			thisObj->setSearchPaths(paths);
+		} else {
+			auto& locator = parameter[0].to<Util::FileLocator&>(rt);
+			thisObj->setSearchPaths(locator.getSearchPaths());
+		}
+		return thisEObj;
+	})
+	
 	ES_MGETSET(PbrMaterialState, uint32_t, BaseColorTexCoord)
 	ES_MGETSET(PbrMaterialState, uint32_t, BaseColorTexUnit)
 	ES_MGETSET(PbrMaterialState, float, MetallicFactor)
