@@ -19,10 +19,12 @@
 #include <E_Util/E_Utils.h>
 #include <E_Util/Graphics/E_Color.h>
 #include <E_Geometry/E_Vec3.h>
+#include <E_Geometry/E_Matrix3x3.h>
 #include <EScript/EScript.h>
 
 using namespace EScript;
 using namespace MinSG;
+using namespace Geometry;
 
 namespace E_MinSG {
 
@@ -110,18 +112,23 @@ void E_PbrMaterialState::init(EScript::Namespace & lib) {
 	
 	ES_MGETSET(PbrMaterialState, uint32_t, BaseColorTexCoord)
 	ES_MGETSET(PbrMaterialState, uint32_t, BaseColorTexUnit)
+	ES_MGETSET(PbrMaterialState, Matrix3x3, BaseColorTexTransform)
 	ES_MGETSET(PbrMaterialState, float, MetallicFactor)
 	ES_MGETSET(PbrMaterialState, float, RoughnessFactor)
 	ES_MGETSET(PbrMaterialState, uint32_t, MetallicRoughnessTexCoord)
 	ES_MGETSET(PbrMaterialState, uint32_t, MetallicRoughnessTexUnit)
+	ES_MGETSET(PbrMaterialState, Matrix3x3, MetallicRoughnessTexTransform)
 	ES_MGETSET(PbrMaterialState, float, NormalScale)
 	ES_MGETSET(PbrMaterialState, uint32_t, NormalTexCoord)
 	ES_MGETSET(PbrMaterialState, uint32_t, NormalTexUnit)
+	ES_MGETSET(PbrMaterialState, Matrix3x3, NormalTexTransform)
 	ES_MGETSET(PbrMaterialState, float, OcclusionStrength)
 	ES_MGETSET(PbrMaterialState, uint32_t, OcclusionTexCoord)
 	ES_MGETSET(PbrMaterialState, uint32_t, OcclusionTexUnit)
+	ES_MGETSET(PbrMaterialState, Matrix3x3, OcclusionTexTransform)
 	ES_MGETSET(PbrMaterialState, uint32_t, EmissiveTexCoord)
 	ES_MGETSET(PbrMaterialState, uint32_t, EmissiveTexUnit)
+	ES_MGETSET(PbrMaterialState, Matrix3x3, EmissiveTexTransform)
 	ES_MGETSET(PbrMaterialState, float, AlphaCutoff)
 	ES_MGETSET(PbrMaterialState, bool, DoubleSided)
 	ES_MGETSET(PbrMaterialState, bool, UseSkinning)
