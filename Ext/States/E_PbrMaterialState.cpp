@@ -130,6 +130,7 @@ void E_PbrMaterialState::init(EScript::Namespace & lib) {
 	ES_MGETSET(PbrMaterialState, uint32_t, EmissiveTexUnit)
 	ES_MGETSET(PbrMaterialState, Matrix3x3, EmissiveTexTransform)
 	ES_MGETSET(PbrMaterialState, float, AlphaCutoff)
+	ES_MGETSET(PbrMaterialState, float, IOR)
 	ES_MGETSET(PbrMaterialState, bool, DoubleSided)
 	ES_MGETSET(PbrMaterialState, bool, UseSkinning)
 	ES_MGETSET(PbrMaterialState, bool, UseIBL)
