@@ -108,6 +108,9 @@ void E_IBLEnvironmentState::init(EScript::Namespace & lib) {
 		}
 		return thisEObj;
 	})
+
+	ES_MGETSET(IBLEnvironmentState, float, Rotation);
+	ES_MGETSET(IBLEnvironmentState, float, RotationDeg);
 }
 //---
 
